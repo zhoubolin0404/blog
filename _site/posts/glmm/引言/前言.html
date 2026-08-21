@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-03-02">
+
+<title>01-前言 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">01-前言</h1>
+            <p class="subtitle lead">学习统计模型——通过R模拟</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">GLMM</div>
+                <div class="quarto-category">线性混合效应模型</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 2, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#课程目的" id="toc-课程目的" class="nav-link active" data-scroll-target="#课程目的"><span class="header-section-number">1</span> 课程目的</a></li>
+  <li><a href="#广义线性混合效应模型generalized-linear-mixed-effects-models-glmms" id="toc-广义线性混合效应模型generalized-linear-mixed-effects-models-glmms" class="nav-link" data-scroll-target="#广义线性混合效应模型generalized-linear-mixed-effects-models-glmms"><span class="header-section-number">2</span> 广义线性混合效应模型(Generalized Linear Mixed-Effects Models, GLMMs)</a></li>
+  <li><a href="#线性模型" id="toc-线性模型" class="nav-link" data-scroll-target="#线性模型"><span class="header-section-number">3</span> 线性模型</a>
+  <ul class="collapse">
+  <li><a href="#混合模型" id="toc-混合模型" class="nav-link" data-scroll-target="#混合模型"><span class="header-section-number">3.1</span> 混合模型</a></li>
+  </ul></li>
+  <li><a href="#关于可重复性的说明" id="toc-关于可重复性的说明" class="nav-link" data-scroll-target="#关于可重复性的说明"><span class="header-section-number">4</span> 关于可重复性的说明</a></li>
+  <li><a href="#基于模拟的方法" id="toc-基于模拟的方法" class="nav-link" data-scroll-target="#基于模拟的方法"><span class="header-section-number">5</span> 基于模拟的方法</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="说明">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>说明
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>本系列内容是本人对<strong>2024年</strong>翻译的<a href="https://glmm.netlify.app">《学习统计模型——通过R模拟》</a>的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。</p>
+<p>2026年3月2日查询原文github，显示部分文件于1年前更新，受个人精力限制，<strong>不对更新内容进行对比</strong>，还是推荐有条件者阅读原文。</p>
+</div>
+</div>
+<section id="课程目的" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 课程目的</h1>
+<p>本课程的目的是教你如何分析(还有模拟!)作为心理学家你可能遇到的各种数据集。重点是行为数据——反应时、知觉判断、选择、决策、李克特量表评分、眼动、睡眠时间等。这些数据通常是在有计划的研究或实验中收集到的。</p>
+<p>本课程旨在教授<strong>灵活</strong>、<strong>可推广</strong>、<strong>可重复</strong>的分析技术。你将学习到的技术是灵活的，这意味着它们可以应用到各式各样的研究设计和不同类型的数据上。通过充分考虑抽样对统计推断的潜在偏倚影响，它们在最大程度上具有可推广性——这有助于支持超越特定被试和实验中涉及的刺激得出结论。最后，你将学习到的技术会尽可能地做到可完全重复，因为你的分析将以R代码的纯文本脚本形式明确记录从原始数据到研究结果的每一个步骤。</p>
+</section>
+<section id="广义线性混合效应模型generalized-linear-mixed-effects-models-glmms" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 广义线性混合效应模型(Generalized Linear Mixed-Effects Models, GLMMs)</h1>
+<p>本课程强调一个灵活的回归模型框架而不是教授处理不同类型数据的”公式”。课程假设你需要分析的基本数据类型将是多层的(multilevel)，而且你不仅仅需要处理连续测量数据，还要处理有序测量数据（李克特量表评分）、计数数据（特定事件发生的次数）以及名义数据（某物所属的类别）。</p>
+<p>本课程结束时，你将学会如何使用广义线性混合效应模型(GLMMs)来量化因变量和一组预测变量之间的关系。要理解GLMMs，你需要学习以下三部分：</p>
+<ol type="1">
+<li>“线性模型”部分，包括如何捕捉不同类型的预测变量及其交互效应；</li>
+<li>“混合”部分，包括如何使用随机效应来表示通过对同一批被试或刺激进行重复测量而产生的多层次依赖关系；</li>
+<li>“广义”部分，包括拓展线性模型来表示非完全正态自变量，包括计数、有序和二元变量。</li>
+</ol>
+</section>
+<section id="线性模型" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 线性模型</h1>
+<p>GLMMs是一般线性模型的扩展。一般线性模型是方差分析(ANOVA)、t检验和古典回归等更简单方法的基础。本课程的主要观点是：<strong>你可能遇到的几乎所有实验得到的数据都可以用GLMMs进行分析</strong>。</p>
+<p>一个线性模型的简单例子：</p>
+<p><span class="math display">\[Y_i = \beta_0 + \beta_1 X_i + e_i\]</span></p>
+<p>其中<span class="math inline">\(Y_i\)</span>是样本<span class="math inline">\(i\)</span>的因变量的观测值，由截距加上被系数<span class="math inline">\(\beta_1\)</span>加权的预测值<span class="math inline">\(X_i\)</span>以及误差项构成。表示线性关系<span class="math inline">\(Y_i = 3 + 2X_i + e_i\)</span>的模拟数据如 <a href="#fig-basic_glm" class="quarto-xref">图&nbsp;1</a> 所示。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>) <span class="co"># if needed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">62</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">X =</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="at">Y =</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> X <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(X, Y)) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">3</span>, <span class="at">slope =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-basic_glm" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-basic_glm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="前言_files/figure-html/fig-basic_glm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-basic_glm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 线性模型Y = 3 + 2X的模拟数据
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>你可能会发现上述方程表示的是一条直线(<span class="math inline">\(y = mx + b\)</span>)，其中<span class="math inline">\(\beta_0\)</span>是截距，<span class="math inline">\(\beta_1\)</span>是斜率。<span class="math inline">\(e_i\)</span>是样本<span class="math inline">\(i\)</span>的模型误差，表示样本观测值<span class="math inline">\(Y_i\)</span>与给定<span class="math inline">\(X_i\)</span>的模型预测值之间的差距。</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="说明">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>说明
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>表示法惯例</strong></p>
+<p>希腊字母(<span class="math inline">\(\beta\)</span>, <span class="math inline">\(\rho\)</span>, <span class="math inline">\(\tau\)</span>)表示总体参数，通常是未观测到的，需要从数据中估计得到的。当我们想要区分<strong>估计</strong>参数和真实值时，我们会使用”hat”：如<span class="math inline">\(\hat{\beta}_0\)</span>表示从数据中估计得到的<span class="math inline">\(\beta_0\)</span>的值。</p>
+<p>大写拉丁字母(<span class="math inline">\(X\)</span>、<span class="math inline">\(Y\)</span>)表示观测值——即你已经测量过的值，因此是已知的。你也会看到小写拉丁字母(如<span class="math inline">\(e_i\)</span>)，表示统计误差或其他我将称之为派生量或虚拟量的东西(这将在课程后面进行解释)。</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="提示">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>提示
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>线性模型中的”线性”并不像你想象的那样!</strong></p>
+<p>许多人认为”线性模型”只能捕捉线性关系，即可以用直线(或平面)来描述的关系。这是错误的。</p>
+<p>线性模型是各种项的加权和，每个项都有一个预测变量(或常数)乘上一个系数。在上述模型中，系数是<span class="math inline">\(\beta_0\)</span>和<span class="math inline">\(\beta_1\)</span>。你可以用线性模型拟合各种复杂的关系，包括非线性关系，如下所示。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-tryptych" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tryptych-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="前言_files/figure-html/fig-tryptych-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tryptych-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: 用线性模型建模的非线性关系
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>在左边面板中，我们使用线性模型<span class="math inline">\(Y = \beta_0 + \beta_1 X + \beta_2 X^2\)</span>捕捉了一个二次(抛物线)函数。X和Y之间的关系是非线性的，但模型本身是线性的。我们对预测变量<span class="math inline">\(X\)</span>进行了平方处理，但系数<span class="math inline">\(\beta_0\)</span>、<span class="math inline">\(\beta_1\)</span>和<span class="math inline">\(\beta_2\)</span>并没有被平方、立方或类似的处理(它们都是”一次幂”)。</p>
+<p>在中间面板中，我们使用线性模型捕捉了一个S形函数。在这里，Y变量表示某个事件的概率，例如基于学习时间来预测通过考试的概率。在这种情况下，我们通过在一个特殊的转换空间中估计线性模型来建模X和Y之间的关系，使得X-Y关系是线性的，然后将模型投影回非线性的概率空间(使用”链接函数”)。非线性来自于”链接函数”，但模型本身是线性的。</p>
+<p>最后，右边面板展示了一种略显任意的波动模式，由广义可加混合模型捕获————这是一种我们在本课程中不会学到的高级技术。但从根本上说，它仍然是一个线性模型，因为它还是一系列复杂事物(在这种情况下是”基础函数”)的加权和，而系数提供了权重。</p>
+<p>线性模型是一个<strong>系数是线性</strong>的模型；模型中的每个系数(<span class="math inline">\(\beta_0\)</span>、<span class="math inline">\(\beta_1\)</span>)只允许被设置为一次幂，并且每个项<span class="math inline">\(\beta_i X_j\)</span>都只涉及单个系数。这些项只能与涉及其他系数的项相加，但不能相乘或相除(如<span class="math inline">\(Y = \frac{\beta_1}{\beta_2} X\)</span>是不允许的)。</p>
+</div>
+</div>
+<p>当前课程的一个局限性是主要关注单变量数据，即将单一响应变量作为分析的焦点。通常情况下，你会处理相同对象的多个响应变量，但是同时对它们进行建模在技术上是非常困难的，并且超出了本课程的范围。一种更简单的方法(也是这里采用的方法)是对每个响应变量进行单独的单变量分析。</p>
+<section id="混合模型" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="混合模型"><span class="header-section-number">3.1</span> 混合模型</h2>
+<p>研究结果的推断或解释的可推广性指的是它能够被轻松应用于超出特定研究背景(对象、刺激、任务等)的情境的程度。最理想的情况是，我们的发现能够适用于人类物种的所有成员，涵盖各种各样的刺激和任务；最糟糕的情况是，它们只能适用于那些受到我们使用的特定刺激的特定的人，在我们研究的特定背景下才观察得到。</p>
+<p>研究结果的可推广性取决于几个因素：研究的设计方式、所使用的材料、被试的招募方式、给予被试的任务的性质以及<strong>数据分析的方式</strong>。在这门课程中我们将重点关注最后一点。在分析一个数据集时，如果你想要提出具有推广性的论断，你必须决定哪些可以算作你研究的重复————关于哪些方面应该在复制中保持不变，以及哪些方面允许变化。</p>
+<p>不幸的是，有时你会发现数据以一种不太支持广泛意义上的可推广性的方式进行分析，这往往是因为低估了刺激材料或实验任务的独特特征对观测结果的影响 <span class="citation" data-cites="yarkoni_2019">(<a href="#ref-yarkoni_2019" role="doc-biblioref">Yarkoni, 2019</a>)</span>。</p>
+</section>
+</section>
+<section id="关于可重复性的说明" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 关于可重复性的说明</h1>
+<p>本课程的数据分析是使用R编写脚本进行的。</p>
+<p>可重复性指的是在不同情况下重现研究结果的可能性程度。</p>
+<p>如果我们能在给定原始数据的情况下得到相同的结果，我们会说这个发现在<em>分析(analytically)</em>或<em>计算(computationally)</em>上是可重复的。需要注意的是，这与说一个发现<strong>可复制(replicable)</strong>是不同的。可复制指的是能够在<strong>新样本</strong>中复制这一发现。对于这些术语并没有广泛的共识，但方便起见，我们可以将分析上的可重复性(reproducibility)和可复制性(replicability)视为两种不同但相关的可重复性(reproducibility)类型，前者反映分析员之间(或同一分析员随时间变化)的可重复性，而后者反映了在被试样本或亚群体之间的可重复性。</p>
+<p>确保分析可重复性是一个难题。如果你未能正确记录自己的分析过程，或者你使用的软件被修改或过时并且变得不可用，你可能会在重现自己的发现时遇到麻烦！</p>
+<p>分析的另一个重要属性是透明度——在某种研究中所有步骤都可以公开的程度。一项研究可能是透明的但不可重复，反之亦然。使用促进透明度的工作流程非常重要。这使得脚本编程的“编辑–执行”工作流程对于数据分析来说是理想的选择，远远优于大多数商业统计软件的“指向–点击”的工作流程。通过编写代码，你可以使逻辑和决策过程对他人明确，并易于重建。</p>
+</section>
+<section id="基于模拟的方法" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 基于模拟的方法</h1>
+<p>本课程最后一个重要特点是采用了<strong>基于模拟的方法</strong>来学习统计模型。通过数据模拟，我们定义一个特定模型来描述感兴趣的总体，然后利用计算机的随机数生成器来模拟从该总体中抽样的过程。我们将在下面看一个简单的例子。</p>
+<p>在分析数据时，你会面临的经典问题是你不知道你正在研究的总体的“真实情况”。你从该总体中抽取一个样本，对观测到的数据获取方式做出一些假设，然后利用观察到的数据来估计未知的总体参数及这些参数的不确定性。</p>
+<p>数据模拟颠倒了这个过程。你会定义一个模型的参数，代表关于(假设的)总体的真实情况，从中获取数据。然后，你可以像平常一样分析获得的数据，并考察参数估计与真实值之间的对应程度。</p>
+<p>让我们看一个例子。假设你对以下问题感兴趣：作为学步幼儿的父母是否会“提高”你的反应能力。如果你曾经照顾过一个幼儿，你就会知道身体危险似乎总是在即——他们可能从刚刚爬上的椅子上摔下来，被门里夹到，头撞在桌子角上等等——所以你需要保持警惕并准备迅速行动。你假设这种警惕会转化为在幼儿不在场的其他情况下的更快反应时间，比如在心理实验室里。因此，你招募了一组有幼儿的父母来实验室。你让每个父母在闪烁的灯光出现时尽快按下按钮，并测量他们的反应时(以毫秒为单位)。对于每个父母，你计算了他们在所有试验中的平均反应时。我们可以使用R中的<code>rnorm()</code>函数模拟50个父母的平均反应时。但在我们开始之前，我们将加载我们需要的包（tidyverse）并设置随机种子(random seed)，以确保你(读者)得到和我(作者)相同的随机值。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>) <span class="co"># 可以是任意整数</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>parents <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">480</span>, <span class="at">sd =</span> <span class="dv">40</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 475.1016 502.0983 493.9460 494.3853 515.9221 403.0972 490.4698 516.6227
+ [9] 480.5509 549.1985 436.7118 469.0870 487.2798 540.3417 544.1788 406.3410
+[17] 544.9324 485.2556 539.2449 540.5327 442.3023 472.5726 435.9550 528.3246
+[25] 415.0025 484.2151 421.7823 465.8394 476.2520 524.0267 401.4470 422.0822
+[33] 520.7777 423.1433 455.8187 416.6610 428.5627 421.8126 476.5172 500.1895
+[41] 484.6555 550.4085 466.1953 564.8000 478.6249 448.3138 539.0206 450.9777
+[49] 492.4952 507.6786</code></pre>
+</div>
+</div>
+<p>我们选择使用<code>rnorm()</code>来生成数据，这是一个从正态分布中生成随机数的函数，这反映了我们的假设——平均反应时在总体中呈正态分布。正态分布由两个参数定义，一个是均值(通常用希腊字母<span class="math inline">\(\mu\)</span>表示，发音为”myoo”)，另一个是标准差(通常用希腊字母<span class="math inline">\(\sigma\)</span>表示，发音为”sigma”)。由于我们自己生成了数据，所以<span class="math inline">\(\mu\)</span>和<span class="math inline">\(\sigma\)</span>都是已知的，在调用<code>rnorm()</code>时，我们将它们分别设置为480和40。</p>
+<p>当然，为了验证我们的假设，我们需要一个对照组，所以我们定义了一个非父母的对照组。我们用相同的方式从这个对照组生成数据，但改变了平均值。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">500</span>, <span class="at">sd =</span> <span class="dv">40</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>让我们将它们放入数据框(tibble)中，以便更容易绘制和分析数据。该数据框中的每一行表示来自特定被试的平均反应时。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"parent"</span>, <span class="st">"control"</span>), <span class="at">each =</span> <span class="dv">50</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt =</span> <span class="fu">c</span>(parents, control)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>dat</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 2
+   group     rt
+   &lt;chr&gt;  &lt;dbl&gt;
+ 1 parent  475.
+ 2 parent  502.
+ 3 parent  494.
+ 4 parent  494.
+ 5 parent  516.
+ 6 parent  403.
+ 7 parent  490.
+ 8 parent  517.
+ 9 parent  481.
+10 parent  549.
+# ℹ 90 more rows</code></pre>
+</div>
+</div>
+<p>下面是对模拟数据的一些尝试。</p>
+<ol type="1">
+<li>以某种合理的方式绘制数据。</li>
+<li>计算平均值和标准差。它们与总体参数相比如何?</li>
+<li>对这些数据进行t检验。群组效应显著吗?</li>
+</ol>
+<p>做完这些后，再做一次，但改变样本量、总体参数或两者都改变。</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-yarkoni_2019" class="csl-entry" role="listitem">
+Yarkoni, T. (2019). <em>The generalizability crisis</em>. <a href="https://doi.org/10.31234/osf.io/jqw35">https://doi.org/10.31234/osf.io/jqw35</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

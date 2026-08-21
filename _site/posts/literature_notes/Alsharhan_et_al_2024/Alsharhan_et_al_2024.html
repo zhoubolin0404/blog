@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2025-06-07">
+
+<title>聊天机器人的采用：多视角的系统回顾和未来的研究议程 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">聊天机器人的采用：多视角的系统回顾和未来的研究议程</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">文献笔记</div>
+                <div class="quarto-category">人机交互</div>
+                <div class="quarto-category">CASA</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 7, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#引言" id="toc-引言" class="nav-link active" data-scroll-target="#引言"><span class="header-section-number">1</span> 引言</a></li>
+  <li><a href="#相关研究" id="toc-相关研究" class="nav-link" data-scroll-target="#相关研究"><span class="header-section-number">2</span> 相关研究</a></li>
+  <li><a href="#方法" id="toc-方法" class="nav-link" data-scroll-target="#方法"><span class="header-section-number">3</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#纳入和排除标准" id="toc-纳入和排除标准" class="nav-link" data-scroll-target="#纳入和排除标准"><span class="header-section-number">3.1</span> 纳入和排除标准</a></li>
+  <li><a href="#数据来源和检索策略" id="toc-数据来源和检索策略" class="nav-link" data-scroll-target="#数据来源和检索策略"><span class="header-section-number">3.2</span> 数据来源和检索策略</a></li>
+  <li><a href="#数据收集和分析" id="toc-数据收集和分析" class="nav-link" data-scroll-target="#数据收集和分析"><span class="header-section-number">3.3</span> 数据收集和分析</a></li>
+  </ul></li>
+  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">4</span> 结果</a>
+  <ul class="collapse">
+  <li><a href="#出版年份" id="toc-出版年份" class="nav-link" data-scroll-target="#出版年份"><span class="header-section-number">4.1</span> 出版年份</a></li>
+  <li><a href="#数据库" id="toc-数据库" class="nav-link" data-scroll-target="#数据库"><span class="header-section-number">4.2</span> 数据库</a></li>
+  <li><a href="#研究层次" id="toc-研究层次" class="nav-link" data-scroll-target="#研究层次"><span class="header-section-number">4.3</span> 研究层次</a></li>
+  <li><a href="#理论模型" id="toc-理论模型" class="nav-link" data-scroll-target="#理论模型"><span class="header-section-number">4.4</span> 理论/模型</a></li>
+  <li><a href="#国家和地区" id="toc-国家和地区" class="nav-link" data-scroll-target="#国家和地区"><span class="header-section-number">4.5</span> 国家和地区</a></li>
+  <li><a href="#主要因变量" id="toc-主要因变量" class="nav-link" data-scroll-target="#主要因变量"><span class="header-section-number">4.6</span> 主要因变量</a></li>
+  <li><a href="#主要自变量" id="toc-主要自变量" class="nav-link" data-scroll-target="#主要自变量"><span class="header-section-number">4.7</span> 主要自变量</a></li>
+  <li><a href="#主要调节变量" id="toc-主要调节变量" class="nav-link" data-scroll-target="#主要调节变量"><span class="header-section-number">4.8</span> 主要调节变量</a></li>
+  <li><a href="#主要研究领域" id="toc-主要研究领域" class="nav-link" data-scroll-target="#主要研究领域"><span class="header-section-number">4.9</span> 主要研究领域</a></li>
+  <li><a href="#主要研究方法" id="toc-主要研究方法" class="nav-link" data-scroll-target="#主要研究方法"><span class="header-section-number">4.10</span> 主要研究方法</a></li>
+  <li><a href="#被试分布" id="toc-被试分布" class="nav-link" data-scroll-target="#被试分布"><span class="header-section-number">4.11</span> 被试分布</a></li>
+  </ul></li>
+  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">5</span> 讨论</a></li>
+  <li><a href="#结论" id="toc-结论" class="nav-link" data-scroll-target="#结论"><span class="header-section-number">6</span> 结论</a>
+  <ul class="collapse">
+  <li><a href="#研究意义" id="toc-研究意义" class="nav-link" data-scroll-target="#研究意义"><span class="header-section-number">6.1</span> 研究意义</a></li>
+  <li><a href="#未来研究方向" id="toc-未来研究方向" class="nav-link" data-scroll-target="#未来研究方向"><span class="header-section-number">6.2</span> 未来研究方向</a>
+  <ul class="collapse">
+  <li><a href="#聊天机器人" id="toc-聊天机器人" class="nav-link" data-scroll-target="#聊天机器人"><span class="header-section-number">6.2.1</span> 聊天机器人</a></li>
+  <li><a href="#generative-ai" id="toc-generative-ai" class="nav-link" data-scroll-target="#generative-ai"><span class="header-section-number">6.2.2</span> Generative AI</a></li>
+  </ul></li>
+  <li><a href="#不足" id="toc-不足" class="nav-link" data-scroll-target="#不足"><span class="header-section-number">6.3</span> 不足</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Alsharhan, A., Al-Emran, M., &amp; Shaalan, K. (2024). Chatbot Adoption: A Multiperspective Systematic Review and Future Research Agenda. <em>Ieee Transactions on Engineering Management</em>, <em>71</em>, 10232-10244. <a href="https://doi.org/10.1109/tem.2023.3298360" class="uri">https://doi.org/10.1109/tem.2023.3298360</a></p>
+<p><span class="citation" data-cites="Alsharhan_2024">Alsharhan et al. (<a href="#ref-Alsharhan_2024" role="doc-biblioref">2024</a>)</span></p>
+</div>
+</div>
+<section id="引言" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 引言</h1>
+<ul>
+<li><p>对话代理（conversational agent）也就是聊天机器人（Chat-bot）</p></li>
+<li><p>技术接受分为个人和组织两个层次，个人层次自愿，组织层次带有强制性</p></li>
+<li><p>常见模型是技术接受模型（TAM）和技术接受和使用统一理论及其拓展（UTAUT2）</p></li>
+<li><p>探索以下内容</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>研究对象</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>主要理论和模型</td>
+<td>理论框架优缺点</td>
+</tr>
+<tr class="even">
+<td>地理分布</td>
+<td>识别地域趋势和偏见</td>
+</tr>
+<tr class="odd">
+<td>自变量、因变量、调节变量</td>
+<td>识别潜在变量</td>
+</tr>
+<tr class="even">
+<td>应用领域</td>
+<td>识别潜在领域</td>
+</tr>
+<tr class="odd">
+<td>方法论</td>
+<td>评估稳健性</td>
+</tr>
+<tr class="even">
+<td>被试分布</td>
+<td>评估代表性</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</section>
+<section id="相关研究" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 相关研究</h1>
+<div id="tbl-prereview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prereview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 前人综述研究
+</figcaption>
+<div aria-describedby="tbl-prereview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>研究目的</th>
+<th>时间区间</th>
+<th>纳入研究量</th>
+<th>领域</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>消费者对聊天机器人采纳的态度</td>
+<td>2016-2019</td>
+<td>12</td>
+<td>通用领域</td>
+</tr>
+<tr class="even">
+<td>聊天机器人在多大程度上能够改变有害行为</td>
+<td>1966-2019</td>
+<td>110</td>
+<td>通用领域</td>
+</tr>
+<tr class="odd">
+<td>聊天机器人在减肥方面的应用以及影响用户参与度的因素</td>
+<td>-2021</td>
+<td>23</td>
+<td>医疗保健</td>
+</tr>
+<tr class="even">
+<td>聊天机器人对用户忠诚度的影响</td>
+<td>1990-2021</td>
+<td>41</td>
+<td>通用领域</td>
+</tr>
+<tr class="odd">
+<td>医疗保健领域中会话代理的可用性和有效性</td>
+<td>2008-2019</td>
+<td>31</td>
+<td>医疗保健</td>
+</tr>
+<tr class="even">
+<td>消费者使用智能代理技术的驱动因素</td>
+<td>2000-2020</td>
+<td>107</td>
+<td>通用领域</td>
+</tr>
+<tr class="odd">
+<td>用户对聊天机器人采纳的行为意向</td>
+<td>2017-2021</td>
+<td>39</td>
+<td>通用领域</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="方法" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 方法</h1>
+<ul>
+<li>systematic literature review（SLR）：参考preferred reporting items for systematic reviews and meta-analyses（PRISMA）<span class="citation" data-cites="Shamseer_2015">(<a href="#ref-Shamseer_2015" role="doc-biblioref">Shamseer et al., 2015</a>)</span></li>
+</ul>
+<section id="纳入和排除标准" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="纳入和排除标准"><span class="header-section-number">3.1</span> 纳入和排除标准</h2>
+<div id="tbl-inclusion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-inclusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;2: 纳入和排除标准
+</figcaption>
+<div aria-describedby="tbl-inclusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>纳入</th>
+<th>排除</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>与聊天机器人的采纳和使用相关</td>
+<td>与聊天机器人的采纳和使用无关</td>
+</tr>
+<tr class="even">
+<td>包含带有假设的理论模型</td>
+<td>不包含理论模型</td>
+</tr>
+<tr class="odd">
+<td>关于对话代理（聊天机器人）</td>
+<td>关于特定的对话代理，如voice-based agents和embodied virtual agents（机器人）</td>
+</tr>
+<tr class="even">
+<td>英文撰写</td>
+<td>非英文撰写</td>
+</tr>
+<tr class="odd">
+<td>已发表的期刊论文、会议论文和带结果的书籍章节</td>
+<td>综述、书籍、海报、报告、学位论文、杂志、未报告结果的论文</td>
+</tr>
+<tr class="even">
+<td>全文可获得</td>
+<td>无法获得</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="数据来源和检索策略" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="数据来源和检索策略"><span class="header-section-number">3.2</span> 数据来源和检索策略</h2>
+<ul>
+<li><p>Emerald、ACM、Science Direct、Springer、Sage、IEEE Xplore、Taylor &amp; Francis 和 Google Scholar</p></li>
+<li><p>“Chatbot” AND (“acceptance” OR “adoption” OR “use” OR “intention” OR “behavior”)</p></li>
+<li><div id="fig-flowchart" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="PRISMA flowchart.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: PRISMA流程图
+</figcaption>
+</figure>
+</div></li>
+<li><p>最后获得219份文献进行分析</p></li>
+</ul>
+</section>
+<section id="数据收集和分析" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="数据收集和分析"><span class="header-section-number">3.3</span> 数据收集和分析</h2>
+<p>1）作者，2）出版年份，3）数据库，4）理论/模型，5）国家和地区，6）因变量，7）外部因素，8）调节变量，9）方法论，10）被试，11）研究层次，12）研究领域</p>
+</section>
+</section>
+<section id="结果" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 结果</h1>
+<section id="出版年份" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="出版年份"><span class="header-section-number">4.1</span> 出版年份</h2>
+<div id="fig-year" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Number of Chatbot adoption studies per year.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: 出版年份
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="数据库" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="数据库"><span class="header-section-number">4.2</span> 数据库</h2>
+<div id="fig-databases" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-databases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Distribution of Chatbot adoption studies by databases.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-databases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 数据库
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="研究层次" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="研究层次"><span class="header-section-number">4.3</span> 研究层次</h2>
+<div id="fig-unit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Distribution of studies by the unit of analysis.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4: 研究层次
+</figcaption>
+</figure>
+</div>
+<p>205项研究是个人层次的技术接受，12项是组织层次的，1项是综述，1项是元结构方程模型（ meta-analytic structural equation modeling，MSAEM）</p>
+</section>
+<section id="理论模型" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="理论模型"><span class="header-section-number">4.4</span> 理论/模型</h2>
+<table class="caption-top table">
+<caption>聊天机器人接受研究中使用的主要理论/模型</caption>
+<colgroup>
+<col style="width: 86%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>理论/模型</th>
+<th>研究数量</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Technology acceptance model (TAM)</td>
+<td>43</td>
+</tr>
+<tr class="even">
+<td>Social presence theory (SPT)</td>
+<td>27</td>
+</tr>
+<tr class="odd">
+<td>Computers as social actors （CASA）</td>
+<td>26</td>
+</tr>
+<tr class="even">
+<td>Information systems success model (ISS)</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>Extension of UTAUT (UTAUT2)</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>UTAUT</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>Expectation confirmation theory (ECT)</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Uses and gratifications theory (U&amp;G)</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>Self-determination theory (SDT)</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Diffusion of innovations (DOI)</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>Social response theory (SRT)</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Service quality (SERVQUAL)</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>Uncanny valley of mind (UVM)</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Media richness theory (MRT)</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Theory of reasoned action (TRA)</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Theory of planned behavior (TPB)</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Cognitive absorption theory (CAT)</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Behavioral reasoning theory (BRT)</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Attribution theory (ATT)</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Expectation-confirmation model of information system (ECM-IS)</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Stimulus–organism–response model (SOR)</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Task technology fit (TTF)</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Theory of consumption values (TCV)</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Status quo bias (SQB)</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Expectancy violations theory (EVT)</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Similarity/attraction theory (SAT)</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>None</td>
+<td>55</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>SPT和CASA受到重视，说明TAM可能不足以解释聊天机器人的技术接受</p></li>
+<li><p>原文展示了各个理论/模型在各个领域研究的数目</p>
+<ul>
+<li><p>TAM常用于电子商务、金融、教育和客户服务研究</p></li>
+<li><p>CASA常用于电子商务、客户服务和营销研究</p></li>
+<li><p>SPT常用于营销研究</p></li>
+</ul></li>
+<li><p>可考虑其他理论/模型在其他领域的应用</p></li>
+</ul>
+</section>
+<section id="国家和地区" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="国家和地区"><span class="header-section-number">4.5</span> 国家和地区</h2>
+<div id="fig-Geographical" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Geographical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Geographical distribution of Chatbot adoption studies by continent.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Geographical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5: 地理分布
+</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Geographical distribution of Chatbot adoption studies.png" class="img-fluid figure-img"></p>
+<figcaption>国家和地区分布</figcaption>
+</figure>
+</div>
+<div id="fig-worldwide" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-worldwide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Chatbot adoption research worldwide.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-worldwide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6: 全球分布
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>15个研究涉及多个国家或地区</p></li>
+<li><p>美国的大量研究可能不是因为对这个领域感兴趣，而是因为Amazon Mechanical Turk（MTurk）平台便于招募被试</p></li>
+<li><p>非洲未开发</p></li>
+</ul>
+</section>
+<section id="主要因变量" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="主要因变量"><span class="header-section-number">4.6</span> 主要因变量</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TOP 10 DEPENDENT VARIABLES IN CHATBOT ADOPTION STUDIES.png" class="img-fluid figure-img"></p>
+<figcaption>前10因变量</figcaption>
+</figure>
+</div>
+</section>
+<section id="主要自变量" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="主要自变量"><span class="header-section-number">4.7</span> 主要自变量</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TOP 10 INDEPENDENT VARIABLES IN CHATBOT ADOPTION STUDIES.png" class="img-fluid figure-img"></p>
+<figcaption>前10额外自变量</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>筛选标准</p>
+<ul>
+<li><p>出现了两次或两次以上</p></li>
+<li><p>不是模型/理论中的变量（如TAM里面的感知易用性和感知有用性）</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="主要调节变量" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="主要调节变量"><span class="header-section-number">4.8</span> 主要调节变量</h2>
+<div id="fig-moderator" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-moderator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Main moderators in Chatbot adoption studies.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-moderator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;7: 主要调节变量
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>63%研究没使用调节变量</li>
+</ul>
+</section>
+<section id="主要研究领域" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="主要研究领域"><span class="header-section-number">4.9</span> 主要研究领域</h2>
+<div id="fig-domains" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-domains-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Main domains in Chatbot adoption studies.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-domains-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8: 主要研究领域
+</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="MAIN DOMAINS AND THEIR SUBCATEGORIES IN CHATBOT ADOPTION STUDIES.png" class="img-fluid figure-img"></p>
+<figcaption>细分领域</figcaption>
+</figure>
+</div>
+<ul>
+<li>还有12%（26项）研究是应用于通用领域</li>
+</ul>
+</section>
+<section id="主要研究方法" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="主要研究方法"><span class="header-section-number">4.10</span> 主要研究方法</h2>
+<div id="fig-methodologies" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-methodologies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Main methodologies in Chatbot adoption studies.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-methodologies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9: 主要研究方法
+</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Main statistical methods.png" class="img-fluid figure-img"></p>
+<figcaption>主要统计方法</figcaption>
+</figure>
+</div>
+</section>
+<section id="被试分布" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="被试分布"><span class="header-section-number">4.11</span> 被试分布</h2>
+<div id="fig-participant" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-participant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Main participants in Chatbot adoption studies.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-participant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10: 被试分布
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="讨论" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 讨论</h1>
+<ul>
+<li><p>研究数量在增加</p></li>
+<li><p>个人与组织层次研究分布不平衡</p></li>
+<li><p>传播学理论在兴起</p></li>
+<li><p>主要集中于亚洲、北美、欧洲，可能是因为这些地区有众包平台</p>
+<ul>
+<li>欧洲数量的增加可能要归功于德国</li>
+</ul></li>
+<li><p>关于实际使用行为和继续使用的研究较少，更多是关注未使用过的和早起使用者</p></li>
+<li><p>拟人性（anthropomorphism）是常见变量</p></li>
+<li><p>调节变量值得研究</p></li>
+<li><p>见<a href="#fig-domains" class="quarto-xref">图&nbsp;8</a></p></li>
+</ul>
+</section>
+<section id="结论" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 结论</h1>
+<section id="研究意义" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="研究意义"><span class="header-section-number">6.1</span> 研究意义</h2>
+<p>做了这个研究XD</p>
+</section>
+<section id="未来研究方向" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="未来研究方向"><span class="header-section-number">6.2</span> 未来研究方向</h2>
+<section id="聊天机器人" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="聊天机器人"><span class="header-section-number">6.2.1</span> 聊天机器人</h3>
+<ol type="1">
+<li><p>聊天机器人如何用于说服或政策合规？</p></li>
+<li><p>影响用户对聊天机器人网络安全行为的因素有哪些？</p></li>
+<li><p>聊天机器人所带来的安全性和隐私挑战在多大程度上影响用户的采用？</p></li>
+<li><p>如何解决安全性和隐私问题，以促进聊天机器人的更广泛应用？</p></li>
+<li><p>聊天机器人在农村地区处理医疗紧急情况、缓解老年人孤独感和协助宇航员方面的效率如何？</p></li>
+<li><p>聊天机器人在发展中国家的采用驱动因素和障碍有哪些？与发达国家有何不同？</p></li>
+<li><p>影响绿色聊天机器人使用的因素以及其对可持续发展的影响有哪些？</p></li>
+<li><p>聊天机器人使用对工作表现、社区参与和可持续性的影响是什么？</p></li>
+<li><p>MASEM方法是否可以用于识别聊天机器人采用文献中的共性或差异？</p></li>
+<li><p>在聊天机器人的开发和部署过程中，应该考虑哪些伦理问题，如何有效地解决这些问题以确保负责任的使用？</p></li>
+<li><p>在各个领域的组织层面，影响聊天机器人采用的关键因素有哪些？</p></li>
+<li><p>聊天机器人在不同组织领域的接受率如何？</p></li>
+</ol>
+</section>
+<section id="generative-ai" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="generative-ai"><span class="header-section-number">6.2.2</span> Generative AI</h3>
+<ol type="1">
+<li><p>用户如何看待生成式人工智能的潜在风险和收益，这如何影响他们对这些技术的接受？</p></li>
+<li><p>影响生成式人工智能持续意愿及其对可持续发展影响的因素有哪些？</p></li>
+<li><p>生成式人工智能（如ChatGPT和Google Bard）的引入如何影响教育、医疗、旅游和营销等领域的聊天机器人采用格局？</p></li>
+<li><p>生成式人工智能如何转变教学与学习实践，且其对学生的教育成果和参与度有何影响？</p></li>
+<li><p>生成式人工智能在心理健康支持方面的应用如何？其在心理健康护理中的采用受哪些因素影响？</p></li>
+<li><p>对生成式人工智能的信任程度如何影响其在不同领域个体和组织层面的采用？</p></li>
+<li><p>领导力在推动生成式人工智能在各领域组织层面采用中扮演何种角色？</p></li>
+<li><p>在促进生成式人工智能在个体和组织层面采用方面，需要哪些培训和支持结构？</p></li>
+<li><p>生成式人工智能的使用如何影响个体在不同领域的工作满意度和职业发展？</p></li>
+<li><p>组织如何有效地采用生成式人工智能以提升其运营效率？</p></li>
+<li><p>不同领域的组织在采用生成式人工智能时面临哪些障碍，如何克服这些障碍？</p></li>
+<li><p>生成式人工智能的使用如何影响个体和组织层面的决策过程？</p></li>
+<li><p>任务技术适配模型（TTF）如何预测生成式人工智能在个体和组织层面的采用成功率？</p></li>
+</ol>
+</section>
+</section>
+<section id="不足" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="不足"><span class="header-section-number">6.3</span> 不足</h2>
+<ul>
+<li><p>研究范围只包含基于文本的聊天机器人，不包含语音助手等</p></li>
+<li><p>时间范围不足</p></li>
+<li><p>检索数据库不足</p></li>
+</ul>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Alsharhan_2024" class="csl-entry" role="listitem">
+Alsharhan, A., Al-Emran, M., &amp; Shaalan, K. (2024). Chatbot adoption: A multiperspective systematic review and future research agenda. <em>Ieee Transactions on Engineering Management</em>, <em>71</em>, 10232–10244. <a href="https://doi.org/10.1109/tem.2023.3298360">https://doi.org/10.1109/tem.2023.3298360</a>
+</div>
+<div id="ref-Shamseer_2015" class="csl-entry" role="listitem">
+Shamseer, L., Moher, D., Clarke, M., Ghersi, D., Liberati, A., Petticrew, M., Shekelle, P., Stewart, L. A., &amp; Group, P.-P. (2015). Preferred reporting items for systematic review and meta-analysis protocols (PRISMA-p) 2015: Elaboration and explanation. <em>BMJ : British Medical Journal</em>, <em>349</em>, g7647. <a href="https://doi.org/10.1136/bmj.g7647">https://doi.org/10.1136/bmj.g7647</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

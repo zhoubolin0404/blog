@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-03-02">
+
+<title>02-相关和回归 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">02-相关和回归</h1>
+            <p class="subtitle lead">学习统计模型——通过R模拟</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">GLMM</div>
+                <div class="quarto-category">线性混合效应模型</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 2, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#相关矩阵correlation-matrices" id="toc-相关矩阵correlation-matrices" class="nav-link active" data-scroll-target="#相关矩阵correlation-matrices"><span class="header-section-number">1</span> 相关矩阵(Correlation matrices)</a></li>
+  <li><a href="#模拟二元数据" id="toc-模拟二元数据" class="nav-link" data-scroll-target="#模拟二元数据"><span class="header-section-number">2</span> 模拟二元数据</a></li>
+  <li><a href="#相关和回归的关系" id="toc-相关和回归的关系" class="nav-link" data-scroll-target="#相关和回归的关系"><span class="header-section-number">3</span> 相关和回归的关系</a></li>
+  <li><a href="#练习" id="toc-练习" class="nav-link" data-scroll-target="#练习"><span class="header-section-number">4</span> 练习</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注释
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>本系列内容是本人对<strong>2024年</strong>翻译的<a href="https://glmm.netlify.app">《学习统计模型——通过R模拟》</a>的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。</p>
+<p>2026年3月2日查询原文github，显示部分文件于1年前更新，受个人精力限制，<strong>不对更新内容进行对比</strong>，还是推荐有条件者阅读原文。</p>
+</div>
+</div>
+<section id="相关矩阵correlation-matrices" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 相关矩阵(Correlation matrices)</h1>
+<p>你可能已经通过阅读心理学论文对<strong>相关矩阵</strong>这个概念有所了解。相关矩阵是总结同一个体的多个测量值之间关系的常用方法。</p>
+<p>假设你用多个量表测量了心理幸福感。一个问题是这些量表在多大程度上测量了相同的东西。通常，你会查看相关矩阵来探索测量之间所有成对关系。</p>
+<p>回忆一下，相关系数量化了两个变量之间关系的<strong>强度</strong>和<strong>方向</strong>。它通常用符号<span class="math inline">\(r\)</span>或<span class="math inline">\(\rho\)</span>(希腊字母”rho”)表示。相关系数的范围在-1到1之间，其中0表示没有关系，正值反映正相关(一个变量增加，另一个也增加)，负值反映负相关(一个变量增加，另一个减少)。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="相关和回归_files/figure-html/correlation-relationships-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>不同类型的二元关系</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>如果你有<span class="math inline">\(n\)</span>个测量值，你可以计算多少个成对相关？你可以用下面蓝框中的公式来计算，也可以更简单地通过R中的<code>choose(n, 2)</code>函数直接计算。例如，要获得6个测量值之间可能的成对相关数量，你可以输入<code>choose(6, 2)</code>，这会告诉你有15对组合。</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+提示
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>对于任意<span class="math inline">\(n\)</span>个测量值，你可以计算<span class="math inline">\(\frac{n!}{2(n - 2)!}\)</span>个各值之间的成对相关。符号<span class="math inline">\(!\)</span>称为<strong>阶乘(factorial)</strong>运算符，定义为从1到<span class="math inline">\(n\)</span>所有数字的乘积。因此，如果你有6个测量值，你可以得到</p>
+<p><span class="math display">\[
+\frac{6!}{2(6-2)!} = \frac{1 \times 2 \times 3 \times 4 \times 5 \times 6}{2\left(1 \times 2 \times 3 \times 4\right)} = \frac{720}{2(24)} = 15
+\]</span></p>
+</div>
+</div>
+<p>你可以使用R中的<code>base::cor()</code>或<code>corrr::correlate()</code>来创建相关矩阵。我们更喜欢后者函数，因为<code>cor()</code>要求你的数据存储在矩阵中，而我们将处理的大多数数据是存储在数据框中的表格数据。<code>corrr::correlate()</code>函数将数据框作为第一个参数，并提供”整洁”的输出，因此它可以更好地与tidyverse系列函数和管道操作符(<code>%&gt;%</code>)联动。</p>
+<p>让我们创建一个相关矩阵来看看它是如何工作的。首先加载我们需要的包。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"corrr"</span>) <span class="co"># 如缺失(missing)，在控制台(console)中输入install.packages("corrr")</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>我们将使用<code>starwars</code>数据集，这是在加载tidyverse包后可用的内置数据集。该数据集包含了出现在星球大战电影系列中的各种角色的信息。让我们来看看之间的相关性</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height, mass, birth_year) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Correlation computed with
+• Method: 'pearson'
+• Missing treated using: 'pairwise.complete.obs'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  term       height   mass birth_year
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+1 height     NA      0.131     -0.404
+2 mass        0.131 NA          0.478
+3 birth_year -0.404  0.478     NA    </code></pre>
+</div>
+</div>
+<p>你可以在任意给定的行或列的交叉处查找任何双变量相关系数。因此，<code>height</code>和<code>mass</code>之间的相关系数是.131，你可以在第1行，第2列或第2行，第1列找到它——它们是相同的。请注意，这里只有<code>choose(3, 2)</code> = 3个唯一的双变量关系，但每个关系在表中出现了两次。我们可能只想显示唯一的组合，这可以通过在管道中附加<code>corrr::shave()</code>来实现。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height, mass, birth_year) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shave</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Correlation computed with
+• Method: 'pearson'
+• Missing treated using: 'pairwise.complete.obs'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  term       height   mass birth_year
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+1 height     NA     NA             NA
+2 mass        0.131 NA             NA
+3 birth_year -0.404  0.478         NA</code></pre>
+</div>
+</div>
+<p>现在我们只有相关矩阵的下三角部分，但<code>NA</code>看起来很难看，前导0也不美观。<strong><code>corrr</code></strong>包还提供了<code>fashion()</code>函数，可以对其进行清理(更多选项请查阅<code>?corrr::fashion</code>)。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height, mass, birth_year) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shave</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fashion</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Correlation computed with
+• Method: 'pearson'
+• Missing treated using: 'pairwise.complete.obs'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        term height mass birth_year
+1     height                       
+2       mass    .13                
+3 birth_year   -.40  .48           </code></pre>
+</div>
+</div>
+<p>相关性只有在关系(大致)线性且没有严重的异常值对结果产生过大影响时才能很好地描述关系。因此，可视化相关性通常和量化它们一样是个好主意。<code>base::pairs()</code>函数可以实现这一点。<code>pairs()</code>的第一个参数形式为<code>~ v1 + v2 + v3 + ... + vn</code>，其中<code>v1</code>、<code>v2</code>等是你想要进行相关分析的变量名。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="sc">~</span> height <span class="sc">+</span> mass <span class="sc">+</span> birth_year, starwars)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="相关和回归_files/figure-html/pairs-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>星球大战数据集相关关系</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>我们会发现一个巨大的离群值影响了我们的数据。具体来说是有个体重超过1200kg的生物。让我们找出它并从数据集里面删掉它。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass <span class="sc">&gt;</span> <span class="dv">1200</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, mass, height, birth_year)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  name                   mass height birth_year
+  &lt;chr&gt;                 &lt;dbl&gt;  &lt;int&gt;      &lt;dbl&gt;
+1 Jabba Desilijic Tiure  1358    175        600</code></pre>
+</div>
+</div>
+<p>好了，让我们看看没有了这个庞然大物的数据会是什么样子。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>starwars2 <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name <span class="sc">!=</span> <span class="st">"Jabba Desilijic Tiure"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="sc">~</span> height <span class="sc">+</span> mass <span class="sc">+</span> birth_year, starwars2)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="相关和回归_files/figure-html/massive-creature-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>去除体重离群值后星球大战数据集相关关系</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>好多了，但还有个生物的离群出生年份可能是我们不想要的。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>starwars2 <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(birth_year <span class="sc">&gt;</span> <span class="dv">800</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, height, mass, birth_year)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  name  height  mass birth_year
+  &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Yoda      66    17        896</code></pre>
+</div>
+</div>
+<p>是尤达大师！他和宇宙一样古老。让我们抛开他看看图会怎么样。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>starwars3 <span class="ot">&lt;-</span> starwars2 <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name <span class="sc">!=</span> <span class="st">"Yoda"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="sc">~</span> height <span class="sc">+</span> mass <span class="sc">+</span> birth_year, starwars3)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="相关和回归_files/figure-html/bye-yoda-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>去除体重和出生年份离群值后星球大战数据集相关关系</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>看起来更好了。让我们看看它是怎样改变我们的相关矩阵的。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>starwars3 <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height, mass, birth_year) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shave</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fashion</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Correlation computed with
+• Method: 'pearson'
+• Missing treated using: 'pairwise.complete.obs'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        term height mass birth_year
+1     height                       
+2       mass    .73                
+3 birth_year    .44  .24           </code></pre>
+</div>
+</div>
+<p>请注意，这些值与我们开始时的值有很大不同。</p>
+<p>有时移除离群值不是一个好办法。处理离群值的另一个办法是使用一种更稳健(robust)的方法。使用<code>corrr::correlate()</code>默认计算的相关系数是Pearson积差相关(Pearson product-moment correlation)系数。我们也能通过改变<code>correlate()</code>的<code>method()</code>参数来计算Spearman相关系数。这将在计算相关性之前用排名替换原始值，因此仍会包括离群值，但影响将大大减小。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height, mass, birth_year) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>(<span class="at">method =</span> <span class="st">"spearman"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shave</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fashion</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Correlation computed with
+• Method: 'spearman'
+• Missing treated using: 'pairwise.complete.obs'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        term height mass birth_year
+1     height                       
+2       mass    .72                
+3 birth_year    .15  .15           </code></pre>
+</div>
+</div>
+<p>顺便一提，如果你用R Markdown生成报告，并希望你的表格有个好看的格式，可以使用<code>knitr:: able()</code>。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height, mass, birth_year) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlate</span>(<span class="at">method =</span> <span class="st">"spearman"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shave</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fashion</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">height</th>
+<th style="text-align: left;">mass</th>
+<th style="text-align: left;">birth_year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">height</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mass</td>
+<td style="text-align: left;">.72</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">birth_year</td>
+<td style="text-align: left;">.15</td>
+<td style="text-align: left;">.15</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="模拟二元数据" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 模拟二元数据</h1>
+<p>你已经学会了使用<code>rnorm()</code>函数从正态分布中模拟数据。回忆一下，<code>rnorm()</code>允许你指定单个变量的均值和标准差。那我们怎么模拟相关变量呢？</p>
+<p>应该很明确，你不能仅仅运行两次<code>rnorm()</code>后组合变量就完事。因为这会得到两个不相关的变量，即相关性为零。</p>
+<p><strong><code>MASS</code></strong>包提供<code>mvrnorm()</code>函数，这是rnorm的”多元”(multivariate)版(因此函数的名字是’mv’ + ‘rnorm’，这样更容易记住)。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注释
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>R预装了<strong><code>MASS</code></strong>包。但<strong><code>MASS</code></strong>包中你唯一可能会用到的函数只是<code>mvrnorm()</code>，因此相比于使用<code>library("MASS")</code>加载包，使用<code>MASS::mvrnorm()</code>是更好的办法，尤其是在<strong><code>MASS</code></strong>和<strong><code>tidyverse</code></strong>里的<strong><code>dplyr</code></strong>包不太合得来的情况下(因为两个包都有<code>select()</code>函数)。因此，如果在加载<strong><code>tidyverse</code></strong>之后加载<strong><code>MASS</code></strong>，那么最终得到的<code>select()</code>是<strong><code>MASS</code></strong>版本，而不是<strong><code>dplyr</code></strong>版本。这会让你绞尽脑汁来找出代码的问题所在，所以总在不加载的情况下使用<code>MASS::mvrnorm()</code>吧。</p>
+<p>注：这里作者贴了一则他在Twitter(现X)上吐槽<strong><code>MASS</code></strong>的打油诗，不过现在已经查不到了QwQ，考虑到翻译水平不佳，附上原文！</p>
+<blockquote class="blockquote">
+<p>MASS before dplyr, clashes not dire; <br> dplyr before MASS, pain in the ass.</p>
+<p>—— Dale Barr(September 30, 2014)</p>
+</blockquote>
+</div>
+</div>
+<p>请查看<code>mvrnorm()</code>函数的文档(在控制台输入<code>?MASS::mvrnorm</code>)。</p>
+<p>有3个参数需要注意：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">参数</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">n</td>
+<td style="text-align: left;">所需样本数</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mu</td>
+<td style="text-align: left;">一个给出变量均值的向量</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sigma</td>
+<td style="text-align: left;">一个正定对称矩阵，用于指定变量的协方差矩阵</td>
+</tr>
+</tbody>
+</table>
+<p>对<code>n</code>和<code>mu</code>的描述可以理解，但“一个正定对称矩阵(positive-definite symmetric matrix)，用于指定变量的协方差矩阵”是什么意思呢？</p>
+<p>当你有个多层数据时，<strong>协方差矩阵</strong>(也叫<strong>方差-协方差矩阵</strong>)反映了各个变量的方差及其相互关系。它类似于<strong>标准差</strong>的多维版本。要充分描述单变量正态分布，你只需要知道均值和标准差；要描述双变量正态分布，你需要分别知道两个变量的均值、标准差和他们的相关性；对于包含两个以上变量的多元分布，你需要知道所有变量的均值、它们的标准差以及所有可能的成对相关性。<strong>这些概念在我们开始讨论混合效应模型时会变得非常重要。</strong></p>
+<p>你可以将协方差矩阵看作类似于之前见过的相关矩阵；实际上，通过一些计算，你可以将协方差矩阵转换为相关矩阵。</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+提示
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>你在说什么《黑客帝国(Matrix)》？那不是从上世纪90年代开始的科幻电影系列吗？</strong></p>
+<p>在数学中，矩阵只是向量概念的推广:向量被认为只有一个维度，而矩阵可以是任意数量的维度。</p>
+<p>那么矩阵</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp; 4 &amp; 7 \\
+2 &amp; 5 &amp; 8 \\
+3 &amp; 6 &amp; 9 \\
+\end{pmatrix}
+\]</span></p>
+<p>是一个3(行) x 3(列)矩阵，包括了列向量<span class="math inline">\(\begin{pmatrix} 1 \\ 2 \\ 3 \\ \end{pmatrix}\)</span>，<span class="math inline">\(\begin{pmatrix} 4 \\ 5 \\ 6 \\ \end{pmatrix}\)</span>和<span class="math inline">\(\begin{pmatrix} 7 \\ 8 \\ 9 \\ \end{pmatrix}\)</span>。通常我们用<span class="math inline">\(i\)</span> x <span class="math inline">\(j\)</span>的形式表示矩阵，<span class="math inline">\(i\)</span>是行数，<span class="math inline">\(j\)</span>是列数。因此，一个3x2矩阵有3行2列，像这样：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+a &amp; d \\
+b &amp; e \\
+c &amp; f \\
+\end{pmatrix}
+\]</span></p>
+<p><strong>方阵</strong>是行数等于列数的矩阵。</p>
+<p>你可以用<code>matrix()</code>函数在R中创建一个方阵，或者使用base R的 <code>cbind()</code>和<code>rbind()</code>将向量连接在一起，它们分别将向量按列和按行连接在一起。在控制台试试<code>cbina(1:3, 4:6, 7:9)</code>吧。</p>
+</div>
+</div>
+<p>那么“正定”和“对称”是什么呢？这是对可以表示多元正态分布的这类矩阵的数学要求。换句话说，你提供的协方差矩阵必须表示一个合法的多元正态分布。在这点上，你真的不需要知道再多了。</p>
+<iframe src="https://dalejbarr.github.io/bivariate/index.html" width="420" height="620" class="noborder">
+</iframe>
+<p>让我们从模拟假设的人类身高和体重的数据开始。我们知道这些是相关的。为了能够模拟数据，我们需要这两个变量的均值和标准差以及它们的相关性。</p>
+<p>我找到了一些<a href="https://www.geogebra.org/m/RRprACv4">数据</a>并把它转换为CSV文件。如果你想跟上，可以下载这个文件<a href="heights_and_weights.csv" download="heights_and_weights.csv">heights_and_weights.csv</a>。这是散点图：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>handw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"heights_and_weights.csv"</span>, <span class="at">col_types =</span> <span class="st">"dd"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(handw, <span class="fu">aes</span>(height_in, weight_lbs)) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"height (inches)"</span>, <span class="at">y =</span> <span class="st">"weight (pounds)"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="相关和回归_files/figure-html/heights-and-weights-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>475人的身高和体重(包括婴儿)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>这不是一个线性关系。我们可以先对每个变量进行对数(log)变换。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>handw_log <span class="ot">&lt;-</span> handw <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hlog =</span> <span class="fu">log</span>(height_in), <span class="at">wlog =</span> <span class="fu">log</span>(weight_lbs))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="相关和回归_files/figure-html/handw-log-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>对数变换后的身高和体重</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>散点图右上侧尾部有一个大的点簇，这可能表示在这个样本中成年人比儿童更多，因为成年人更高和更重。</p>
+<p>对数身高的均值是4.11 (SD = 0.26)，而对数体重的均值是4.74 (SD = 0.65)。对数身高和对数体重之间的相关性我们可以用<code>cor()</code>函数获得，高达0.96。</p>
+<p>我们现在有了模拟500人身高和体重所需的所有信息。但我们如何将这些信息输入到<code>MASS::mvrnorm()</code>呢？我们知道函数调用的第一部分是<code>MASS::mvrnorm(500, c(4.11,4.74), ...)</code>，但<code>Sigma</code>——那个协方差矩阵呢？我们从上面知道<span class="math inline">\(\hat{\sigma}_x = 0.26\)</span>和<span class="math inline">\(\hat{\sigma}_y = 0.65\)</span>，以及<span class="math inline">\(\hat{\sigma}_y = 0.65\)</span>, and <span class="math inline">\(\hat{\rho}_{xy} = 0.96\)</span>。</p>
+<p>表示二元数据<code>Sigma</code> (<span class="math inline">\(\mathbf{\Sigma}\)</span>)的协方差矩阵如下：</p>
+<p><span class="math display">\[
+\mathbf{\Sigma} =
+\begin{pmatrix}
+{\sigma_x}^2                &amp; \rho_{xy} \sigma_x \sigma_y \\
+\rho_{yx} \sigma_y \sigma_x &amp; {\sigma_y}^2 \\
+\end{pmatrix}
+\]</span></p>
+<p>方差（标准差的平方，<span class="math inline">\({\sigma_x}^2\)</span>和<span class="math inline">\({\sigma_y}^2\)</span>）位于对角线上，协方差(相关系数乘以两个标准差，<span class="math inline">\(\rho_{xy} \sigma_x \sigma_y\)</span>)位于非对角线上。记住协方差就是相关系数与两个标准差的积，这是很有用的。正如我们在上面的相关矩阵中看到的，表格中存在额外信息；也就是说，协方差同时出现在矩阵的右上角单元格和左下角单元格。</p>
+<p>代入之前的值，协方差矩阵应该是：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+.26^2 &amp; (.96)(.26)(.65) \\
+(.96)(.65)(.26) &amp; .65^2 \\
+\end{pmatrix} =
+\begin{pmatrix}
+.067 &amp; .162 \\
+.162 &amp; .423 \\
+\end{pmatrix}
+\]</span></p>
+<p>很好，那么我们如何在R中形成<code>Sigma</code>以便我们可以将它传递给<code>mvrnorm()</code>函数呢？我们将使用<code>matrix()</code>函数，如下所示。</p>
+<p>首先，让我们定义协方差并将其存储在变量<code>my_cov</code>中。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>my_cov <span class="ot">&lt;-</span> .<span class="dv">96</span> <span class="sc">*</span> .<span class="dv">26</span> <span class="sc">*</span> .<span class="dv">65</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>现在我们将使用<code>matrix()</code>来定义我们的<code>Sigma</code>为<code>my_Sigma</code>。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>my_Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(.<span class="dv">26</span><span class="sc">^</span><span class="dv">2</span>, my_cov, my_cov, .<span class="dv">65</span><span class="sc">^</span><span class="dv">2</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>my_Sigma</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        [,1]    [,2]
+[1,] 0.06760 0.16224
+[2,] 0.16224 0.42250</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+提示
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>对<code>matrix()</code>函数感到困惑吗?</strong></p>
+<p>通过运行下面的代码，你可以发现<code>matrix()</code>是逐列填充矩阵元素，而不是逐行填充:</p>
+<p><code>matrix(c("a", "b", "c", "d"), ncol = 2)</code></p>
+<p>如果你想改变这种行为，将<code>byrow</code>参数设置为<code>TRUE</code>。</p>
+<p><code>matrix(c("a", "b", "c", "d"), ncol = 2, byrow = TRUE)</code></p>
+</div>
+</div>
+<p>太好了！现在我们得到了<code>my_Sigma</code>，我们已经准备好使用<code>MASS::mvrnorm()</code>了。让我们通过创建6个模拟的人的数据来测试一下。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">62</span>) <span class="co"># 为了可重复性</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 传递*命名的*向量c(height = 4.11, weight = 4.74)给mu可以在输出中得到列名</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>log_ht_wt <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">6</span>, <span class="fu">c</span>(<span class="at">height =</span> <span class="fl">4.11</span>, <span class="at">weight =</span> <span class="fl">4.74</span>), my_Sigma)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>log_ht_wt</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       height   weight
+[1,] 4.254209 5.282913
+[2,] 4.257828 4.895222
+[3,] 3.722376 3.759767
+[4,] 4.191287 4.764229
+[5,] 4.739967 6.185191
+[6,] 4.058105 4.806485</code></pre>
+</div>
+</div>
+<p>那么<code>MASS::mvrnorm()</code>会返回一个矩阵，每个模拟的人对应一行，其中第一列表示对数身高，第二列表示对数体重。但是对数身高和对数体重对我们来说并不是很有用，所以让我们使用<code>exp()</code>函数来进行转换，它是<code>log()</code>转换的逆操作。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(log_ht_wt)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        height    weight
+[1,]  70.40108 196.94276
+[2,]  70.65632 133.64963
+[3,]  41.36254  42.93844
+[4,]  66.10779 117.24065
+[5,] 114.43045 485.50576
+[6,]  57.86453 122.30092</code></pre>
+</div>
+</div>
+<p>那么我们第一个模拟的人的身高是70.4英寸(大约是5’5”或者178.816 cm)，体重是196.94磅(约89.32 kg)。听起来感觉不错吧！(还是要注意，它会生成超出我们原始数据范围的观测值：我们会得到超高的人，例如第5个观测值，但至少体重/身高的关系会被保留)。</p>
+<p>好的，让我们随机生成一群人的数据，将它们从对数转换为英寸和磅，然后将它们与我们的原始数据进行比较，看看效果如何。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 模拟新的人</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>new_humans <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">500</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">height_in =</span> <span class="fl">4.11</span>, <span class="at">weight_lbs =</span> <span class="fl">4.74</span>),</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  my_Sigma</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>() <span class="sc">%&gt;%</span> <span class="co"># 从对数转换回英寸和磅</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="co"># 为绘图转换为tibble格式</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="st">"simulated"</span>) <span class="co"># 将他们标记为模拟(simulated)</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 合并真实和模拟的数据集，其中handw是来自heights_and_weights.csv的变量</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>alldata <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(handw <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">type =</span> <span class="st">"real"</span>), new_humans)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(alldata, <span class="fu">aes</span>(height_in, weight_lbs)) <span class="sc">+</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> type), <span class="at">alpha =</span> .<span class="dv">1</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="相关和回归_files/figure-html/plot-together-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>真实和模拟的人</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>你可以看到，我们模拟的人与正常的人非常相似，只是我们创建了一些身高和体重超出正常范围的人。</p>
+</section>
+<section id="相关和回归的关系" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 相关和回归的关系</h1>
+<p>好的，我们知道如何估计相关了，但如果我们想要根据身高来预测体重该怎么办呢？这可能听起来像一个不切实际的问题。但事实上，在使用或进行安全性取决于患者体重的药物或程序，但没时间称量患者体重时，<a href="https://link.springer.com/article/10.1186/s12245-018-0212-9">急救医护人员可以使用这种技术，在紧急情况下迅速估算人们的体重</a>。</p>
+<p>回忆一下，简单回归模型的GLM是：</p>
+<p><span class="math display">\[Y_i = \beta_0 + \beta_1 X_i + e_i.\]</span></p>
+<p>在这里，我们尝试根据他们观测到的身高(<span class="math inline">\(X_i\)</span>)来预测体重(<span class="math inline">\(Y_i\)</span>)。在这个方程里，<span class="math inline">\(\beta_0\)</span>和<span class="math inline">\(\beta_1\)</span>分别是y轴截距和斜率的参数，<span class="math inline">\(e_i\)</span>是残差。传统上假设<span class="math inline">\(e_i\)</span>的值来自均值为0、方差为<span class="math inline">\(\sigma^2\)</span>的正态分布；数学上的表述是<span class="math inline">\(e_i \sim N(0, \sigma^2)\)</span>，其中<span class="math inline">\(\sim\)</span>表示“按照分布”，<span class="math inline">\(N(0, \sigma^2)\)</span>表示“均值为0、方差为<span class="math inline">\(\sigma^2\)</span>的正态分布(<span class="math inline">\(N\)</span>)”。</p>
+<p>这表明如果我们有X和Y的均值估计值(分别标记为<span class="math inline">\(\mu_x\)</span>和<span class="math inline">\(\mu_y\)</span>)、标准差估计值(<span class="math inline">\(\hat{\sigma}_x\)</span>和<span class="math inline">\(\hat{\sigma}_y\)</span>)、X和Y之间相关系数的估计值(<span class="math inline">\(\hat{\rho}\)</span>)，我们就有了估计回归方程参数<span class="math inline">\(\beta_0\)</span>和<span class="math inline">\(\beta_1\)</span>所需要的所有信息。下面是具体做法。(译者注：这里的估计值是指根据样本信息来估计总体情况的估计值，是总体的估计值、样本的观测值)</p>
+<p>首先，回归线的斜率<span class="math inline">\(\beta_1\)</span>等于相关系数<span class="math inline">\(\rho\)</span>乘以<span class="math inline">\(Y\)</span>和<span class="math inline">\(X\)</span>的标准差之比。</p>
+<p><span class="math display">\[\beta_1 = \rho \frac{\sigma_Y}{\sigma_X}\]</span></p>
+<p>根据上面对数身高和对数体重的估计值，你能算出<span class="math inline">\(\beta_1\)</span>吗?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> .<span class="dv">96</span> <span class="sc">*</span> (.<span class="dv">65</span> <span class="sc">/</span> .<span class="dv">26</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>b1</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.4</code></pre>
+</div>
+</div>
+<p>下一个要注意的点是，基于数学原理，回归线必须通过与<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>均值对应的点，即点<span class="math inline">\((\mu_x, \mu_y)\)</span>(你可以想象回归线根据斜率围绕该点“旋转”)。你也知道<span class="math inline">\(\beta_0\)</span>是y轴截距，即在<span class="math inline">\(X = 0\)</span>处与纵轴相交的点。根据这些信息和上面的估计值，你能推断出<span class="math inline">\(\beta_0\)</span>的值吗？</p>
+<p>下面是你求解<span class="math inline">\(\beta_0\)</span>的推理过程。</p>
+<p>想象一下，从<span class="math inline">\(X = \mu_x\)</span>逐步一个一个单位后退到<span class="math inline">\(X = 0\)</span>。在<span class="math inline">\(X = \mu_x\)</span>处，<span class="math inline">\(Y = 4.74\)</span>，每在X轴后退一个单位，<span class="math inline">\(Y\)</span>将下降<span class="math inline">\(\beta_1 = 2.4\)</span>个单位。当你到0时，<span class="math inline">\(Y\)</span>将从<span class="math inline">\(\mu_y\)</span>下降到<span class="math inline">\(\mu_y - \mu_x \beta_1\)</span>。</p>
+<p>因此通解是：<span class="math inline">\(\beta_0 = \mu_y - \mu_x\beta_1\)</span>。</p>
+<p>因为<span class="math inline">\(\beta_1 = 2.4\)</span>、<span class="math inline">\(\mu_x = 4.11\)</span>、<span class="math inline">\(\mu_y = 4.74\)</span>，所以<span class="math inline">\(\beta_0 = -5.124\)</span>。因此，我们的回归方程是：</p>
+<p><span class="math display">\[Y_i =  -5.124 + 2.4X_i + e_i.\]</span></p>
+<p>为了验证我们的结果，我们先对对数转换后的数据进行回归，使用<code>lm()</code>函数，它采用最小二乘法(ordinary least squares regression)来估计参数。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(wlog <span class="sc">~</span> hlog, handw_log))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wlog ~ hlog, data = handw_log)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.63296 -0.09915 -0.01366  0.09285  0.65635 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -5.26977    0.13169  -40.02   &lt;2e-16 ***
+hlog         2.43304    0.03194   76.17   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1774 on 473 degrees of freedom
+Multiple R-squared:  0.9246,    Adjusted R-squared:  0.9245 
+F-statistic:  5802 on 1 and 473 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>看起来非常接近。不完全匹配的原因仅仅是我们将估计值四舍五入到小数点后两位以方便计算。</p>
+<p>作为另一个检查，让我们将手动计算的回归线叠加在对数转换后数据的散点图上。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(handw_log, <span class="fu">aes</span>(hlog, wlog)) <span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"log(height)"</span>, <span class="at">y =</span> <span class="st">"log(weight)"</span>) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="sc">-</span><span class="fl">5.124</span>, <span class="at">slope =</span> <span class="fl">2.4</span>, <span class="at">colour =</span> <span class="st">'blue'</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="相关和回归_files/figure-html/scatter-with-line-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>对数值和叠加的回归线</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>看起来是对的。</p>
+<p>最后，以下是相关性和回归之间关系的一些影响：</p>
+<ul>
+<li>当<span class="math inline">\(\beta_1 = 0\)</span>时，与<span class="math inline">\(\rho = 0\)</span>相同。</li>
+<li>当<span class="math inline">\(\beta_1 &gt; 0\)</span>时， <span class="math inline">\(\rho &gt; 0\)</span>，因为标准差不能为负。</li>
+<li>当<span class="math inline">\(\beta_1 &lt; 0\)</span>时， <span class="math inline">\(\rho &lt; 0\)</span>，原因同上。</li>
+<li>拒绝零假设<span class="math inline">\(\beta_1 = 0\)</span>与拒绝零假设<span class="math inline">\(\rho = 0\)</span>是相同的。在<code>lm()</code>中得到的<span class="math inline">\(\beta_1\)</span>的p值与使用<code>cor.test()</code>得到的<span class="math inline">\(\rho\)</span>的p值相同。</li>
+</ul>
+</section>
+<section id="练习" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 练习</h1>
+<div class="cell">
+<iframe src="https://rstudio-connect.psy.gla.ac.uk/covariance/?showcase=0" width="530px" height="480px" data-external="1">
+</iframe>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

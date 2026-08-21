@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-03-02">
+
+<title>05-介绍线性混合效应模型 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">05-介绍线性混合效应模型</h1>
+            <p class="subtitle lead">学习统计模型——通过R模拟</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">GLMM</div>
+                <div class="quarto-category">线性混合效应模型</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 2, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#多层数据建模" id="toc-多层数据建模" class="nav-link active" data-scroll-target="#多层数据建模"><span class="header-section-number">1</span> 多层数据建模</a></li>
+  <li><a href="#如何对这些数据进行建模" id="toc-如何对这些数据进行建模" class="nav-link" data-scroll-target="#如何对这些数据进行建模"><span class="header-section-number">2</span> 如何对这些数据进行建模</a>
+  <ul class="collapse">
+  <li><a href="#完全混合一刀切" id="toc-完全混合一刀切" class="nav-link" data-scroll-target="#完全混合一刀切"><span class="header-section-number">2.1</span> 完全混合：一刀切</a></li>
+  <li><a href="#不混合" id="toc-不混合" class="nav-link" data-scroll-target="#不混合"><span class="header-section-number">2.2</span> 不混合</a></li>
+  </ul></li>
+  <li><a href="#使用混合效应模型的部分混合" id="toc-使用混合效应模型的部分混合" class="nav-link" data-scroll-target="#使用混合效应模型的部分混合"><span class="header-section-number">3</span> 使用混合效应模型的部分混合</a>
+  <ul class="collapse">
+  <li><a href="#方差-协方差矩阵" id="toc-方差-协方差矩阵" class="nav-link" data-scroll-target="#方差-协方差矩阵"><span class="header-section-number">3.1</span> 方差-协方差矩阵</a></li>
+  </ul></li>
+  <li><a href="#估计模型参数" id="toc-估计模型参数" class="nav-link" data-scroll-target="#估计模型参数"><span class="header-section-number">4</span> 估计模型参数</a></li>
+  <li><a href="#解释lmer输出结果并提取估计值" id="toc-解释lmer输出结果并提取估计值" class="nav-link" data-scroll-target="#解释lmer输出结果并提取估计值"><span class="header-section-number">5</span> 解释<code>lmer()</code>输出结果并提取估计值</a>
+  <ul class="collapse">
+  <li><a href="#固定效应" id="toc-固定效应" class="nav-link" data-scroll-target="#固定效应"><span class="header-section-number">5.1</span> 固定效应</a></li>
+  <li><a href="#随机效应" id="toc-随机效应" class="nav-link" data-scroll-target="#随机效应"><span class="header-section-number">5.2</span> 随机效应</a></li>
+  </ul></li>
+  <li><a href="#多层数据建模app" id="toc-多层数据建模app" class="nav-link" data-scroll-target="#多层数据建模app"><span class="header-section-number">6</span> 多层数据建模app</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注释
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>本系列内容是本人对<strong>2024年</strong>翻译的<a href="https://glmm.netlify.app">《学习统计模型——通过R模拟》</a>的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。</p>
+<p>2026年3月2日查询原文github，显示部分文件于1年前更新，受个人精力限制，<strong>不对更新内容进行对比</strong>，还是推荐有条件者阅读原文。</p>
+</div>
+</div>
+<section id="多层数据建模" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="多层数据建模"><span class="header-section-number">1</span> 多层数据建模</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+提示
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>本章中的一些观点来自 <span class="citation" data-cites="McElreath_2020">McElreath (<a href="#ref-McElreath_2020" role="doc-biblioref">2020</a>)</span> 的<a href="https://xcelab.net/rm/statistical-rethinking/">《Statistical Rethinking》</a>，还广泛借鉴了Tristan Mahr关于部分混合(partial pooling)的出色<a href="https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/">博客</a>。</p>
+</div>
+</div>
+<p>在本章中，我们将使用一些来自研究睡眠剥夺对心理运动能力(psychomotor performance)影响的真实数据<span class="citation" data-cites="Belenky_et_al_2003">(<a href="#ref-Belenky_et_al_2003" role="doc-biblioref">Belenky et al., 2003</a>)</span>。该研究的数据包含在R的<code>lme4</code>包中的内置数据集<code>sleepstudy</code>中<span class="citation" data-cites="Bates_et_al_2015">(<a href="#ref-Bates_et_al_2015" role="doc-biblioref">Bates et al., 2015</a>)</span>。</p>
+<p>让我们从查看<code>sleepstudy</code>数据集的文档开始。加载<strong><code>lme4</code></strong>包后，你可以在控制台中输入<code>?sleepstudy</code>来访问文档。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注释
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>注：这是对数据集文档的中文翻译 sleepstudy package:lme4 R Documentation</p>
+<p>睡眠剥夺研究中的反应时</p>
+<p>描述：</p>
+<pre><code> 一项睡眠剥夺研究中，被试每天的平均反应时(以毫秒为单位)。
+
+ 第0-1天为适应和训练阶段(T1/T2)，第2天为基线(B)；睡眠剥夺从第2天开始。</code></pre>
+<p>格式：</p>
+<pre><code> 一个包含180个观测结果的数据框，其中包含以下3个变量：
+
+ Reaction：平均反应时(毫秒)
+
+ Days：睡眠剥夺的天数
+
+ Subject：进行观测的被试编号</code></pre>
+<p>详细信息：</p>
+<pre><code> 这些数据来自Belenky et al.(2003)描述的研究，针对的是最严重的睡
+ 眠剥夺组(每天仅睡3小时)和研究的前10天，直到恢复期。原始研究分析
+ 了速度(1/反应时)，并将天数作为分类而非连续预测变量进行处理。</code></pre>
+<p>参考文献：</p>
+<pre><code> Gregory Belenky, Nancy J. Wesensten, David R. Thorne, Maria L.
+ Thomas, Helen C. Sing, Daniel P. Redmond, Michael B. Russo and
+ Thomas J. Balkin (2003) Patterns of performance degradation and
+ restoration during sleep restriction and subsequent recovery: a
+ sleep dose-response study. _Journal of Sleep Research_ *12*, 1-12.</code></pre>
+</div>
+</div>
+<p>这些数据符合我们对多层数据的定义，因为在十天内对同一被试的同一因变量(平均反应时)进行了重复测量。这种类型的多层数据在心理学中非常常见。不幸的是，大多数心理学课程常用的统计教材对多层数据的讨论是不充分的，通常只涉及配对样本t检验和重复测量ANOVA。<code>sleepstudy</code>数据集很有趣，因为它是多层的，但有一个连续的预测变量，因此不适合t检验或ANOVA，因为这两种方法都是针对分类预测变量的。有方法可以让数据适应其中一个框架，但会丢失信息或可能违反假设。</p>
+<p>遗憾的是，心理学专业的学生并没有真正学会如何分析多层数据。想想你最近读过的心理学或神经科学的研究。有多少研究是对每个被试只测量一次因变量？很少，如果有的话。几乎所有研究都进行了多次测量，因为以下一种或多种原因：(1)研究者在被试内设计中跨因子多水平测量同一被试；(2)他们有兴趣评估随时间的变化；或(3)他们在测量对多种刺激的反应。多层数据如此常见，以至于多层分析应该作为心理学中的<strong>默认</strong>方法来教授。学习多层分析可能具有挑战性，但你已经通过学习相关和回归掌握了大部分所需的知识。你会发现它只是简单回归的扩展。</p>
+<p>让我们更详细地看看<code>sleepstudy</code>数据。该数据集包含来自三小时睡眠情况下的十八位被试。在为期十天的时间里，被试每天进行十分钟的“心理运动警觉性测试(psychomotor vigilance test)”，在每次出现刺激时尽快按下按钮。数据集中的因变量是被试在当天任务中的平均反应时(RT)。</p>
+<p>开始分析的一个好方法是绘制数据图。下面是一个被试的数据。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>just_308 <span class="ot">&lt;-</span> sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Subject <span class="sc">==</span> <span class="st">"308"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(just_308, <span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="介绍线性混合效应模型_files/figure-html/one-subject-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption><em>Belenky et al.(2003)中单个被试的数据</em></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">重要</span>练习
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>练习</strong></p>
+<p>使用<code>ggplot</code>重现下面的图，这包含了所有18个被试。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="介绍线性混合效应模型_files/figure-html/plot-solution0-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption><em>Belenky et al.(2003)中的数据</em></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>从第2天开始到第10天，RT似乎随着睡眠剥夺天数的增加而增加。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="展开提示">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>展开提示
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>上面给出了绘制单个被试数据的代码。通过去掉<code>filter()</code>语句并添加以<code>facet_</code>开头的<em><code>ggplot2</code></em>函数，将此代码改为显示所有被试的数据。</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="展示答案">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>展示答案
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>和上面一样，只是你要增加一行：<code>facet_wrap(~Subject)</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleepstudy, <span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="如何对这些数据进行建模" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="如何对这些数据进行建模"><span class="header-section-number">2</span> 如何对这些数据进行建模</h2>
+<p>要合理地对数据进行建模，我们首先需要了解更多关于设计的信息 <span class="citation" data-cites="Belenky_et_al_2003">Belenky et al. (<a href="#ref-Belenky_et_al_2003" role="doc-biblioref">2003</a>)</span> 在他们的研究中是这样描述的(p.&nbsp;2)：</p>
+<blockquote class="blockquote">
+<p>前3天(T1、T2和B)是适应和训练(T1和T2)以及基线(B)，被试要求从23:00到07:00上床睡觉[在床时间(time in bed，TIB)为8小时]。在第3天(B)，进行了基线测量。从第4天开始，连续7天(E1-E7)，被试处于4种睡眠条件之一[TIB为9小时(22:00–07:00)，TIB为7小时(24:00–07:00)，TIB为5小时(02:00–07:00)或TIB为3小时(04:00–07:00)]，实际上是一种睡眠延长条件和三种睡眠限制条件。</p>
+</blockquote>
+<p>从第3天之后的第1晚开始，有7晚的睡眠限制。前2天，编码为<code>0</code>、<code>1</code>，是适应(adaptation)和训练(training)。编码为<code>2</code>的那天是进行基线测量的时间，应该是我们分析开始的地方。如果我们将<code>0</code>和<code>1</code>两天包含在我们的分析中，可能会偏倚(bias)我们的结果，因为前两天的任何表现变化都与训练有关，而不是与睡眠限制有关。</p>
+<div class="callout callout-style-default callout-important callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">重要</span>练习
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><em>练习</em></strong></p>
+<p>从数据集中删除<code>Days</code>编码为<code>0</code>或<code>1</code>的观察值，然后根据<code>Days</code>变量创建一个新的变量<code>days_deprived</code>，使序列从第2天开始，第2天重新编码为第0天，第3天为第1天，第4天为第2天，依此类推。这个新变量现在追踪睡眠剥夺的天数。将新表存储为<code>sleep2</code>。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="展开答案">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>展开答案
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sleep2 <span class="ot">&lt;-</span> sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Days <span class="sc">&gt;=</span> <span class="dv">2</span>L) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">days_deprived =</span> Days <span class="sc">-</span> <span class="dv">2</span>L)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>仔细检查代码是否按预期工作总是一个好主意。首先，看看它：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sleep2)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Reaction Days Subject days_deprived
+1 250.8006    2     308             0
+2 321.4398    3     308             1
+3 356.8519    4     308             2
+4 414.6901    5     308             3
+5 382.2038    6     308             4
+6 290.1486    7     308             5</code></pre>
+</div>
+</div>
+<p>检查<code>Days</code>和<code>days_deprivation</code>是否匹配。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sleep2 <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(days_deprived, Days)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  days_deprived Days  n
+1             0    2 18
+2             1    3 18
+3             2    4 18
+4             3    5 18
+5             4    6 18
+6             5    7 18
+7             6    8 18
+8             7    9 18</code></pre>
+</div>
+</div>
+<p>看起来很好. 请注意，由<code>count()</code>生成的变量<code>n</code>会告诉你<code>Days</code>和<code>days_deprivation</code>的每个唯一组合有多少行。在这种情况下有18行，每个被试1行。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>现在让我们重新绘制数据，只查看从第0天到第7天的这8个数据点。我们已经从上面的代码中复制了代码，将<code>sleepstudy</code>替换为<code>sleep2</code>，并使用<code>days_deprived</code>作为我们的<code>x</code>变量。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleep2, <span class="fu">aes</span>(<span class="at">x =</span> days_deprived, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"反应时"</span>, <span class="at">x =</span> <span class="st">"睡眠剥夺的天数(0 = 基线)"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="介绍线性混合效应模型_files/figure-html/plot-solution2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption><em>数据来自Belenky et al.(2003)，表示基线(0天)和每天睡眠剥夺后的反应时</em></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>请稍作思考，我们如何对<code>days_deprived</code>和<code>Reaction</code>之间的关系建模。随着睡眠剥夺的增加，反应时间是增加还是减少？这种关系大致稳定还是随时间变化？</p>
+<p>除了一个例外(335号被试)，看起来反应时随着睡眠剥夺的增加而增加。看起来我们可以对每位被试的数据拟合一条直线。回想一下，一条直线的一般方程形式为<strong>y = y轴截距 + 斜率 <span class="math inline">\(\times\)</span> x</strong>。在回归分析中，我们通常用以下公式表示线性关系：</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X\]</span></p>
+<p>其中<span class="math inline">\(\beta_0\)</span>是y轴截距，<span class="math inline">\(\beta_1\)</span>是斜率，这些参数都是我们从数据中估计而来的。</p>
+<p>这些线的截距(剥夺睡眠开始前第0天的平均RT)和斜率(每增加一天的睡眠剥夺后RT的变化)都不同。但我们应该为每个被试拟合同一条线吗？还是每个被试拟合完全不同的线？或者介于两者之间的某种情况？</p>
+<p>让我们首先考虑可能用到的三种不同方法。根据McElreath的说法，我们将这些方法称为<strong>完全混合(complete pooling)</strong>、<strong>不混合(no pooling)</strong>和<strong>部分混合(partial pooling)</strong>。</p>
+<section id="完全混合一刀切" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="完全混合一刀切"><span class="header-section-number">2.1</span> 完全混合：一刀切</h3>
+<p><strong>完全混合</strong>是一种“一刀切”模型：它为整个数据集估计单一的截距和斜率，忽略了不同被试在截距或斜率上可能存在的差异。如果这听起来像是一种糟糕的方法，那确实是对的；但你知道这一点是因为你已经可视化了数据，并注意到每个参与者的模式似乎需要不同的y轴截距和斜率值。</p>
+<p>拟合出一条线称为“完全混合”方法，因为我们将所有被试的数据混合在一起，得到总体截距和斜率的单一估计。该方法的广义线性模型(GLM)简单地表示为：</p>
+<p><span class="math display">\[Y_{sd} = \beta_0 + \beta_1 X_{sd} + e_{sd}\]</span></p>
+<p><span class="math display">\[e_{sd} \sim N\left(0, \sigma^2\right)\]</span></p>
+<p>其中<span class="math inline">\(Y_{sd}\)</span>是被试<span class="math inline">\(s\)</span>在第<span class="math inline">\(d\)</span>天的平均反应时，<span class="math inline">\(X_{sd}\)</span>是与该情况相关的<code>days_deprived</code>值(0-7)，<span class="math inline">\(e_{sd}\)</span>是误差。</p>
+<p>我们可以在R中用<code>lm()</code>函数拟合一个这样的模型，如下：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cp_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Reaction <span class="sc">~</span> days_deprived, sleep2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cp_model)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Reaction ~ days_deprived, data = sleep2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-112.284  -26.732    2.143   27.734  140.453 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    267.967      7.737  34.633  &lt; 2e-16 ***
+days_deprived   11.435      1.850   6.183 6.32e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 50.85 on 142 degrees of freedom
+Multiple R-squared:  0.2121,    Adjusted R-squared:  0.2066 
+F-statistic: 38.23 on 1 and 142 DF,  p-value: 6.316e-09</code></pre>
+</div>
+</div>
+<p>根据这个模型，第0天的预测平均反应时约为268毫秒，随着剥夺天数的增加，每天的反应时平均增加约11毫秒。然而，我们不能相信回归系数的标准误，因为我们假设所有的观测值都是独立的(严格来说是残差独立)。但我们可以很确定这是一个糟糕的假设。</p>
+<p>让我们把模型预测值添加到我们之前创建的图中。我们可以使用<code>geom_abline()</code>来做到这一点，指定截距和斜率为模型拟合的回归系数<code>coef(cp_model)</code>，该函数返回一个包含截距和斜率两个元素的向量。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(cp_model)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) days_deprived 
+    267.96742      11.43543 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleep2, <span class="fu">aes</span>(<span class="at">x =</span> days_deprived, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">intercept =</span> <span class="fu">coef</span>(cp_model)[<span class="dv">1</span>],</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope =</span> <span class="fu">coef</span>(cp_model)[<span class="dv">2</span>],</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">'blue'</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"反应时"</span>, <span class="at">x =</span> <span class="st">"睡眠剥夺的天数(0 = 基线)"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="介绍线性混合效应模型_files/figure-html/cp-model-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>原始数据和完全混合模型的拟合结果对比图</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>这个模型与数据不太吻合。我们需要一种不同的方法。</p>
+</section>
+<section id="不混合" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="不混合"><span class="header-section-number">2.2</span> 不混合</h3>
+<p>将所有信息混合成一个截距和一个斜率来估计是不合适的。另一种方法是为每个被试拟合单独的线。这意味着每个被试的估计值将完全不受其他被试估计值的影响。换句话说，我们可以分别估计18组单独的截距/斜率对。</p>
+<p>这个模型可以通过两种方式实现：(1)为每个被试运行单独的回归或(2)运行混合效应回归。我们将采用后者，这样所有内容都在一个大模型中。我们已经知道了如何做到这一点：我们为<code>Subject</code>因子添加虚拟编码。这个因子有18个水平，所以我们需要17个虚拟编码。幸运的是，R为我们省去了手动创建这17个变量的麻烦。我们只需要在模型中纳入<code>Subject</code>作为预测变量，并将这个分类预测变量与<code>days_deprived</code>进行交互，以允许截距和斜率变化。</p>
+<div class="yellowbox">
+<p><code>sleep2</code>数据集中的变量<code>Subject</code>是名义变量。我们只是用数字作为标签来保证匿名性，并不意味着被试310比被试309好1点，或者比被试308好2点。确保将其定义为因子变量，而不是作为连续变量包含在内！</p>
+<p>我们可以通过多种方式测试某个变量是否为因子变量。其中一种方法是对表格使用<code>summary()</code>函数。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sleep2 <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Reaction          Days         Subject   days_deprived 
+ Min.   :203.0   Min.   :2.00   308    : 8   Min.   :0.00  
+ 1st Qu.:265.2   1st Qu.:3.75   309    : 8   1st Qu.:1.75  
+ Median :303.2   Median :5.50   310    : 8   Median :3.50  
+ Mean   :308.0   Mean   :5.50   330    : 8   Mean   :3.50  
+ 3rd Qu.:347.7   3rd Qu.:7.25   331    : 8   3rd Qu.:5.25  
+ Max.   :466.4   Max.   :9.00   332    : 8   Max.   :7.00  
+                                (Other):96                 </code></pre>
+</div>
+</div>
+<p>这里你可以看到它并没有被当做一个数字变量，因为它没给出分布信息(均值等)，而是告诉你在每个水平上有多少个观测值。</p>
+<p>你也可以直接测试它：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sleep2 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Subject) <span class="sc">%&gt;%</span> <span class="fu">is.factor</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>如果某些变量不是因子变量，你可以使用<code>factor()</code>函数重新定义它，使其变为因子变量。</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>np_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  Reaction <span class="sc">~</span> days_deprived <span class="sc">+</span> Subject <span class="sc">+</span> days_deprived<span class="sc">:</span>Subject,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> sleep2</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(np_model)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Reaction ~ days_deprived + Subject + days_deprived:Subject, 
+    data = sleep2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-106.521   -8.541    1.143    8.889  128.545 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)              288.2175    16.4772  17.492  &lt; 2e-16 ***
+days_deprived             21.6905     3.9388   5.507 2.49e-07 ***
+Subject309               -87.9262    23.3023  -3.773 0.000264 ***
+Subject310               -62.2856    23.3023  -2.673 0.008685 ** 
+Subject330               -14.9533    23.3023  -0.642 0.522422    
+Subject331                 9.9658    23.3023   0.428 0.669740    
+Subject332                27.8157    23.3023   1.194 0.235215    
+Subject333                -2.7581    23.3023  -0.118 0.906000    
+Subject334               -50.2051    23.3023  -2.155 0.033422 *  
+Subject335               -25.3429    23.3023  -1.088 0.279207    
+Subject337                24.6143    23.3023   1.056 0.293187    
+Subject349               -59.2183    23.3023  -2.541 0.012464 *  
+Subject350               -40.2023    23.3023  -1.725 0.087343 .  
+Subject351               -24.2467    23.3023  -1.041 0.300419    
+Subject352                43.0655    23.3023   1.848 0.067321 .  
+Subject369               -21.5040    23.3023  -0.923 0.358154    
+Subject370               -53.3072    23.3023  -2.288 0.024107 *  
+Subject371               -30.4896    23.3023  -1.308 0.193504    
+Subject372                 2.4772    23.3023   0.106 0.915535    
+days_deprived:Subject309 -17.3334     5.5703  -3.112 0.002380 ** 
+days_deprived:Subject310 -17.7915     5.5703  -3.194 0.001839 ** 
+days_deprived:Subject330 -13.6849     5.5703  -2.457 0.015613 *  
+days_deprived:Subject331 -16.8231     5.5703  -3.020 0.003154 ** 
+days_deprived:Subject332 -19.2947     5.5703  -3.464 0.000765 ***
+days_deprived:Subject333 -10.8151     5.5703  -1.942 0.054796 .  
+days_deprived:Subject334  -3.5745     5.5703  -0.642 0.522423    
+days_deprived:Subject335 -25.8995     5.5703  -4.650 9.47e-06 ***
+days_deprived:Subject337   0.7518     5.5703   0.135 0.892895    
+days_deprived:Subject349  -5.2644     5.5703  -0.945 0.346731    
+days_deprived:Subject350   1.6007     5.5703   0.287 0.774382    
+days_deprived:Subject351 -13.1681     5.5703  -2.364 0.019867 *  
+days_deprived:Subject352 -14.4019     5.5703  -2.585 0.011057 *  
+days_deprived:Subject369  -7.8948     5.5703  -1.417 0.159273    
+days_deprived:Subject370  -1.0495     5.5703  -0.188 0.850912    
+days_deprived:Subject371  -9.3443     5.5703  -1.678 0.096334 .  
+days_deprived:Subject372 -10.6041     5.5703  -1.904 0.059613 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 25.53 on 108 degrees of freedom
+Multiple R-squared:  0.849, Adjusted R-squared:  0.8001 
+F-statistic: 17.35 on 35 and 108 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>这个模型将一个被试(具体来说是被试308)作为基线，并通过偏移量来表示每个被试相对于该基线的差异。在我们之前讨论[连续变量-分类变量交互效应]时你已经看过这种方法了。</p>
+<div class="callout callout-style-default callout-important callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">重要</span>练习
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>回答这些问题(结果保留三位小数)</p>
+<ul>
+<li>被试308的截距是多少？<input class="webex-solveme nospaces" data-tol="0.001" size="8" data-answer="[&quot;288.217466666666&quot;]"></li>
+<li>被试308的斜率是多少？<input class="webex-solveme nospaces" data-tol="0.001" size="8" data-answer="[&quot;21.6904952380953&quot;]"></li>
+<li>被试335的截距是多少？<input class="webex-solveme nospaces" data-tol="0.001" size="8" data-answer="[&quot;262.874583333333&quot;]"></li>
+<li>被试335的斜率是多少？<input class="webex-solveme nospaces" data-tol="0.001" size="8" data-answer="[&quot;-4.20899166666667&quot;]"></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="答案和解析">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>答案和解析
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>基线被试是308——R中默认按字母顺序排列因子的水平，并选择第一个作为基线。这意味着对于被试308，截距由<code>(Intercept)</code>给出，而斜率由<code>days_deprived</code>给出，因为其他17个虚拟变量对被试308而言都是0。</p>
+<p>所有其他被试的回归系数都表示为相对于此基线被试的<em>偏移量</em>。如果我们想计算特定受试者的截距和斜率，只需加上相应的偏移量即可。因此，答案如下：</p>
+<ul>
+<li><p>被试308的截距: <u>288.217</u></p></li>
+<li><p>被试308的斜率: 21.69</p></li>
+<li><p>被试355的截距: <code>(Intercept)</code> + <code>Subject335</code> = 288.217 + -25.343 = <u>262.874</u></p></li>
+<li><p>被试355的斜率: <code>days_deprived</code> + <code>days_deprived:Subject335</code> = 21.69 + -25.899 = <u>-4.209</u></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>在“不混合”模型中，没有<em>整个</em>总体截距和斜率的估计；在这种情况下，<code>(Intercept)</code>和<code>days_deprived</code>是被试308的截距和斜率的估计，因为被试308被(随意地)选择为基线被试。为了得到总体的估计值，我们可以引入第二阶段分析，计算各个被试的截距和斜率的平均值。让我们使用模型估计值来计算每个被试的截距和斜率。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>all_intercepts <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(np_model)[<span class="st">"(Intercept)"</span>],</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(np_model)[<span class="dv">3</span><span class="sc">:</span><span class="dv">19</span>] <span class="sc">+</span> <span class="fu">coef</span>(np_model)[<span class="st">"(Intercept)"</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>all_slopes <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(np_model)[<span class="st">"days_deprived"</span>],</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(np_model)[<span class="dv">20</span><span class="sc">:</span><span class="dv">36</span>] <span class="sc">+</span> <span class="fu">coef</span>(np_model)[<span class="st">"days_deprived"</span>]</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> sleep2 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Subject) <span class="sc">%&gt;%</span> <span class="fu">levels</span>() <span class="sc">%&gt;%</span> <span class="fu">factor</span>()</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 用上面提取的数据创建一个tibble</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>np_coef <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Subject =</span> ids, <span class="at">intercept =</span> all_intercepts, <span class="at">slope =</span> all_slopes)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>np_coef</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 18 × 3
+   Subject intercept slope
+   &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1 308          288. 21.7 
+ 2 309          200.  4.36
+ 3 310          226.  3.90
+ 4 330          273.  8.01
+ 5 331          298.  4.87
+ 6 332          316.  2.40
+ 7 333          285. 10.9 
+ 8 334          238. 18.1 
+ 9 335          263. -4.21
+10 337          313. 22.4 
+11 349          229. 16.4 
+12 350          248. 23.3 
+13 351          264.  8.52
+14 352          331.  7.29
+15 369          267. 13.8 
+16 370          235. 20.6 
+17 371          258. 12.3 
+18 372          291. 11.1 </code></pre>
+</div>
+</div>
+<p>让我们看看这个模型拟合数据的效果有多好。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleep2, <span class="fu">aes</span>(<span class="at">x =</span> days_deprived, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> np_coef,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">intercept =</span> intercept, <span class="at">slope =</span> slope),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">'blue'</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"反应时"</span>, <span class="at">x =</span> <span class="st">"睡眠剥夺的天数(0 = 基线)"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="介绍线性混合效应模型_files/figure-html/np-model-fits-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>原始数据和不混合方法的拟合结果对比图</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>这比完全混合模型要好得多。如果要检验固定斜率为0的原假设，可以用单样本检验。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>np_coef <span class="sc">%&gt;%</span> <span class="fu">pull</span>(slope) <span class="sc">%&gt;%</span> <span class="fu">t.test</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  .
+t = 6.1971, df = 17, p-value = 9.749e-06
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  7.542244 15.328613
+sample estimates:
+mean of x 
+ 11.43543 </code></pre>
+</div>
+</div>
+<p>这告诉我们平均斜率 11.435 显著不等于0, t(17) = 6.197, <span class="math inline">\(p &lt; .001\)</span>.</p>
+</section>
+</section>
+<section id="使用混合效应模型的部分混合" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="使用混合效应模型的部分混合"><span class="header-section-number">3</span> 使用混合效应模型的部分混合</h2>
+<p>完全混合或不混合方法都不是令人满意的。如果我们能够利用对其他被试的了解来改进对单个被试的估计，那将是可取的。这将有助于更好地区分每个被试的信号(signal)和误差(error)，并提高对总体的可推广性。正如最下面的网页APP所示，当我们有不平衡或缺失的数据时，这变得尤为重要。</p>
+<p>在不混合模型中，我们将<code>Subject</code>视为一个<strong>固定因子(fixed factor)</strong>。每对截距和斜率的估计仅由该被试的数据决定。然而，我们对这18个被试本身并不感兴趣；我们更感兴趣的是他们作为具有潜在被试的更大群体的代表。如果你的目标是推广到你感兴趣的群体中的新被试，那么这种被试作为固定效应因子的方法是不够优化的。</p>
+<p>部分混合发生在你将一个因子视为随机因子而不是固定因子进行分析时。<strong>随机因子(random factor)</strong>是指其水平被认为代表所有潜在水平的一个真子集(proper subset)。通常情况下，当你数据中的水平是抽样结果，并且你希望推广到超出这些水平的范围时，你会将一个因子视为随机。在这种情况下，我们有18个独特被试(因此有18个<code>Subject</code>因子的水平)，希望能够对潜在被试群体的睡眠剥夺效应做出一些一般性的陈述。</p>
+<!-- Just as there are two types of factors---fixed and random---there are -->
+<p>一种在分析中包含随机因子的方法是使用线性混合效应模型(linear mixed-effects model)。当你这样做时，每个因子水平(即每个被试)的估计值将受其他水平(即其他被试)信息的影响。与不考虑其他被试估计的情况下为每个被试估计截距和斜率相比，该模型会估计总体的值，并将各个被试的估计值向这些值拉近，这种统计现象称为<code>shrinkage</code>。</p>
+<p>下面是多层模型。理解其中的数学原理及其意义非常重要。乍一看似乎很复杂，但实际上这里没有什么是你以前没有见过的。我们将逐步解释一切。</p>
+<p><em>第1层:</em></p>
+<p><span class="math display">\[\begin{equation}
+Y_{sd} = \beta_{0s} + \beta_{1s} X_{sd} + e_{sd}
+\end{equation}\]</span></p>
+<p><em>第2层:</em></p>
+<p><span class="math display">\[\begin{equation}
+\beta_{0s} = \gamma_{0} + S_{0s}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\beta_{1s} = \gamma_{1} + S_{1s}
+\end{equation}\]</span></p>
+<p><em>方差成分(variance components):</em></p>
+<p><span class="math display">\[\begin{equation}
+\langle S_{0s}, S_{1s} \rangle \sim N\left(\langle 0, 0 \rangle, \mathbf{\Sigma}\right)
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\mathbf{\Sigma} = \left(\begin{array}{cc}{\tau_{00}}^2 &amp; \rho\tau_{00}\tau_{11} \\
+         \rho\tau_{00}\tau_{11} &amp; {\tau_{11}}^2 \\
+         \end{array}\right)
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+e_{sd} \sim N\left(0, \sigma^2\right)
+\end{equation}\]</span></p>
+<p>如果你感到迷惑，这里有一个表格，解释了上述方程组中的所有变量。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 11%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">变量</th>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Y_{sd}\)</span></td>
+<td style="text-align: left;">观测值</td>
+<td style="text-align: left;">被试<span class="math inline">\(s\)</span>在第<span class="math inline">\(d\)</span>天的<code>Reaction</code>值</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X_{sd}\)</span></td>
+<td style="text-align: left;">观测值</td>
+<td style="text-align: left;">被试<span class="math inline">\(s\)</span>在第<span class="math inline">\(d\)</span>天的<code>days_deprived</code>值(0-7)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\beta_{0s}\)</span></td>
+<td style="text-align: left;">派生值</td>
+<td style="text-align: left;">第1层截距参数</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\beta_{1s}\)</span></td>
+<td style="text-align: left;">派生值</td>
+<td style="text-align: left;">第1层斜率参数</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(e_{sd}\)</span></td>
+<td style="text-align: left;">派生值</td>
+<td style="text-align: left;">被试<span class="math inline">\(s\)</span>在第<span class="math inline">\(d\)</span>天的误差</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\gamma_0\)</span></td>
+<td style="text-align: left;">固定</td>
+<td style="text-align: left;">总体截距(“gamma”)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\gamma_1\)</span></td>
+<td style="text-align: left;">固定</td>
+<td style="text-align: left;">总体斜率(“gamma”)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(S_{0s}\)</span></td>
+<td style="text-align: left;">派生值</td>
+<td style="text-align: left;">被试<span class="math inline">\(s\)</span>的随机截距(偏移量)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(S_{1s}\)</span></td>
+<td style="text-align: left;">派生值</td>
+<td style="text-align: left;">被试<span class="math inline">\(s\)</span>的随机斜率(偏移量)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\mathbf{\Sigma}\)</span></td>
+<td style="text-align: left;">随机</td>
+<td style="text-align: left;">方差协方差矩阵</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\({\tau_{00}}^2\)</span></td>
+<td style="text-align: left;">随机</td>
+<td style="text-align: left;">随机截距的方差</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\rho\)</span></td>
+<td style="text-align: left;">随机</td>
+<td style="text-align: left;">截距和斜率之间的随机相关性</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\({\tau_{11}}^2\)</span></td>
+<td style="text-align: left;">随机</td>
+<td style="text-align: left;">随机斜率的方差</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\sigma^2\)</span></td>
+<td style="text-align: left;">随机</td>
+<td style="text-align: left;">误差方差</td>
+</tr>
+</tbody>
+</table>
+<p>注意，表格的“类型”列包含的内容有<em>固定</em>、<em>随机</em>和<em>派生值</em>。尽管<em>固定</em>和<em>随机</em>是标准术语，但<em>派生值</em>不是；我引入这个术语是为了帮助你理解这些不同变量在模型中的意义，并帮助你区分直接估计的变量和非直接估计的变量。</p>
+<p>让我们从模型的第1层方程开始，它表示预测变量和响应变量之间的总体关系。它捕捉了反应时<span class="math inline">\(Y_{sd}\)</span>和睡眠剥夺<span class="math inline">\(X_{sd}\)</span>之间主要关系的函数形式：一条截距为<span class="math inline">\(\beta_{0s}\)</span>和斜率为<span class="math inline">\(\beta_{1s}\)</span>的直线。现在<span class="math inline">\(\beta_{0s}\)</span>和<span class="math inline">\(\beta_{1s}\)</span>使它看起来像完全混合模型，在这种模型中，我们为整个数据集估计一个截距和一个斜率；然而，我们实际上并没有直接估计这些值。相反，我们将<span class="math inline">\(\beta_{0s}\)</span>和<span class="math inline">\(\beta_{1s}\)</span>视为派生值：它们完全由模型第2层的变量定义。</p>
+<p>模型的第2层由两个方程定义，表示被试层次的关系。在这里，我们通过固定效应<span class="math inline">\(\gamma_0\)</span>和<em>随机截距</em><span class="math inline">\(S_{0s}\)</span>来定义截距<span class="math inline">\(\beta_{0s}\)</span>；同样地，我们通过固定斜率<span class="math inline">\(\gamma_1\)</span>和<em>随机斜率</em><span class="math inline">\(S_{1s}\)</span>来定义斜率<span class="math inline">\(\beta_{1s}\)</span>。</p>
+<p>最后的方程代表模型的<em>方差成分</em>。我们将在下面更详细地讨论这一点。</p>
+<p>让我们将第2层方程代入第1层方程，看看以多层的方式表示的优势。</p>
+<p><span class="math display">\[\begin{equation}
+Y_{sd} = \gamma_{0} + S_{0s} + \left(\gamma_{1} + S_{1s}\right) X_{sd} + e_{sd}
+\end{equation}\]</span></p>
+<p>虽然“组合”公式语法在这种特定情况下足够容易理解，但多层的形式更清楚地向我们展示了模型的功能形式：一条直线。我们可以轻松地改变功能形式，例如捕捉非线性趋势：</p>
+<p><span class="math display">\[Y_{sd} = \beta_{0s} + \beta_{1s} X_{sd} + \beta_{2s} X_{sd}^2 + e_{sd}\]</span></p>
+<p>这种功能形式在组合语法中变得模糊不清。多层语法还使得容易看清哪些项与截距相关，哪些项与斜率相关。而且，随着设计变得更加复杂——例如，如果我们将被试分配到不同的实验条件中，在第2层就要引入更多的预测变量——组合方程将变得越来越难以解析和理解。</p>
+<p>固定效应参数如<span class="math inline">\(\gamma_0\)</span>和<span class="math inline">\(\gamma_1\)</span>是从数据中估计得到的，反映了总体的稳定特性。在这个例子中，<span class="math inline">\(\gamma_0\)</span>是总体截距，<span class="math inline">\(\gamma_1\)</span>是总体斜率。你可以将这些<strong>固定效应参数</strong>视为代表总体中的<strong>平均截距和斜率</strong>。这些是“固定”的，因为我们假设它们反映了总体中的真实潜在值(underlying value)；我们假设它们不会随着样本的变化而变。这些固定效应参数通常是主要的理论关注点；我们希望在数据允许的情况下，以一种尽可能公正和精确的方式来衡量它们和它们的标准差。在实验设置中，它们通常是假设检验的目标。</p>
+<p>随机效应如<span class="math inline">\(S_{0i}\)</span>和<span class="math inline">\(S_{1i}\)</span>分别允许截距和斜率在不同被试之间变化。这些随机效应是<em>偏移量</em>：相对于总体“总体均值”的偏差。有些被试的反应就是比别人慢，因此他们在第0天的截距(mean RT)高于总计估计值<span class="math inline">\(\hat{\gamma_0}\)</span>。这些比平均速度更慢的被试会有正的<span class="math inline">\(S_{0i}\)</span>值；比平均速度更快的被试会有负的<span class="math inline">\(S_{0i}\)</span>值。同样，一些被试的睡眠剥夺效应比估计的总体效应<span class="math inline">\(\hat{\gamma_1}\)</span>更强(更陡的斜率)，这意味着正的偏移量<span class="math inline">\(S_{1s}\)</span>，而另一些可能显示出较弱的效应或几乎没有效应(负的偏移量)。</p>
+<p>每个被试都可以表示为一个向量对<span class="math inline">\(\langle S_{0i}, S_{1i} \rangle\)</span>。如果我们的样本中的被试包含了整个总体，我们将有理由将其视为固定效应并估计它们的值，像上文的“无混合”方法那样。然而情况并非如此。鉴于它们是抽样而来的，我们把被试视为随机因子而不是固定因子。我们不会估计我们恰好选中的被试的值，而是估计<strong>代表这些值的二元分布的协方差矩阵</strong>。通过这样做，我们允许样本中的被试向我们提供有关总体特征的信息。</p>
+<section id="方差-协方差矩阵" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="方差-协方差矩阵"><span class="header-section-number">3.1</span> 方差-协方差矩阵</h3>
+<p><span class="math display">\[\begin{equation}
+\langle S_{0s}, S_{1s} \rangle \sim N\left(\langle 0, 0 \rangle, \mathbf{\Sigma}\right)
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\mathbf{\Sigma} = \left(\begin{array}{cc}{\tau_{00}}^2 &amp; \rho\tau_{00}\tau_{11} \\
+         \rho\tau_{00}\tau_{11} &amp; {\tau_{11}}^2 \\
+         \end{array}\right)
+\end{equation}\]</span></p>
+<p><em>方差分量</em>中的方程描述了我们对变异性(variability)的估计。第一个方程说明了我们的假设，即随机截距/随机斜率对<span class="math inline">\(\langle S_{0s}, S_{1s} \rangle\)</span>是从一个二元正态分布中抽取的，该分布根据<span class="math inline">\(\mathbf{\Sigma}\)</span>以原点<span class="math inline">\(\langle 0, 0 \rangle\)</span>为中心。</p>
+<p>协方差矩阵是关键：它决定了从总体中抽取随机效应对<span class="math inline">\(\langle S_{0s}, S_{1s} \rangle\)</span>的概率。你在[相关和回归]一章中已经见过这些。协方差矩阵总是一个方阵(列数和行数相等)。主对角线(左上角和右下角的单元格)表示随机效应方差<span class="math inline">\({\tau_{00}}^2\)</span>和<span class="math inline">\({\tau_{11}}^2\)</span>。<span class="math inline">\({\tau_{00}}^2\)</span>是随机截距方差，它捕捉了被试在第0天(没有任何睡眠剥夺前)的平均反应时的变化程度。<span class="math inline">\({\tau_{11}}^2\)</span>是随机斜率方差，它捕捉了被试对睡眠剥夺效应敏感性的变化程度。</p>
+<p>非对角线的单元格包含协方差，但这些信息在矩阵中是冗余表示；左下角元素与右上角元素相同，两者都捕捉了随机截距和斜率之间的协方差，如<span class="math inline">\(\rho\tau_{00}\tau_{11}\)</span>所示。在这个方程中，<span class="math inline">\(\rho\)</span>是截距和斜率之间的相关性。因此，矩阵中的所有信息都可以通过三个参数来捕捉：<span class="math inline">\(\tau_{00}\)</span>、<span class="math inline">\(\tau_{11}\)</span>和<span class="math inline">\(\rho\)</span>。</p>
+</section>
+</section>
+<section id="估计模型参数" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="估计模型参数"><span class="header-section-number">4</span> 估计模型参数</h2>
+<p>为了估计参数，我们将使用lme4包的<code>lmer()</code>函数<span class="citation" data-cites="Bates_et_al_2015">(<a href="#ref-Bates_et_al_2015" role="doc-biblioref">Bates et al., 2015</a>)</span>。<code>lmer()</code>的基本公式如下：</p>
+<pre><code>lmer(formula, data, ...)</code></pre>
+<p>其中<code>formula</code>以精简的形式表示底层模型的结构，<code>data</code>是<code>formula</code>中提到的变量所在的数据框。</p>
+<p>N个固定效应(<code>fix</code>)和K个随机效应(<code>ran</code>)的模型公式一般格式为：</p>
+<p><code>DV ~ fix1 + fix2 + ... + fixN + (ran1 + ran2 + ... + ranK | random_factor1)</code></p>
+<p>因子A和因子B之间的交互效应可以用<code>A * B</code>(交互效应和主效应)或<code>A:B</code>(仅仅是交互效应)来指定。</p>
+<p>与标准的R模型语法的一个关键区别是存在一个随机效应项，该项在括号内，即<code>(ran1 + ran2 + ... + ranK | random_factor)</code>。每个括号中的表达式表示与单个随机因子相关的随机效应。当我们讨论交叉随机因子时，你会看到在一个公式中可以有多个随机效应项。你应该将随机效应项看作为<code>lmer()</code>提供<strong>构造方差-协方差矩阵的指示</strong>。</p>
+<p>在竖线<code>|</code>的左侧(注：建议大家了解一下英文中符号的表达，如<code>|</code>是竖线，bar；<code>/</code>是正斜杠或除号，forward slash或division sign；<code>\</code>是反斜杠，backward slash，有时也用backslash等，这样便于阅读技术手册和工作交流)，放置你希望允许随右侧随机因子的不同水平变化的效应。通常右边的变量是可以唯一地标识单个被试的变量(如<code>subject_id</code>)。</p>
+<p>考虑下方<code>sleep2</code>数据的可能模型公式及其构造的方差-协方差矩阵。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 35%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>模型</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>仅随机截距</td>
+<td><code>Reaction ~ days_deprived + (1 | Subject)</code></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>随机截距和斜率</td>
+<td><code>Reaction ~ days_deprived + (1 + days_deprived | Subject)</code></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>模型2的备选语法</td>
+<td><code>Reaction ~ days_deprived + (days_deprived | Subject)</code></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>仅随机斜率</td>
+<td><code>Reaction ~ days_deprived + (0 + days_deprived | Subject)</code></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>模型2 + 0协方差(zero-covariances)</td>
+<td><code>Reaction ~ days_deprived + (days_deprived || Subject)</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>模型1:</em></p>
+<p><span class="math display">\[\begin{equation*}
+  \mathbf{\Sigma} = \left(
+  \begin{array}{cc}
+    {\tau_{00}}^2 &amp; 0 \\
+                0 &amp; 0 \\
+  \end{array}\right)
+\end{equation*}\]</span></p>
+<p><em>模型2和3:</em></p>
+<p><span class="math display">\[\begin{equation*}
+  \mathbf{\Sigma} = \left(
+  \begin{array}{cc}
+             {\tau_{00}}^2 &amp; \rho\tau_{00}\tau_{11} \\
+    \rho\tau_{00}\tau_{11} &amp;          {\tau_{11}}^2 \\
+  \end{array}\right)
+\end{equation*}\]</span></p>
+<p><em>模型4:</em></p>
+<p><span class="math display">\[\begin{equation*}
+  \mathbf{\Sigma} = \left(
+  \begin{array}{cc}
+    0 &amp;             0 \\
+    0 &amp; {\tau_{11}}^2 \\
+  \end{array}\right)
+\end{equation*}\]</span></p>
+<p><em>模型5:</em></p>
+<p><span class="math display">\[\begin{equation*}
+  \mathbf{\Sigma} = \left(
+  \begin{array}{cc}
+    {\tau_{00}}^2 &amp;             0 \\
+                0 &amp; {\tau_{11}}^2 \\
+  \end{array}\right)
+\end{equation*}\]</span></p>
+<p>对于这些数据来说，最合理的模型是模型2，所以我们继续使用它。</p>
+<p>让我们拟合模型，将结果存储在<code>pp_mod</code>中。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pp_mod <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> days_deprived <span class="sc">+</span> (days_deprived <span class="sc">|</span> Subject), sleep2)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pp_mod)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: Reaction ~ days_deprived + (days_deprived | Subject)
+   Data: sleep2
+
+REML criterion at convergence: 1404.1
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.0157 -0.3541  0.0069  0.4681  5.0732 
+
+Random effects:
+ Groups   Name          Variance Std.Dev. Corr
+ Subject  (Intercept)   958.35   30.957       
+          days_deprived  45.78    6.766   0.18
+ Residual               651.60   25.526       
+Number of obs: 144, groups:  Subject, 18
+
+Fixed effects:
+              Estimate Std. Error t value
+(Intercept)    267.967      8.266  32.418
+days_deprived   11.435      1.845   6.197
+
+Correlation of Fixed Effects:
+            (Intr)
+days_deprvd -0.062</code></pre>
+</div>
+</div>
+<p>在讨论如何解释输出结果之前，我们先绘制原始数据与模型预测值的对比图。我们可以使用<code>predict()</code>函数获取模型预测值(有关与混合效应模型一起使用的更多信息，参见<code>?predict.merMod</code>)。</p>
+<p>首先为<code>Subject</code>和<code>days_deprivation</code>的预测值创建一个新的数据集。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>newdata <span class="ot">&lt;-</span> <span class="fu">crossing</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Subject =</span> sleep2 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Subject) <span class="sc">%&gt;%</span> <span class="fu">levels</span>() <span class="sc">%&gt;%</span> <span class="fu">factor</span>(),</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">days_deprived =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">7</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(newdata, <span class="dv">17</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 2
+   Subject days_deprived
+   &lt;fct&gt;           &lt;int&gt;
+ 1 308                 0
+ 2 308                 1
+ 3 308                 2
+ 4 308                 3
+ 5 308                 4
+ 6 308                 5
+ 7 308                 6
+ 8 308                 7
+ 9 309                 0
+10 309                 1
+11 309                 2
+12 309                 3
+13 309                 4
+14 309                 5
+15 309                 6
+16 309                 7
+17 310                 0</code></pre>
+</div>
+</div>
+<p>然后，通过<code>predict()</code>运行这个数据框。通常我们会将预测值作为新变量添加到新的数据框中，并将其命名为与我们的因变量(<code>Reaction</code>)相同的名称。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>newdata2 <span class="ot">&lt;-</span> newdata <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Reaction =</span> <span class="fu">predict</span>(pp_mod, newdata))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>现在我们准备好绘图了。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleep2, <span class="fu">aes</span>(<span class="at">x =</span> days_deprived, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> newdata2, <span class="at">color =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"反应时"</span>, <span class="at">x =</span> <span class="st">"睡眠剥夺的天数(0 = 基线)"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="介绍线性混合效应模型_files/figure-html/pp-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>原始数据和部分混合方法的拟合结果对比图</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="解释lmer输出结果并提取估计值" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="解释lmer输出结果并提取估计值"><span class="header-section-number">5</span> 解释<code>lmer()</code>输出结果并提取估计值</h2>
+<p>调用<code>lmer()</code>返回一个”lmerMod”类的拟合模型对象。要了解有关<code>lmerMod</code>类(<code>merMod</code>类的一个特化版本)的更多信息，参见<code>?lmerMod-class</code>。</p>
+<section id="固定效应" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="固定效应"><span class="header-section-number">5.1</span> 固定效应</h3>
+<p>输出中<code>Fixed effects:</code>部分应该看起来很熟悉；它类似于通过<code>lm()</code>拟合的简单线性模型输出结果中的内容。</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Fixed effects:
+              Estimate Std. Error t value
+(Intercept)    267.967      8.266  32.418
+days_deprived   11.435      1.845   6.197</code></pre>
+</div>
+</div>
+<p>这表明，在第0天被试的反应时估计平均约为268毫秒，每增加1天睡眠剥夺平均增加11毫秒反应时。</p>
+<p>如果我们需要从模型中获取固定效应，我们可以使用<code>fixef()</code>提取它们。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(pp_mod)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) days_deprived 
+    267.96742      11.43543 </code></pre>
+</div>
+</div>
+<p>标准差为我们提供了由于抽样误差导致这些参数的变异性的估计。你可以使用这些标准差计算<span class="math inline">\(t\)</span>值或推导置信区间。使用<code>vcov(pp_mod)</code>提取它们，这将给出方差-协方差矩阵(<strong>不是</strong>与随机效应相关的那个)，然后使用<code>diag()</code>提取对角线，并使用<code>sqrt()</code>计算平方根。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(pp_mod)))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) days_deprived 
+     8.265896      1.845293 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 或使用等价的管道：</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># vcov(pp_mod) %&gt;% diag() %&gt;% sqrt()</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>注意，这些<span class="math inline">\(t\)</span>值没有与<span class="math inline">\(p\)</span>值一起出现，这是在简单建模框架中常见的做法。有多种方法从混合效应模型中获取<span class="math inline">\(p\)</span>值，每种方法都有其优缺点；参见 <span class="citation" data-cites="Luke_2017">Luke (<a href="#ref-Luke_2017" role="doc-biblioref">2017</a>)</span> 对这些选项的综述。这些<span class="math inline">\(t\)</span>值没有和自由度(degree of freedom)一起出现，因为在混合效应模型中，自由度的定义并不明确(注：配合这篇<a href="https://zhuanlan.zhihu.com/p/50048784">知乎帖子</a>阅读，有助理解)。通常，人们会将它们视为Wald <span class="math inline">\(z\)</span>值，即标准正态分布中的观测值。由于当观测数趋于无穷大时，<span class="math inline">\(t\)</span>分布渐近于标准正态分布，如果你的观测数据集足够大，那么这种“t-as-z”的做法是合理的。</p>
+<p>要计算Wald <span class="math inline">\(z\)</span>值，只需用固定效应估计值除以其标准差：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">fixef</span>(pp_mod) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(pp_mod)))</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>tvals</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) days_deprived 
+    32.418437      6.197082 </code></pre>
+</div>
+</div>
+<p>你可以使用下面的公式获得相应的<span class="math inline">\(p\)</span>值。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(tvals)))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) days_deprived 
+  0.00000e+00   5.75197e-10 </code></pre>
+</div>
+</div>
+<p>这为反对原假设<span class="math inline">\(H_0: \gamma_1 = 0\)</span>提供了强有力的证据。睡眠剥夺确实会增加反应时。</p>
+<p>你可以使用<code>confint()</code>来获取估计值的置信区间(该技术使用<em>parametric bootstrap</em>)。<code>confint()</code>是一个通用函数，因此要获取有关此函数的帮助，请使用<code>?confint.merMod</code>。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(pp_mod)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Computing profile confidence intervals ...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    2.5 %      97.5 %
+.sig01         19.0979934  46.3366599
+.sig02         -0.4051073   0.8058951
+.sig03          4.0079284  10.2487351
+.sigma         22.4666029  29.3494509
+(Intercept)   251.3443396 284.5904989
+days_deprived   7.7245247  15.1463328</code></pre>
+</div>
+</div>
+</section>
+<section id="随机效应" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="随机效应"><span class="header-section-number">5.2</span> 随机效应</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Random effects:
+ Groups   Name          Variance Std.Dev. Corr
+ Subject  (Intercept)   958.35   30.957       
+          days_deprived  45.78    6.766   0.18
+ Residual               651.60   25.526       
+Number of obs: 144, groups:  Subject, 18</code></pre>
+</div>
+</div>
+<p><code>summary()</code>输出中的随机效应部分看起来有些陌生。你在这里找到的是关于方差成分的信息：方差-协方差矩阵(如果你有多个随机因子的话，就是多个矩阵)和残差方差。</p>
+<p>让我们从<code>Residual</code>行开始。这告诉我们残差方差<span class="math inline">\(\sigma^2\)</span>估计约为651.6。下一列的值25.526只是标准差<span class="math inline">\(\sigma\)</span>，它是方差的平方根。</p>
+<p>我们使用<code>sigma()</code>函数提取残差标准差。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(pp_mod) <span class="co"># 残差</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25.5264</code></pre>
+</div>
+</div>
+<p>在<code>Residual</code>行上面的两行提供了关于<code>Subject</code>随机因子的方差-协方差矩阵的信息。</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> Groups   Name          Variance Std.Dev. Corr
+ Subject  (Intercept)   958.35   30.957       
+          days_deprived  45.78    6.766   0.18</code></pre>
+</div>
+</div>
+<p><code>Variance</code>列的值给出了矩阵主对角线的元素，而<code>Std.Dev.</code>列是这些值的平方根。<code>Corr</code>列告诉我们截距和斜率之间的相关性。</p>
+<p>我们可以使用<code>VarCorr()</code>函数从拟合对象<code>pp_mod</code>中提取这些值。该函数返回一个带有名称的列表，每个随机因子对应一个元素。在我们的模型中，只有一个随机因子<code>Subject</code>，因此返回的列表长度为1。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 随机效应Subject的方差-协方差矩阵</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(pp_mod)[[<span class="st">"Subject"</span>]] <span class="co"># 等于VarCorr(pp_mod)[[1]]</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              (Intercept) days_deprived
+(Intercept)      958.3517      37.20460
+days_deprived     37.2046      45.77766
+attr(,"stddev")
+  (Intercept) days_deprived 
+    30.957255      6.765919 
+attr(,"correlation")
+              (Intercept) days_deprived
+(Intercept)     1.0000000     0.1776263
+days_deprived   0.1776263     1.0000000</code></pre>
+</div>
+</div>
+<p>前几行是方差-协方差矩阵的打印输出。你可以看到主对角线上的方差。我们可以使用以下方法获取这些值：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(<span class="fu">VarCorr</span>(pp_mod)[[<span class="st">"Subject"</span>]]) <span class="co"># 方差</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) days_deprived 
+    958.35165      45.77766 </code></pre>
+</div>
+</div>
+<p>我们可以通过两种方式获取截距和斜率之间的相关性。首先，通过提取<code>"correlation"</code>属性，然后获取第1行第2列的元素(<code>[1, 2]</code>)：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(<span class="fu">VarCorr</span>(pp_mod)[[<span class="st">"Subject"</span>]], <span class="st">"correlation"</span>)[<span class="dv">1</span>, <span class="dv">2</span>] <span class="co"># 相关</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1776263</code></pre>
+</div>
+</div>
+<p>或者我们可以直接从方差-协方差矩阵中计算这个值。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 从方差-协方差矩阵直接计算相关性</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>mx <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(pp_mod)[[<span class="st">"Subject"</span>]]</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 如果cov = rho * t00 * t11，则</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="do">## rho = cov / (t00 * t11).</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>mx[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">/</span> (<span class="fu">sqrt</span>(mx[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="sc">*</span> <span class="fu">sqrt</span>(mx[<span class="dv">2</span>, <span class="dv">2</span>]))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1776263</code></pre>
+</div>
+</div>
+<p>我们可以使用<code>ranef()</code>来提取估计的随机效应(最佳线性无偏预测值，best linear unbiased predictions，BLUPS)。和<code>VarCorr()</code>一样，结果是一个命名列表，其中每个元素对应一个随机因子。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(pp_mod)[[<span class="st">"Subject"</span>]]</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    (Intercept) days_deprived
+308  24.4992891     8.6020000
+309 -59.3723102    -8.1277534
+310 -39.4762764    -7.4292365
+330   1.3500428    -2.3845976
+331  18.4576169    -3.7477340
+332  30.5270040    -4.8936899
+333  13.3682027     0.2888639
+334 -18.1583020     3.8436686
+335 -16.9737887   -12.0702333
+337  44.5850842    10.1760837
+349 -26.6839022     2.1946699
+350  -5.9657957     8.1758613
+351  -5.5710355    -2.3718494
+352  46.6347253    -0.5616377
+369   0.9616395     1.7385130
+370 -18.5216778     5.6317534
+371  -7.3431320     0.2729282
+372  17.6826159     0.6623897</code></pre>
+</div>
+</div>
+<p>还有其他有用的提取函数。参见<code>?merMod-class</code>获取详细信息。</p>
+<p>我们可以使用<code>fitted()</code>函数获取模型的拟合值，使用<code>residuals()</code>函数获取残差。(这些函数考虑了“随机效应的条件模式”，即BLUPS）。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(sleep2, <span class="at">fit =</span> <span class="fu">fitted</span>(pp_mod), <span class="at">resid =</span> <span class="fu">residuals</span>(pp_mod)) <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Subject) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="sc">+</span><span class="cn">Inf</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 18 × 6
+# Groups:   Subject [18]
+   Reaction  Days Subject days_deprived   fit  resid
+      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;           &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1     251.     2 308                 0  292. -41.7 
+ 2     203.     2 309                 0  209.  -5.62
+ 3     234.     2 310                 0  228.   5.83
+ 4     284.     2 330                 0  269.  14.5 
+ 5     302.     2 331                 0  286.  15.4 
+ 6     273.     2 332                 0  298. -25.5 
+ 7     277.     2 333                 0  281.  -4.57
+ 8     243.     2 334                 0  250.  -6.44
+ 9     254.     2 335                 0  251.   3.50
+10     292.     2 337                 0  313. -20.9 
+11     239.     2 349                 0  241.  -2.36
+12     256.     2 350                 0  262.  -5.80
+13     270.     2 351                 0  262.   7.50
+14     327.     2 352                 0  315.  12.3 
+15     257.     2 369                 0  269. -11.7 
+16     239.     2 370                 0  249. -10.5 
+17     278.     2 371                 0  261.  17.3 
+18     298.     2 372                 0  286.  11.9 </code></pre>
+</div>
+</div>
+<p>最后，我们可以使用<code>predict()</code>函数为新数据获取预测值，就像我们之前做过的那样。下面我们使用<code>predict()</code>来想象如果我们继续进行三天的研究会发生什么。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 用新的预测值创建表</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>ndat <span class="ot">&lt;-</span> <span class="fu">crossing</span>(</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Subject =</span> sleep2 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Subject) <span class="sc">%&gt;%</span> <span class="fu">levels</span>() <span class="sc">%&gt;%</span> <span class="fu">factor</span>(),</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">days_deprived =</span> <span class="dv">8</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Reaction =</span> <span class="fu">predict</span>(pp_mod, <span class="at">newdata =</span> .))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleep2, <span class="fu">aes</span>(<span class="at">x =</span> days_deprived, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">bind_rows</span>(newdata2, ndat), <span class="at">color =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"反应时"</span>, <span class="at">x =</span> <span class="st">"睡眠剥夺的天数(0 = 基线)"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="介绍线性混合效应模型_files/figure-html/extrap-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>原始数据与外推模型</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="多层数据建模app" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="多层数据建模app"><span class="header-section-number">6</span> 多层数据建模app</h2>
+<p>试试这个<a href="https://rstudio-connect.psy.gla.ac.uk/multilevel" target="_blank">多层数据建模app</a>以加深你对三种不同的多层建模方法的理解。</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Bates_et_al_2015" class="csl-entry" role="listitem">
+Bates, D., Maechler, M., Bolker, B., &amp; Walker, S. (2015). Fitting linear mixed-effects models using lme4. <em><span class="nocase">Journal of Statistical Software</span></em>, <em>67</em>, 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>
+</div>
+<div id="ref-Belenky_et_al_2003" class="csl-entry" role="listitem">
+Belenky, G., Wesensten, N. J., Thorne, D. R., Thomas, M. L., Sing, H. C., Redmond, D. P., Russo, M. B., &amp; Balkin, T. J. (2003). Patterns of performance degradation and restoration during sleep restriction and subsequent recovery: A sleep dose-response study. <em><span class="nocase">Journal of Sleep Research</span></em>, <em>12</em>(1), 1–12. <a href="https://doi.org/10.1046/j.1365-2869.2003.00337.x">https://doi.org/10.1046/j.1365-2869.2003.00337.x</a>
+</div>
+<div id="ref-Luke_2017" class="csl-entry" role="listitem">
+Luke, S. G. (2017). Evaluating significance in linear mixed-effects models in r. <em><span>Behavior Research Methods</span></em>, <em>49</em>, 1494–1502. <a href="https://doi.org/10.3758/s13428-016-0809-y">https://doi.org/10.3758/s13428-016-0809-y</a>
+</div>
+<div id="ref-McElreath_2020" class="csl-entry" role="listitem">
+McElreath, R. (2020). <em><span class="nocase">Statistical Rethinking: A Bayesian course with examples in R and STAN</span></em>. CRC Press.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

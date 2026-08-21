@@ -1,0 +1,2582 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-06-17">
+
+<title>不忠是可以预测的吗？使用可解释的机器学习来识别不忠的最重要预测因素 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script src="../../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="../../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">不忠是可以预测的吗？使用可解释的机器学习来识别不忠的最重要预测因素</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">文献笔记</div>
+                <div class="quarto-category">不忠</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 17, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#引言" id="toc-引言" class="nav-link active" data-scroll-target="#引言"><span class="header-section-number">1</span> 引言</a></li>
+  <li><a href="#前人研究" id="toc-前人研究" class="nav-link" data-scroll-target="#前人研究"><span class="header-section-number">2</span> 前人研究</a></li>
+  <li><a href="#机器学习" id="toc-机器学习" class="nav-link" data-scroll-target="#机器学习"><span class="header-section-number">3</span> 机器学习</a></li>
+  <li><a href="#本研究" id="toc-本研究" class="nav-link" data-scroll-target="#本研究"><span class="header-section-number">4</span> 本研究</a></li>
+  <li><a href="#方法" id="toc-方法" class="nav-link" data-scroll-target="#方法"><span class="header-section-number">5</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#研究1" id="toc-研究1" class="nav-link" data-scroll-target="#研究1"><span class="header-section-number">5.1</span> 研究1</a>
+  <ul class="collapse">
+  <li><a href="#被试和流程" id="toc-被试和流程" class="nav-link" data-scroll-target="#被试和流程"><span class="header-section-number">5.1.1</span> 被试和流程</a></li>
+  <li><a href="#测量" id="toc-测量" class="nav-link" data-scroll-target="#测量"><span class="header-section-number">5.1.2</span> 测量</a></li>
+  </ul></li>
+  <li><a href="#研究2" id="toc-研究2" class="nav-link" data-scroll-target="#研究2"><span class="header-section-number">5.2</span> 研究2</a>
+  <ul class="collapse">
+  <li><a href="#被试和流程-1" id="toc-被试和流程-1" class="nav-link" data-scroll-target="#被试和流程-1"><span class="header-section-number">5.2.1</span> 被试和流程</a></li>
+  <li><a href="#测量-1" id="toc-测量-1" class="nav-link" data-scroll-target="#测量-1"><span class="header-section-number">5.2.2</span> 测量</a></li>
+  </ul></li>
+  <li><a href="#数据分析" id="toc-数据分析" class="nav-link" data-scroll-target="#数据分析"><span class="header-section-number">5.3</span> 数据分析</a>
+  <ul class="collapse">
+  <li><a href="#数据预处理" id="toc-数据预处理" class="nav-link" data-scroll-target="#数据预处理"><span class="header-section-number">5.3.1</span> 数据预处理</a></li>
+  <li><a href="#分析" id="toc-分析" class="nav-link" data-scroll-target="#分析"><span class="header-section-number">5.3.2</span> 分析</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">6</span> 结果</a>
+  <ul class="collapse">
+  <li><a href="#不忠行为发生率" id="toc-不忠行为发生率" class="nav-link" data-scroll-target="#不忠行为发生率"><span class="header-section-number">6.1</span> 不忠行为发生率</a></li>
+  <li><a href="#预测准确率" id="toc-预测准确率" class="nav-link" data-scroll-target="#预测准确率"><span class="header-section-number">6.2</span> 预测准确率</a></li>
+  <li><a href="#重要预测变量" id="toc-重要预测变量" class="nav-link" data-scroll-target="#重要预测变量"><span class="header-section-number">6.3</span> 重要预测变量</a></li>
+  </ul></li>
+  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">7</span> 讨论</a>
+  <ul class="collapse">
+  <li><a href="#不忠预测变量的比较" id="toc-不忠预测变量的比较" class="nav-link" data-scroll-target="#不忠预测变量的比较"><span class="header-section-number">7.1</span> 不忠预测变量的比较</a></li>
+  <li><a href="#研究意义和展望" id="toc-研究意义和展望" class="nav-link" data-scroll-target="#研究意义和展望"><span class="header-section-number">7.2</span> 研究意义和展望</a></li>
+  <li><a href="#优势和局限" id="toc-优势和局限" class="nav-link" data-scroll-target="#优势和局限"><span class="header-section-number">7.3</span> 优势和局限</a></li>
+  </ul></li>
+  <li><a href="#小结" id="toc-小结" class="nav-link" data-scroll-target="#小结"><span class="header-section-number">8</span> 小结</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vowels, L. M., Vowels, M. J., &amp; Mark, K. P. (2022). Is Infidelity Predictable? Using Explainable Machine Learning to Identify the Most Important Predictors of Infidelity. <em>Journal of Sex Research</em>, <em>59</em>(2), 224-237. <a href="https://doi.org/10.1080/00224499.2021.1967846" class="uri">https://doi.org/10.1080/00224499.2021.1967846</a></p>
+<p><span class="citation" data-cites="Vowels_et_al_2022">Vowels et al. (<a href="#ref-Vowels_et_al_2022" role="doc-biblioref">2022</a>)</span></p>
+</div>
+</div>
+<section id="引言" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 引言</h1>
+<ul>
+<li>不同不忠定义和测量情况下，不忠的概率从20%到50%不等
+<ul>
+<li>常见定义：在双方约定的关系范围之外进行感情或性关系</li>
+<li>行为：调情、有感情联系、性交、使用色情作品</li>
+<li>网络技术发达：发送色情短信、发送露骨照片、观看网络色情直播</li>
+</ul></li>
+<li>生态伴侣系统图（Ecological Couples System Diagram，ECSD，<a href="#fig-1" class="quarto-xref">图&nbsp;1</a>）</li>
+<li>本研究关注：<strong>个体</strong>、<strong>伴侣</strong>、<strong>二元</strong>因素</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="ECSD">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>ECSD
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ECSD.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 生态伴侣系统图<span class="citation" data-cites="Haseli_et_al_2019">(<a href="#ref-Haseli_et_al_2019" role="doc-biblioref">Haseli et al., 2019</a>)</span>
+</figcaption>
+</figure>
+</div>
+<p>不匹配的伴侣更容易发生不忠，不匹配不仅仅发生在伴侣之间，还可能发生在各级系统之间</p>
+<ul>
+<li>微观系统（Microsystem）
+<ul>
+<li>包含：个体、伴侣、性问题</li>
+<li>影响因素：
+<ul>
+<li>个体特征：社会人口特征、性别、年龄、教育、权力、收入</li>
+<li>心理和生理因素：寻求支持、压力、抑郁、促卵泡激素、内源性睾酮</li>
+<li>人格：神经质、自我调节能力、自我扩展、责任心、自尊、审慎决策能力，<strong>伴侣的也包含，不匹配更易不忠</strong></li>
+<li>性相关信息：性经验、性兴奋倾向、性态度、性兴趣、首次性交年龄等</li>
+<li>对不忠的态度和不忠经历</li>
+<li>酒精消费</li>
+<li>伴侣特征</li>
+<li>伴侣吸引力、第三者吸引力</li>
+<li>性功能和性功能障碍</li>
+<li>父母特征：不忠、离异、婚姻不满意、性态度</li>
+</ul></li>
+</ul></li>
+<li>中介系统（Mesosystem）
+<ul>
+<li>包含：伴侣关系层面的变量</li>
+<li>影响因素：
+<ul>
+<li>婚姻相关信息：结婚年龄、首次性交时间、同居、怀孕</li>
+<li>伴侣关系：婚姻满意度、幸福感</li>
+<li>性满意度：个体幸福感维度、伴侣互动过程维度</li>
+<li>依恋风格</li>
+</ul></li>
+</ul></li>
+<li>外部系统（Exosystem）
+<ul>
+<li>社交媒体使用</li>
+<li>社会生活：社交应酬、晚宴聚会、拜访朋友、团体旅行等</li>
+<li>孤独感</li>
+<li>职业</li>
+</ul></li>
+<li>宏观系统（Macrosystem）
+<ul>
+<li>宗教与灵性（Religion and Spirituality）</li>
+<li>文化</li>
+<li>种族和族裔</li>
+<li>性别角色、公平观念、社会规范和文化男性气质</li>
+</ul></li>
+<li>时间系统（Chronosystem）
+<ul>
+<li>人生不同阶段、生命历程</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="前人研究" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 前人研究</h1>
+<ul>
+<li>社会人口学
+<ul>
+<li>性别：男性性不忠、女性情感不忠，但更多研究认为<strong>性别相似性大于差异性</strong>，尤其是同时考虑性和情感时</li>
+<li>关系状况</li>
+<li>教育：存在争议</li>
+<li>宗教：存在争议</li>
+<li>忠诚（commitment）：正向</li>
+</ul></li>
+<li>个体因素
+<ul>
+<li>开放性态度、性兴趣和不忠正相关</li>
+<li>依恋：焦虑和回避更容易不忠</li>
+</ul></li>
+<li>伴侣水平
+<ul>
+<li>关系满意度、性生活频率、性态度不匹配</li>
+</ul></li>
+</ul>
+</section>
+<section id="机器学习" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 机器学习</h1>
+<ul>
+<li>线性模型：不能估计非线性关系、复杂交互</li>
+<li>机器学习：可以处理大量变量、非线性关系、复杂交互、变量重要性</li>
+<li>模型现在可解释</li>
+</ul>
+</section>
+<section id="本研究" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 本研究</h1>
+<ul>
+<li>因变量是性不忠和线上不忠（情感不忠未获取数据）</li>
+<li>所有变量都加入，不重要变量权重自动为0</li>
+<li>机器学习是探索性的，所以不作假设</li>
+<li>k折交叉验证，提供验证</li>
+<li>数据集
+<ul>
+<li>研究1是个体水平</li>
+<li>研究2是伴侣水平</li>
+<li>针对不同性别进行了分析</li>
+</ul></li>
+</ul>
+</section>
+<section id="方法" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 方法</h1>
+<section id="研究1" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="研究1"><span class="header-section-number">5.1</span> 研究1</h2>
+<section id="被试和流程" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="被试和流程"><span class="header-section-number">5.1.1</span> 被试和流程</h3>
+<ul>
+<li>2014年的横断研究，众包平台、邮件、短信、网站等招募，18岁及以上，至少经历过一次单配偶式浪漫关系</li>
+<li>去除不符合要求的被试后得到891名被试
+<ul>
+<li>557男、279女、25非二元</li>
+<li>483异性恋、189双性恋、101男同性恋、60女同性恋</li>
+<li>大多数白人（88.4%）、已婚或同居（62.7%）、一个孩子及以上（24.5%）、大学学历及以上（95.8%）、不信仰任何宗教（54.5%）</li>
+<li>平均年龄32.7（±9.63）、关系长度6.21 (7.12)</li>
+</ul></li>
+</ul>
+</section>
+<section id="测量" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="测量"><span class="header-section-number">5.1.2</span> 测量</h3>
+<ul>
+<li>一共95个变量（包含编码后的哑变量）</li>
+</ul>
+<div class="cell">
+<div id="tbl-1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 变量信息
+</figcaption>
+<div aria-describedby="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="sppsxrfnim" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sppsxrfnim table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#sppsxrfnim thead, #sppsxrfnim tbody, #sppsxrfnim tfoot, #sppsxrfnim tr, #sppsxrfnim td, #sppsxrfnim th {
+  border-style: none;
+}
+
+#sppsxrfnim p {
+  margin: 0;
+  padding: 0;
+}
+
+#sppsxrfnim .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#sppsxrfnim .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sppsxrfnim .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sppsxrfnim .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sppsxrfnim .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sppsxrfnim .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sppsxrfnim .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sppsxrfnim .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sppsxrfnim .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#sppsxrfnim .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#sppsxrfnim .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sppsxrfnim .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sppsxrfnim .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sppsxrfnim .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sppsxrfnim .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sppsxrfnim .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#sppsxrfnim .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#sppsxrfnim .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#sppsxrfnim .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sppsxrfnim .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#sppsxrfnim .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sppsxrfnim .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sppsxrfnim .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sppsxrfnim .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sppsxrfnim .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sppsxrfnim .gt_left {
+  text-align: left;
+}
+
+#sppsxrfnim .gt_center {
+  text-align: center;
+}
+
+#sppsxrfnim .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sppsxrfnim .gt_font_normal {
+  font-weight: normal;
+}
+
+#sppsxrfnim .gt_font_bold {
+  font-weight: bold;
+}
+
+#sppsxrfnim .gt_font_italic {
+  font-style: italic;
+}
+
+#sppsxrfnim .gt_super {
+  font-size: 65%;
+}
+
+#sppsxrfnim .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#sppsxrfnim .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#sppsxrfnim .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#sppsxrfnim .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#sppsxrfnim .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#sppsxrfnim .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#sppsxrfnim .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#sppsxrfnim .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#sppsxrfnim div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a变量/构念" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">变量/构念</th>
+<th id="a变量分组" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">变量分组</th>
+<th id="a量表" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">量表</th>
+<th id="a变量类型" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">变量类型</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">年龄</td>
+<td class="gt_row gt_left" headers="变量分组">人口统计学</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">种族/民族</td>
+<td class="gt_row gt_left" headers="变量分组">人口统计学</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">分类</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">性别</td>
+<td class="gt_row gt_left" headers="变量分组">人口统计学</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">分类</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">性取向</td>
+<td class="gt_row gt_left" headers="变量分组">人口统计学</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">分类</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">关系状态</td>
+<td class="gt_row gt_left" headers="变量分组">人口统计学</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">分类</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">是否有子女</td>
+<td class="gt_row gt_left" headers="变量分组">人口统计学</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">分类</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">教育水平</td>
+<td class="gt_row gt_left" headers="变量分组">人口统计学</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">分类</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">避孕情况</td>
+<td class="gt_row gt_left" headers="变量分组">行为/健康</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">*</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">性行为情况</td>
+<td class="gt_row gt_left" headers="变量分组">行为</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">*</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">心理健康</td>
+<td class="gt_row gt_left" headers="变量分组">健康</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">*</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">身体健康</td>
+<td class="gt_row gt_left" headers="变量分组">健康</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">*</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">想要更多/更少性行为</td>
+<td class="gt_row gt_left" headers="变量分组">性需求/关系互动</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">*</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">想要更多/更少沟通</td>
+<td class="gt_row gt_left" headers="变量分组">关系互动</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">*</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">性欲</td>
+<td class="gt_row gt_left" headers="变量分组">心理/性心理构念</td>
+<td class="gt_row gt_left" headers="量表">Sexual Desire Inventory, SDI<span class="citation" data-cites="Spector_et_al_1996">(<a href="#ref-Spector_et_al_1996" role="doc-biblioref">Spector et al., 1996</a>)</span></td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">&nbsp;&nbsp;伴侣性欲（dyadic desire）</td>
+<td class="gt_row gt_left" headers="变量分组">心理/性心理构念</td>
+<td class="gt_row gt_left" headers="量表">SDI</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">&nbsp;&nbsp;独处性欲（solitary desire）</td>
+<td class="gt_row gt_left" headers="变量分组">心理/性心理构念</td>
+<td class="gt_row gt_left" headers="量表">SDI</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">哈尔伯特性欲</td>
+<td class="gt_row gt_left" headers="变量分组">心理/性心理构念</td>
+<td class="gt_row gt_left" headers="量表">Halbert Index for Sexual Desire, HISD<span class="citation" data-cites="Yousefi_et_al_2014">(<a href="#ref-Yousefi_et_al_2014" role="doc-biblioref">Yousefi et al., 2013</a>)</span></td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">特质正念</td>
+<td class="gt_row gt_left" headers="变量分组">心理特质</td>
+<td class="gt_row gt_left" headers="量表">Five Facet Mindfulness Questionnaire–Short Form, FFMQ-SF<span class="citation" data-cites="Bohlmeijer_et_al_2011">(<a href="#ref-Bohlmeijer_et_al_2011" role="doc-biblioref">Bohlmeijer et al., 2011</a>)</span></td>
+<td class="gt_row gt_left" headers="变量类型">5个分量表</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">&nbsp;&nbsp;不反应</td>
+<td class="gt_row gt_left" headers="变量分组">正念</td>
+<td class="gt_row gt_left" headers="量表">FFMQ-SF</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">&nbsp;&nbsp;观察</td>
+<td class="gt_row gt_left" headers="变量分组">正念</td>
+<td class="gt_row gt_left" headers="量表">FFMQ-SF</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">&nbsp;&nbsp;有觉察地行动</td>
+<td class="gt_row gt_left" headers="变量分组">正念</td>
+<td class="gt_row gt_left" headers="量表">FFMQ-SF</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">&nbsp;&nbsp;描述感受</td>
+<td class="gt_row gt_left" headers="变量分组">正念</td>
+<td class="gt_row gt_left" headers="量表">FFMQ-SF</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">&nbsp;&nbsp;非评判态度</td>
+<td class="gt_row gt_left" headers="变量分组">正念</td>
+<td class="gt_row gt_left" headers="量表">FFMQ-SF</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">性态度</td>
+<td class="gt_row gt_left" headers="变量分组">态度</td>
+<td class="gt_row gt_left" headers="量表">Attitudes Toward Sexuality Scale, ATSS<span class="citation" data-cites="Fisher_Hall_1988">(<a href="#ref-Fisher_Hall_1988" role="doc-biblioref">Fisher &amp; Hall, 1988</a>)</span></td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">爱情最重要</td>
+<td class="gt_row gt_left" headers="变量分组">爱情/性观念</td>
+<td class="gt_row gt_left" headers="量表">Perception of Love and Sex Scale, PLSS<span class="citation" data-cites="Hendrick_Hendrick_2002">(<a href="#ref-Hendrick_Hendrick_2002" role="doc-biblioref">Hendrick &amp; Hendrick, 2002</a>)</span></td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">性能表达爱情</td>
+<td class="gt_row gt_left" headers="变量分组">爱情/性观念</td>
+<td class="gt_row gt_left" headers="量表">PLSS</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">先爱后性</td>
+<td class="gt_row gt_left" headers="变量分组">爱情/性观念</td>
+<td class="gt_row gt_left" headers="量表">PLSS</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">性正在衰退</td>
+<td class="gt_row gt_left" headers="变量分组">爱情/性观念</td>
+<td class="gt_row gt_left" headers="量表">PLSS</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">依恋焦虑</td>
+<td class="gt_row gt_left" headers="变量分组">依恋风格</td>
+<td class="gt_row gt_left" headers="量表">ECR-S</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">依恋回避</td>
+<td class="gt_row gt_left" headers="变量分组">依恋风格</td>
+<td class="gt_row gt_left" headers="量表">ECR-S</td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">性满意度</td>
+<td class="gt_row gt_left" headers="变量分组">满意度</td>
+<td class="gt_row gt_left" headers="量表">General Measure of Sexual Satisfaction, GMSEX<span class="citation" data-cites="Lawrance_Byers_1992">(<a href="#ref-Lawrance_Byers_1992" role="doc-biblioref">K. Lawrance &amp; Byers, 1992</a>)</span></td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">关系满意度</td>
+<td class="gt_row gt_left" headers="变量分组">满意度</td>
+<td class="gt_row gt_left" headers="量表">General Measure of Relationship Satisfaction, GMREL<span class="citation" data-cites="Lawrance_Byers_1995">(<a href="#ref-Lawrance_Byers_1995" role="doc-biblioref">K.-A. Lawrance &amp; Byers, 1995</a>)</span></td>
+<td class="gt_row gt_left" headers="变量类型">连续</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量/构念">现实不忠</td>
+<td class="gt_row gt_left" headers="变量分组">因变量</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">0，1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量/构念">线上不忠</td>
+<td class="gt_row gt_left" headers="变量分组">因变量</td>
+<td class="gt_row gt_left" headers="量表">自编</td>
+<td class="gt_row gt_left" headers="变量类型">0，1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="研究2" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="研究2"><span class="header-section-number">5.2</span> 研究2</h2>
+<section id="被试和流程-1" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="被试和流程-1"><span class="header-section-number">5.2.1</span> 被试和流程</h3>
+<ul>
+<li>2012年的纵向伴侣数据，网站和社媒招募，18岁及以上，至少3年的异性单配偶式关系，目前和伴侣同居，无1岁以下小孩，未怀孕</li>
+<li>202对异性被试（404人）</li>
+<li>大部分美国（89%），少部分加拿大（11%）；96%至少接受大学教育</li>
+<li>平均年龄32.5（±8.90）、关系长度9.19 (6.85)</li>
+</ul>
+</section>
+<section id="测量-1" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="测量-1"><span class="header-section-number">5.2.2</span> 测量</h3>
+<ul>
+<li>一共66个变量（和研究1比少了的主要是异性恋情侣部分问题选项更少）</li>
+<li>依恋风格（ECR-S）、性态度（ATSS）、哈尔伯特性欲指数（HISD）、特质正念（FFQM-SF）、爱情/性观念（PLSS）</li>
+<li>增加浪漫爱情量表<span class="citation" data-cites="Rubin_1970">(<a href="#ref-Rubin_1970" role="doc-biblioref">Rubin, 1970</a>)</span>
+<ul>
+<li>从属和依赖需要、助人倾向、排他性与专注投入的取向</li>
+</ul></li>
+<li>因变量和@tbl-1 中的相同</li>
+</ul>
+</section>
+</section>
+<section id="数据分析" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="数据分析"><span class="header-section-number">5.3</span> 数据分析</h2>
+<section id="数据预处理" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="数据预处理"><span class="header-section-number">5.3.1</span> 数据预处理</h3>
+<ul>
+<li>分类变量均转换为0,1变量</li>
+<li>排除与因变量实质相同的变量</li>
+<li>随机森林多重插补处理缺失数据（不到1%）</li>
+</ul>
+</section>
+<section id="分析" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="分析"><span class="header-section-number">5.3.2</span> 分析</h3>
+<ul>
+<li>个体水平数据分男、女进行分析</li>
+<li>伴侣水平数据也分男、女进行分析，同时考虑行动者（actor）效应和伴侣（partner）效应</li>
+<li>使用平衡随机森林分类器（balanced random forest classifier）处理分类因变量
+<ul>
+<li>随机森林不进行超参数调优也能获得很好的结果，防止调优减少样本数</li>
+<li>自举法对因变量的多数类进行欠采样来进行平衡</li>
+</ul></li>
+<li>10 折交叉验证</li>
+<li>选择精确率、召回率、F1分数和Mathews相关系数（MCC）作为模型表现指标</li>
+<li>使用SHAP值对模型进行解释</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="指标说明">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>指标说明
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div id="tbl-2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;2: 混淆矩阵
+</figcaption>
+<div aria-describedby="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="avudbmnvpb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#avudbmnvpb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#avudbmnvpb thead, #avudbmnvpb tbody, #avudbmnvpb tfoot, #avudbmnvpb tr, #avudbmnvpb td, #avudbmnvpb th {
+  border-style: none;
+}
+
+#avudbmnvpb p {
+  margin: 0;
+  padding: 0;
+}
+
+#avudbmnvpb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#avudbmnvpb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#avudbmnvpb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#avudbmnvpb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#avudbmnvpb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#avudbmnvpb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#avudbmnvpb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#avudbmnvpb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#avudbmnvpb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#avudbmnvpb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#avudbmnvpb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#avudbmnvpb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#avudbmnvpb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#avudbmnvpb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#avudbmnvpb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#avudbmnvpb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#avudbmnvpb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#avudbmnvpb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#avudbmnvpb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#avudbmnvpb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#avudbmnvpb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#avudbmnvpb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#avudbmnvpb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#avudbmnvpb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#avudbmnvpb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#avudbmnvpb .gt_left {
+  text-align: left;
+}
+
+#avudbmnvpb .gt_center {
+  text-align: center;
+}
+
+#avudbmnvpb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#avudbmnvpb .gt_font_normal {
+  font-weight: normal;
+}
+
+#avudbmnvpb .gt_font_bold {
+  font-weight: bold;
+}
+
+#avudbmnvpb .gt_font_italic {
+  font-style: italic;
+}
+
+#avudbmnvpb .gt_super {
+  font-size: 65%;
+}
+
+#avudbmnvpb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#avudbmnvpb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#avudbmnvpb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#avudbmnvpb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#avudbmnvpb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#avudbmnvpb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#avudbmnvpb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#avudbmnvpb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#avudbmnvpb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a-" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="a预测正类-(Positive)" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">预测正类 (Positive)</th>
+<th id="a预测负类-(Negative)" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">预测负类 (Negative)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers=" "><strong>实际正类</strong></td>
+<td class="gt_row gt_center" headers="预测正类 (Positive)">真阳性 (TP)</td>
+<td class="gt_row gt_center" headers="预测负类 (Negative)">假阴性 (FN)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers=" "><strong>实际负类</strong></td>
+<td class="gt_row gt_center" headers="预测正类 (Positive)">假阳性 (FP)</td>
+<td class="gt_row gt_center" headers="预测负类 (Negative)">真阴性 (TN)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><strong>精确率 (Precision)</strong></p>
+<p><span class="math display">\[
+\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}
+\]</span></p>
+<p><strong>召回率 (Recall)</strong></p>
+<p><span class="math display">\[
+\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
+\]</span></p>
+<p><strong>F1 分数 (F1-Score)</strong></p>
+<p><span class="math display">\[
+F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\]</span></p>
+<p>精确率和召回率的调和平均数</p>
+<p><strong>Mathews相关系数 (MCC)</strong></p>
+<p><span class="math display">\[
+\text{MCC} = \frac{\text{TP} \cdot \text{TN} - \text{FP} \cdot \text{FN}}{\sqrt{(\text{TP} + \text{FP})(\text{TP} + \text{FN})(\text{TN} + \text{FP})(\text{TN} + \text{FN})}}
+\]</span></p>
+<p>真实类别和预测类别之间的相关系数，不平衡数据的最佳指标</p>
+<p>取值范围为 <span class="math inline">\([-1, 1]\)</span>：当 <span class="math inline">\(\text{MCC} = 1\)</span> 时表示模型实现了完美预测，<span class="math inline">\(\text{MCC} = 0\)</span> 表示模型的预测能力与随机猜测无异，而 <span class="math inline">\(\text{MCC} = -1\)</span> 则意味着模型预测与真实类别完全相反。</p>
+<p><strong>SHAP（SHapley Additive exPlanations）值</strong></p>
+<p>基于博弈论Shapley值的模型解释方法，目的是公平分配每个特征对单个预测结果的贡献</p>
+<p>将模型的输出表示为基准值（如训练集的平均预测）与所有特征SHAP值的线性加和：<span class="math inline">\(f(x) = \text{base\_value} + \sum_{i=1}^{M} \phi_i\)</span></p>
+<p>SHAP值为<strong>正</strong>说明该特征会<strong>提高</strong>样本被预测为<strong>正类的概率</strong>，为<strong>负</strong>则<strong>降低</strong>该概率，<strong>绝对值越大则影响越强</strong></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="结果" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 结果</h1>
+<section id="不忠行为发生率" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="不忠行为发生率"><span class="header-section-number">6.1</span> 不忠行为发生率</h2>
+<ul>
+<li>研究1（个体水平）
+<ul>
+<li>32.0%有过线下不忠，43.4%男性；25.7%女性</li>
+<li>26.6%有过线上不忠，41.6%男性；18.5%女性</li>
+</ul></li>
+<li>研究2（伴侣水平）
+<ul>
+<li>17.4%有过线下不忠，18.8%男性；15.9%女性</li>
+<li>14.1%有过线上不忠，16.8%男性；11.4%女性</li>
+</ul></li>
+</ul>
+</section>
+<section id="预测准确率" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="预测准确率"><span class="header-section-number">6.2</span> 预测准确率</h2>
+<ul>
+<li>研究1报告了总体样本和分性别样本（样本类型3 × 不忠类型2）</li>
+<li>研究2报告总体和分性别，同时区分了不包含伴侣效应和包含伴侣效应（样本类型3 × 不忠类型2 × 是否包含伴侣效应2）</li>
+<li>选择MCC作为指标，0.1为小效应、0.3为中效应、0.5为大效应</li>
+</ul>
+<div class="cell">
+<div id="tbl-3" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;3: 模型结果
+</figcaption>
+<div aria-describedby="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table cell caption-top table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="4" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px; font-weight: bold;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Sample 1
+</div></th>
+<th colspan="4" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px; font-weight: bold;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Sample 2
+</div></th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" style="text-align: left; border-bottom: 2px solid black;">Outcome</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">Class</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">Pre</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">Rec</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">F1</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">MCC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">Pre</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">Rec</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">F1</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; border-bottom: 2px solid black;">MCC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; padding: 3px 6px;">Infidelity</td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">All:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;">.81 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.65 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.72 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.28 (.03)</strong></td>
+<td style="text-align: center; padding: 3px 6px;">.92 (.01)</td>
+<td style="text-align: center; padding: 3px 6px;">.80 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.85 (.01)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.36 (.06)</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;">.48 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.69 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.56 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.40 (.05)</td>
+<td style="text-align: center; padding: 3px 6px;">.62 (.06)</td>
+<td style="text-align: center; padding: 3px 6px;">.48 (.06)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">Men:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;">.70 (.05)</td>
+<td style="text-align: center; padding: 3px 6px;">.66 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.66 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.28 (.08)</strong></td>
+<td style="text-align: center; padding: 3px 6px;">.91 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.69 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.78 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.32 (.03)</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;">.58 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;">.63 (.05)</td>
+<td style="text-align: center; padding: 3px 6px;">.59 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.34 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.73 (.07)</td>
+<td style="text-align: center; padding: 3px 6px;">.44 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">Men dyadic:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.92 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.77 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.84 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.42 (.06)</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.43 (.06)</td>
+<td style="text-align: center; padding: 3px 6px;">.75 (.07)</td>
+<td style="text-align: center; padding: 3px 6px;">.52 (.05)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">Women:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;">.84 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.65 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.73 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.25 (.04)</strong></td>
+<td style="text-align: center; padding: 3px 6px;">.92 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.79 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.85 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.35 (.09)</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;">.39 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.62 (.05)</td>
+<td style="text-align: center; padding: 3px 6px;">.46 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.36 (.07)</td>
+<td style="text-align: center; padding: 3px 6px;">.64 (.10)</td>
+<td style="text-align: center; padding: 3px 6px;">.79 (.08)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">Women dyadic:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.93 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.78 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;">.84 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.35 (.08)</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.36 (.06)</td>
+<td style="text-align: center; padding: 3px 6px;">.65 (.11)</td>
+<td style="text-align: center; padding: 3px 6px;">.44 (.07)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; padding: 3px 6px;">Infidelity online</td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+<td style="text-align: center; font-weight: bold; padding: 3px 6px;"></td>
+</tr>
+<tr class="odd">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">All:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;">.87 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.70 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.77 (.01)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.36 (.02)</strong></td>
+<td style="text-align: center; padding: 3px 6px;">.94 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.80 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.86 (.01)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.38 (.06)</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;">.46 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.71 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.55 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.36 (.06)</td>
+<td style="text-align: center; padding: 3px 6px;">.71 (.08)</td>
+<td style="text-align: center; padding: 3px 6px;">.44 (.06)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="odd">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">Men:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;">.72 (.06)</td>
+<td style="text-align: center; padding: 3px 6px;">.64 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;">.67 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.28 (.08)</strong></td>
+<td style="text-align: center; padding: 3px 6px;">.94 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.80 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.86 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.33 (.05)</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;">.56 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;">.65 (.06)</td>
+<td style="text-align: center; padding: 3px 6px;">.59 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.36 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;">.71 (.09)</td>
+<td style="text-align: center; padding: 3px 6px;">.44 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="odd">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">Men dyadic:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.90 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.67 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.77 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.24 (.05)</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.27 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;">.68 (.08)</td>
+<td style="text-align: center; padding: 3px 6px;">.37 (.05)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="odd">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">Women:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;">.88 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.63 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;">.73 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.18 (.05)</strong></td>
+<td style="text-align: center; padding: 3px 6px;">.98 (.01)</td>
+<td style="text-align: center; padding: 3px 6px;">.85 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;">.90 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.49 (.07)</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;">.27 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.60 (.07)</td>
+<td style="text-align: center; padding: 3px 6px;">.36 (.04)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.41 (.07)</td>
+<td style="text-align: center; padding: 3px 6px;">.79 (.10)</td>
+<td style="text-align: center; padding: 3px 6px;">.51 (.08)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+<tr class="odd">
+<td rowspan="2" style="text-align: left; vertical-align: middle !important; padding: 3px 6px;">Women dyadic:</td>
+<td style="text-align: center; padding: 3px 6px;">0</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.96 (.01)</td>
+<td style="text-align: center; padding: 3px 6px;">.87 (.03)</td>
+<td style="text-align: center; padding: 3px 6px;">.91 (.02)</td>
+<td style="text-align: center; padding: 3px 6px;"><strong>.40 (.11)</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center; padding: 3px 6px;">1</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+<td style="text-align: center; padding: 3px 6px;">.39 (.11)</td>
+<td style="text-align: center; padding: 3px 6px;">.62 (.14)</td>
+<td style="text-align: center; padding: 3px 6px;">.45 (.11)</td>
+<td style="text-align: center; padding: 3px 6px;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<ul>
+<li>线下不忠
+<ul>
+<li>整体是中效应，0.25-0.42</li>
+<li>纳入伴侣效应后仅能提高对男性的预测效果</li>
+</ul></li>
+<li>线上不忠
+<ul>
+<li>整体是中效应，0.18-0.49</li>
+<li>纳入伴侣效应后会削弱预测效果</li>
+</ul></li>
+</ul>
+</section>
+<section id="重要预测变量" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="重要预测变量"><span class="header-section-number">6.3</span> 重要预测变量</h2>
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ip_S1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: 研究1线下不忠结果
+</figcaption>
+</figure>
+</div>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ip_S2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 研究2线下不忠结果
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-2" class="quarto-xref">图&nbsp;2</a> 和 <a href="#fig-3" class="quarto-xref">图&nbsp;3</a> 显示对<strong>线下不忠</strong>而言：
+<ul>
+<li>关系满意度、独处性欲、伴侣性欲、关系时长和某些性行为是常见有力预测变量</li>
+<li>整体来看关系满意度低线下不忠可能性低，但<strong>也有部分高关系满意度个体更容易线下不忠</strong></li>
+<li>较高的独处性欲和伴侣性欲以及更长的关系时长都预示着线下不忠的可能性增加</li>
+<li>研究1中对性更开放的态度，也预测了更高的线下不忠可能性</li>
+<li>研究2中较高的性满意度和浪漫爱情也预示着线下不忠的可能性更低</li>
+</ul></li>
+</ul>
+<div id="fig-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="online_S1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4: 研究1线上不忠结果
+</figcaption>
+</figure>
+</div>
+<div id="fig-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="online_S2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5: 研究2线上不忠结果
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-4" class="quarto-xref">图&nbsp;4</a> 和 <a href="#fig-5" class="quarto-xref">图&nbsp;5</a> 显示对<strong>线上不忠</strong>而言：
+<ul>
+<li>从未发生过肛交，会降低线上不忠的可能性</li>
+<li><strong>更长的关系时长</strong>和更强的性欲望，会提高线上不忠的可能性</li>
+<li>较高的独处性欲和伴侣性欲以及更长的关系时长都预示着线下不忠的可能性增加</li>
+<li>研究1中使用激素避孕药会降低男性发生线上不忠的可能性</li>
+<li>只在研究2中，关系满意度和性满意度进入前10</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="讨论" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 讨论</h1>
+<section id="不忠预测变量的比较" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="不忠预测变量的比较"><span class="header-section-number">7.1</span> 不忠预测变量的比较</h2>
+<ul>
+<li>关系特征（关系满意度、关系时长、伴侣欲望、性满意度、浪漫爱情、关系内的某些性行为）在不同样本中都稳定地位于前10个最重要预测因素之列，说明<strong>关系变量在不忠预测中更为稳定</strong></li>
+<li>高满意度也会发生不忠，可能是因为已经修复不忠影响，或者就是不忠也会发生在幸福关系中</li>
+<li>肛交是线上不忠的最重要预测因素，可能是因为这代表更开放的性态度</li>
+<li>性别只在一个样本中进入前十，说明性别的差异在逐渐减小</li>
+</ul>
+</section>
+<section id="研究意义和展望" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="研究意义和展望"><span class="header-section-number">7.2</span> 研究意义和展望</h2>
+<ul>
+<li>ECSD模型认为伴侣双方的个体因素以及关系层面的因素都会预测不忠行为，但本研究发现<strong>加入伴侣效应并不能增强预测能力</strong></li>
+<li>个体态度相关变量能预测不忠，对性持较为保守态度的人，发生不忠的可能性较低</li>
+<li>某些性行为也能预测不忠，未参与传统意义上较为开放的性行为的人，也较少发生不忠行为</li>
+<li><strong>个体层面变量很少进入前10</strong>，这也许可以解释为什么社会人口学变量经常得到不一致的结果</li>
+<li>未来研究需要考察<strong>近期发生的不忠事件</strong>，以更深入理解关系特征与不忠之间的联系</li>
+<li>针对大量变量研究可能优于针对单一变量</li>
+</ul>
+</section>
+<section id="优势和局限" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="优势和局限"><span class="header-section-number">7.3</span> 优势和局限</h2>
+<ul>
+<li>优势
+<ul>
+<li>同时比较大量预测变量</li>
+<li>估计非线性关系</li>
+<li>识别复杂交互作用</li>
+<li>同时考察线下不忠与线上不忠</li>
+</ul></li>
+<li>局限
+<ul>
+<li>不忠测量过于简单</li>
+<li>横断面设计限制因果推断</li>
+<li>类别不平衡</li>
+<li>单个变量效应较弱</li>
+<li>无法推断因果关系</li>
+<li>算法选择限制</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="小结" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> 小结</h1>
+<ul>
+<li>关系变量是预测不忠最稳定、最强大的因素</li>
+<li>人口学变量和个体差异变量的重要性远低于关系变量</li>
+<li>当关系困难刚出现时进行干预，可能比关注个体特质更有效</li>
+<li>性欲是最稳健的预测因素之一</li>
+<li>建议
+<ul>
+<li>讨论双方的性需求</li>
+<li>表达性期待</li>
+<li>寻找满足性需求的方式</li>
+</ul></li>
+</ul>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Bohlmeijer_et_al_2011" class="csl-entry" role="listitem">
+Bohlmeijer, E., Klooster, P. M. ten, Fledderus, M., Veehof, M., &amp; Baer, R. (2011). Psychometric properties of the five facet mindfulness questionnaire in depressed adults and development of a short form. <em>Assessment</em>, <em>18</em>(3), 308–320. <a href="https://doi.org/10.1177/1073191111408231">https://doi.org/10.1177/1073191111408231</a>
+</div>
+<div id="ref-Fisher_Hall_1988" class="csl-entry" role="listitem">
+Fisher, T. D., &amp; Hall, R. G. (1988). A scale for the comparison of the sexual attitudes of adolescents and their parents. <em>The Journal of Sex Research</em>, <em>24</em>(1), 90–100. <a href="https://doi.org/10.1080/00224498809551400">https://doi.org/10.1080/00224498809551400</a>
+</div>
+<div id="ref-Haseli_et_al_2019" class="csl-entry" role="listitem">
+Haseli, A., Shariati, M., Nazari, A. M., Keramat, A., &amp; Emamian, M. H. (2019). Infidelity and its associated factors: A systematic review. <em>The Journal of Sexual Medicine</em>, <em>16</em>(8), 1155–1169. <a href="https://doi.org/10.1016/j.jsxm.2019.04.011">https://doi.org/10.1016/j.jsxm.2019.04.011</a>
+</div>
+<div id="ref-Hendrick_Hendrick_2002" class="csl-entry" role="listitem">
+Hendrick, S. S., &amp; Hendrick, C. (2002). Linking romantic love with sex: Development of the perceptions of love and sex scale. <em>Journal of Social and Personal Relationships</em>, <em>19</em>(3), 361–378. <a href="https://doi.org/10.1177/0265407502193004">https://doi.org/10.1177/0265407502193004</a>
+</div>
+<div id="ref-Lawrance_Byers_1995" class="csl-entry" role="listitem">
+Lawrance, K.-A., &amp; Byers, E. S. (1995). Sexual satisfaction in long-term heterosexual relationships: The interpersonal exchange model of sexual satisfaction. <em>Personal Relationships</em>, <em>2</em>(4), 267–285. <a href="https://doi.org/10.1111/j.1475-6811.1995.tb00092.x">https://doi.org/10.1111/j.1475-6811.1995.tb00092.x</a>
+</div>
+<div id="ref-Lawrance_Byers_1992" class="csl-entry" role="listitem">
+Lawrance, K., &amp; Byers, E. S. (1992). Development of the interpersonal exchange model of sexual satisfaction in long term relationships. <em>Canadian Journal of Human Sexuality</em>, <em>1</em>(2), 123–128.
+</div>
+<div id="ref-Rubin_1970" class="csl-entry" role="listitem">
+Rubin, Z. (1970). Measurement of romantic love. <em>Journal of Personality and Social Psychology</em>, <em>16</em>(2), 265–273. <a href="https://doi.org/10.1037/h0029841">https://doi.org/10.1037/h0029841</a>
+</div>
+<div id="ref-Spector_et_al_1996" class="csl-entry" role="listitem">
+Spector, I. P., Carey, M. P., &amp; Steinberg, L. (1996). The sexual desire inventory: Development, factor structure, and evidence of reliability. <em>Journal of Sex &amp; Marital Therapy</em>, <em>22</em>(3), 175–190. <a href="https://doi.org/10.1080/00926239608414655">https://doi.org/10.1080/00926239608414655</a>
+</div>
+<div id="ref-Vowels_et_al_2022" class="csl-entry" role="listitem">
+Vowels, L. M., Vowels, M. J., &amp; Mark, K. P. (2022). Is infidelity predictable? Using explainable machine learning to identify the most important predictors of infidelity. <em>Journal of Sex Research</em>, <em>59</em>(2), 224–237. <a href="https://doi.org/10.1080/00224499.2021.1967846">https://doi.org/10.1080/00224499.2021.1967846</a>
+</div>
+<div id="ref-Yousefi_et_al_2014" class="csl-entry" role="listitem">
+Yousefi, N., Farsani, K., Shakiba, A., Hemmati, S., &amp; Nabavi Hesar, J. (2013). Halbert index of sexual desire (HISD) questionnaire validation. <em>Clinical Psychology and Personality</em>, <em>11</em>(2), 107–118. <a href="https://cpap.shahed.ac.ir/article_2696_dc2b690516158a874dd8aabe1365c6a0.pdf">https://cpap.shahed.ac.ir/article_2696_dc2b690516158a874dd8aabe1365c6a0.pdf</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

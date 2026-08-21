@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>周博霖 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">周博霖</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">分类</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">全部 <span class="quarto-category-count">(26)</span></div><div class="category" data-category="JUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJDJUIw">伴侣评估 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="JUU0JUI4JThEJUU1JUJGJUEw">不忠 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="JUU5JTgxJTkzJUU1JUJFJUI3JUU1JUJGJTgzJUU3JTkwJTg2JUU1JUFEJUE2">道德心理学 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="JUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTky">人机交互 <span class="quarto-category-count">(4)</span></div><div class="category" data-category="JUU2JTk3JUI2JUU5JTk3JUI0JUU1JUJBJThGJUU1JTg4JTk3">时间序列 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw">文献笔记 <span class="quarto-category-count">(14)</span></div><div class="category" data-category="JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC">线性混合效应模型 <span class="quarto-category-count">(10)</span></div><div class="category" data-category="QUk=">AI <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Q0FTQQ==">CASA <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RU1B">EMA <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RVNN">ESM <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R0xNTQ==">GLMM <span class="quarto-category-count">(10)</span></div><div class="category" data-category="TENB">LCA <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWV0YQ==">meta <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmV0d29yaw==">network <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U0RNLVBTSQ==">SDM-PSI <span class="quarto-category-count">(1)</span></div></div></div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJDJUIw" data-listing-date-sort="1782748800000" data-listing-file-modified-sort="1782839794953" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="361">
+<div class="thumbnail"><a href="./posts/literature_notes/Frost_Eastwick_2025/Frost_Eastwick_2025.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Frost_Eastwick_2025/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Frost_Eastwick_2025/Frost_Eastwick_2025.html" class="no-external">理想伴侣偏好在关系中作用的实验检验</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Frost_Eastwick_2025/Frost_Eastwick_2025.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJDJUIw'); return false;">伴侣评估</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Frost_Eastwick_2025/Frost_Eastwick_2025.html" class="no-external">
+Frost, A. D., &amp; Eastwick, P. W. (in press). Experimental Tests of the Role of Ideal Partner Preferences in Relationships. <em>Personality and Social Psychology Bulletin</em>. https:/…
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Frost_Eastwick_2025/Frost_Eastwick_2025.html" class="no-external">
+<div class="listing-date">
+Jun 30, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJDJUIw" data-listing-date-sort="1782057600000" data-listing-file-modified-sort="1782117343791" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1220">
+<div class="thumbnail"><a href="./posts/literature_notes/Harper_et_al_2024/Harper_et_al_2024.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Harper_et_al_2024/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Harper_et_al_2024/Harper_et_al_2024.html" class="no-external">准确自我评价在最优择偶中的作用</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Harper_et_al_2024/Harper_et_al_2024.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJDJUIw'); return false;">伴侣评估</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Harper_et_al_2024/Harper_et_al_2024.html" class="no-external">
+Harper, K. T., Stanley, F., Sidari, M. J., Lee, A. J., &amp; Zietsch, B. P. (2024). The Role of Accurate Self-Assessments in Optimizing Mate Choice. <em>Personality and Social…</em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Harper_et_al_2024/Harper_et_al_2024.html" class="no-external">
+<div class="listing-date">
+Jun 22, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1781625600000" data-listing-file-modified-sort="1781631511674" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="29" data-listing-word-count-sort="5724">
+<div class="thumbnail"><a href="./posts/literature_notes/Vowels_et_al_2022/Vowels_et_al_2022.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Vowels_et_al_2022/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Vowels_et_al_2022/Vowels_et_al_2022.html" class="no-external">不忠是可以预测的吗？使用可解释的机器学习来识别不忠的最重要预测因素</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Vowels_et_al_2022/Vowels_et_al_2022.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUI4JThEJUU1JUJGJUEw'); return false;">不忠</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Vowels_et_al_2022/Vowels_et_al_2022.html" class="no-external">
+Vowels, L. M., Vowels, M. J., &amp; Mark, K. P. (2022). Is Infidelity Predictable? Using Explainable Machine Learning to Identify the Most Important Predictors of Infidelity. <em>Jou…</em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Vowels_et_al_2022/Vowels_et_al_2022.html" class="no-external">
+<div class="listing-date">
+Jun 17, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw" data-listing-date-sort="1780675200000" data-listing-file-modified-sort="1780765126506" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="135">
+<div class="thumbnail"><a href="./posts/literature_notes/Fujii_2026/Fujii_2026.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Fujii_2026/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Fujii_2026/Fujii_2026.html" class="no-external">如何设计有效的科学图片</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Fujii_2026/Fujii_2026.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Fujii_2026/Fujii_2026.html" class="no-external">
+Fujii, R. (2026). How to design effective scientific figures. <em>Nature Human Behaviour</em>, <em>10</em>(5), 825-827. https://doi.org/10.1038/s41562-026-02466-9
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Fujii_2026/Fujii_2026.html" class="no-external">
+<div class="listing-date">
+Jun 6, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1779638400000" data-listing-file-modified-sort="1779861542466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4949">
+<div class="thumbnail"><a href="./posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Qin_et_al_2025/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html" class="no-external">厌恶还是欣赏AI？能力-个性化框架和元分析综述</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html" class="no-external">
+Qin, X., Zhou, X., Chen, C., Wu, D., Zhou, H., Dong, X., Cao, L., &amp; Lu, J. G. (2025). AI aversion or appreciation? A capability–personalization framework and a meta-analytic…<em></em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html" class="no-external">
+<div class="listing-date">
+May 25, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDRU1BJTJDRVNNJTJDJUU2JTk3JUI2JUU5JTk3JUI0JUU1JUJBJThGJUU1JTg4JTk3" data-listing-date-sort="1779206400000" data-listing-file-modified-sort="1779630296865" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="883">
+<div class="thumbnail"><a href="./posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Siepe_et_al_2025/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html" class="no-external">理解生态瞬时评估数据：一项关于探索生态瞬时评估数据中项目表现的教程</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RU1B'); return false;">EMA</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RVNN'); return false;">ESM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk3JUI2JUU5JTk3JUI0JUU1JUJBJThGJUU1JTg4JTk3'); return false;">时间序列</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html" class="no-external">
+Siepe, B. S., Rieble, C. L., Tutunji, R., Rimpler, A., März, J., Proppert, R. K. K., &amp; Fried, E. I. (2025). Understanding Ecological-Momentary-Assessment Data: A Tutorial on…<em></em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html" class="no-external">
+<div class="listing-date">
+May 20, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="TENB" data-listing-date-sort="1778601600000" data-listing-file-modified-sort="1778663406571" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="45" data-listing-word-count-sort="8877">
+<div class="thumbnail"><a href="./posts/literature_notes/LCA/LCA.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/LCA/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/LCA/LCA.html" class="no-external">潜在类别分析</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/LCA/LCA.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TENB'); return false;">LCA</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/LCA/LCA.html" class="no-external">
+Sinha, P., Calfee, C. S., &amp; Delucchi, K. L. (2021). Practitioner’s Guide to Latent Class Analysis: Methodological Considerations and Common Pitfalls. <em>Critical Care Medicine</em>, <em>…</em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/LCA/LCA.html" class="no-external">
+<div class="listing-date">
+May 13, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDbmV0d29yaw==" data-listing-date-sort="1777305600000" data-listing-file-modified-sort="1777456761203" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="601">
+<div class="thumbnail"><a href="./posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/network/Borsboom_et_al_2021/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html" class="no-external">心理科学中多元数据的网络分析</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bmV0d29yaw=='); return false;">network</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html" class="no-external">
+Borsboom, D., Deserno, M. K., Rhemtulla, M., Epskamp, S., Fried, E. I., McNally, R. J., Robinaugh, D. J., Perugini, M., Dalege, J., Costantini, G., Isvoranu, A.-M., Wysocki…<em></em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html" class="no-external">
+<div class="listing-date">
+Apr 28, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDTENB" data-listing-date-sort="1776182400000" data-listing-file-modified-sort="1776246230248" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="126">
+<div class="thumbnail"><a href="./posts/literature_notes/Imrani_et_al_2026/Imrani_et_al_2026.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Imrani_et_al_2026/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Imrani_et_al_2026/Imrani_et_al_2026.html" class="no-external">失眠与刷屏：睡眠障碍如何预测青少年强迫性互联网使用</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Imrani_et_al_2026/Imrani_et_al_2026.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('TENB'); return false;">LCA</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Imrani_et_al_2026/Imrani_et_al_2026.html" class="no-external">
+Imrani, S., Touri, B., Romo, L., &amp; Zerhouni, O. (2026). Sleepless and scrolling: How sleep disturbances predict compulsive internet use among adolescents. <em>Computers in Human…</em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Imrani_et_al_2026/Imrani_et_al_2026.html" class="no-external">
+<div class="listing-date">
+Apr 15, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1775577600000" data-listing-file-modified-sort="1775590273538" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="532">
+<div class="thumbnail"><a href="./posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Haas_et_al_2026/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html" class="no-external">评估大型语言模型道德能力的路线图</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html" class="no-external">
+Haas, J., Bridgers, S., Manzini, A., Henke, B., May, J., Levine, S., Weidinger, L., Shanahan, M., Lum, K., Gabriel, I., &amp; Isaac, W. (2026). A roadmap for evaluating moral…<em></em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html" class="no-external">
+<div class="listing-date">
+Apr 8, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772434925407" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="72">
+<div class="thumbnail"><a href="./posts/glmm/概述/概述.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/概述/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/概述/概述.html" class="no-external">00-概述</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/概述/概述.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/概述/概述.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/概述/概述.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772434968205" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="498">
+<div class="thumbnail"><a href="./posts/glmm/引言/前言.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/引言/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/引言/前言.html" class="no-external">01-前言</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/引言/前言.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/引言/前言.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/引言/前言.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772434998313" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1034">
+<div class="thumbnail"><a href="./posts/glmm/相关和回归/相关和回归.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/相关和回归/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/相关和回归/相关和回归.html" class="no-external">02-相关和回归</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/相关和回归/相关和回归.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/相关和回归/相关和回归.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/相关和回归/相关和回归.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772439330276" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="849">
+<div class="thumbnail"><a href="./posts/glmm/多元回归/多元回归.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/多元回归/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/多元回归/多元回归.html" class="no-external">03-多元回归</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/多元回归/多元回归.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/多元回归/多元回归.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/多元回归/多元回归.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="14" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772444878283" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3581">
+<div class="thumbnail"><a href="./posts/glmm/交互效应/交互效应.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/交互效应/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/交互效应/交互效应.html" class="no-external">04-交互效应</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/交互效应/交互效应.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/交互效应/交互效应.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/交互效应/交互效应.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="15" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772445986264" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2763">
+<div class="thumbnail"><a href="./posts/glmm/介绍线性混合效应模型/介绍线性混合效应模型.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/介绍线性混合效应模型/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/介绍线性混合效应模型/介绍线性混合效应模型.html" class="no-external">05-介绍线性混合效应模型</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/介绍线性混合效应模型/介绍线性混合效应模型.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/介绍线性混合效应模型/介绍线性混合效应模型.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/介绍线性混合效应模型/介绍线性混合效应模型.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="16" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772450734815" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1252">
+<div class="thumbnail"><a href="./posts/glmm/单随机因子线性混合效应模型/单随机因子线性混合效应模型.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/单随机因子线性混合效应模型/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/单随机因子线性混合效应模型/单随机因子线性混合效应模型.html" class="no-external">06-单随机因子线性混合效应模型</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/单随机因子线性混合效应模型/单随机因子线性混合效应模型.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/单随机因子线性混合效应模型/单随机因子线性混合效应模型.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/单随机因子线性混合效应模型/单随机因子线性混合效应模型.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="17" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772453956926" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1998">
+<div class="thumbnail"><a href="./posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/交叉随机因子线性混合效应模型/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html" class="no-external">07-交叉随机因子线性混合效应模型</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="18" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772453978675" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="373">
+<div class="thumbnail"><a href="./posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/广义线性混合效应模型/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html" class="no-external">08-广义线性混合效应模型</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="19" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1772453990017" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1214">
+<div class="thumbnail"><a href="./posts/glmm/符号定义/符号定义.html" class="no-external">
+
+<img loading="lazy" src="./posts/glmm/符号定义/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/glmm/符号定义/符号定义.html" class="no-external">09-符号定义</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/glmm/符号定义/符号定义.html" class="no-external">学习统计模型——通过R模拟</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('R0xNTQ=='); return false;">GLMM</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU3JUJBJUJGJUU2JTgwJUE3JUU2JUI3JUI3JUU1JTkwJTg4JUU2JTk1JTg4JUU1JUJBJTk0JUU2JUE4JUExJUU1JTlFJThC'); return false;">线性混合效应模型</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/glmm/符号定义/符号定义.html" class="no-external">
+本系列内容是本人对<strong>2024年</strong>翻译的《学习统计模型——通过R模拟》的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/glmm/符号定义/符号定义.html" class="no-external">
+<div class="listing-date">
+Mar 2, 2026
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="20" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1755014400000" data-listing-file-modified-sort="1757824350363" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1112">
+<div class="thumbnail"><a href="./posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Malle_et_al_2025/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html" class="no-external">人们对人类和机器人在经典道德困境中的判断</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU5JTgxJTkzJUU1JUJFJUI3JUU1JUJGJTgzJUU3JTkwJTg2JUU1JUFEJUE2'); return false;">道德心理学</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html" class="no-external">
+Malle, B. F., Scheutz, M., Cusimano, C., Voiklis, J., Komatsu, T., Thapa, S., &amp; Aladia, S. (2025). People’s judgments of humans and robots in a classic moral dilemma. <em>Cogniti…</em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html" class="no-external">
+<div class="listing-date">
+Aug 13, 2025
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="21" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1750176000000" data-listing-file-modified-sort="1750233286043" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="978">
+<div class="thumbnail"><a href="./posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Bonnefon_et_al_2024/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html" class="no-external">人工智能的道德心理学</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTky'); return false;">人机交互</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU5JTgxJTkzJUU1JUJFJUI3JUU1JUJGJTgzJUU3JTkwJTg2JUU1JUFEJUE2'); return false;">道德心理学</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html" class="no-external">
+Bonnefon, J.-F., Rahwan, I., &amp; Shariff, A. (2024). The Moral Psychology of Artificial Intelligence. <em>Annual Review of Psychology</em>, <em>75</em>(1), 653-675. https://doi.org/10.1146/annur…
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html" class="no-external">
+<div class="listing-date">
+Jun 18, 2025
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="22" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQ0FTQQ==" data-listing-date-sort="1749398400000" data-listing-file-modified-sort="1749993886326" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="240">
+<div class="thumbnail"><a href="./posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Heyselaar_2023/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html" class="no-external">CASA理论不再适用于台式电脑</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTky'); return false;">人机交互</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q0FTQQ=='); return false;">CASA</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html" class="no-external">
+Heyselaar, E. (2023). The CASA theory no longer applies to desktop computers. <em>Scientific Reports</em>, <em>13</em>(1), 19693. https://doi.org/10.1038/s41598-023-46527-9
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html" class="no-external">
+<div class="listing-date">
+Jun 9, 2025
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="23" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUk=" data-listing-date-sort="1749398400000" data-listing-file-modified-sort="1751267425318" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="569">
+<div class="thumbnail"><a href="./posts/literature_notes/Bender_2024/Bender_2024.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Bender_2024/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Bender_2024/Bender_2024.html" class="no-external">在AI时代抵制非人化</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Bender_2024/Bender_2024.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTky'); return false;">人机交互</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Bender_2024/Bender_2024.html" class="no-external">
+Bender, E. M. (2024). Resisting Dehumanization in the Age of “AI”. <em>Current Directions in Psychological Science</em>, <em>33</em>(2), 114-120. https://doi.org/10.1177/09637214231217286
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Bender_2024/Bender_2024.html" class="no-external">
+<div class="listing-date">
+Jun 9, 2025
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="24" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQ0FTQQ==" data-listing-date-sort="1749225600000" data-listing-file-modified-sort="1749993862251" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1823">
+<div class="thumbnail"><a href="./posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html" class="no-external">
+
+<img loading="lazy" src="./posts/literature_notes/Alsharhan_et_al_2024/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html" class="no-external">聊天机器人的采用：多视角的系统回顾和未来的研究议程</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw'); return false;">文献笔记</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTky'); return false;">人机交互</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q0FTQQ=='); return false;">CASA</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html" class="no-external">
+Alsharhan, A., Al-Emran, M., &amp; Shaalan, K. (2024). Chatbot Adoption: A Multiperspective Systematic Review and Future Research Agenda. <em>Ieee Transactions on Engineering…</em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html" class="no-external">
+<div class="listing-date">
+Jun 7, 2025
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="25" data-categories="bWV0YSUyQ1NETS1QU0k=" data-listing-date-sort="1748102400000" data-listing-file-modified-sort="1749993981208" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="507">
+<div class="thumbnail"><a href="./posts/SDM-PSI/SDM-PSI.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/SDM-PSI/cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/SDM-PSI/SDM-PSI.html" class="no-external">SDM-PSI Reference Manual(中文翻译)</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/SDM-PSI/SDM-PSI.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWV0YQ=='); return false;">meta</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('U0RNLVBTSQ=='); return false;">SDM-PSI</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/SDM-PSI/SDM-PSI.html" class="no-external">
+SDM-PSI参考手册
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/SDM-PSI/SDM-PSI.html" class="no-external">
+<div class="listing-date">
+May 25, 2025
+</div>
+<div class="listing-author">
+周博霖
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">无匹配项</div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div></main> <!-- /main -->
+<div style="text-align:center; margin-top:2em;">
+
+  <a href="https://beian.miit.gov.cn/" target="_blank">赣ICP备2025064404号-1</a>
+
+  &nbsp;&nbsp;
+  <a href="https://beian.mps.gov.cn/#/query/webSearch?code=36100202000609" rel="noreferrer" target="_blank">
+
+    <img src="备案图标.png" style="vertical-align:middle; margin-right:5px; width:16px; height:16px;">
+
+    赣公网安备36100202000609号
+
+  </a>
+
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

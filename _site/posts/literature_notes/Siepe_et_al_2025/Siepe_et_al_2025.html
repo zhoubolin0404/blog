@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-05-20">
+
+<title>理解生态瞬时评估数据：一项关于探索生态瞬时评估数据中项目表现的教程 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<link href="../../../site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+
+<script src="../../../site_libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">理解生态瞬时评估数据：一项关于探索生态瞬时评估数据中项目表现的教程</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">文献笔记</div>
+                <div class="quarto-category">EMA</div>
+                <div class="quarto-category">ESM</div>
+                <div class="quarto-category">时间序列</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 20, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#方法" id="toc-方法" class="nav-link active" data-scroll-target="#方法"><span class="header-section-number">1</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#warn-d" id="toc-warn-d" class="nav-link" data-scroll-target="#warn-d"><span class="header-section-number">1.1</span> WARN-D</a></li>
+  <li><a href="#软件和可视化" id="toc-软件和可视化" class="nav-link" data-scroll-target="#软件和可视化"><span class="header-section-number">1.2</span> 软件和可视化</a></li>
+  </ul></li>
+  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">2</span> 结果</a>
+  <ul class="collapse">
+  <li><a href="#分布distributions" id="toc-分布distributions" class="nav-link" data-scroll-target="#分布distributions"><span class="header-section-number">2.1</span> 分布（Distributions）</a>
+  <ul class="collapse">
+  <li><a href="#概括统计量" id="toc-概括统计量" class="nav-link" data-scroll-target="#概括统计量"><span class="header-section-number">2.1.1</span> 概括统计量</a></li>
+  <li><a href="#模态modality" id="toc-模态modality" class="nav-link" data-scroll-target="#模态modality"><span class="header-section-number">2.1.2</span> 模态（Modality）</a></li>
+  <li><a href="#地板效应" id="toc-地板效应" class="nav-link" data-scroll-target="#地板效应"><span class="header-section-number">2.1.3</span> 地板效应</a></li>
+  </ul></li>
+  <li><a href="#情景" id="toc-情景" class="nav-link" data-scroll-target="#情景"><span class="header-section-number">2.2</span> 情景</a>
+  <ul class="collapse">
+  <li><a href="#不同活动下的反应" id="toc-不同活动下的反应" class="nav-link" data-scroll-target="#不同活动下的反应"><span class="header-section-number">2.2.1</span> 不同活动下的反应</a></li>
+  <li><a href="#一天中的时间效应和周内效应" id="toc-一天中的时间效应和周内效应" class="nav-link" data-scroll-target="#一天中的时间效应和周内效应"><span class="header-section-number">2.2.2</span> 一天中的时间效应和周内效应</a></li>
+  </ul></li>
+  <li><a href="#跨时间" id="toc-跨时间" class="nav-link" data-scroll-target="#跨时间"><span class="header-section-number">2.3</span> 跨时间</a>
+  <ul class="collapse">
+  <li><a href="#群体层面" id="toc-群体层面" class="nav-link" data-scroll-target="#群体层面"><span class="header-section-number">2.3.1</span> 群体层面</a></li>
+  <li><a href="#个体层面" id="toc-个体层面" class="nav-link" data-scroll-target="#个体层面"><span class="header-section-number">2.3.2</span> 个体层面</a></li>
+  </ul></li>
+  <li><a href="#分解变异源" id="toc-分解变异源" class="nav-link" data-scroll-target="#分解变异源"><span class="header-section-number">2.4</span> 分解变异源</a></li>
+  <li><a href="#跨时间尺度测量" id="toc-跨时间尺度测量" class="nav-link" data-scroll-target="#跨时间尺度测量"><span class="header-section-number">2.5</span> 跨时间尺度测量</a></li>
+  </ul></li>
+  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">3</span> 讨论</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Siepe, B. S., Rieble, C. L., Tutunji, R., Rimpler, A., März, J., Proppert, R. K. K., &amp; Fried, E. I. (2025). Understanding Ecological-Momentary-Assessment Data: A Tutorial on Exploring Item Performance in Ecological-Momentary-Assessment Data. <em>Advances in Methods and Practices in Psychological Science</em>, <em>8</em>(1). <a href="https://doi.org/10.1177/25152459241286877" class="uri">https://doi.org/10.1177/25152459241286877</a></p>
+<p><span class="citation" data-cites="Siepe_et_al_2025">Siepe et al. (<a href="#ref-Siepe_et_al_2025" role="doc-biblioref">2025</a>)</span></p>
+</div>
+</div>
+<ul>
+<li>生态瞬时评估（ecological-momentary-assessment，EMA）
+<ul>
+<li>对个人日常生活的反复评估（多次评估嵌套在个体层次下）</li>
+<li>需要展示数据<strong>个体内</strong>和<strong>个体间</strong>的<strong>动态</strong>变化</li>
+<li>文章主要展示可视化，结构如下
+<ul>
+<li>分布</li>
+<li>情景</li>
+<li>时间稳定性</li>
+<li>分解变异源</li>
+<li>跨时间尺度测量</li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="方法" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 方法</h1>
+<section id="warn-d" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="warn-d"><span class="header-section-number">1.1</span> WARN-D</h2>
+<ul>
+<li>本项目目的是建立一个关于高等教育学生抑郁症的个性化的早期预警系统
+<ul>
+<li>4个队列，每个队列500人，共2000名学生（每个队列仅存在收集时间差异）</li>
+<li>整个研究持续2年
+<ul>
+<li>完成基线调查</li>
+<li>进行3个月每日数据收集
+<ul>
+<li>每天在4个<em>半随机</em>的时间点收到提醒，要求完成问卷</li>
+<li>同时佩戴手环收集活动、睡眠和心率等数据</li>
+<li>周末额外填写关于这一周的问卷，内容和EMA问卷重叠</li>
+</ul></li>
+<li>之后21个月，每3个月进行一次随访</li>
+</ul></li>
+<li>本研究选取前两个队列，抽样70%后（剩余30%作为验证集），排除漏答率大于70%的样本后，共得到499名被试</li>
+</ul></li>
+</ul>
+</section>
+<section id="软件和可视化" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="软件和可视化"><span class="header-section-number">1.2</span> 软件和可视化</h2>
+<ul>
+<li>使用<strong>R语言</strong>，详细环境和本文所用数据见<a href="https://osf.io/yf3up" class="uri">https://osf.io/yf3up</a></li>
+<li>可视化原则
+<ul>
+<li>明确展示被试、项目和时间的异质性</li>
+<li>使用颜色突出差异，同时保持对色盲友好</li>
+<li>在呈现汇总值或估计值时绘制原始数据点和（或）展示不确定性</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="结果" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 结果</h1>
+<section id="分布distributions" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="分布distributions"><span class="header-section-number">2.1</span> 分布（Distributions）</h2>
+<section id="概括统计量" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="概括统计量"><span class="header-section-number">2.1.1</span> 概括统计量</h3>
+<ul>
+<li><p><strong>先计算个体内，再计算个体间</strong>，而不是计算整体</p></li>
+<li><p>RMSSD：root mean square of successive difference，展示变化剧烈程度</p>
+<p><span class="math display">\[RMSSD = \sqrt{\frac{1}{n-1} \sum_{i=2}^{n} (x_i - x_{i-1})^2}\]</span></p></li>
+</ul>
+<div class="cell">
+<div id="tbl-1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 不同个体概括统计均值（标准差）
+</figcaption>
+<div aria-describedby="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-b5f706d4{table-layout:auto;width:100%;}.cl-b5e91614{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-b5e91628{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-b5e91629{font-family:'Arial';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-b5ed7f9c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-b5ed7fa6{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-b5ed7fa7{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-b5ed7fb0{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-b5edbdea{background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b5edbdf4{background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b5edbdfe{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b5edbdff{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b5edbe08{background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b5edbe09{background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b5edbe0a{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b5edbe12{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-b5f706d4"><thead><tr style="overflow-wrap:break-word;"><th class="cl-b5edbdea"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">Item</span></p></th><th class="cl-b5edbdf4"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">iMean</span></p></th><th class="cl-b5edbdf4"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">iMedian</span></p></th><th class="cl-b5edbdf4"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">i</span><span class="cl-b5e91628">SD</span></p></th><th class="cl-b5edbdf4"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">iSkew</span></p></th><th class="cl-b5edbdf4"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">iRMSSD</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">愉快(Cheerful)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">4.34 (0.86)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">4.42 (1.04)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.18 (0.31)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">-0.27 (0.57)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.39 (0.37)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">易怒(Irritable)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.98 (0.78)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.61 (0.88)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.08 (0.41)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.09 (1.60)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.36 (0.51)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">动机(Motivated)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">3.76 (0.87)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">3.77 (1.11)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.26 (0.34)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">-0.10 (0.62)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.53 (0.45)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">紧张(Nervous)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.22 (0.91)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.89 (1.09)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.11 (0.41)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.69 (1.62)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.30 (0.49)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">不堪重负(Overwhelmed)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.39 (1.02)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.09 (1.23)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.18 (0.44)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.53 (1.86)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.36 (0.52)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">放松(Relaxed)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">4.34 (0.80)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">4.48 (0.99)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.27 (0.33)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">-0.34 (0.54)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.53 (0.43)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">反刍(Ruminate)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.01 (0.90)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.70 (1.01)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.00 (0.45)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.26 (2.22)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.18 (0.52)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">悲伤(Sad)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.88 (0.77)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.55 (0.83)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.00 (0.42)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.51 (2.10)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.15 (0.47)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbdfe"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">压力(Stressed)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.58 (0.94)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">2.28 (1.17)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.25 (0.39)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.07 (1.36)</span></p></td><td class="cl-b5edbdff"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.42 (0.47)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b5edbe08"><p class="cl-b5ed7f9c"><span class="cl-b5e91614">疲倦(Tired)</span></p></td><td class="cl-b5edbe09"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">3.73 (0.94)</span></p></td><td class="cl-b5edbe09"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">3.67 (1.22)</span></p></td><td class="cl-b5edbe09"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.41 (0.34)</span></p></td><td class="cl-b5edbe09"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">0.14 (0.61)</span></p></td><td class="cl-b5edbe09"><p class="cl-b5ed7fa6"><span class="cl-b5e91614">1.73 (0.45)</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="6" class="cl-b5edbe0a"><p class="cl-b5ed7fa7"><span class="cl-b5e91629">注：开头字母i表示个体概括统计</span></p></td></tr></tfoot></table></div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<ul>
+<li><a href="#tbl-1" class="quarto-xref">表&nbsp;1</a> 表明
+<ul>
+<li>被试整体易怒水平较低（1.98±0.78）</li>
+<li>动机水平中等（3.76±0.87）</li>
+<li>愉快和放松左偏态（偏度&lt;0）</li>
+<li>负面情绪右偏态(偏度&gt;0)，暗示存在地板效应</li>
+<li>RMSSD数值接近，但整体偏大</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="rc_grid.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 云雨图
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><a href="#fig-1" class="quarto-xref">图&nbsp;1</a> 表明
+<ul>
+<li>负面情绪存在地板效应</li>
+<li>部分变量存在多峰分布</li>
+</ul></li>
+</ul>
+</section>
+<section id="模态modality" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="模态modality"><span class="header-section-number">2.1.2</span> 模态（Modality）</h3>
+<ul>
+<li>概括统计不足以展示变量的具体情况，双峰分布在数据上也可能类似正态分布</li>
+<li>双峰分布可能暗示被试在多个水平之间来回切换</li>
+<li>许多时间序列统计模型的前提假设是单峰分布，双峰分布的话结果不准确</li>
+<li>可用目测边缘分布的方式进行检查(<span class="citation" data-cites="Haslbeck_et_al_2023">Haslbeck et al. (<a href="#ref-Haslbeck_et_al_2023" role="doc-biblioref">2023</a>)</span>)</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="plot_modality.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: 模态
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><a href="#fig-2" class="quarto-xref">图&nbsp;2</a> 表明
+<ul>
+<li>a展示了6个被试在压力上的分布</li>
+<li>b展示了多个项目的分布</li>
+</ul></li>
+</ul>
+</section>
+<section id="地板效应" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="地板效应"><span class="header-section-number">2.1.3</span> 地板效应</h3>
+<ul>
+<li>EMA存在地板效应（常见）和天花板效应（少见）</li>
+<li>地板效应可能说明
+<ul>
+<li>事件或状态不常见</li>
+<li>被试并没有将变量视为连续，而是先评估是和否，是才打大于1的分</li>
+</ul></li>
+<li>可通过展示打最低分的时间百分比的人数分布来判断地板效应</li>
+</ul>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="floor.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 最低分时间百分比分布图
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="情景" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="情景"><span class="header-section-number">2.2</span> 情景</h2>
+<ul>
+<li>EMA可以结合情景进行分析</li>
+</ul>
+<section id="不同活动下的反应" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="不同活动下的反应"><span class="header-section-number">2.2.1</span> 不同活动下的反应</h3>
+<div id="fig-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="plot_four_act.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4: 跨活动结果
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>社交活动时，愉快报告更多高水平</li>
+<li>学习/工作对比休闲，动机报告更多高水平</li>
+<li><a href="#fig-5" class="quarto-xref">图&nbsp;5</a> 中的a展示了学习/工作和社交的差异</li>
+</ul>
+</section>
+<section id="一天中的时间效应和周内效应" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="一天中的时间效应和周内效应"><span class="header-section-number">2.2.2</span> 一天中的时间效应和周内效应</h3>
+<div id="fig-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="plot_social_beepeffect.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5: 活动和时间效应
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>晚上动机水平较低</li>
+<li>疲倦时间效应最明显</li>
+<li>提醒太频繁或太少都会影响信息获取，且针对不同项目，信息获取最优频率不同</li>
+</ul>
+<div id="fig-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day_week_per.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6: 每日和周末百分比对比
+</figcaption>
+</figure>
+</div>
+<div id="fig-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="day_week_mean.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;7: 每日和周末均值对比
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="跨时间" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="跨时间"><span class="header-section-number">2.3</span> 跨时间</h2>
+<ul>
+<li>时间序列模型通常假设均值和方差随时间没有（持续性）变化</li>
+<li>需要同时考虑群体和个体</li>
+</ul>
+<section id="群体层面" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="群体层面"><span class="header-section-number">2.3.1</span> 群体层面</h3>
+<div id="fig-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="plot_init_eval12_coh.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8: 群体水平每日变化
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-8" class="quarto-xref">图&nbsp;8</a> 中实线是变化曲线，虚线是整体均值，竖线是周一</li>
+<li>压力一开始高于均值，因为前20天是考试周</li>
+<li>学生样本前后波动较小，如果是接受治疗，可能会有较大变化</li>
+</ul>
+</section>
+<section id="个体层面" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="个体层面"><span class="header-section-number">2.3.2</span> 个体层面</h3>
+<section id="稳定性" class="level4" data-number="2.3.2.1">
+<h4 data-number="2.3.2.1" class="anchored" data-anchor-id="稳定性"><span class="header-section-number">2.3.2.1</span> 稳定性</h4>
+<div id="fig-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="plot_acf_stressed.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9: 压力自相关
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>短期滞后被认为是惯性（inertia），长期是记忆（memory）</li>
+<li>压力在滞后4和5下有些许提高，说明压力在24小时内（一天测4次）具有一定稳定性</li>
+</ul>
+</section>
+<section id="差异性" class="level4" data-number="2.3.2.2">
+<h4 data-number="2.3.2.2" class="anchored" data-anchor-id="差异性"><span class="header-section-number">2.3.2.2</span> 差异性</h4>
+<div id="fig-10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="grid_slide_noid.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10: 6名被试的抑郁情况
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-10" class="quarto-xref">图&nbsp;10</a> a展示了个体抑郁随时间变化的情况</li>
+<li><a href="#fig-10" class="quarto-xref">图&nbsp;10</a> b展示了移动窗口（7天平均）技术下的个体抑郁随时间变化的情况</li>
+<li>b可以更好的展示抑郁变化</li>
+<li>还可以在旁边添加选项分布，更好的展示具体情况，如@fig-11</li>
+</ul>
+<div id="fig-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="two_fig.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11: 带边际分布的原始时间序列
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="分解变异源" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="分解变异源"><span class="header-section-number">2.4</span> 分解变异源</h2>
+<ul>
+<li>组内相关系数（ICC）：组间方差与总方差的比值，ICC越大说明个体间差异影响越大，个体内差异影响越小</li>
+</ul>
+<p><span class="math display">\[
+\text{ICC} = \frac{\sigma_b^2}{\sigma_b^2 + \sigma_w^2}
+\]</span></p>
+<p>其中：</p>
+<p><span class="math inline">\(\sigma_b^2\)</span>：表示组间方差</p>
+<p><span class="math inline">\(\sigma_w^2\)</span>：表示组内方差</p>
+<div class="cell">
+<div id="tbl-2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;2: 各测量条目组内相关系数（ICC）
+</figcaption>
+<div aria-describedby="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-b636803e{table-layout:auto;width:100%;}.cl-b62d2db8{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-b6315c08{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-b6318232{background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b631823c{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b631823d{background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-b636803e"><thead><tr style="overflow-wrap:break-word;"><th class="cl-b6318232"><p class="cl-b6315c08"><span class="cl-b62d2db8">Item</span></p></th><th class="cl-b6318232"><p class="cl-b6315c08"><span class="cl-b62d2db8">ICC</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">消极思维(Negative thoughts)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.43</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">不堪重负(Overwhelmed)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.42</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">紧张(Nervous)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.39</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">抑郁(Depressed)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.36</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">悲伤(Sad)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.35</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">压力(Stressed)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.35</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">心境展望(Outlook)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.34</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">愉快(Happy)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.32</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">疲倦(Tired)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.32</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">恼怒(Annoyed)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.31</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">情绪应对(Emotional coping)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.30</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">动机(Motivated)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.30</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">快感缺失(Anhedonia)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.29</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">注意力集中(Concentrate)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.28</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">应对方式(Coping)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.28</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">放松(Relaxed)</span></p></td><td class="cl-b631823c"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.26</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b631823d"><p class="cl-b6315c08"><span class="cl-b62d2db8">幸福体验(Eudaimonia)</span></p></td><td class="cl-b631823d"><p class="cl-b6315c08"><span class="cl-b62d2db8">0.23</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<ul>
+<li>ICC越高说明更多的变异来自个体间，因变量主要被个体间差异解释</li>
+</ul>
+<div id="fig-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="vdif.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;12: 压力差异来源
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-12" class="quarto-xref">图&nbsp;12</a> 展示了多个随机截距模型的差异来源，其中：
+<ul>
+<li>Person对应被试间差异</li>
+<li>Day对应不同天之间的差异</li>
+<li>Beep对应不同提醒时间（1天4次，4种Beep）间的差异</li>
+<li>上述变量的交互</li>
+</ul></li>
+<li><a href="#fig-12" class="quarto-xref">图&nbsp;12</a> 表明个体内的效应（残差）最大，天数间的差异很小（学生不同天数差异不大）</li>
+</ul>
+</section>
+<section id="跨时间尺度测量" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="跨时间尺度测量"><span class="header-section-number">2.5</span> 跨时间尺度测量</h2>
+<ul>
+<li>判断是否有预测效果</li>
+<li>EMA项目与基线之间的相关</li>
+</ul>
+<div id="fig-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="cor_plot_ema_baseline.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;13: EMA和基线相关
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>心理状态相关的基线和各个EMA指标之间相关接近，说明并不能有效区分</li>
+<li>大多数项目与进食障碍问卷（SCOFF）和躁狂问卷（ASRM）的相关性较弱</li>
+</ul>
+<div id="fig-14" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="cor_day_week.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;14: 每周抑郁各项和EMA相关
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>回顾性报告和日常报告的关系</li>
+<li>日均抑郁与整体抑郁相关为0.56（95% CI = [0.54, 0.58]），预测效果较好</li>
+</ul>
+</section>
+</section>
+<section id="讨论" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 讨论</h1>
+<ul>
+<li>未讨论类似结构方程模型的时间序列</li>
+<li>没有统一有效的关于时间序列信效度的检验方法</li>
+<li>选项背后的原因需要通过认知性访谈补充</li>
+</ul>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Haslbeck_et_al_2023" class="csl-entry" role="listitem">
+Haslbeck, J., Ryan, O., &amp; Dablander, F. (2023). Multimodality and skewness in emotion time series. <em>Emotion</em>, <em>23</em>(8), 2117–2141. <a href="https://doi.org/10.1037/emo0001218">https://doi.org/10.1037/emo0001218</a>
+</div>
+<div id="ref-Siepe_et_al_2025" class="csl-entry" role="listitem">
+Siepe, B. S., Rieble, C. L., Tutunji, R., Rimpler, A., März, J., Proppert, R. K. K., &amp; Fried, E. I. (2025). Understanding ecological-momentary-assessment data: A tutorial on exploring item performance in ecological-momentary-assessment data. <em>Advances in Methods and Practices in Psychological Science</em>, <em>8</em>(1). <a href="https://doi.org/10.1177/25152459241286877">https://doi.org/10.1177/25152459241286877</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

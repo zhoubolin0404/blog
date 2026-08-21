@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-06-22">
+
+<title>准确自我评价在最优择偶中的作用 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">准确自我评价在最优择偶中的作用</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">文献笔记</div>
+                <div class="quarto-category">伴侣评估</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 22, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#配偶标准和挑剔" id="toc-配偶标准和挑剔" class="nav-link active" data-scroll-target="#配偶标准和挑剔"><span class="header-section-number">1</span> 配偶标准和挑剔</a></li>
+  <li><a href="#准确性和自我提升" id="toc-准确性和自我提升" class="nav-link" data-scroll-target="#准确性和自我提升"><span class="header-section-number">2</span> 准确性和自我提升</a></li>
+  <li><a href="#本研究" id="toc-本研究" class="nav-link" data-scroll-target="#本研究"><span class="header-section-number">3</span> 本研究</a></li>
+  <li><a href="#方法" id="toc-方法" class="nav-link" data-scroll-target="#方法"><span class="header-section-number">4</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#被试" id="toc-被试" class="nav-link" data-scroll-target="#被试"><span class="header-section-number">4.1</span> 被试</a></li>
+  <li><a href="#测量" id="toc-测量" class="nav-link" data-scroll-target="#测量"><span class="header-section-number">4.2</span> 测量</a></li>
+  <li><a href="#程序" id="toc-程序" class="nav-link" data-scroll-target="#程序"><span class="header-section-number">4.3</span> 程序</a></li>
+  <li><a href="#社会关系分析计划" id="toc-社会关系分析计划" class="nav-link" data-scroll-target="#社会关系分析计划"><span class="header-section-number">4.4</span> 社会关系分析计划</a></li>
+  </ul></li>
+  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">5</span> 结果</a>
+  <ul class="collapse">
+  <li><a href="#零阶相关" id="toc-零阶相关" class="nav-link" data-scroll-target="#零阶相关"><span class="header-section-number">5.1</span> 零阶相关</a></li>
+  <li><a href="#标准和挑剔性" id="toc-标准和挑剔性" class="nav-link" data-scroll-target="#标准和挑剔性"><span class="header-section-number">5.2</span> 标准和挑剔性</a></li>
+  <li><a href="#准确性" id="toc-准确性" class="nav-link" data-scroll-target="#准确性"><span class="header-section-number">5.3</span> 准确性</a></li>
+  <li><a href="#自我提升和匹配结果" id="toc-自我提升和匹配结果" class="nav-link" data-scroll-target="#自我提升和匹配结果"><span class="header-section-number">5.4</span> 自我提升和匹配结果</a></li>
+  </ul></li>
+  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">6</span> 讨论</a>
+  <ul class="collapse">
+  <li><a href="#标准和挑剔性-1" id="toc-标准和挑剔性-1" class="nav-link" data-scroll-target="#标准和挑剔性-1"><span class="header-section-number">6.1</span> 标准和挑剔性</a></li>
+  <li><a href="#准确性-1" id="toc-准确性-1" class="nav-link" data-scroll-target="#准确性-1"><span class="header-section-number">6.2</span> 准确性</a></li>
+  <li><a href="#自我提升和匹配结果-1" id="toc-自我提升和匹配结果-1" class="nav-link" data-scroll-target="#自我提升和匹配结果-1"><span class="header-section-number">6.3</span> 自我提升和匹配结果</a></li>
+  <li><a href="#不足和未来方向" id="toc-不足和未来方向" class="nav-link" data-scroll-target="#不足和未来方向"><span class="header-section-number">6.4</span> 不足和未来方向</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Harper, K. T., Stanley, F., Sidari, M. J., Lee, A. J., &amp; Zietsch, B. P. (2024). The Role of Accurate Self-Assessments in Optimizing Mate Choice. <em>Personality and Social Psychology Bulletin</em>, <em>50</em>(4), 587-596. <a href="https://doi.org/10.1177/01461672221135955" class="uri">https://doi.org/10.1177/01461672221135955</a></p>
+<p><span class="citation" data-cites="Harper_et_al_2024">Harper et al. (<a href="#ref-Harper_et_al_2024" role="doc-biblioref">2024</a>)</span></p>
+</div>
+</div>
+<p>本研究主要关注个体的<strong>自我评价</strong>是否与<strong>伴侣选择</strong>有关，这些<strong>自我评价的准确性</strong>是否与<strong>择偶结果</strong>（mating outcomes）有关</p>
+<section id="配偶标准和挑剔" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 配偶标准和挑剔</h1>
+<ul>
+<li>社会交换理论认为人们会选择最有价值的伴侣</li>
+<li>选择最有价值伴侣的前提是正确识别自己的价值</li>
+<li>高价值个体期望和相同价值的伴侣配对，因此会<strong>提高标准</strong></li>
+<li>关于自我评价和伴侣选择关系的研究，大多聚焦于自我陈述而不是实际行为，这两者往往是脱节的</li>
+<li>本研究，将<strong>标准</strong>界定为：个体在潜在伴侣身上所愿意接纳的<strong>配偶价值水平</strong>，该水平通过<strong>个体与真实潜在对象约会的实际意愿</strong>来体现</li>
+<li><strong>挑剔性</strong>界定为：个体所<strong>愿意接纳</strong>的潜在伴侣<strong>人数</strong>（不一定要求同时）</li>
+<li>亲代投资理论：在抚养后代上投入更多资源的一方在择偶时也会更加挑剔
+<ul>
+<li>女性投入更多，可能更挑剔。但因为人类是相互择偶，这种情况并没有其他动物那么明显。</li>
+</ul></li>
+</ul>
+</section>
+<section id="准确性和自我提升" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 准确性和自我提升</h1>
+<ul>
+<li><strong>高估</strong>自身价值会造成<strong>资源浪费</strong>；<strong>低估</strong>自身价值会得到<strong>次优选择</strong></li>
+<li>自我提升如果可以获得更高的成功率，那么也不会造成资源浪费
+<ul>
+<li>速配研究中，倾向选择自我提升者作为短期伴侣，而不是长期</li>
+<li>自我提升者对长期伴侣更挑剔</li>
+</ul></li>
+</ul>
+</section>
+<section id="本研究" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 本研究</h1>
+<ul>
+<li>1354名被试，2317次速配交互，大样本可以澄清前人研究中的不确定</li>
+<li>检验<strong>自我感知的配偶价值</strong>能否预测其<strong>择偶标准</strong>和<strong>挑剔性</strong></li>
+<li>评估<strong>自我评价准确性</strong></li>
+<li><strong>自我提升</strong>是否与个体<strong>所获接受次数</strong>、个体达成的<strong>相互匹配数量</strong>以及这些<strong>匹配的质量</strong>相关</li>
+</ul>
+</section>
+<section id="方法" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 方法</h1>
+<ul>
+<li>样本是2010到2019年收集的</li>
+<li>近期一项元分析证明：自我提升对零相识情境下人际知觉影响的估计效应量为<span class="math inline">\(r = 0.11\)</span></li>
+<li>G*Power计算得到<span class="math inline">\(N=1354\)</span>，<span class="math inline">\(\alpha=0.05\)</span>情况下，<span class="math inline">\(r = 0.11\)</span>时的统计功效是96%</li>
+</ul>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="统计功效">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>统计功效
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>G*Power计算统计功效有两种模式：</p>
+<ul>
+<li>实验前计算需要多少样本
+<ul>
+<li>在一定<span class="math inline">\(\alpha\)</span>值和效应量下，达到80%统计功效（常见）需要多少样本</li>
+</ul></li>
+<li>已经收集好样本计算统计功效
+<ul>
+<li>在一定<span class="math inline">\(\alpha\)</span>值和被试数量下，达到一定效应量的共计功效是多少</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<section id="被试" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="被试"><span class="header-section-number">4.1</span> 被试</h2>
+<ul>
+<li>1354大一心理学学生；52%女性；年龄19.5±2.8</li>
+<li>要求是异性恋和英语母语者，完成实验后会获得学分奖励</li>
+<li><em>匹配质量</em>变量需要被试至少有过一次成功匹配；<em>择偶标准</em>变量需要被试至少接受一位潜在伴侣
+<ul>
+<li>变量缺失时在相关分析中删除该被试</li>
+</ul></li>
+</ul>
+</section>
+<section id="测量" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="测量"><span class="header-section-number">4.2</span> 测量</h2>
+<ul>
+<li>自我评分：吸引力的自我评分（3道），分别是面部、身体和个性的评分，7点量表（低于标准到高于标准）</li>
+<li>伴侣评分：对互动对象的吸引力评分，也是面部、身体和个性三个方面，7点量表（低于标准到高于标准）</li>
+<li>计算变量：具体情况见 <a href="#tbl-1" class="quarto-xref">表&nbsp;1</a>
+<ul>
+<li>最低、最高和平均标准使用目标被试自己的评分，因为择偶是主观的</li>
+<li>匹配质量选择其他被试的评分，因为这个指标应该是客观的</li>
+</ul></li>
+</ul>
+<div id="tbl-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 变量的定义和计算方法
+</figcaption>
+<div aria-describedby="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">变量</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">计算方法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>准确性（Accuracy）</strong></td>
+<td style="text-align: left;">个体对自身配偶价值的感知，与他人对其配偶价值评分之间的接近程度</td>
+<td style="text-align: left;">个体自我评分与他人给定评分的<strong>绝对差值</strong>（数值越接近零，表示准确性越高）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>方向性准确性（Directional Accuracy）</strong></td>
+<td style="text-align: left;">相较于他人的评定，个体对自身配偶价值的高估或低估程度</td>
+<td style="text-align: left;">个体自我评分与他人给定评分的<strong>方向差值</strong>（自评—他评，正值代表高估，数值越接近零越准确）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>自我提升（Self-enhancement）</strong></td>
+<td style="text-align: left;">校正了被试和伴侣双方“行动者效应”后的方向性准确性指标</td>
+<td style="text-align: left;">校正行动者效应后的自我评分，减去校正行动者效应后的他人评分（数值越接近零越准确）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>挑剔性（Choosiness）</strong></td>
+<td style="text-align: left;">对潜在约会对象说“不”的倾向</td>
+<td style="text-align: left;">“不”回应数量占总选择机会数的比例（数值越大表示越挑剔）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>最低标准（Minimum Standard）</strong></td>
+<td style="text-align: left;">被试表示“接受”（说“是”）的所有对象中，最低的配偶价值</td>
+<td style="text-align: left;">所有接受对象中，<strong>最低</strong>的配偶价值评分（使用<strong>目标被试自身的评分</strong>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>最高标准（Maximum Standard）</strong></td>
+<td style="text-align: left;">被试表示“接受”（说“是”）的所有对象中，最高的配偶价值</td>
+<td style="text-align: left;">所有接受对象中，<strong>最高</strong>的配偶价值评分（使用<strong>目标被试自身的评分</strong>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>平均标准（Mean Standard）</strong></td>
+<td style="text-align: left;">被试表示“接受”（说“是”）的所有对象的平均配偶价值</td>
+<td style="text-align: left;">所有接受对象的配偶价值评分的<strong>平均值</strong>（使用<strong>目标被试自身的评分</strong>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>潜在匹配数量（Potential Match Quantity）</strong></td>
+<td style="text-align: left;">向目标被试说“是”（愿意约会）的潜在伴侣人数</td>
+<td style="text-align: left;">对被试说“是”的人数，占被试所见面总人数的<strong>比例</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>匹配数量（Match Quantity）</strong></td>
+<td style="text-align: left;">个体达成的相互匹配（互选）的数量</td>
+<td style="text-align: left;">目标被试匹配成功的对象人数，占其所见面总人数的<strong>比例</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>匹配质量（Match Quality）</strong></td>
+<td style="text-align: left;">被试所匹配对象的平均配偶价值（客观指标）</td>
+<td style="text-align: left;">被试匹配成功的对象所获配偶价值评分的<strong>平均值</strong>（<strong>剔除目标被试自身的评分</strong>，使用其他被试的评分）</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="程序" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="程序"><span class="header-section-number">4.3</span> 程序</h2>
+<ul>
+<li>每次速配，4男4女参加，每个速配站之间相隔1.7m防止干扰</li>
+<li>约会前
+<ul>
+<li>男女分别在两个房间</li>
+<li>填写保密保证和知情同意书后，在ipad上预问卷（人口统计学信息和自评）</li>
+<li>填写完进入房间和第一个对象进行匹配</li>
+</ul></li>
+<li>互动
+<ul>
+<li>进行3分钟自我介绍和交流后，在ipad上填写对对方的评价（相互保密）</li>
+<li>主试确定填写完成后，选择一种性别轮换到下一个，性别在各组间得到平衡</li>
+<li>性别不平衡时，多出的被试安静等待下一组</li>
+</ul></li>
+<li>约会后
+<ul>
+<li>完成后测，包含一些和本研究无关的题目</li>
+<li>给出一个简易报告并感谢</li>
+</ul></li>
+</ul>
+</section>
+<section id="社会关系分析计划" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="社会关系分析计划"><span class="header-section-number">4.4</span> 社会关系分析计划</h2>
+<ul>
+<li>使用社会关系分析（Social Relations Analysis）来计算评估准确性与自我提升</li>
+<li>本研究是完全区组设计（full-block design），每一组中男性对所有女性评分，女性也对所有男性评分</li>
+<li>每个评分可分解为三部分
+<ul>
+<li>被试的<strong>行动者效应</strong>（actor effect）：被试自身的倾向，被试有多容易觉得别人有吸引力，或者倾向于如何评价伴侣</li>
+<li>对方的<strong>对象效应</strong>（partner effect）：被评价的对象本身的总体特征，也就是这个人通常会被别人觉得有多有吸引力</li>
+<li>双方的<strong>关系效应</strong>（relationship effect）：被试对该特定对象的评分，在多大程度上高于或低于行动者效应与伙伴效应所共同预期的水平</li>
+</ul></li>
+<li>参考@Kenny_et_al_2006 的公式分别计算出被试和对象的行动者效应得分，具体计算见@fig-1</li>
+</ul>
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 行动者效应得分计算（纵轴给横轴打分）
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>对被试的自我评价和他人对被试的评价进行校正<span class="citation" data-cites="Kenny_et_al_2006 Humberg_et_al_2018">(<a href="#ref-Humberg_et_al_2018" role="doc-biblioref">Humberg et al., 2018</a>; <a href="#ref-Kenny_et_al_2006" role="doc-biblioref">Kenny et al., 2006</a>)</span>
+<ul>
+<li>校正后的自我感知配偶价值 = 自我感知配偶价值 − 被试的行动者效应（自我评价）</li>
+<li>校正后的接收配偶价值 = 被试接收到的配偶价值 − 对象的行动者效应（现实标准）</li>
+</ul></li>
+<li><em>校正后的接收配偶价值</em>作为因变量，<em>校正后的自我感知配偶价值</em>和<em>性别</em>及其<em>交互</em>作为自变量，检验准确性（<a href="#tbl-5" class="quarto-xref">表&nbsp;5</a>）
+<ul>
+<li>性别编码：男性 = 0；女性 = 1</li>
+</ul></li>
+<li>使用<strong>基于条件的回归分析</strong>（Condition-Based Regression Analysis）检验自我提升（贬损）对结果变量的影响<span class="citation" data-cites="Humberg_et_al_2018">(<a href="#ref-Humberg_et_al_2018" role="doc-biblioref">Humberg et al., 2018</a>)</span>
+<ul>
+<li>有效分离<em>自我提升</em>和<em>积极自我观</em>（positivity of self-view）</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\text{结果变量} = c_0 + c_1 \times \text{自我评价} + c_2 \times \text{现实标准} + \varepsilon
+\]</span></p>
+<ul>
+<li>自我提升：</li>
+</ul>
+<p><span class="math display">\[
+abs = \left| c_1 - c_2 \right| - \left|c_1 + c_2\right| &gt; 0 \quad \text{且} \quad (c_1 - c_2) &gt; 0
+\]</span></p>
+<ul>
+<li>自我贬损：</li>
+</ul>
+<p><span class="math display">\[
+abs = \left| c_1 - c_2 \right| - \left|c_1 + c_2\right| &gt; 0 \quad \text{且} \quad (c_1 - c_2) &lt; 0
+\]</span></p>
+<ul>
+<li>要检验自我提升对结果变量的影响，<span class="math inline">\(abs\)</span>一定要显著，<span class="math inline">\(c_1 - c_2\)</span>数值上成立</li>
+</ul>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="基于条件的回归分析">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>基于条件的回归分析
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(c_1\)</span>和<span class="math inline">\(c_2\)</span>分别表示在另一个变量保持不变的情况下，变量本身的变化对结果变量的影响。</p>
+<p><span class="math inline">\(abs &gt; 0\)</span>既<span class="math inline">\(\left| c_1 - c_2 \right| &gt; \left|c_1 + c_2\right|\)</span>，说明<span class="math inline">\(c_1\)</span>和<span class="math inline">\(c_2\)</span>必须异号（<span class="math inline">\(c_1 \cdot c_2 &lt; 0\)</span>）</p>
+<p><span class="math inline">\((c_1 - c_2) &gt; 0\)</span>说明<span class="math inline">\(c_1 &gt; 0, c_2 &lt; 0\)</span>，既现实标准不变时，自我评价正向影响结果变量；自我评价不变时，现实标准负面影响结果变量</p>
+<p><span class="math inline">\((c_1 - c_2) &lt; 0\)</span>则相反</p>
+<p>只要这样才能确认不是单纯的实际更好或自我评价高影响了结果变量，是自我评价与现实的差距影响了结果变量</p>
+</div>
+</div>
+</section>
+</section>
+<section id="结果" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 结果</h1>
+<section id="零阶相关" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="零阶相关"><span class="header-section-number">5.1</span> 零阶相关</h2>
+<ul>
+<li>零阶相关结果如 <a href="#tbl-2" class="quarto-xref">表&nbsp;2</a> 所示</li>
+<li>描述性统计如 <a href="#tbl-3" class="quarto-xref">表&nbsp;3</a> 所示</li>
+<li>男性倾向于给自己和对象更高的评价，也更有可能高估自己的配偶价值</li>
+<li>女性更容易低估自己的配偶价值，而且更挑剔</li>
+</ul>
+<div id="tbl-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[40, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;2: 零阶相关
+</figcaption>
+<div aria-describedby="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>变量</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. 自我感知配偶价值</td>
+<td>—</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2. 接收配偶价值</td>
+<td>.15***</td>
+<td>—</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3. 校正后自我感知配偶价值</td>
+<td>.76***</td>
+<td>.29***</td>
+<td>—</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4. 校正后接收配偶价值</td>
+<td>.18***</td>
+<td>.87***</td>
+<td>.14***</td>
+<td>—</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5. 最低标准</td>
+<td>.15***</td>
+<td>.06</td>
+<td>-.13***</td>
+<td>.19***</td>
+<td>—</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6. 最高标准</td>
+<td>.15***</td>
+<td>-.02</td>
+<td>-.27***</td>
+<td>.18***</td>
+<td>.59***</td>
+<td>—</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7. 平均标准</td>
+<td>.17***</td>
+<td>.02</td>
+<td>-.23***</td>
+<td>.20***</td>
+<td>.90***</td>
+<td>.88***</td>
+<td>—</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8. 挑剔性</td>
+<td>-.02</td>
+<td>.09***</td>
+<td>.29***</td>
+<td>-.06*</td>
+<td>.28***</td>
+<td>-.26***</td>
+<td>.02</td>
+<td>—</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9. 匹配数量</td>
+<td>.08***</td>
+<td>.35***</td>
+<td>-.05*</td>
+<td>.40***</td>
+<td>-.11***</td>
+<td>.10***</td>
+<td>-.01</td>
+<td>-.56***</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10. 潜在匹配数量</td>
+<td>.10***</td>
+<td>.68***</td>
+<td>.17***</td>
+<td>.61***</td>
+<td>.05</td>
+<td>.03</td>
+<td>.05</td>
+<td>.05*</td>
+<td>.56***</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11. 匹配质量</td>
+<td>.13***</td>
+<td>.10***</td>
+<td>.17***</td>
+<td>.34***</td>
+<td>.33***</td>
+<td>.22***</td>
+<td>.31***</td>
+<td>.13***</td>
+<td>-.00</td>
+<td>.08*</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-3" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[40, 10, 10, 10, 10, 10, 10]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;3: 描述性统计
+</figcaption>
+<div aria-describedby="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">变量</th>
+<th style="text-align: center;">男性</th>
+<th style="text-align: center;">女性</th>
+<th style="text-align: center;">总体</th>
+<th style="text-align: center;">最小值</th>
+<th style="text-align: center;">最大值</th>
+<th style="text-align: center;">α</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">自我感知配偶价值（1–7）</td>
+<td style="text-align: center;">4.73(0.74)**</td>
+<td style="text-align: center;">4.60(0.77)</td>
+<td style="text-align: center;">4.66(0.76)</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">6.67</td>
+<td style="text-align: center;">.68</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">接收到的配偶价值（1–7）</td>
+<td style="text-align: center;">4.51(0.78)***</td>
+<td style="text-align: center;">4.75(0.72)</td>
+<td style="text-align: center;">4.63(0.76)</td>
+<td style="text-align: center;">2.00</td>
+<td style="text-align: center;">6.67</td>
+<td style="text-align: center;">.80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">方向性准确性（−6到+6）</td>
+<td style="text-align: center;">0.22(0.94)***</td>
+<td style="text-align: center;">−0.15(1.00)</td>
+<td style="text-align: center;">0.03(0.99)</td>
+<td style="text-align: center;">−4.11</td>
+<td style="text-align: center;">3.33</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">准确性（0–6）</td>
+<td style="text-align: center;">0.76(0.60)</td>
+<td style="text-align: center;">0.79(0.63)</td>
+<td style="text-align: center;">0.78(0.61)</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">4.11</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">自我提升</td>
+<td style="text-align: center;">0.00(1.10)</td>
+<td style="text-align: center;">0.06(1.13)</td>
+<td style="text-align: center;">0.03(1.11)</td>
+<td style="text-align: center;">−4.11</td>
+<td style="text-align: center;">3.87</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">挑剔性（0–1）</td>
+<td style="text-align: center;">0.49(0.34)***</td>
+<td style="text-align: center;">0.58(0.33)</td>
+<td style="text-align: center;">0.53(0.34)</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">最低标准（1–7）</td>
+<td style="text-align: center;">5.04(0.67)*</td>
+<td style="text-align: center;">4.95(0.74)</td>
+<td style="text-align: center;">5.00(0.71)</td>
+<td style="text-align: center;">2.00</td>
+<td style="text-align: center;">7.00</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">最高标准（1–7）</td>
+<td style="text-align: center;">5.59(0.65)***</td>
+<td style="text-align: center;">5.43(0.71)</td>
+<td style="text-align: center;">5.52(0.68)</td>
+<td style="text-align: center;">2.00</td>
+<td style="text-align: center;">7.33</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">平均标准（1–7）</td>
+<td style="text-align: center;">5.31(0.58)**</td>
+<td style="text-align: center;">5.19(0.65)</td>
+<td style="text-align: center;">5.25(0.62)</td>
+<td style="text-align: center;">2.00</td>
+<td style="text-align: center;">7.00</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">匹配数量（比例；0–1）</td>
+<td style="text-align: center;">0.22(0.26)</td>
+<td style="text-align: center;">0.23(0.27)</td>
+<td style="text-align: center;">0.23(0.26)</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">匹配质量（1–7）</td>
+<td style="text-align: center;">4.90(0.69)*</td>
+<td style="text-align: center;">4.77(0.74)</td>
+<td style="text-align: center;">4.83(0.72)</td>
+<td style="text-align: center;">2.33</td>
+<td style="text-align: center;">6.67</td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>显著性标记表示男性与女性均值的独立样本<span class="math inline">\(t\)</span>检验结果</p>
+</section>
+<section id="标准和挑剔性" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="标准和挑剔性"><span class="header-section-number">5.2</span> 标准和挑剔性</h2>
+<ul>
+<li><em>自我感知配偶价值</em>和对潜在伴侣的<em>配偶价值标准</em>显著<em>正相关</em>（<a href="#tbl-4" class="quarto-xref">表&nbsp;4</a>）</li>
+<li>自我感知配偶价值对挑剔性没有显著影响</li>
+<li><em>最低标准</em>和<em>平均标准</em>中，在<em>女性</em>中<em>自我感知配偶价值</em>和<em>配偶价值标准</em>的关系可能更强</li>
+<li>给他人的评分和给自己的评分之间无显著相关（<span class="math inline">\(r = 0.05,p = 0.051\)</span>），<strong>排除了单纯喜欢给高分</strong>这个原因（这个相关是同时包括匹配成功和不成功的）</li>
+</ul>
+<div id="tbl-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;4: 自我感知配偶价值预测择偶标准和挑剔性
+</figcaption>
+<div aria-describedby="tbl-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">结果变量</th>
+<th style="text-align: left;">预测变量</th>
+<th style="text-align: left;">β [95% CI]</th>
+<th style="text-align: left;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>最低标准</strong></td>
+<td style="text-align: left;">自我感知配偶价值</td>
+<td style="text-align: left;"><strong>0.15 [0.09, 0.21]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">性别</td>
+<td style="text-align: left;">-0.05 [-0.11, 0.01]</td>
+<td style="text-align: left;">.077</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">交互</td>
+<td style="text-align: left;"><strong>0.07 [0.01, 0.13]</strong></td>
+<td style="text-align: left;"><strong>.024</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>平均标准</strong></td>
+<td style="text-align: left;">自我感知配偶价值</td>
+<td style="text-align: left;"><strong>0.17 [0.10, 0.23]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">性别</td>
+<td style="text-align: left;"><strong>-0.09 [-0.15, -0.03]</strong></td>
+<td style="text-align: left;"><strong>.004</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">交互</td>
+<td style="text-align: left;"><strong>0.07 [0.01, 0.13]</strong></td>
+<td style="text-align: left;"><strong>.022</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>最高标准</strong></td>
+<td style="text-align: left;">自我感知配偶价值</td>
+<td style="text-align: left;"><strong>0.15 [0.09, 0.21]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">性别</td>
+<td style="text-align: left;"><strong>-0.11 [-0.17, -0.05]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">交互</td>
+<td style="text-align: left;">0.05 [-0.01, 0.11]</td>
+<td style="text-align: left;">.124</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>挑剔性</strong></td>
+<td style="text-align: left;">自我感知配偶价值</td>
+<td style="text-align: left;">-0.01 [-0.06, 0.04]</td>
+<td style="text-align: left;">.712</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">性别</td>
+<td style="text-align: left;"><strong>0.13 [0.08, 0.19]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">交互</td>
+<td style="text-align: left;">-0.04 [-0.09, 0.02]</td>
+<td style="text-align: left;">.180</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="准确性" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="准确性"><span class="header-section-number">5.3</span> 准确性</h2>
+<ul>
+<li><a href="#tbl-5" class="quarto-xref">表&nbsp;5</a> 表明：
+<ul>
+<li>自我评价具有一定程度的准确性，因为自我感知配偶价值和接收配偶价值显著正相关</li>
+</ul></li>
+<li>分组的检验证明：男性的自我评价可能比女性更准确（男性组校正后自我感知配偶价值系数更大）</li>
+</ul>
+<div id="tbl-5" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[25, 40, 25, 10]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;5: 准确性
+</figcaption>
+<div aria-describedby="tbl-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 40%">
+<col style="width: 25%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">结果变量</th>
+<th style="text-align: left;">预测变量</th>
+<th style="text-align: left;">β [95% CI]</th>
+<th style="text-align: left;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>校正后接收配偶价值</strong></td>
+<td style="text-align: left;">校正后自我感知配偶价值</td>
+<td style="text-align: left;"><strong>0.13 [0.08, 0.19]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">性别</td>
+<td style="text-align: left;">-0.02 [-0.04, 0.07]</td>
+<td style="text-align: left;">.536</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">交互</td>
+<td style="text-align: left;"><strong>-0.06 [-0.11, -0.01]</strong></td>
+<td style="text-align: left;"><strong>.028</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="自我提升和匹配结果" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="自我提升和匹配结果"><span class="header-section-number">5.4</span> 自我提升和匹配结果</h2>
+<ul>
+<li><a href="#tbl-6" class="quarto-xref">表&nbsp;6</a> 表明：
+<ul>
+<li>潜在匹配数量和匹配质量不存在自我提升效应</li>
+<li>匹配数量存在显著的负向自我提升效应，<strong>低估自身配偶价值的人比高估者获得了更多的互选成功匹配</strong></li>
+<li>挑剔性存在显著的正向自我提升效应，<strong>高估者比低估者更为挑剔</strong></li>
+<li>分性别进行检验结果一致</li>
+</ul></li>
+</ul>
+<div id="tbl-6" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[20, 40, 20, 5, 15]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;6: 基于条件的回归分析结果
+</figcaption>
+<div aria-describedby="tbl-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 20%">
+<col style="width: 5%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">结果变量</th>
+<th style="text-align: left;">预测变量</th>
+<th style="text-align: left;">系数 [95% CI]</th>
+<th style="text-align: left;">p</th>
+<th style="text-align: left;">自我提升效应</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>潜在匹配数量</strong></td>
+<td style="text-align: left;">校正后自我感知配偶价值（c₁）</td>
+<td style="text-align: left;"><strong>0.03 [0.02, 0.04]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">校正后接收配偶价值（c₂）</td>
+<td style="text-align: left;"><strong>0.27 [0.25, 0.29]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">abs</td>
+<td style="text-align: left;">-0.06 [-0.08, -0.04]</td>
+<td style="text-align: left;">1.0</td>
+<td style="text-align: left;">负向</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>匹配数量</strong></td>
+<td style="text-align: left;">校正后自我感知配偶价值（c₁）</td>
+<td style="text-align: left;"><strong>-0.03 [-0.04, -0.02]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">校正后接收配偶价值（c₂）</td>
+<td style="text-align: left;"><strong>0.15 [0.13, 0.17]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">abs</td>
+<td style="text-align: left;"><strong>0.05 [0.03, 0.07]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"><strong>负向</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>匹配质量</strong></td>
+<td style="text-align: left;">校正后自我感知配偶价值（c₁）</td>
+<td style="text-align: left;"><strong>0.12 [0.07, 0.18]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">校正后接收配偶价值（c₂）</td>
+<td style="text-align: left;"><strong>0.32 [0.24, 0.41]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">abs</td>
+<td style="text-align: left;">-0.24 [-0.36, -0.12]</td>
+<td style="text-align: left;">.999</td>
+<td style="text-align: left;">负向</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>挑剔性</strong></td>
+<td style="text-align: left;">校正后自我感知配偶价值（c₁）</td>
+<td style="text-align: left;"><strong>0.10 [0.08, 0.11]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">校正后接收配偶价值（c₂）</td>
+<td style="text-align: left;"><strong>-0.05 [-0.07, -0.03]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">abs</td>
+<td style="text-align: left;"><strong>0.10 [0.06, 0.14]</strong></td>
+<td style="text-align: left;"><strong>&lt;.001</strong></td>
+<td style="text-align: left;"><strong>正向</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="讨论" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 讨论</h1>
+<section id="标准和挑剔性-1" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="标准和挑剔性-1"><span class="header-section-number">6.1</span> 标准和挑剔性</h2>
+<ul>
+<li><strong>女性比男性更挑剔</strong>，符合亲代投资理论</li>
+<li>男性最低标准比女性高，可能是因为女性接收的评价更高</li>
+<li>自我感知配偶价值正向预测最低标准，符合社会交换理论和前人研究</li>
+<li>择偶标准不是选择高于某一值的，因为自我感知配偶价值和挑剔性关系不显著，更可能是<strong>双方价值差异过大的也不考虑</strong></li>
+<li>本研究样本量大，但每场速配样本太小，模型解释力不足，不过可以提供更精准的估计</li>
+<li>整体来看，<strong>个体会利用自我评价来为潜在伴侣设定配偶价值标准</strong>
+<ul>
+<li>匹配假说：配偶偏好随个体自身配偶价值而变化，会寻找价值相似的
+<ul>
+<li>吸引力是普遍的，低价值的也会觉得高价值的有吸引力，假说不成立</li>
+</ul></li>
+<li>吸引力低的拒绝吸引力高的，是一种自我保护</li>
+<li>依恋安全感也很重要</li>
+</ul></li>
+</ul>
+</section>
+<section id="准确性-1" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="准确性-1"><span class="header-section-number">6.2</span> 准确性</h2>
+<ul>
+<li>自我感知配偶价值和他人评价显著弱相关，符合社会交换理论：这是进行选择的前提</li>
+<li><strong>解释效力较低</strong>，和前人研究一致</li>
+</ul>
+</section>
+<section id="自我提升和匹配结果-1" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="自我提升和匹配结果-1"><span class="header-section-number">6.3</span> 自我提升和匹配结果</h2>
+<ul>
+<li>自我提升并不会显著增加匹配质量</li>
+<li>高估自己的会更挑剔，但匹配成功更少</li>
+<li>未区分长期和短期，<strong>研究结果和长期的更一致</strong></li>
+<li>只考察了<strong>自我评价和他人评价不一致</strong>时的结果，未能考察自我提升对他人评价的影响
+<ul>
+<li>研究中他人评价本身就是受自我提升影响后的结果，混杂了自我提升造成的所有影响</li>
+</ul></li>
+<li>高估者比低估者更挑剔，互选匹配数量更少，但匹配质量无差异
+<ul>
+<li><strong>研究需要考虑更多的结果，而不是单一结果</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="不足和未来方向" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="不足和未来方向"><span class="header-section-number">6.4</span> 不足和未来方向</h2>
+<ul>
+<li>不足
+<ul>
+<li>被试以年轻、受过教育、社会经济地位较高且以英语为母语的大学生为主</li>
+<li>3分钟速配时间有限</li>
+<li>未区分长期和短期</li>
+<li>不能理清不选择高标准是因为：他可能看不上我（理性）还是我单纯不喜欢他（感性）</li>
+</ul></li>
+<li>结论
+<ul>
+<li>高统计效力</li>
+<li>自我评价与择偶标准相关，对伴侣的兴趣集中在与自己配偶价值相差不远的范围内</li>
+<li>高估自身配偶价值的个体并未比低估者获得更多的兴趣，但他们更为挑剔，获得的匹配数量更少。</li>
+<li>本研究结果支持社会交换理论和匹配假说，并与自我提升促进积极社会印象和结果的研究发现形成对比</li>
+</ul></li>
+</ul>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Harper_et_al_2024" class="csl-entry" role="listitem">
+Harper, K. T., Stanley, F., Sidari, M. J., Lee, A. J., &amp; Zietsch, B. P. (2024). The role of accurate self-assessments in optimizing mate choice. <em>Personality and Social Psychology Bulletin</em>, <em>50</em>(4), 587–596. <a href="https://doi.org/10.1177/01461672221135955">https://doi.org/10.1177/01461672221135955</a>
+</div>
+<div id="ref-Humberg_et_al_2018" class="csl-entry" role="listitem">
+Humberg, S., Dufner, M., Schönbrodt, F. D., Geukes, K., Hutteman, R., Zalk, M. H. W. van, Denissen, J. J. A., Nestler, S., &amp; Back, M. D. (2018). Enhanced versus simply positive: A new condition-based regression analysis to disentangle effects of self-enhancement from effects of positivity of self-view. <em>Journal of Personality and Social Psychology</em>, <em>114</em>(2), 303–322. <a href="https://doi.org/10.1037/pspp0000134">https://doi.org/10.1037/pspp0000134</a>
+</div>
+<div id="ref-Kenny_et_al_2006" class="csl-entry" role="listitem">
+Kenny, D. A., Kashy, D. A., &amp; Cook, W. L. (2006). <em>Dyadic data analysis</em>. The Guilford Press.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

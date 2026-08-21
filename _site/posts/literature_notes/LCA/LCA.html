@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-05-13">
+
+<title>潜在类别分析 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">潜在类别分析</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">LCA</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 13, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#实验设计" id="toc-实验设计" class="nav-link active" data-scroll-target="#实验设计"><span class="header-section-number">1</span> 实验设计</a></li>
+  <li><a href="#数据准备" id="toc-数据准备" class="nav-link" data-scroll-target="#数据准备"><span class="header-section-number">2</span> 数据准备</a>
+  <ul class="collapse">
+  <li><a href="#检查数据" id="toc-检查数据" class="nav-link" data-scroll-target="#检查数据"><span class="header-section-number">2.1</span> 检查数据</a></li>
+  <li><a href="#样本量" id="toc-样本量" class="nav-link" data-scroll-target="#样本量"><span class="header-section-number">2.2</span> 样本量</a></li>
+  <li><a href="#缺失数据" id="toc-缺失数据" class="nav-link" data-scroll-target="#缺失数据"><span class="header-section-number">2.3</span> 缺失数据</a></li>
+  </ul></li>
+  <li><a href="#拟合模型" id="toc-拟合模型" class="nav-link" data-scroll-target="#拟合模型"><span class="header-section-number">3</span> 拟合模型</a></li>
+  <li><a href="#评估模型" id="toc-评估模型" class="nav-link" data-scroll-target="#评估模型"><span class="header-section-number">4</span> 评估模型</a>
+  <ul class="collapse">
+  <li><a href="#拟合指数" id="toc-拟合指数" class="nav-link" data-scroll-target="#拟合指数"><span class="header-section-number">4.1</span> 拟合指数</a></li>
+  <li><a href="#类别数量检验" id="toc-类别数量检验" class="nav-link" data-scroll-target="#类别数量检验"><span class="header-section-number">4.2</span> 类别数量检验</a></li>
+  <li><a href="#类别数样本大小分离程度" id="toc-类别数样本大小分离程度" class="nav-link" data-scroll-target="#类别数样本大小分离程度"><span class="header-section-number">4.3</span> 类别数、样本大小、分离程度</a></li>
+  </ul></li>
+  <li><a href="#解释模型" id="toc-解释模型" class="nav-link" data-scroll-target="#解释模型"><span class="header-section-number">5</span> 解释模型</a>
+  <ul class="collapse">
+  <li><a href="#分类然后分析" id="toc-分类然后分析" class="nav-link" data-scroll-target="#分类然后分析"><span class="header-section-number">5.1</span> 分类然后分析</a></li>
+  <li><a href="#类别比较" id="toc-类别比较" class="nav-link" data-scroll-target="#类别比较"><span class="header-section-number">5.2</span> 类别比较</a></li>
+  <li><a href="#外部验证" id="toc-外部验证" class="nav-link" data-scroll-target="#外部验证"><span class="header-section-number">5.3</span> 外部验证</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sinha, P., Calfee, C. S., &amp; Delucchi, K. L. (2021). Practitioner’s Guide to Latent Class Analysis: Methodological Considerations and Common Pitfalls. <em>Critical Care Medicine</em>, <em>49</em>(1), e63-e79. <a href="https://doi.org/10.1097/CCM.0000000000004710" class="uri">https://doi.org/10.1097/CCM.0000000000004710</a></p>
+<p><span class="citation" data-cites="Sinha_Calfee_Delucchi_2021">Sinha et al. (<a href="#ref-Sinha_Calfee_Delucchi_2021" role="doc-biblioref">2021</a>)</span></p>
+</div>
+</div>
+<section id="实验设计" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 实验设计</h1>
+<ul>
+<li>选择合适的变量</li>
+</ul>
+</section>
+<section id="数据准备" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 数据准备</h1>
+<section id="检查数据" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="检查数据"><span class="header-section-number">2.1</span> 检查数据</h2>
+<ul>
+<li>样本<strong>占比低于约10%</strong>的类别可以排除（经验）
+<ul>
+<li>如果变量很重要，也应该保留</li>
+</ul></li>
+<li>连续数据最好转换为<strong>等方差正态分布</strong></li>
+<li>数据需要满足<strong>局部独立性</strong>
+<ul>
+<li>违背会高估类别数量</li>
+<li>相关矩阵，去除相关程度高（<strong>r&gt;0.5</strong>，经验）的其中一个</li>
+<li>如需要保留，轮流剔除进行<strong>敏感性检验</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="样本量" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="样本量"><span class="header-section-number">2.2</span> 样本量</h2>
+<ul>
+<li>是否足以检出真实的潜在类别数
+<ul>
+<li>变量质量好，样本量需求就低</li>
+<li>不同研究有不同发现
+<ul>
+<li><span class="math inline">\(n=500\)</span> 或 <span class="math inline">\(n=1000\)</span> 时，<strong>信息准则</strong>和<strong>似然比检验</strong>可以很好检出；<span class="math inline">\(n=200\)</span> 时不能</li>
+<li><span class="math inline">\(n&lt;70\)</span> 不可行，<span class="math inline">\(n&lt;100\)</span> 谨慎解读</li>
+<li><span class="math inline">\(n&lt;300\)</span> 拟合检验效能不足</li>
+</ul></li>
+<li><span class="math inline">\(n&gt;500\)</span> 可靠，<span class="math inline">\(n&lt;300\)</span> 可进行蒙特卡罗模拟来检验能效，变量质量不佳，<span class="math inline">\(300&lt;n&lt;500\)</span> 也需进行检验</li>
+</ul></li>
+<li>分出的亚组在检验其他变量时是否有实际效能</li>
+</ul>
+</section>
+<section id="缺失数据" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="缺失数据"><span class="header-section-number">2.3</span> 缺失数据</h2>
+<ul>
+<li><strong>删除法</strong>
+<ul>
+<li>丢失样本，不推荐</li>
+</ul></li>
+<li><strong>多重插补</strong>（Multiple Imputation，MI）
+<ul>
+<li>优点：可跨模型使用</li>
+<li>缺点：使数据类型更复杂</li>
+</ul></li>
+<li><strong>完全信息最大似然法</strong>（Full Information Maximum Likelihood，FIML）
+<ul>
+<li>优点：充分利用信息，<strong>首选</strong></li>
+<li>缺点：算法复杂</li>
+</ul></li>
+<li>使用删除或插补时应进行敏感性检验</li>
+<li>部分领域有其专门的处理手法</li>
+</ul>
+<div id="tbl-data_pre" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data_pre-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 数据准备的关键步骤和建议汇总
+</figcaption>
+<div aria-describedby="tbl-data_pre-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 29%">
+<col style="width: 35%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">建议</th>
+<th style="text-align: left;">结果呈现</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">指标选择</td>
+<td style="text-align: left;">所选指标将决定聚类的本质</td>
+<td style="text-align: left;"><p>1. 基于研究问题选择指标</p>
+<p>2. 排除由模型中其他指标组合而成的复合指标</p>
+<p>3. 排除因变量作为指标</p></td>
+<td style="text-align: left;">清晰说明指标选择的依据</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">数据处理</td>
+<td style="text-align: left;">转换数据以最小化极端量纲，更有可能得到有意义的类别</td>
+<td style="text-align: left;"><p>1. 分类变量：考虑合并样本占比＜10%的类别</p>
+<p>2. 非参数数据应转换为正态分布并统一标准化</p></td>
+<td style="text-align: left;">清晰描述数据转换和类别合并所使用的程序</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">局部独立性</td>
+<td style="text-align: left;">假设在同一类别内，观测指标相互独立</td>
+<td style="text-align: left;"><p>1. 在完整数据集和每个类别内部检验指标变量的相关性</p>
+<p>2. 若存在共线性，考虑移除一个或多个指标</p>
+<p>3. 若单对指标高度相关，考虑放宽该假设</p></td>
+<td style="text-align: left;"><p>1. 呈现相关性最高的指标的相关系数</p>
+<p>2. 清晰说明从分析中排除的任何变量</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">样本量</td>
+<td style="text-align: left;"><p>功效样本量用于：</p>
+<ol type="1">
+<li>确定真实的类别数量 2) 检测类别间的相关差异</li>
+</ol></td>
+<td style="text-align: left;"><p>1. 当n＜300时，建议进行蒙特卡洛模拟以确定样本量是否充足</p>
+<p>2. 应进行标准功效计算，以确定检测类别间显著差异所需的样本量</p></td>
+<td style="text-align: left;">清晰说明样本量的依据以及所进行的任何功效计算</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">缺失数据处理</td>
+<td style="text-align: left;"><p>缺失数据的处理方法：</p>
+<ol type="1">
+<li><p>完全信息最大似然法</p></li>
+<li><p>多重插补法</p></li>
+</ol></td>
+<td style="text-align: left;">推荐使用完全信息最大似然法和多重插补法处理缺失数据</td>
+<td style="text-align: left;"><p>1. 呈现用于处理缺失数据的方法</p>
+<p>2. 呈现缺失组与完整组在指标和结局上的差异</p>
+<p>3. 使用缺失数据/未插补数据进行敏感性分析</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="拟合模型" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 拟合模型</h1>
+<ul>
+<li>注意可能<strong>不存在潜在类别</strong>或者存在<strong>极端个例</strong></li>
+</ul>
+<div id="tbl-fit_best" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fit_best-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;2: 拟合不佳的特征和对应的排错解决方案
+</figcaption>
+<div aria-describedby="tbl-fit_best-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">提示模型拟合不佳的特征</th>
+<th style="text-align: left;">排错解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">无法获得多次重复的最大似然估计</td>
+<td style="text-align: left;"><p>1. 增加随机起始值</p>
+<p>2. 检查连续预测变量的量纲是否经过适当转换和统一标准化</p>
+<p>3. 检查变量的分布情况，查找极端异常值</p>
+<p>4. 若模型仍无法重复得到最大似然估计，考虑舍弃该模型</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p>指标的微小变动导致模型拟合统计量</p>
+<p>和（或）</p>
+<p>Vuong-Lo-Mendell-Rubin检验值发生大幅变化</p></td>
+<td style="text-align: left;"><p>1. 检查指标之间的相关性</p>
+<p>2. 检查每个类别内部指标之间的相关性</p>
+<p>3. 检查连续指标的数据转换（插补）是否导致重要变量出现极端缩放</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p>两类别模型中存在样本占比＜15%的类别</p>
+<p>或</p>
+<p>包含三个及以上类别的模型中存在样本占比＜10%的类别</p></td>
+<td style="text-align: left;"><p>1. 检查是否存在单个指标主导了类别的划分</p>
+<p>2. 若单个变量决定了类别划分：</p>
+<ul>
+<li><p>检查连续预测变量的量纲是否经过适当转换和标准化</p></li>
+<li><p>考虑舍弃该模型</p></li>
+</ul>
+<p>3. 在独立队列中验证研究结果</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">模型熵值较低</td>
+<td style="text-align: left;"><p>1. 评估指标的质量：</p>
+<ul>
+<li>检查单个变量的熵值。变量可能质量不佳，无法有效区分类别</li>
+</ul>
+<p>2. 考虑向模型中加入新颖、质量更好的变量</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="评估模型" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 评估模型</h1>
+<ul>
+<li>类别数最少但拟合最好</li>
+</ul>
+<section id="拟合指数" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="拟合指数"><span class="header-section-number">4.1</span> 拟合指数</h2>
+<ul>
+<li>信息准则：BIC、AIC
+<ul>
+<li>BIC：样本越大，惩罚力度越大，倾向于更少类别</li>
+<li>AIC：不受样本大小影响，倾向于更多类别</li>
+<li><strong>BIC的表现通常优于AIC</strong>，尤其是大样本</li>
+<li><span class="math inline">\(n&lt;300\)</span> 时建议<strong>同时报告BIC和AIC</strong></li>
+<li>存在连续变量时BIC优于AIC</li>
+<li>有时类别增加信息准则一直减小，选择<strong>拐点</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="类别数量检验" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="类别数量检验"><span class="header-section-number">4.2</span> 类别数量检验</h2>
+<ul>
+<li><span class="math inline">\(k\)</span> 类别的模型与 <span class="math inline">\(k-1\)</span> 类别的模型比较，<strong>VLMR检验</strong>（Vuong-Lo-Mendell-Rubin test）</li>
+<li>BLMR是VLMR的bootstrap版本
+<ul>
+<li>BLMR的统计功效高于LMR</li>
+<li>分类和连续变量混合的研究中，BLMR总是倾向于支持k类（局限）</li>
+</ul></li>
+</ul>
+</section>
+<section id="类别数样本大小分离程度" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="类别数样本大小分离程度"><span class="header-section-number">4.3</span> 类别数、样本大小、分离程度</h2>
+<ul>
+<li>类别数过多可能是过拟合</li>
+<li>考虑<strong>最小潜在类别的相对大小</strong>，关注其是否有效</li>
+<li>熵（Entropy）反映类别分离程度，<strong>熵高不表示分类好，但熵低表示分类不佳</strong></li>
+</ul>
+<div id="tbl-best_model" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-best_model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;3: 确定最优类别数的关键步骤和建议
+</figcaption>
+<div aria-describedby="tbl-best_model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 30%">
+<col style="width: 34%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">建议</th>
+<th style="text-align: left;">结果呈现</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">拟合指标</td>
+<td style="text-align: left;">AIC、BIC以及样本量校正贝叶斯信息准则</td>
+<td style="text-align: left;"><p>1. 对于大多数分析，推荐使用BIC和（或）样本量校正BIC</p>
+<p>2. 对于小样本量(&lt;300)和（或）最终模型包含多个类别的分析，同时使用AIC和BIC</p></td>
+<td style="text-align: left;"><p>1. 用于模型选择的所有指标均应在拟合统计量表中呈现</p>
+<p>2. 若样本量n&lt;300，应同时呈现AIC和BIC</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">模型检验</td>
+<td style="text-align: left;">Lo-Mendell-Rubin检验、VLMR检验和BLMR检验</td>
+<td style="text-align: left;"><p>1. 应使用VLMR检验来检验k类别模型是否优于k-1类别模型</p>
+<p>2. 对于包含混合类型指标数据的模型，不推荐使用BLMR检验</p></td>
+<td style="text-align: left;"><p>1. 所有模型统计检验结果均应呈现，并标注p&lt;0.05的显著性水平</p>
+<p>2. 清晰说明选择某一模型的临床或生物学依据（即使p值可能不显著）</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">模型特征</td>
+<td style="text-align: left;">类别数量、最小类别的样本量以及类别分离程度是决定模型拟合效果的重要因素</td>
+<td style="text-align: left;"><p>1. 应评估包含小样本量类别的模型，判断是否存在单个指标的异常值决定了类别的划分</p>
+<p>2. 与类别更少、分布更均衡的模型相比，包含大量小类别的模型更难实现外部推广</p></td>
+<td style="text-align: left;"><p>1. 呈现分析中所有模型的拟合统计量以及每个类别的观测数</p>
+<p>2. 呈现分析中所有模型的熵值</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="解释模型" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 解释模型</h1>
+<ul>
+<li>多个随机初始值保证可重复性</li>
+<li>检查各个类别，确保不是一组的分层</li>
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="class.png" class="img-fluid figure-img"></p>
+<figcaption>Salsa effect</figcaption>
+</figure>
+</div></li>
+</ul>
+<section id="分类然后分析" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="分类然后分析"><span class="header-section-number">5.1</span> 分类然后分析</h2>
+<ul>
+<li>得到的分类是概率，按 <span class="math inline">\(p&gt;0.5\)</span> 进行分类可能存在误差</li>
+<li>如结果变量是分类变量，可将结果变量纳入模型进行分析 <span class="citation" data-cites="Lanza_Rhoades_2013">Lanza &amp; Rhoades (<a href="#ref-Lanza_Rhoades_2013" role="doc-biblioref">2013</a>)</span></li>
+</ul>
+</section>
+<section id="类别比较" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="类别比较"><span class="header-section-number">5.2</span> 类别比较</h2>
+<ul>
+<li>变量在不同类别间的差异是<strong>循环论证</strong>，并不提供额外证据</li>
+<li><strong>类别间差异最大的变量</strong>有助于刻画类别特征</li>
+</ul>
+</section>
+<section id="外部验证" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="外部验证"><span class="header-section-number">5.3</span> 外部验证</h2>
+<ul>
+<li>是否具有相同的类别数</li>
+<li>类别的特征是否相同</li>
+</ul>
+<div id="tbl-inter" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-inter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;4: 模型解读的关键步骤和建议汇总
+</figcaption>
+<div aria-describedby="tbl-inter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 26%">
+<col style="width: 33%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">建议</th>
+<th style="text-align: left;">结果呈现</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">收敛性</td>
+<td style="text-align: left;">一种内部验证形式，通过随机起始值生成每个模型的最大似然估计</td>
+<td style="text-align: left;"><p>1. 推荐使用多个随机起始值（最少50个），确保最大似然估计至少重复20次</p>
+<p>2. 模型复杂度越高，应增加随机起始值的数量</p>
+<p>3. 若最大似然估计无法重复，评估数据结构和类型；若始终无法重复，考虑舍弃该模型</p></td>
+<td style="text-align: left;"><p>1. 确认分析中所有模型的最大似然估计至少重复了20次</p>
+<p>2. 最大似然值本身为可选呈现内容，因为AIC和BIC均基于该值生成</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">分类</td>
+<td style="text-align: left;">模型生成的概率用于将每个观测值分配到相应类别</td>
+<td style="text-align: left;"><p>1. 应预先确定类别分配的概率截断值</p>
+<p>2. 若模型熵值较低且类别分离度差，应在分析中纳入类别归属的不确定性</p></td>
+<td style="text-align: left;">呈现最优模型（最能描述目标人群的最终模型）中各类别的概率分布</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">萨尔萨效应(Salsa effect)</td>
+<td style="text-align: left;">指强制将原本不存在潜类别的人群划分为多个类别的现象</td>
+<td style="text-align: left;">检查指标变量的分布，判断是否存在将单一连续分布的人群强行拆分为多个类别的情况</td>
+<td style="text-align: left;">不适用</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">结局指标</td>
+<td style="text-align: left;">为证明所识别类别的价值，需展示某些关键变量在不同类别间存在差异</td>
+<td style="text-align: left;"><p>1. 应在分析计划中预先说明关键判别结局指标</p>
+<p>2. 研究者在确定最优拟合模型时，应对这些结局指标设盲</p></td>
+<td style="text-align: left;">预先制定的分析计划应说明用于判断潜类别间差异及评估其临床效用的指标</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Lanza_Rhoades_2013" class="csl-entry" role="listitem">
+Lanza, S. T., &amp; Rhoades, B. L. (2013). Latent class analysis: An alternative perspective on subgroup analysis in prevention and treatment. <em>Prevention Science</em>, <em>14</em>(2), 157–168. <a href="https://doi.org/10.1007/s11121-011-0201-1">https://doi.org/10.1007/s11121-011-0201-1</a>
+</div>
+<div id="ref-Sinha_Calfee_Delucchi_2021" class="csl-entry" role="listitem">
+Sinha, P., Calfee, C. S., &amp; Delucchi, K. L. (2021). Practitioner’s guide to latent class analysis: Methodological considerations and common pitfalls. <em>Critical Care Medicine</em>, <em>49</em>(1), e63–e79. <a href="https://doi.org/10.1097/CCM.0000000000004710">https://doi.org/10.1097/CCM.0000000000004710</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

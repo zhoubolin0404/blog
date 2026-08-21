@@ -1,0 +1,7 @@
+.img-full img,
+.quarto-listing-img.img-full img {
+  object-fit: contain !important;
+  width: 100%;
+  height: auto;
+  max-height: 300px; /* 可按需调整高度上限 */
+}

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2025-06-18">
+
+<title>人工智能的道德心理学 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">人工智能的道德心理学</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">文献笔记</div>
+                <div class="quarto-category">人机交互</div>
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">道德心理学</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 18, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#引言" id="toc-引言" class="nav-link active" data-scroll-target="#引言"><span class="header-section-number">1</span> 引言</a></li>
+  <li><a href="#机器作为道德行为者" id="toc-机器作为道德行为者" class="nav-link" data-scroll-target="#机器作为道德行为者"><span class="header-section-number">2</span> 机器作为道德行为者</a>
+  <ul class="collapse">
+  <li><a href="#内隐道德机器" id="toc-内隐道德机器" class="nav-link" data-scroll-target="#内隐道德机器"><span class="header-section-number">2.1</span> 内隐道德机器</a>
+  <ul class="collapse">
+  <li><a href="#表现" id="toc-表现" class="nav-link" data-scroll-target="#表现"><span class="header-section-number">2.1.1</span> 表现</a></li>
+  <li><a href="#偏见" id="toc-偏见" class="nav-link" data-scroll-target="#偏见"><span class="header-section-number">2.1.2</span> 偏见</a></li>
+  <li><a href="#对伤害的责备和其他反应" id="toc-对伤害的责备和其他反应" class="nav-link" data-scroll-target="#对伤害的责备和其他反应"><span class="header-section-number">2.1.3</span> 对伤害的责备和其他反应</a></li>
+  </ul></li>
+  <li><a href="#显性道德机器" id="toc-显性道德机器" class="nav-link" data-scroll-target="#显性道德机器"><span class="header-section-number">2.2</span> 显性道德机器</a>
+  <ul class="collapse">
+  <li><a href="#价值对齐问谁" id="toc-价值对齐问谁" class="nav-link" data-scroll-target="#价值对齐问谁"><span class="header-section-number">2.2.1</span> 价值对齐：问谁</a></li>
+  <li><a href="#价值对齐如何问" id="toc-价值对齐如何问" class="nav-link" data-scroll-target="#价值对齐如何问"><span class="header-section-number">2.2.2</span> 价值对齐：如何问</a></li>
+  <li><a href="#价值对齐如何处理回答" id="toc-价值对齐如何处理回答" class="nav-link" data-scroll-target="#价值对齐如何处理回答"><span class="header-section-number">2.2.3</span> 价值对齐：如何处理回答</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#机器作为道德接受者" id="toc-机器作为道德接受者" class="nav-link" data-scroll-target="#机器作为道德接受者"><span class="header-section-number">3</span> 机器作为道德接受者</a>
+  <ul class="collapse">
+  <li><a href="#面向机器的偏好" id="toc-面向机器的偏好" class="nav-link" data-scroll-target="#面向机器的偏好"><span class="header-section-number">3.1</span> 面向机器的偏好</a></li>
+  <li><a href="#克服机器惩罚" id="toc-克服机器惩罚" class="nav-link" data-scroll-target="#克服机器惩罚"><span class="header-section-number">3.2</span> 克服机器惩罚</a></li>
+  </ul></li>
+  <li><a href="#机器作为道德代理" id="toc-机器作为道德代理" class="nav-link" data-scroll-target="#机器作为道德代理"><span class="header-section-number">4</span> 机器作为道德代理</a>
+  <ul class="collapse">
+  <li><a href="#委托给机器" id="toc-委托给机器" class="nav-link" data-scroll-target="#委托给机器"><span class="header-section-number">4.1</span> 委托给机器</a></li>
+  <li><a href="#机器伪装machine-masquerade" id="toc-机器伪装machine-masquerade" class="nav-link" data-scroll-target="#机器伪装machine-masquerade"><span class="header-section-number">4.2</span> 机器伪装（Machine Masquerade）</a></li>
+  </ul></li>
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">5</span> 总结</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bonnefon, J.-F., Rahwan, I., &amp; Shariff, A. (2024). The Moral Psychology of Artificial Intelligence. <em>Annual Review of Psychology</em>, <em>75</em>(1), 653-675. <a href="https://doi.org/10.1146/annurev-psych-030123-113559" class="uri">https://doi.org/10.1146/annurev-psych-030123-113559</a></p>
+<p><span class="citation" data-cites="Bonnefon_et_al_2024">Bonnefon et al. (<a href="#ref-Bonnefon_et_al_2024" role="doc-biblioref">2024</a>)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+重要
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>机器的道德类型转化（typecasting）</strong></p>
+<p>本文中机器被分为道德行为者（agent）和接受者（patient），仅仅是为了方便论述，不构成任何指导性意见。</p>
+<p>行为者和接受者也不是二元分类，是人们心智知觉（mind perception）的连续维度<span class="citation" data-cites="Wegner_Gray_2016">(<a href="#ref-Wegner_Gray_2016" role="doc-biblioref">Wegner &amp; Gray, 2016</a>)</span>。</p>
+</div>
+</div>
+<section id="引言" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 引言</h1>
+<ul>
+<li><p>AI发展迅速，有些是前瞻性研究，但更多的是追赶AI发展引发的心理挑战</p></li>
+<li><p>本文将回顾关于AI承担道德角色（moral role）的研究</p>
+<ul>
+<li><p>道德行为者：机器被默许或明确参与或做出道德决策</p>
+<ul>
+<li><p>谁应该获得肾脏移植</p></li>
+<li><p>交通事故中谁的安全应该优先考虑</p></li>
+<li><p>谁应该被监禁</p></li>
+<li><p>在上述领域中，如何让AI和人类价值观一致</p></li>
+</ul></li>
+<li><p>道德接受者：机器成为人类道德行为的对象——合作或竞争，同情或恶意</p>
+<ul>
+<li>这类研究可以提高人们和AI合作的意愿</li>
+</ul></li>
+<li><p>道德代理者（moral proxy）：机器成为人际交往过程中的道德中介</p>
+<ul>
+<li>人们通过机器的掩护、粉饰甚至直接执行不道德决策</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="机器作为道德行为者" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 机器作为道德行为者</h1>
+<section id="内隐道德机器" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="内隐道德机器"><span class="header-section-number">2.1</span> 内隐道德机器</h2>
+<p>即使机器没有被直接编码进行道德决策，只要其行为后果具有道德影响，也会被认为是道德行为者。它们不需要去解决道德难题，但它们的错误具有道德意义。</p>
+<ul>
+<li><p>医疗AI错误诊断伤害患者</p></li>
+<li><p>推荐算法引动儿童看暴力内容</p></li>
+<li><p>面部识别算法错误将他人识别为恐怖分子</p></li>
+</ul>
+<section id="表现" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="表现"><span class="header-section-number">2.1.1</span> 表现</h3>
+<ul>
+<li><p>要求机器完美后再使用是<strong>因噎废食</strong>，一般认为机器投入使用的前提是比人类更为优秀</p></li>
+<li><p><strong>客观证明</strong>机器比人类<strong>更优秀</strong>本身就是个难题，混合<strong>偏见</strong>后更是难上加难</p></li>
+<li><p>在内隐道德机器要求<strong>更为严格</strong>，而且人们常常<strong>高估自己</strong>的水平</p>
+<ul>
+<li><p>德国样本表示：专家预测信贷违约错误率为20%-30%（这可能低估了），但要求机器错误率在10%以下</p></li>
+<li><p>美国样本表示：平均水平司机认为自己技术在前25%，自己驾驶的话可以避免<span class="math inline">\(frac{1}{3}\)</span>车祸，同时对机器的安全要求更高</p></li>
+<li><p>美国人对于医疗AI的担忧也一样，他们常常认为AI不能理解自己情况的独特性和细微差异，认为AI推荐的可解释性和透明度不如人类，即使人类医生在这些方面并没有被检验过</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="偏见" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="偏见"><span class="header-section-number">2.1.2</span> 偏见</h3>
+<ul>
+<li><p>错误的<strong>分布</strong>和错误的数量同样重要</p>
+<ul>
+<li><p>信用评分算法是否对女性错误更多</p></li>
+<li><p>自动驾驶对行人的保护是否低于其他人</p></li>
+<li><p>面部识别算法是否歧视深色人种</p></li>
+</ul></li>
+<li><p>错误的<strong>性质</strong>也很重要</p>
+<ul>
+<li><p>COMPAS算法在美国部分法院用来预测未来两年再被捕的概率</p>
+<ul>
+<li><p>针对白人和黑人错误率相同</p></li>
+<li><p>白人更多是有利错误；黑人更多是不利错误</p></li>
+<li><p>白人和西班牙裔中也是这种情况</p></li>
+</ul></li>
+</ul></li>
+<li><p>从数学角度看，算法对公平的<strong>定义不同</strong>，而且这些定义<strong>无法同时满足</strong>，需要研究人们在<strong>不同领域</strong>对公平的偏好</p>
+<ul>
+<li><p>大学录取算法偏好各群体录取率相近</p></li>
+<li><p>算法判断是否给予保释时，偏好不同群体之间的假阳性率相等，而不是准确率</p></li>
+<li><p>算法用于贷款分配时，优先考虑还款率高的申请人</p></li>
+<li><p>研究更多是基于计算机科学和不可能性定理（impossibility theorems，定义无法同时满足），缺乏心理学导向研究</p></li>
+</ul></li>
+<li><p>人们对<strong>算法公平</strong>的担忧也是研究重点</p>
+<ul>
+<li><p>媒体广泛讨论机器会学习、放大数据集中的偏见</p></li>
+<li><p>人们认为机器更具同质性——一台机器有偏见，所有机器都有偏见</p></li>
+<li><p>认为机器继承了人类纠正偏见的难度，低估了人类编程的能力</p></li>
+<li><p>人类对机器偏见的愤怒程度低于对人类偏见的愤怒</p></li>
+<li><p>担忧人类偏见的群体反而愿意让机器进行决策</p></li>
+</ul></li>
+<li><p>部署内隐道德机器时，需要考虑弱势群体的态度、非专家的知识基础和清晰可视化、可理解</p></li>
+</ul>
+</section>
+<section id="对伤害的责备和其他反应" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="对伤害的责备和其他反应"><span class="header-section-number">2.1.3</span> 对伤害的责备和其他反应</h3>
+<ul>
+<li><p>从理性角度看对机器生气是没有意义的，但从心理学角度看可能是因为认为机器具有自主性</p></li>
+<li><p>内隐道德机器犯错时<strong>反应更强烈</strong></p>
+<ul>
+<li><p>对自动驾驶责备更多，反应更强烈，且认为后果更严重</p></li>
+<li><p>缺乏关于其他领域的研究</p></li>
+</ul></li>
+<li><p>对机器的<strong>歧视反应更强烈</strong>，可能是因为机器被认为是没有偏见的</p></li>
+<li><p>对<strong>人机合作</strong>后果的反应<strong>更值得研究</strong>，因为除了完全自动驾驶外，机器极少被允许不在人类监督下进行决策</p>
+<ul>
+<li><p>人为车祸较为宽容，机器车祸更为严厉</p></li>
+<li><p>人机合作车祸更多指责人类</p></li>
+<li><p>机制并不清楚，为了可以在其他领域研究</p></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="显性道德机器" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="显性道德机器"><span class="header-section-number">2.2</span> 显性道德机器</h2>
+<ul>
+<li><p>显性道德机器需要<strong>直接</strong>解决道德困境</p></li>
+<li><p>道德困境通常是<strong>两种道德原则之间的冲突</strong></p>
+<ul>
+<li><p>在线内容审查机器需要在<strong>言论自由</strong>和<strong>抑制冒犯或有害内容</strong>之间进行抉择</p></li>
+<li><p>医疗AI需要在<strong>立刻</strong>给出当前最优诊断（即便无法向人类解释推理过程）和<strong>进一步检测</strong>以提高可解释性（但这可能会延迟一个对时间敏感的诊断）之间进行抉择</p></li>
+</ul></li>
+<li><p>AI<strong>道德价值（如仁慈、隐私、尊严、透明）发生冲突</strong>时，如何应对是缺乏研究的</p>
+<ul>
+<li>道德价值难以量化</li>
+</ul></li>
+<li><p>AI指导<strong>稀缺资源的分配</strong></p>
+<ul>
+<li><p>肾脏配对捐赠系统需要依据一个复杂的优先级体系，同时考虑候选人年龄、在项目中注册时间、前往移植中心路程、在普通人群中找到捐赠者的基线概率等因素，来决定谁可以获得肾脏</p></li>
+<li><p>自动驾驶汽车（autonomous vehicles，AVs）中的稀缺资源是道路安全，从整体安全角度看AVs是内隐道德机器，从每个决策看AVs是显性道德机器</p>
+<ul>
+<li><p><a href="#fig-dilemmas" class="quarto-xref">图&nbsp;1</a> 中a展示了AVs需要对自行车骑手、汽车驾驶员和货车驾驶员的安全优先级进行抉择</p></li>
+<li><p><a href="#fig-dilemmas" class="quarto-xref">图&nbsp;1</a> 中b展示了一种极端情况，碰撞无法避免，AVs必须选择是保护乘客还是行人</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="fig-dilemmas" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dilemmas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="dilemmas.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dilemmas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 自动驾驶汽车作为显性道德行为者所面临困境的例子
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>有观点认为当悲剧<strong>无法避免</strong>时，让AI进行决定可能是<strong>更好的选择</strong></p>
+<ul>
+<li><p>道德困境中无论做出什么选择都会被指责，决策者需要付出短期或长期情感代价</p></li>
+<li><p>机器进行抉择时，<strong>不同决定受到的指责也和人类不一样</strong>，以选择牺牲一人来拯救多人的道德困境为例</p>
+<ul>
+<li><p>选择牺牲一人的人类通常会被更多地指责</p></li>
+<li><p>机器不会受到指责或者结果发生了反转</p></li>
+</ul></li>
+</ul></li>
+<li><p>要让机器进行选择，我们就要明确目标和优先级，这就涉及到<strong>价值对齐</strong>（value alignment）问题</p>
+<ul>
+<li>为了确保机器以<strong>符合人类</strong>目标和优先级的方式解决道德困境，我们需要了解人类的目标和优先级，并找到教会机器这些目标的方法</li>
+</ul></li>
+</ul>
+<section id="价值对齐问谁" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="价值对齐问谁"><span class="header-section-number">2.2.1</span> 价值对齐：问谁</h3>
+<ul>
+<li><p>伦理学家（ethicist）</p>
+<ul>
+<li><strong>难以达成共识</strong>：德国的国家伦理委员会在AVs遇到必须选择拯救乘客还是其他道路使用者的情况下如何决策方面无法达成共识</li>
+</ul></li>
+<li><p>机器制造者</p>
+<ul>
+<li>他们<strong>不愿意参与</strong>讨论，以AVs为例，无论是优先驾驶者还是行人都会得罪部分人</li>
+</ul></li>
+<li><p>普通大众</p>
+<ul>
+<li><p>AVs优先保护驾驶者还是行人是<strong>消费者关注</strong>的核心问题之一</p></li>
+<li><p>道德问题影响大众接受AVs</p></li>
+<li><p>了解消费者的道德偏好可能是显性道德机器发挥潜在益处的前提条件</p></li>
+</ul></li>
+<li><p>其他利益相关者</p>
+<ul>
+<li>AVs会影响其他道路使用者</li>
+</ul></li>
+</ul>
+</section>
+<section id="价值对齐如何问" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="价值对齐如何问"><span class="header-section-number">2.2.2</span> 价值对齐：如何问</h3>
+<ul>
+<li><p>显性道德机器道德优先级的测量十分困难</p>
+<ul>
+<li><p>需要在大量相互冲突的价值或优先事项之间进行权衡，导致<strong>实验条件数量剧增</strong></p></li>
+<li><p><strong>实验设计选择</strong>也会影响可行性和结果解释</p>
+<ul>
+<li><p>道德实验要求碰撞无法避免，但实际情况的有可能避免的</p></li>
+<li><p><strong>提问方式</strong>不同结果可能也不同：让被试作为不同身份回答VAs应该怎么做，结果不同</p></li>
+<li><p>使用虚拟现实技术模拟真实反应</p></li>
+</ul></li>
+</ul></li>
+<li><p>显性道德机器在道德心理学领域是新话题，当前阶段或许最合适的策略是鼓励方法和设计的多样化</p></li>
+</ul>
+</section>
+<section id="价值对齐如何处理回答" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="价值对齐如何处理回答"><span class="header-section-number">2.2.3</span> 价值对齐：如何处理回答</h3>
+<ul>
+<li><p>完全依靠普通大众的偏好来制定政策显然是不合适的，占多少比例是个值得探讨的问题</p></li>
+<li><p>一种可行的方法是考虑专家和大众的一致程度和分歧程度</p>
+<ul>
+<li><p>专家有共识</p>
+<ul>
+<li><p>大众有共识且和专家一致：直接据此制定政策</p></li>
+<li><p>大众不一致：优先采纳专家共识，向公众清晰、有理地解释专家立场，增强公众理解与接受度</p></li>
+<li><p>大众有共识但和专家不一致：分析公众共识是否基于偏见，若是偏见则应坚持专家意见</p></li>
+</ul></li>
+<li><p>专家内部存在合理分歧</p>
+<ul>
+<li>大众有共识，且共识被证明是无偏见的：采用大众共识</li>
+</ul></li>
+</ul></li>
+<li><p>道德心理学家的职责是确保所采集到的大众道德偏好具备科学性与代表性</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="机器作为道德接受者" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 机器作为道德接受者</h1>
+<ul>
+<li><p>面对机器，人类仍然有同理心</p>
+<ul>
+<li><p>看到机器被虐待仍会不适</p></li>
+<li><p>被要求推倒机器时仍会犹豫</p></li>
+<li><p>看到实验者侮辱机器时会要求暂停</p></li>
+</ul></li>
+<li><p>人与AI的交互已经无法避免</p>
+<ul>
+<li><p>与AVs合作维护交通安全</p></li>
+<li><p>在线上社区与bot交互，可能沟通可能举报</p></li>
+<li><p>Wikipedia与机器协作编辑，或者展开编辑战</p></li>
+</ul></li>
+<li><p>人类间亲社会者易合作，反社会者难合作，如果对象是机器会如何？</p></li>
+</ul>
+<section id="面向机器的偏好" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="面向机器的偏好"><span class="header-section-number">3.1</span> 面向机器的偏好</h2>
+<ul>
+<li><p>和研究人际合作合作一样，可以使用金钱代表合作货币研究人机合作</p>
+<ul>
+<li><p>没有比金钱更好的其他“货币”可以替代</p></li>
+<li><p>人们似乎普遍认为机器仍“想要”钱，至少在实验程序上如此</p></li>
+</ul></li>
+<li><p>合作游戏中存在<strong>机器惩罚</strong>（machine penalty），即存在合作行为，但会下降</p>
+<ul>
+<li><p>在一次性信任游戏中，只有34%的人类选择回报机器的信任，而回报人类的比例为75%</p></li>
+<li><p>在一次性囚徒困境中，人们与机器的合作率为36%，低于与人类合作的49%</p></li>
+<li><p>在一次性独裁者游戏中，人们将16%的资源分给机器，而分给人类的比例为39%</p></li>
+<li><p>在一次性公共物品游戏中，人们与机器合作时平均贡献了40%，而与人类合作时贡献达55%</p></li>
+</ul></li>
+</ul>
+<div id="fig-prisoner" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prisoner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="prisoner.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prisoner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: 囚徒困境合作水平变化
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>重复性游戏进一步揭示了机器惩罚随互动次数增加的变化</p>
+<ul>
+<li><p>通过<strong>欺骗</strong>的方法消除（认为）机器和人类策略不同产生的影响，可以保证仅仅是<strong>相信对方是人或是机器</strong>这一信念的影响</p></li>
+<li><p><a href="#fig-prisoner" class="quarto-xref">图&nbsp;2</a>中的平行线表明<strong>机器惩罚一直存在且未发生改变</strong></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="克服机器惩罚" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="克服机器惩罚"><span class="header-section-number">3.2</span> 克服机器惩罚</h2>
+<ul>
+<li><p>AI超越人类很重要，但要充分发挥其作用，还是要对人机合作进行研究</p></li>
+<li><p>一方面是<strong>技术</strong>发展，另一方面是从<strong>心理</strong>层面研究为什么出现机器惩罚，如何缓解</p></li>
+<li><p><strong>拟人化</strong>被视为潜在解决方案</p>
+<ul>
+<li><p>外形、情绪等轻度拟人化并没有提高合作水平</p></li>
+<li><p>较高拟人化会产生恐怖谷效应</p></li>
+<li><p>女性化有效，可能是因为女性形象与愿意合作相联结，但这种联结存在偏见</p></li>
+<li><p>进行欺骗，用合成真人头像代表机器，消除了机器惩罚，但违反AI伦理</p></li>
+</ul></li>
+<li><p>未来需要研究<strong>不依赖拟人化</strong>的方案，建立<strong>新的社会规范</strong>可能是新方向</p></li>
+</ul>
+</section>
+</section>
+<section id="机器作为道德代理" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 机器作为道德代理</h1>
+<p>机器以一种道德的方式作为人类交流的中介。</p>
+<section id="委托给机器" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="委托给机器"><span class="header-section-number">4.1</span> 委托给机器</h2>
+<ul>
+<li><p>越来越多任务被委托给机器</p></li>
+<li><p>人们也可能将<strong>不道德行为</strong>委托给机器</p>
+<ul>
+<li><p>匿名性</p></li>
+<li><p>与受害者之间有心理距离：不直接接触受害者</p></li>
+<li><p>不易被发现</p></li>
+<li><p>模糊性：只关心结果，不会直接指示不道德行为</p></li>
+<li><p>在不知情的情况下AI进行了不道德行为：AI联合定价</p></li>
+</ul></li>
+<li><p>也能使用AI促进道德行为</p>
+<ul>
+<li><p>使用AI代为捐款，会产生承诺机制</p></li>
+<li><p>AI顾问，让AI动态地建议或促进人类作出道德决策</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="机器伪装machine-masquerade" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="机器伪装machine-masquerade"><span class="header-section-number">4.2</span> 机器伪装（Machine Masquerade）</h2>
+<p>机器伪装，又称AI中介交流（AI-mediated communication），利用技术修改自己的语言、声音或外貌，以改变互动对象的行为</p>
+<ul>
+<li><p>书面文本、头像照片、甚至实时线上互动的声音和面部动态都可以被修改</p></li>
+<li><p>学生可以用ChatGPT来让自己的表达更专业，企业主可以用它使自己听起来更可信，社交媒体用户则可以请求其生成符合自我形象或道德美德信号的帖子</p></li>
+<li><p>使用机器代写内容的人会被认为<strong>不值得信任</strong></p></li>
+<li><p>仍需深入研究当机器使用行为<strong>未被发现</strong>时，人们可能获得的实际或声誉上的好处，以及这些好处在<strong>不同披露方式</strong>下会保留多少</p></li>
+<li><p>去除客服的外国口音可能减少种族歧视，但也可能被认为是<strong>迎合偏见</strong>，而非改变偏见本身</p></li>
+<li><p>新领域</p>
+<ul>
+<li><p>人们如何使用技术来改变自身形象，以改变道德互动的结果，或管理自己的道德声誉</p></li>
+<li><p>不同披露方式对其影响</p></li>
+<li><p>社会应如何应对这一技术所引发的新伦理困境</p></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="总结" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 总结</h1>
+<ul>
+<li><p>未涵盖所有问题</p>
+<ul>
+<li><p>如何看待人工智能抄袭</p></li>
+<li><p>人工智能代理的存在是削弱还是增强人类群体之间的信任</p></li>
+<li><p>性爱机器人如何改变人类间的亲密关系</p></li>
+</ul></li>
+</ul>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Bonnefon_et_al_2024" class="csl-entry" role="listitem">
+Bonnefon, J.-F., Rahwan, I., &amp; Shariff, A. (2024). The moral psychology of artificial intelligence. <em>Annual Review of Psychology</em>, <em>75</em>(1), 653–675. <a href="https://doi.org/10.1146/annurev-psych-030123-113559">https://doi.org/10.1146/annurev-psych-030123-113559</a>
+</div>
+<div id="ref-Wegner_Gray_2016" class="csl-entry" role="listitem">
+Wegner, D. M., &amp; Gray, K. J. (2016). <em>The mind club: Who thinks, what feels, and why it matters</em>. Viking.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

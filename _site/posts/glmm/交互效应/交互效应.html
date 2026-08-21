@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-03-02">
+
+<title>04-交互效应 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script src="../../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="../../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">04-交互效应</h1>
+            <p class="subtitle lead">学习统计模型——通过R模拟</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">GLMM</div>
+                <div class="quarto-category">线性混合效应模型</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 2, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#cont-by-cat" id="toc-cont-by-cat" class="nav-link active" data-scroll-target="#cont-by-cat"><span class="header-section-number">1</span> 连续变量-分类变量交互效应</a></li>
+  <li><a href="#分类变量-分类变量交互效应" id="toc-分类变量-分类变量交互效应" class="nav-link" data-scroll-target="#分类变量-分类变量交互效应"><span class="header-section-number">2</span> 分类变量-分类变量交互效应</a>
+  <ul class="collapse">
+  <li><a href="#认知治疗与药物治疗对情绪的影响" id="toc-认知治疗与药物治疗对情绪的影响" class="nav-link" data-scroll-target="#认知治疗与药物治疗对情绪的影响"><span class="header-section-number">2.1</span> 认知治疗与药物治疗对情绪的影响</a></li>
+  <li><a href="#因子设计中的效应" id="toc-因子设计中的效应" class="nav-link" data-scroll-target="#因子设计中的效应"><span class="header-section-number">2.2</span> 因子设计中的效应</a></li>
+  <li><a href="#高阶设计higher-order-designs" id="toc-高阶设计higher-order-designs" class="nav-link" data-scroll-target="#高阶设计higher-order-designs"><span class="header-section-number">2.3</span> 高阶设计(Higher-order designs)</a></li>
+  </ul></li>
+  <li><a href="#用于因子设计的glm" id="toc-用于因子设计的glm" class="nav-link" data-scroll-target="#用于因子设计的glm"><span class="header-section-number">3</span> 用于因子设计的GLM</a>
+  <ul class="collapse">
+  <li><a href="#估计方程estimation-equations" id="toc-估计方程estimation-equations" class="nav-link" data-scroll-target="#估计方程estimation-equations"><span class="header-section-number">3.1</span> 估计方程(estimation equations)</a></li>
+  <li><a href="#因子设计app" id="toc-因子设计app" class="nav-link" data-scroll-target="#因子设计app"><span class="header-section-number">3.2</span> 因子设计App</a></li>
+  </ul></li>
+  <li><a href="#在因子设计中对分类预测因子进行编码" id="toc-在因子设计中对分类预测因子进行编码" class="nav-link" data-scroll-target="#在因子设计中对分类预测因子进行编码"><span class="header-section-number">4</span> 在因子设计中对分类预测因子进行编码</a></li>
+  <li><a href="#分类变量的编码方案" id="toc-分类变量的编码方案" class="nav-link" data-scroll-target="#分类变量的编码方案"><span class="header-section-number">5</span> 分类变量的编码方案</a>
+  <ul class="collapse">
+  <li><a href="#简单效应-vs.-主效应" id="toc-简单效应-vs.-主效应" class="nav-link" data-scroll-target="#简单效应-vs.-主效应"><span class="header-section-number">5.1</span> 简单效应 vs.&nbsp;主效应</a></li>
+  <li><a href="#主要编码方案" id="toc-主要编码方案" class="nav-link" data-scroll-target="#主要编码方案"><span class="header-section-number">5.2</span> 主要编码方案</a></li>
+  <li><a href="#超过2水平的因子呢" id="toc-超过2水平的因子呢" class="nav-link" data-scroll-target="#超过2水平的因子呢"><span class="header-section-number">5.3</span> 超过2水平的因子呢？</a></li>
+  <li><a href="#举例3水平因子" id="toc-举例3水平因子" class="nav-link" data-scroll-target="#举例3水平因子"><span class="header-section-number">5.4</span> 举例：3水平因子</a></li>
+  <li><a href="#如何创建你自己的数值型预测变量" id="toc-如何创建你自己的数值型预测变量" class="nav-link" data-scroll-target="#如何创建你自己的数值型预测变量"><span class="header-section-number">5.5</span> 如何创建你自己的数值型预测变量</a></li>
+  <li><a href="#小结" id="toc-小结" class="nav-link" data-scroll-target="#小结"><span class="header-section-number">5.6</span> 小结</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注释
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>本系列内容是本人对<strong>2024年</strong>翻译的<a href="https://glmm.netlify.app">《学习统计模型——通过R模拟》</a>的简单搬运。 该书翻译内容已部署于Netlify平台，考虑到部分爱好者可能无法正常访问该平台，特将内容搬运到博客，方便大家参考学习。</p>
+<p>2026年3月2日查询原文github，显示部分文件于1年前更新，受个人精力限制，<strong>不对更新内容进行对比</strong>，还是推荐有条件者阅读原文。</p>
+</div>
+</div>
+<!-- understand a common fallacy regarding interactions -->
+<p>到目前为止，我们一直专注于估计和解释一个变量或预测变量线性组合对响应变量的影响。然而，往往存在这样的情况，一个预测变量对响应变量的影响取决于另一个预测变量。实际上，我们可以在模型中包含一个<strong>交互</strong>项来估计和解释这种依赖性。</p>
+<section id="cont-by-cat" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="cont-by-cat"><span class="header-section-number">1</span> 连续变量-分类变量交互效应</h2>
+<p>让我们考虑一个简单的虚构例子。假设你对声波干扰对认知表现的影响感兴趣。你的研究中的每个被试在执行一个简单的反应时任务时(尽快对闪光灯做出反应)，被随机分配接受特定水平的声波干扰。你有一种技术，可以自动生成不同水平的背景噪音（例如城市声音的频率和振幅：鸣笛声、钻地声、喧哗声、玻璃破碎声等）。每个参与者在一个随机选择的干扰水平(0到100)下执行任务。你的假设是，城市生活使人们的任务表现更不受声波干扰的影响。你想要比较城市居民和乡村居民(来自更安静的乡村环境)之间干扰与表现关系的差异。</p>
+<p>你有3个变量：</p>
+<ul>
+<li>一个连续响应变量，<code>mean_RT</code>，其较高的水平反映较慢的反应时；</li>
+<li>一个连续预测变量，声波干扰水平(<code>dist_level</code>)，其较高的水平表示更多的干扰；</li>
+<li>一个两水平的因子，<code>group</code> (城市vs.乡村)。</li>
+</ul>
+<p>让我们从模拟一些城市组的数据开始。假设在0干扰(静音)下，平均反应时约为450毫秒，且干扰每增加1个单位，反应时就增加约2毫秒。这给了我们以下线性模型：</p>
+<p><span class="math display">\[Y_i = 450 + 2 X_i + e_i\]</span></p>
+<p>其中<span class="math inline">\(X_i\)</span>是声音干扰的水平。</p>
+<p>让我们模拟100名被试的数据，设定<span class="math inline">\(\sigma = 80\)</span>，并在开始之前设置种子。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1031</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>n_subj <span class="ot">&lt;-</span> <span class="dv">100</span>L  <span class="co"># 模拟100名被试的数据(注：L是说明100是整数)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>b0_urban <span class="ot">&lt;-</span> <span class="dv">450</span> <span class="co"># y轴截距</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>b1_urban <span class="ot">&lt;-</span> <span class="dv">2</span>   <span class="co"># 斜率</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 分解表(decomposition table)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>urban <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">subj_id =</span> <span class="dv">1</span><span class="sc">:</span>n_subj,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">"urban"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">b0 =</span> <span class="dv">450</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">b1 =</span> <span class="dv">2</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist_level =</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span>n_subj, n_subj, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">err =</span> <span class="fu">rnorm</span>(n_subj, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">80</span>),</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">simple_rt =</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> dist_level <span class="sc">+</span> err)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>urban</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 7
+   subj_id group    b0    b1 dist_level     err simple_rt
+     &lt;int&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;
+ 1       1 urban   450     2         59  -36.1       532.
+ 2       2 urban   450     2         45  128.        668.
+ 3       3 urban   450     2         55   23.5       584.
+ 4       4 urban   450     2          8    1.04      467.
+ 5       5 urban   450     2         47   48.7       593.
+ 6       6 urban   450     2         96   88.2       730.
+ 7       7 urban   450     2         62  110.        684.
+ 8       8 urban   450     2          8  -91.6       374.
+ 9       9 urban   450     2         15 -109.        371.
+10      10 urban   450     2         70   20.7       611.
+# ℹ 90 more rows</code></pre>
+</div>
+</div>
+<p>让我们绘制创建的数据，并作出最佳拟合线。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(urban, <span class="fu">aes</span>(dist_level, simple_rt)) <span class="sc">+</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="交互效应_files/figure-html/plot-urban-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption><em>声波干扰对简单反应时的影响(城市组)</em></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>现在让我们为乡村组模拟数据。我们假设这些被试的截距可能会略高一些，可能是因为他们对技术不太熟悉。最重要的是，我们假设他们的斜率会更陡，因为他们受到噪音的影响更大。大致如下：</p>
+<p><span class="math display">\[Y_i = 500 + 3 X_i + e_i\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>b0_rural <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>b1_rural <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>rural <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">subj_id =</span> <span class="dv">1</span><span class="sc">:</span>n_subj <span class="sc">+</span> n_subj,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">"rural"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">b0 =</span> b0_rural,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">b1 =</span> b1_rural,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist_level =</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span>n_subj, n_subj, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">err =</span> <span class="fu">rnorm</span>(n_subj, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">80</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">simple_rt =</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> dist_level <span class="sc">+</span> err)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>现在让我们把这两组的数据一起画出来。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(urban, rural)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(all_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">fct_relevel</span>(group, <span class="st">"urban"</span>)), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(dist_level, simple_rt, <span class="at">colour =</span> group)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> group) <span class="sc">+</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="交互效应_files/figure-html/combined-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption><em>声波干扰对简单反应时的影响(城市和乡村)</em></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>这里我们可以很清楚地看到我们在数据中建立的斜率差异。我们如何测试两个斜率是否有显著不同呢？要做到这一点，我们不能做两个单独的回归。我们需要将这两条回归线纳入同一个模型中。我们应该怎么做呢？</p>
+<p>请注意，我们可以用”偏移(offset)“值来表示其中一条回归线。我们(任意地)选一组作为我们的”基线”组，并将另一组的y轴截距和斜率表示为相对于这个基准的偏移值。因此，如果我们选择城市组作为基线，我们可以用两个偏移值<span class="math inline">\(\beta_2\)</span>和<span class="math inline">\(\beta_3\)</span>分别表示乡村组的y轴截距和斜率偏移。</p>
+<ul>
+<li>y轴截距: <span class="math inline">\(\beta_{0\_rural} = \beta_{0\_urban} + \beta_2\)</span></li>
+<li>斜率: <span class="math inline">\(\beta_{1\_rural} = \beta_{1\_urban} + \beta_3\)</span></li>
+</ul>
+<p>我们有城市组参数：<span class="math inline">\(\beta_{0\_urban} = 450\)</span>和<span class="math inline">\(\beta_{1\_urban} = 2\)</span>，乡村组参数：<span class="math inline">\(\beta_{0\_rural} = 500\)</span>和<span class="math inline">\(\beta_{1\_rural} = 3\)</span>。因此可以得出：</p>
+<ul>
+<li><span class="math inline">\(\beta_2 = 50\)</span>，因为<span class="math inline">\(\beta_{0\_rural} - \beta_{0\_urban} = 500 - 450 = 50\)</span></li>
+<li><span class="math inline">\(\beta_3 = 1\)</span>，因为<span class="math inline">\(\beta_{1\_rural} - \beta_{1\_urban} = 3 - 2 = 1\)</span></li>
+</ul>
+<p>现在我们的两个回归模型是：</p>
+<p><span class="math display">\[Y_{i\_urban} = \beta_{0\_urban} + \beta_{1\_urban} X_i + e_i\]</span></p>
+<p>和</p>
+<p><span class="math display">\[Y_{i\_rural} = (\beta_{0\_urban} + \beta_2) + (\beta_{1\_urban} + \beta_3) X_i + e_i\]</span></p>
+<p>好的，看起来我们更接近将这些模型合并为一个单一的回归模型了。这里有最后的技巧。我们定义一个额外的虚拟变量，该变量在城市组中取值为0(我们选择作为”基线”组)，在其他组中取值为1。下框包含我们的最终模型。</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+提示
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>含有连续-分类变量交互效应的回归模型</strong></p>
+<p><span class="math display">\[Y_{i} = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{1i} X_{2i} + e_{i}\]</span></p>
+<p>其中</p>
+<ul>
+<li><span class="math inline">\(X_{1i}\)</span>是连续变量</li>
+<li><span class="math inline">\(X_{2i}\)</span>是虚拟变量，0表示基线组，1表示其他组</li>
+</ul>
+<p>参数解释：</p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span>: 基线组y轴截距；</li>
+<li><span class="math inline">\(\beta_1\)</span>: 基线组斜率；</li>
+<li><span class="math inline">\(\beta_2\)</span>: 其他组的y轴截距偏移量；</li>
+<li><span class="math inline">\(\beta_3\)</span>: 其他组的斜率偏移量。</li>
+</ul>
+<p>用R估计：</p>
+<p><code>lm(Y ~ X1 + X2 + X1:X2, data)</code>或者简写:</p>
+<p><code>lm(Y ~ X1 * X2, data)</code>。这里<code>*</code>的意思是：“所有可能的主效应以及X1和X2的交互”</p>
+</div>
+</div>
+<p><span class="math inline">\(\beta_3 X_{1i} X_{2i}\)</span>项是两个预测变量相乘，被称为<strong>交互项(interaction term)</strong>。现在让我们展示上述广义线性模型(GLM)是如何得出两条回归线的。</p>
+<p>为了得到城市组的回归方程，我们将0代入到<span class="math inline">\(X_{2i}\)</span>中。得到公式：</p>
+<p><span class="math display">\[Y_{i} = \beta_0 + \beta_1 X_{1i} + \beta_2 0 + \beta_3 X_{1i} 0 + e_i\]</span></p>
+<p>去掉等于0的项，就得到：</p>
+<p><span class="math display">\[Y_{i} = \beta_0 + \beta_1 X_{1i} + e_i,\]</span></p>
+<p>这就是基线组(城市组)的回归方程。将其与上面的<span class="math inline">\(Y_{i\_urban}\)</span>进行对比。</p>
+<p>将1代入到<span class="math inline">\(X_{2i}\)</span>里会得到乡村组的方程。我们得到：</p>
+<p><span class="math display">\[Y_{i} = \beta_0 + \beta_1 X_{1i} + \beta_2 1 + \beta_3 X_{1i} 1 + e_i\]</span></p>
+<p>化简和运用一些代数后，也能表示为：</p>
+<p><span class="math display">\[Y_{i} = \beta_0 + \beta_2 + (\beta_1 + \beta_3) X_{1i} + e_i.\]</span></p>
+<p>将其和上面的<span class="math inline">\(Y_{i\_rural}\)</span>进行对比。虚拟编码起作用了！</p>
+<p>我们如何在R中估计回归系数？假设我们想检验两条线的斜率是否不同。注意，这实际上只是检验原假设<span class="math inline">\(\beta_3 = 0\)</span>，因为<span class="math inline">\(\beta_3\)</span>是我们的斜率偏移量。如果这个参数为0，意味着两个组具有相同的斜率(尽管它们可以有不同的截距)。换句话说，这意味着两条斜线是<strong>平行的</strong>。如果它非0，这意味着两个组具有不同的斜率，也就是说，两条斜线<strong>不平行</strong>。</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注意
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>样本中的平行线 vs.&nbsp;总体中的平行线</strong></p>
+<p>我刚刚提到，两条不平行的线意味着分类预测变量和连续预测变量之间存在<em>交互效应</em>，而平行的线则意味着不存在交互效应。要明确的是，我所说的平行与否是指在总体(population)中的情况。在样本(sample)中的平行与否不仅取决于它们在总体中的情况，还取决于测量和抽样引入的偏差。总体中是平行的线，在样本中却极有可能出现斜率不同的线，尤其是在样本量较小的情况下。</p>
+<p>通常，你会对总体中斜率相同与否感兴趣，而不是样本中的情况。因此，你不能仅仅看样本数据的图表就推断出”线不平行，因此存在交互效应”，或相反”线看起来平行，所以没有交互效应”。你必须进行推论统计检验。</p>
+<p>当交互项在某个<span class="math inline">\(\alpha\)</span>水平(如0.05)上具有统计显著性时，你会拒绝交互系数为0的原假设(如<span class="math inline">\(H_0: \beta_3 = 0\)</span>)，这意味着在总体中这些线不是平行的。</p>
+<p>然而，交互项不显著并<em>不一定</em>意味着在总体中这些线是平行的。它们可能是平行的，但也可能不是，而你的研究只是缺乏足够的统计效力(power)来检测出差异。</p>
+<p>为了获得关于原假设的证据，最好的方法是进行所谓的等效性检验(equivalence test)。在这个检验中你试图拒绝一个原假设，该原假设是总体效应大于某个你感兴趣的最小效应值；教程详见<span class="citation" data-cites="Lakens_Scheel_Isager_2018">(<a href="#ref-Lakens_Scheel_Isager_2018" role="doc-biblioref">Lakens et al., 2018</a>)</span>。</p>
+</div>
+</div>
+<p>我们已经创建了结合两组模拟数据的数据集<code>all_data</code>。我们使用R公式语法表示模型的方式是<code>Y ~ X1 + X2 + X1:X2</code>，其中<code>X1:X2</code>告诉R创建一个预测变量，该预测变量是<code>X1</code>和<code>X2</code>的乘积。还有一个简写方式<code>Y ~ X1 * X2</code>，它告诉R计算所有可能的主效应和交互效应。首先，我们将向模型添加一个虚拟预测变量，并将结果存储在<code>all_data2</code>中。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>all_data2 <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grp =</span> <span class="fu">if_else</span>(group <span class="sc">==</span> <span class="st">"rural"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sonic_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(simple_rt <span class="sc">~</span> dist_level <span class="sc">+</span> grp <span class="sc">+</span> dist_level<span class="sc">:</span>grp,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                all_data2)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sonic_mod)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = simple_rt ~ dist_level + grp + dist_level:grp, data = all_data2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-261.130  -50.749    3.617   62.304  191.211 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    460.1098    15.5053  29.674  &lt; 2e-16 ***
+dist_level       1.9123     0.2620   7.299 7.07e-12 ***
+grp              4.8250    21.7184   0.222    0.824    
+dist_level:grp   1.5865     0.3809   4.166 4.65e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 81.14 on 196 degrees of freedom
+Multiple R-squared:  0.5625,    Adjusted R-squared:  0.5558 
+F-statistic: 83.99 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="练习">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">重要</span>练习
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>练习</strong></p>
+<p>在下面的空格中输入你的答案，至少保留两位小数。</p>
+<p>给定回归模型</p>
+<p><span class="math display">\[Y_{i} = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{1i} X_{2i} + e_{i}\]</span></p>
+<p>(其中<span class="math inline">\(X_{1i}\)</span>是连续预测变量，<span class="math inline">\(X_{2i}\)</span>是分类预测变量)且上方给出了<code>lm()</code>的输出结果，填写以下参数的估计值。</p>
+<ul>
+<li><span class="math inline">\(\hat{\beta}_0\)</span>: <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;460.109764033163&quot;]"></li>
+<li><span class="math inline">\(\hat{\beta}_1\)</span>: <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;1.91232184349596&quot;]"></li>
+<li><span class="math inline">\(\hat{\beta}_2\)</span>: <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;4.82504807369757&quot;]"></li>
+<li><span class="math inline">\(\hat{\beta}_3\)</span>: <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;1.58653315274424&quot;]"></li>
+</ul>
+<p>根据这些参数估计，(基线)城市组的回归线为:</p>
+<p><span class="math inline">\(Y_i =\)</span> <input class="webex-solveme nospaces" data-tol="0.01" size="2" data-answer="[&quot;460.109764033163&quot;]"> <span class="math inline">\(+\)</span> <input class="webex-solveme nospaces" data-tol="0.01" size="2" data-answer="[&quot;1.91232184349596&quot;]"> <span class="math inline">\(X_{1i}\)</span></p>
+<p>乡村组的：</p>
+<p><span class="math inline">\(Y_i =\)</span> <input class="webex-solveme nospaces" data-tol="0.01" size="2" data-answer="[&quot;464.934812106861&quot;]"> <span class="math inline">\(+\)</span> <input class="webex-solveme nospaces" data-tol="0.01" size="2" data-answer="[&quot;3.4988549962402&quot;]"> <span class="math inline">\(X_{1i}\)</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="展开答案">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>展开答案
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(\beta_0=\)</span> 460.11</li>
+<li><span class="math inline">\(\beta_1=\)</span> 1.91</li>
+<li><span class="math inline">\(\beta_2=\)</span> 4.83</li>
+<li><span class="math inline">\(\beta_3=\)</span> 1.59</li>
+</ul>
+<p>城市组的回归线是：</p>
+<p><span class="math inline">\(Y_i = \beta_0 + \beta_1 X_{1i}\)</span>即</p>
+<p><span class="math inline">\(Y_i =\)</span> 460.11 <span class="math inline">\(+\)</span> 1.91 <span class="math inline">\(X_{1i}\)</span></p>
+<p>乡村组的是：</p>
+<p><span class="math inline">\(Y_i = \beta_0 + \beta_2 + \left(\beta_1 + \beta_3\right) X_{1i}\)</span>即</p>
+<p><span class="math inline">\(Y_i=\)</span> 464.93 <span class="math inline">\(+\)</span> 3.5 <span class="math inline">\(X_{1i}\)</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="分类变量-分类变量交互效应" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="分类变量-分类变量交互效应"><span class="header-section-number">2</span> 分类变量-分类变量交互效应</h2>
+<p><strong>因子设计(factorial design)</strong>在心理学中很常见，通常使用基于ANOVA的技术进行分析，这可能掩盖了ANOVA与回归一样也假设了一个潜在的线性模型的事实。</p>
+<p>因子是一种所有预测变量(自变量，IVs)都是分类变量的设计：每个都是具有固定数量<strong>水平</strong>的<strong>因子</strong>。在一个全因子设计(full-factorial design)中，因子之间完全交叉，以表示每种可能的因子组合。我们称每个唯一的组合为设计的一个<strong>单元(cell)</strong>。你经常会听到设计被称为“二乘二(two-by-two)设计”(2x2)，这意味着有2个因子，每个因子有2个水平。一个“三乘三设计”(3x3)是其中有2个因子，每个因子有3个水平的设计；一个“二乘二乘二设计”(2x2x2)是其中有3个因子，每个因子有2个水平，以此类推。</p>
+<p>通常，因子设计都以表格形式给出，显示所有因子水平的组合。下面是一个2x2设计的表格表示。</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$B_1$</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$B_2$</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">$A_1$</td>
+<td style="text-align: left;">$AB_{11}$</td>
+<td style="text-align: left;">$AB_{12}$</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$A_2$</td>
+<td style="text-align: left;">$AB_{21}$</td>
+<td style="text-align: left;">$AB_{22}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>一个3x2设计可能如下所示。</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$B_1$</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$B_2$</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">$A_1$</td>
+<td style="text-align: left;">$AB_{11}$</td>
+<td style="text-align: left;">$AB_{12}$</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$A_2$</td>
+<td style="text-align: left;">$AB_{21}$</td>
+<td style="text-align: left;">$AB_{22}$</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">$A_3$</td>
+<td style="text-align: left;">$AB_{31}$</td>
+<td style="text-align: left;">$AB_{32}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>最后是一个2x2x2设计.</p>
+<p><span class="math display">\[C_1\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$B_1$</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$B_2$</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">$A_1$</td>
+<td style="text-align: left;">$ABC_{111}$</td>
+<td style="text-align: left;">$ABC_{121}$</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$A_2$</td>
+<td style="text-align: left;">$ABC_{211}$</td>
+<td style="text-align: left;">$ABC_{221}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span class="math display">\[C_2\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$B_1$</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$B_2$</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">$A_1$</td>
+<td style="text-align: left;">$ABC_{112}$</td>
+<td style="text-align: left;">$ABC_{122}$</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$A_2$</td>
+<td style="text-align: left;">$ABC_{212}$</td>
+<td style="text-align: left;">$ABC_{222}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注意
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>不要混淆<strong>因子</strong>和<strong>水平</strong>！</p>
+<p>如果你听说一个研究有三个处理组(处理组A、处理组B和对照组)，这不是一个“三因子(three-factor, three-way)设计”。这是一个单因子(one-factor, one-way)设计，具有一个三水平因子(处理条件)。</p>
+<p>不存在只有一个水平的因子。</p>
+</div>
+</div>
+<p>你可以通过将每个因子的水平数相乘来确定设计中有多少个单元。因此，一个2x3x4设计将在设计中有24个单元。</p>
+<section id="认知治疗与药物治疗对情绪的影响" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="认知治疗与药物治疗对情绪的影响"><span class="header-section-number">2.1</span> 认知治疗与药物治疗对情绪的影响</h3>
+<p>让我们考虑一个简单的因子设计，并思考我们的数据可能展示方式。在从这个具体例子中了解概念之后，我们将将其映射到更抽象的统计术语上。</p>
+<p>想象一下，你正在进行一项研究，内容是两种不同类型的治疗(认知疗法和药物疗法)对抑郁症患者的影响。一半的被试被随机分配接受认知行为疗法(Cognitive Behavioral Therapy, CBT)，另一半接受其他控制操作(no-CBT)。此外，你通过随机分配进一步将你的患者分为两组：药物治疗组(接受抗抑郁药物, drug)和对照组(接受安慰剂, placebo)。接受治疗(或对照/安慰剂)后，你使用一个评分标准来测量他们的情绪，较高的数字对应较积极的情绪。</p>
+<p>让我们想象一下，下面我们得到的均值是不受测量或抽样误差影响的总体均值。我们将花一点时间考虑3种不同的可能结果，以及它们暗示这些疗法如何独立或交互地影响情绪。</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注意
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>在分类变量-连续变量交互效应部分关于的总体和样本的提醒在这里同样适用。除非模拟数据，你几乎<strong>永远不会</strong>知道你正在研究的任何总体的真实均值。下面，我们讨论的是你实际知道总体均值并且可以在没有任何统计测试的情况下得出结论的假设情况。你观察到的任何真实样本均值都会包含抽样和测量误差，你所做的任何推断都将取决于统计检验的结果，而不是观察到的均值。</p>
+</div>
+</div>
+<section id="情景a" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="情景a">情景A</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="交互效应_files/figure-html/scenario-a-plot-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption><em>情景A, 单元平均值图</em></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>下面是一个<strong>单元均值(cell mean)</strong>和<strong>边际均值(marginal mean)</strong>的表格。单元均值是设计的每个单元中因变量(情绪)的平均值。边际均值(在表格的边缘)提供了每行和每列的均值。</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">No CBT</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">CBT</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Placebo</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Drug</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: left;">70</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>如果这是我们的结果，你会得出什么结论？认知疗法对情绪有影响吗？药物疗法呢？对于这两个问题的答案都是肯定的：接受CBT的人平均心情(70；第2列的均值)比没有接受的人高出20(50；第1列的均值)。</p>
+<p>同样，接受抗抑郁药物的人情绪(70；第2行均值)相对于接受安慰剂的人(50; 第1行均值)更好。</p>
+<p>现在我们还可以问下个问题：<strong>认知疗法的效果是否取决于患者是否同时接受药物疗法</strong>？答案是否定的。看看为什么，注意到对于安慰剂组(第1行)，认知疗法使情绪提高了20分(从40提高到60)。但对于药物组来说也是一样的：从60提高到80也是20分的提高。因此，没有证据表明一个因素对心情的影响取决于另一个因素。</p>
+</section>
+<section id="情景b" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="情景b">情景B</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="交互效应_files/figure-html/scenario-b-plot-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption><em>情景B, 单元平均值图</em></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">No CBT</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">CBT</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Placebo</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Drug</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>在这种情景下，我们也发现CBT改善了情绪(同样提高了20分)，但药物疗法没有效果(第1行和第2行的边际均值都是50)。我们还可以看到，CBT的效果也不依赖于药物疗法：每行都有20分的提高。</p>
+</section>
+<section id="情景c" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="情景c">情景C</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="交互效应_files/figure-html/scenario-c-plot-1.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption><em>情景C, 单元平均值图</em></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">No CBT</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">CBT</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Placebo</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Drug</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">70</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>根据前面的逻辑，我们发现总体上接受认知疗法的人相比于对照组，情绪有所提升(75分对45分)，而接受药物疗法的人相比于安慰剂组，情绪也有所提升(70分对50分)。但这里还有其他情况：认知疗法对情绪的影响<strong>在同时接受药物疗法的患者中更明显</strong>。对于服用抗抑郁药的患者，情绪相对于对照组提高了40分(从50分到90分；表中的第2行)。对于接受安慰剂的患者，情绪只提高了20分，从40分到60分(表中的第1行)。因此，在这个假设情景中，<strong>认知疗法的效果取决于是否同时进行药物疗法</strong>。</p>
+</section>
+</section>
+<section id="因子设计中的效应" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="因子设计中的效应"><span class="header-section-number">2.2</span> 因子设计中的效应</h3>
+<p>如果你理解了上一节描述的基本效应模式，那么你就准备好将这些概念映射到统计语言上了。</p>
+<section id="主效应main-effect" class="level4" data-number="2.2.1">
+<h4 data-number="2.2.1" class="anchored" data-anchor-id="主效应main-effect"><span class="header-section-number">2.2.1</span> 主效应(main effect)</h4>
+<p><strong>主效应</strong>：在<strong>忽略</strong>设计中其他因子的情况下，一个因子对因变量的效应。</p>
+<p>主效应的检验是对边际均值是否等价的检验。因此，在上述场景A中，当你比较药物治疗的行均值时，你是在评估该因子对情绪的主效应。原假设是这两个边际均值相等：</p>
+<p><span class="math display">\[\bar{Y}_{1..} = \bar{Y}_{2..}\]</span></p>
+<p>其中<span class="math inline">\(Y_{i..}\)</span>是不考虑列因子的情况下<span class="math inline">\(i\)</span>行的平均值。</p>
+<p>如果你有一个因子有<span class="math inline">\(k\)</span>水平，且<span class="math inline">\(k &gt; 2\)</span>，此时主效应的原假设是：</p>
+<p><span class="math display">\[\bar{Y}_{1..} = \bar{Y}_{2..} = \ldots = \bar{Y}_{k..},\]</span></p>
+<p>即所有的行(或列)都是相等的。</p>
+</section>
+<section id="简单效应simple-effect" class="level4" data-number="2.2.2">
+<h4 data-number="2.2.2" class="anchored" data-anchor-id="简单效应simple-effect"><span class="header-section-number">2.2.2</span> 简单效应(simple effect)</h4>
+<p><strong>简单效应</strong>是指在另一个因子的特定水平上(将该因子保持在特定值)，一个因子的效应。</p>
+<p>例如，在情景C中，我们讨论了CBT对抗抑郁药组被试的效应。在这种情况下，对于接受抗抑郁药的被试来说，CBT的简单效应是40个单位。</p>
+<p>我们也可以讨论药物治疗对接受认知疗法的患者的简单效应。在情景C中，这体现为情绪得分从60增加到90(第2列)。</p>
+</section>
+<section id="交互效应" class="level4" data-number="2.2.3">
+<h4 data-number="2.2.3" class="anchored" data-anchor-id="交互效应"><span class="header-section-number">2.2.3</span> 交互效应</h4>
+<p>当一个变量的效应在另一个变量的各个水平上不同的时候，我们称之为存在<strong>交互效应</strong>。</p>
+<p>更像数学定义的表述是，当一个因子的简单效应在另一个因子的各个水平上不同时，就存在交互效应。我们在情景C中看到了这一点，CBT对抗抑郁药组的效果提升了40个单位，而对安慰剂组的效果只提升了20个单位。也许抗抑郁药带来的情绪提升使患者更容易接受CBT。</p>
+<p>关键在于，当A的简单效应在B的各个水平上不同时，我们称A和B之间存在简单交互效应。你也可以检查B的简单效应在A上是否不同。如果其中一个陈述为真，另一个陈述也必为真，因此查看简单效应的方式并不重要。</p>
+</section>
+</section>
+<section id="高阶设计higher-order-designs" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="高阶设计higher-order-designs"><span class="header-section-number">2.3</span> 高阶设计(Higher-order designs)</h3>
+<p>双因子设计(也称为“two-way”)在心理学和神经科学中非常常见，但有时你也会遇到超过两个因子的设计，比如2x2x2设计。</p>
+<p>为了计算不同类型效应的数量，我们使用下面的公式，这个公式给出了从<span class="math inline">\(n\)</span>个元素中取<span class="math inline">\(k\)</span>个元素的可能组合数：</p>
+<p><span class="math display">\[\frac{n!}{k!(n - k)!}\]</span></p>
+<p>相比于实际上的手算，我们可以在R中使用<code>choose(n, k)</code>函数。</p>
+<p>对于有<span class="math inline">\(n\)</span>个因子的设计，你会有：</p>
+<ul>
+<li><span class="math inline">\(n\)</span>个主效应；</li>
+<li><span class="math inline">\(\frac{n!}{2!(n - 2)!}\)</span>个2因素交互效应；</li>
+<li><span class="math inline">\(\frac{n!}{3!(n - 3)!}\)</span>个3因素交互效应；</li>
+<li><span class="math inline">\(\frac{n!}{4!(n - 4)!}\)</span>个4因素交互效应…以此类推。</li>
+</ul>
+<p>因此，如果我们有一个3因子设计，如一个2x2x2设计，其中包含因子<span class="math inline">\(A\)</span>，<span class="math inline">\(B\)</span>和<span class="math inline">\(C\)</span>，我们将有3个主效应：<span class="math inline">\(A\)</span>，<span class="math inline">\(B\)</span>和<span class="math inline">\(C\)</span>；<code>choose(3, 2)</code> = 3个2因素交互效应：<span class="math inline">\(AB\)</span>，<span class="math inline">\(AC\)</span>和<span class="math inline">\(BC\)</span>，以及<code>choose(3, 3)</code> = 1个3因素交互效应：<span class="math inline">\(ABC\)</span>。</p>
+<p>3因素交互效应很难解释，但它们意味着任意两个给定因子之间的<strong>简单交互效应</strong>会随着第3个因子的水平变化而不同。例如，它可能意味着<span class="math inline">\(C_1\)</span>处的<span class="math inline">\(AB\)</span>交互效应与<span class="math inline">\(C_2\)</span>处的<span class="math inline">\(AB\)</span>交互效应不同。</p>
+<p>如果你有一个4因子设计，你将会有四个主效应，<code>choose(4, 2)</code> = 6个2因素交互效应，<code>choose(4, 3)</code> = 4个3因素交互效应，以及1个4因素交互效应。从4因子设计中解释结果几乎是不可能的，所以请保持你的设计简单！</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注意
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>常见错误</strong></p>
+<p>比较简单效应的显著性<strong>不等于</strong>检验简单效应是否有显著差异。</p>
+</div>
+</div>
+</section>
+</section>
+<section id="用于因子设计的glm" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="用于因子设计的glm"><span class="header-section-number">3</span> 用于因子设计的GLM</h2>
+<p>现在让我们看一下这些模型背后的数学。通常情况下，你会看到为2x2因子设计编写的方差分析(ANOVA)的GLM使用“ANOVA”符号，如下所示：</p>
+<p><span class="math display">\[Y_{ijk} = \mu + A_i + B_j + AB_{ij} + S(AB)_{ijk}.\]</span></p>
+<p>在上方公式中：</p>
+<ul>
+<li><span class="math inline">\(Y_{ijk}\)</span>表示在因子<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>个水平和因子<span class="math inline">\(B\)</span>的第<span class="math inline">\(j\)</span>个水平中观测到的<span class="math inline">\(k\)</span>的值；</li>
+<li><span class="math inline">\(\mu\)</span>表示总体均值；</li>
+<li><span class="math inline">\(A_i\)</span>表示因子<span class="math inline">\(A\)</span>在<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>个水平上的主效应；</li>
+<li><span class="math inline">\(B_j\)</span>表示因子<span class="math inline">\(B\)</span>在<span class="math inline">\(B\)</span>的第<span class="math inline">\(j\)</span>个水平上的主效应；</li>
+<li><span class="math inline">\(AB_{ij}\)</span>表示在<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>个水平和<span class="math inline">\(B\)</span>的第<span class="math inline">\(j\)</span>个水平处的<span class="math inline">\(AB\)</span>交互效应；</li>
+<li><span class="math inline">\(S(AB)_{ijk}\)</span>表示残差。</li>
+</ul>
+<p>一个重要的数学事实是，各个主效应和交互效应的总和为零，通常写成：</p>
+<ul>
+<li><span class="math inline">\(\Sigma_i A_i = 0\)</span>;</li>
+<li><span class="math inline">\(\Sigma_j B_j = 0\)</span>;</li>
+<li><span class="math inline">\(\Sigma_{ij} AB_{ij} = 0\)</span>。</li>
+</ul>
+<p>理解这些效应的最好方法是查看分解表。研究下面的分解表，该表包含了从具有因子<span class="math inline">\(A\)</span>和<span class="math inline">\(B\)</span>的2x2设计中获取的12个模拟观测值。提供了索引<span class="math inline">\(i\)</span>、<span class="math inline">\(j\)</span>和<span class="math inline">\(k\)</span>，只是为了帮助你跟踪正在处理的观测值。请记住，<span class="math inline">\(i\)</span>表示因子<span class="math inline">\(A\)</span>的水平，<span class="math inline">\(j\)</span>表示因子<span class="math inline">\(B\)</span>的水平，<span class="math inline">\(k\)</span>表示单元<span class="math inline">\(AB_{ij}\)</span>内的观测值编号。</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 9
+       Y     i     j     k    mu   A_i   B_j AB_ij   err
+   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+ 1    11     1     1     1    10     4    -2    -1     0
+ 2    14     1     1     2    10     4    -2    -1     3
+ 3     8     1     1     3    10     4    -2    -1    -3
+ 4    17     1     2     1    10     4     2     1     0
+ 5    15     1     2     2    10     4     2     1    -2
+ 6    19     1     2     3    10     4     2     1     2
+ 7     8     2     1     1    10    -4    -2     1     3
+ 8     4     2     1     2    10    -4    -2     1    -1
+ 9     3     2     1     3    10    -4    -2     1    -2
+10    10     2     2     1    10    -4     2    -1     3
+11     7     2     2     2    10    -4     2    -1     0
+12     4     2     2     3    10    -4     2    -1    -3</code></pre>
+</div>
+</div>
+<section id="估计方程estimation-equations" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="估计方程estimation-equations"><span class="header-section-number">3.1</span> 估计方程(estimation equations)</h3>
+<p>这些是你在ANOVA中用来估计效应的方程。</p>
+<ul>
+<li><span class="math inline">\(\hat{\mu} = Y_{...}\)</span></li>
+<li><span class="math inline">\(\hat{A}_i = Y_{i..} - \hat{\mu}\)</span></li>
+<li><span class="math inline">\(\hat{B}_j = Y_{.j.} - \hat{\mu}\)</span></li>
+<li><span class="math inline">\(\widehat{AB}_{ij} = Y_{ij.} - \hat{\mu} - \hat{A}_i - \hat{B}_j\)</span></li>
+</ul>
+<p>注意，带有下标点的<span class="math inline">\(Y\)</span>变量是<span class="math inline">\(Y\)</span>的均值，忽略了下标中的任何内容。因此，<span class="math inline">\(Y_{...}\)</span>是<span class="math inline">\(Y\)</span>的均值，<span class="math inline">\(Y_{i..}\)</span>是<span class="math inline">\(Y\)</span>在<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>个水平上的均值，<span class="math inline">\(Y_{.j.}\)</span>是<span class="math inline">\(Y\)</span>在<span class="math inline">\(B\)</span>的第<span class="math inline">\(j\)</span>个水平上的均值，<span class="math inline">\(Y_{ij.}\)</span>是<span class="math inline">\(Y\)</span>在<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>个水平和<span class="math inline">\(B\)</span>的第<span class="math inline">\(j\)</span>个水平上的均值，即单元均值<span class="math inline">\(ij\)</span>。</p>
+</section>
+<section id="因子设计app" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="因子设计app"><span class="header-section-number">3.2</span> 因子设计App</h3>
+<p><img src="04-interactions_factorial_app.png" class="img-fluid"></p>
+<p><a href="https://rstudio-connect.psy.gla.ac.uk/factorial" target="_blank">启动这个网页APP</a>，尝试因子设计，直到你理解因子设计中主效应和交互效应的关键概念。</p>
+</section>
+</section>
+<section id="在因子设计中对分类预测因子进行编码" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="在因子设计中对分类预测因子进行编码"><span class="header-section-number">4</span> 在因子设计中对分类预测因子进行编码</h2>
+<p>心理学研究(尤其是实验心理学)经常涉及分类自变量。分析这些研究的数据时，需要仔细指定预测变量，因为R中的默认设置对实验情景而言并不理想。主要问题是分类预测变量的默认编码在输出中给出的是<strong>简单效应</strong>而非<strong>主效应</strong>，但后者通常是你所需要的。人们有时没有意识到这一点，误读了他们的输出结果。研究人员有时会报告含有分类预测变量的回归结果，但未明确报告他们是如何编码这些变量的，这使得他们的研究结果难以解读和再现。为了确保可重复性、透明度和准确解释，学习如何“手动”编码分类预测变量并在报告中习惯性地报告这些编码是一个好主意。</p>
+<p>由于R的默认设置不适合因子设计，我建议在将分类变量作为线性模型中的预测变量时，应该总是手动编码分类变量。不要将它们包括为<code>factor</code>变量。</p>
+</section>
+<section id="分类变量的编码方案" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="分类变量的编码方案"><span class="header-section-number">5</span> 分类变量的编码方案</h2>
+<p>许多实验研究者在尝试从方差分析(ANOVA)转向使用R进行线性混合效应模型(linear mixed-effects models，LMEMs)时，都会在编码分类预测变量时遇到困难。这比预期的要复杂得多，而R提供的默认设置对于因子实验来说完全不合适。实际上，在因子实验中使用这些默认设置可能会导致研究人员从数据中得出错误的结论。</p>
+<p>为了简化问题，我们将从设计因子不超过两水平的情况开始，然后再讨论具有三个以上水平的设计。</p>
+<section id="简单效应-vs.-主效应" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="简单效应-vs.-主效应"><span class="header-section-number">5.1</span> 简单效应 vs.&nbsp;主效应</h3>
+<p>理解<strong>简单效应(simple effect)</strong>和<strong>主效应(main effect)</strong>以及<strong>简单交互效应(simple interaction)</strong>和<strong>主交互效应(main interaction)</strong>在三因素设计中的区别是非常重要的。</p>
+<p>在<span class="math inline">\(A{\times}B\)</span>设计中，<span class="math inline">\(A\)</span>的简单效应是<strong>控制</strong><span class="math inline">\(B\)</span>后的<span class="math inline">\(A\)</span>的效应，而<span class="math inline">\(A\)</span>的主效应是<strong>忽略</strong><span class="math inline">\(B\)</span>后<span class="math inline">\(A\)</span>的效应。另一种看待这个问题的方法是考虑因子设计中的单元均值(<span class="math inline">\(\bar{Y}_{11}\)</span>，<span class="math inline">\(\bar{Y}_{12}\)</span>，<span class="math inline">\(\bar{Y}_{21}\)</span>和<span class="math inline">\(\bar{Y}_{22}\)</span>)以及边际均值(<span class="math inline">\(\bar{Y}_{1.}\)</span>，<span class="math inline">\(\bar{Y}_{2.}\)</span>，<span class="math inline">\(\bar{Y}_{.1}\)</span>和<span class="math inline">\(\bar{Y}_{.2}\)</span>)。(下标的点告诉你“忽略”该点的维度；例如：<span class="math inline">\(\bar{Y}_{.1}\)</span>告诉你忽略行变量取第1列的均值)。测试<span class="math inline">\(A\)</span>的主效应是测试原假设<span class="math inline">\(\bar{Y}_{1.}=\bar{Y}_{2.}\)</span>。测试<span class="math inline">\(A\)</span>的简单效应，即在<span class="math inline">\(B\)</span>的特定水平上<span class="math inline">\(A\)</span>的效应，例如，测试原假设<span class="math inline">\(\bar{Y}_{11}=\bar{Y}_{21}\)</span>。</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(B_1\)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(B_2\)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">\(A_1\)</td>
+<td style="text-align: center;">\(\bar{Y}_{11}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{12}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{1.}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\(A_2\)</td>
+<td style="text-align: center;">\(\bar{Y}_{21}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{22}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{2.}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{.1}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{.2}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>区别<strong>简单交互效应</strong>和<strong>主交互效应</strong>的逻辑相同：在<span class="math inline">\(ABC\)</span>设计中，<span class="math inline">\(AB\)</span>的简单交互效应是在<span class="math inline">\(C\)</span>的特定水平上<span class="math inline">\(AB\)</span>交互效应；而<span class="math inline">\(AB\)</span>的主交互效应是<strong>忽略</strong><span class="math inline">\(C\)</span>后<span class="math inline">\(AB\)</span>的交互效应。后者是我们在三因子设计中通常讨论的低阶交互效应(lower-order interaction)。这也是标准ANOVA程序(如R的<code>aov()</code>函数、SPSS、SAS等)输出中所提供的内容。</p>
+</section>
+<section id="主要编码方案" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="主要编码方案"><span class="header-section-number">5.2</span> 主要编码方案</h3>
+<p>通常，编码方案的选择会影响对数据的解释：</p>
+<ol type="1">
+<li>截距项的解释</li>
+<li>因子设计中除最高阶效应和(最高阶)交互效应之外的所有测试的解释。</li>
+</ol>
+<p>它还会影响混合效应模型中随机效应的解释/估计(详见这篇<a href="https://talklab.psy.gla.ac.uk/simgen/rsonly.html">博客</a>)。如果你的设计只有一个两水平因素，并且使用了<a href="https://www.sciencedirect.com/science/article/pii/S0749596X12001180">最大随机效应结构</a>( maximal random-effects structure)，那么编码方案的选择实际上并不重要。</p>
+<p>有许多可能的编码方案(详见<code>?contr.treatment</code>)。最相关的编码方案是<strong>处理(treatment)编码</strong>、<strong>求和(sum)编码</strong>和<strong>偏差(deviation)编码</strong>。求和编码和偏差编码可以被视为<strong>效应编码(effect coding)</strong>的特例——人们通常把那些编码总和为0的编码称为效应编码。</p>
+<p>对于2水平因子，你可以使用下面代码：</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Scheme</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">\(A_1\)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">\(A_2\)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Treatment (dummy)</td>
+<td style="text-align: right;">\(0\)</td>
+<td style="text-align: right;">\(1\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: right;">\(-1\)</td>
+<td style="text-align: right;">\(1\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Deviation</td>
+<td style="text-align: right;">\(-\frac{1}{2}\)</td>
+<td style="text-align: right;">\(\frac{1}{2}\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>默认情况下，R对模型中定义为<code>factor</code>的任何变量使用处理编码(详见<code>?factor</code>和<code>?contrasts</code>)。要了解为什么这对因子设计而言并不理想，可以考虑一个2x2x2的因子设计，因子包括<span class="math inline">\(A\)</span>、<span class="math inline">\(B\)</span> 和<span class="math inline">\(C\)</span>。我们将只考虑一个完全的被试内设计，每个被试只有一个观测值，因为这允许我们使用最简单的可能的误差结构(error structure)。我们将使用<code>lm()</code>来拟合一个这样的模型：</p>
+<p><code>lm(Y ~ A * B * C)</code></p>
+<p>下图详细说明了2x2x2设计的各种单元均值和边际均值的符号。</p>
+<p><span class="math display">\[C_1\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(B_1\)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(B_2\)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">\(A_1\)</td>
+<td style="text-align: center;">\(\bar{Y}_{111}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{121}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{1.1}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\(A_2\)</td>
+<td style="text-align: center;">\(\bar{Y}_{211}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{221}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{2.1}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{.11}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{.21}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span class="math display">\[C_2\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(B_1\)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(B_2\)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">\(A_1\)</td>
+<td style="text-align: center;">\(\bar{Y}_{112}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{122}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{1.2}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\(A_2\)</td>
+<td style="text-align: center;">\(\bar{Y}_{212}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{222}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{2.2}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">\(\bar{Y}_{.12}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{.22}\)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>下表提供了在三种不同编码方案下模型中各种效应的解释。注意，<span class="math inline">\(Y\)</span>是因变量，下标的点表示“忽略”相应的维度。因此，<span class="math inline">\(\bar{Y}_{.1.}\)</span>是B_1的均值(忽略因子<span class="math inline">\(A\)</span>和因子<span class="math inline">\(C\)</span>)，而<span class="math inline">\(\bar{Y}_{...}\)</span>是“总均值”(忽略所有因子)。</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">treatment</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">sum</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">\(\mu\)</td>
+<td style="text-align: center;">\(\bar{Y}_{111}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{...}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{...}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\(A\)</td>
+<td style="text-align: center;">\(\bar{Y}_{211} - \bar{Y}_{111}\)</td>
+<td style="text-align: center;">\(\frac{(\bar{Y}_{2..} - \bar{Y}_{1..})}{2}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{2..} - \bar{Y}_{1..}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\(B\)</td>
+<td style="text-align: center;">\(\bar{Y}_{121} - \bar{Y}_{111}\)</td>
+<td style="text-align: center;">\(\frac{(\bar{Y}_{.2.} - \bar{Y}_{.1.})}{2}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{.2.} - \bar{Y}_{.1.}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\(C\)</td>
+<td style="text-align: center;">\(\bar{Y}_{112} - \bar{Y}_{111}\)</td>
+<td style="text-align: center;">\(\frac{(\bar{Y}_{..2} - \bar{Y}_{..1})}{2}\)</td>
+<td style="text-align: center;">\(\bar{Y}_{..2} - \bar{Y}_{..1}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\(AB\)</td>
+<td style="text-align: center;">\((\bar{Y}_{221} - \bar{Y}_{121}) - (\bar{Y}_{211} - \bar{Y}_{111})\)</td>
+<td style="text-align: center;">\(\frac{(\bar{Y}_{22.} - \bar{Y}_{12.}) - (\bar{Y}_{21.} - \bar{Y}_{11.})}{4}\)</td>
+<td style="text-align: center;">\((\bar{Y}_{22.} - \bar{Y}_{12.}) - (\bar{Y}_{21.} - \bar{Y}_{11.})\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\(AC\)</td>
+<td style="text-align: center;">\((\bar{Y}_{212} - \bar{Y}_{211}) - (\bar{Y}_{112} - \bar{Y}_{111})\)</td>
+<td style="text-align: center;">\(\frac{(\bar{Y}_{2.2} - \bar{Y}_{1.2}) - (\bar{Y}_{2.1} - \bar{Y}_{1.1})}{4}\)</td>
+<td style="text-align: center;">\((\bar{Y}_{2.2} - \bar{Y}_{1.2}) - (\bar{Y}_{2.1} - \bar{Y}_{1.1})\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\(BC\)</td>
+<td style="text-align: center;">\((\bar{Y}_{122} - \bar{Y}_{112}) - (\bar{Y}_{121} - \bar{Y}_{111})\)</td>
+<td style="text-align: center;">\(\frac{(\bar{Y}_{.22} - \bar{Y}_{.12}) - (\bar{Y}_{.21} - \bar{Y}_{.11})}{4}\)</td>
+<td style="text-align: center;">\((\bar{Y}_{.22} - \bar{Y}_{.12}) - (\bar{Y}_{.21} - \bar{Y}_{.11})\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>对于三因子(A B C)的交互效应：</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">scheme</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">treatment</td>
+<td style="text-align: center;">\(\displaystyle\left[\displaystyle\left(\bar{Y}_{221} - \bar{Y}_{121}\right) - \displaystyle\left(\bar{Y}_{211} - \bar{Y}_{111}\right)\right] - \displaystyle\left[\displaystyle\left(\bar{Y}_{222} - \bar{Y}_{122}\right) - \displaystyle\left(\bar{Y}_{212} - \bar{Y}_{112}\right)\right]\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">sum</td>
+<td style="text-align: center;">\(\frac{\displaystyle\left[\displaystyle\left(\bar{Y}_{221} - \bar{Y}_{121}\right) - \displaystyle\left(\bar{Y}_{211} - \bar{Y}_{111}\right)\right] - \displaystyle\left[\displaystyle\left(\bar{Y}_{222} - \bar{Y}_{122}\right) - \displaystyle\left(\bar{Y}_{212} - \bar{Y}_{112}\right)\right]}{8}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">deviation</td>
+<td style="text-align: center;">\(\displaystyle\left[\displaystyle\left(\bar{Y}_{221} - \bar{Y}_{121}\right) - \displaystyle\left(\bar{Y}_{211} - \bar{Y}_{111}\right)\right] - \displaystyle\left[\displaystyle\left(\bar{Y}_{222} - \bar{Y}_{122}\right) - \displaystyle\left(\bar{Y}_{212} - \bar{Y}_{112}\right)\right]\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>请注意，尽管求和编码的参数估计值为其他方案的八分之一，但<span class="math inline">\(A \times B \times C\)</span>的推断检验结果全部相同。对于所有低阶效应(lower-order effects)，求和编码和偏差编码将给出不同的参数估计，但相同的推断结果。这两种编码方案都对主效应和主交互效应提供了和3因素ANOVA中相同的检测。相反，处理(虚拟)编码将提供简单效应和简单交互效应的推断检测。因此，如果您感兴趣的是获得方差分析中的“经典”检测结果，请使用求和编码或偏差编码。</p>
+</section>
+<section id="超过2水平的因子呢" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="超过2水平的因子呢"><span class="header-section-number">5.3</span> 超过2水平的因子呢？</h3>
+<p>一个具有<span class="math inline">\(k\)</span>水平的因子需要<span class="math inline">\(k-1\)</span>个变量。每个预测变量将因子的特定“目标”水平与你(任意地)选择为“基线”的水平进行对比。例如，对于一个3水平因子<span class="math inline">\(A\)</span>，选择<span class="math inline">\(A1\)</span>作为基线，你将有两个预测变量，一个比较<span class="math inline">\(A2\)</span>和<span class="math inline">\(A1\)</span>，另一个比较<span class="math inline">\(A3\)</span>和<span class="math inline">\(A1\)</span>。</p>
+<p>对于处理(虚拟)编码，目标水平设置为1，否则为0。</p>
+<p>对于求和编码，水平的总和必须为零，因此对于给定的预测变量，目标水平被赋值为1，基线水平被赋值为-1，任何其他水平被赋值为0。</p>
+<p>对于偏差编码，值也必须总和为0。无论哪种情况，建议在尝试进行ANOVA式推断时使用偏差编码。根据这种方案，目标水平的值为<span class="math inline">\(\frac{k-1}{k}\)</span>，而任何非目标水平的值为<span class="math inline">\(-\frac{1}{k}\)</span>。</p>
+<p><strong>有趣的事实</strong>：对平衡数据进行均值中心处理编码(Mean-centering treatment codes)，你会得到偏差编码。</p>
+<p>注：配合这篇<a href="https://zhuanlan.zhihu.com/p/513227882?ssr_src=heifetz">知乎帖子</a>阅读，有助理解。</p>
+</section>
+<section id="举例3水平因子" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="举例3水平因子"><span class="header-section-number">5.4</span> 举例：3水平因子</h3>
+<section id="处理虚拟编码" class="level4" data-number="5.4.1">
+<h4 data-number="5.4.1" class="anchored" data-anchor-id="处理虚拟编码"><span class="header-section-number">5.4.1</span> 处理(虚拟)编码</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">level</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A2v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A3v1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="求和编码" class="level4" data-number="5.4.2">
+<h4 data-number="5.4.2" class="anchored" data-anchor-id="求和编码"><span class="header-section-number">5.4.2</span> 求和编码</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">level</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A2v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A3v1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="偏差编码" class="level4" data-number="5.4.3">
+<h4 data-number="5.4.3" class="anchored" data-anchor-id="偏差编码"><span class="header-section-number">5.4.3</span> 偏差编码</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">level</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A2v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A3v1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A1</td>
+<td style="text-align: right;">\(-\frac{1}{3}\)</td>
+<td style="text-align: right;">\(-\frac{1}{3}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A2</td>
+<td style="text-align: right;">\(\frac{2}{3}\)</td>
+<td style="text-align: right;">\(-\frac{1}{3}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A3</td>
+<td style="text-align: right;">\(-\frac{1}{3}\)</td>
+<td style="text-align: right;">\(\frac{2}{3}\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="举例5水平因子" class="level4" data-number="5.4.4">
+<h4 data-number="5.4.4" class="anchored" data-anchor-id="举例5水平因子"><span class="header-section-number">5.4.4</span> 举例：5水平因子</h4>
+</section>
+<section id="处理虚拟编码-1" class="level4" data-number="5.4.5">
+<h4 data-number="5.4.5" class="anchored" data-anchor-id="处理虚拟编码-1"><span class="header-section-number">5.4.5</span> 处理(虚拟)编码</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">level</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A2v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A3v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A4v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A5v1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="求和编码-1" class="level4" data-number="5.4.6">
+<h4 data-number="5.4.6" class="anchored" data-anchor-id="求和编码-1"><span class="header-section-number">5.4.6</span> 求和编码</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">level</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A2v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A3v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A4v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A5v1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="偏差编码-1" class="level4" data-number="5.4.7">
+<h4 data-number="5.4.7" class="anchored" data-anchor-id="偏差编码-1"><span class="header-section-number">5.4.7</span> 偏差编码</h4>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">level</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A2v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A3v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A4v1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">A5v1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A1</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A2</td>
+<td style="text-align: right;">\(\frac{4}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A3</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(\frac{4}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A4</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(\frac{4}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A5</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(-\frac{1}{5}\)</td>
+<td style="text-align: right;">\(\frac{4}{5}\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="如何创建你自己的数值型预测变量" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="如何创建你自己的数值型预测变量"><span class="header-section-number">5.5</span> 如何创建你自己的数值型预测变量</h3>
+<p>让我们假设你的数据包含在如下所示的表<code>dat</code>中。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a> <span class="do">## 创建你自己的数值型预测变量</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a> <span class="do">## 创建一个示例表</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a> dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Y =</span> <span class="fu">rnorm</span>(<span class="dv">12</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">A =</span> <span class="fu">rep</span>(<span class="fu">paste0</span>(<span class="st">"A"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">each =</span> <span class="dv">4</span>))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="点击展开">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>点击展开
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Y</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-0.41</td>
+<td style="text-align: left;">A1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.44</td>
+<td style="text-align: left;">A1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-2.01</td>
+<td style="text-align: left;">A1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.56</td>
+<td style="text-align: left;">A1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.67</td>
+<td style="text-align: left;">A2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">A2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.61</td>
+<td style="text-align: left;">A2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.32</td>
+<td style="text-align: left;">A2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.44</td>
+<td style="text-align: left;">A3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.19</td>
+<td style="text-align: left;">A3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.87</td>
+<td style="text-align: left;">A3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.50</td>
+<td style="text-align: left;">A3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="mutateif_elsecase_when-方法操作3水平因子" class="level4" data-number="5.5.1">
+<h4 data-number="5.5.1" class="anchored" data-anchor-id="mutateif_elsecase_when-方法操作3水平因子"><span class="header-section-number">5.5.1</span> <code>mutate()</code>、<code>if_else()</code>、<code>case_when()</code> 方法操作3水平因子</h4>
+</section>
+<section id="处理编码" class="level4" data-number="5.5.2">
+<h4 data-number="5.5.2" class="anchored" data-anchor-id="处理编码"><span class="header-section-number">5.5.2</span> 处理编码</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>  <span class="do">## 3水平因子示例</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## 处理编码</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  dat_treat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">A2v1 =</span> <span class="fu">if_else</span>(A <span class="sc">==</span> <span class="st">"A2"</span>, <span class="dv">1</span>L, <span class="dv">0</span>L),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">A3v1 =</span> <span class="fu">if_else</span>(A <span class="sc">==</span> <span class="st">"A3"</span>, <span class="dv">1</span>L, <span class="dv">0</span>L))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="展开结果">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>展开结果
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+        Y A      A2v1  A3v1
+    &lt;dbl&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+ 1 -0.410 A1        0     0
+ 2 -1.44  A1        0     0
+ 3 -2.01  A1        0     0
+ 4  0.562 A1        0     0
+ 5 -0.671 A2        1     0
+ 6  1.000 A2        1     0
+ 7 -1.61  A2        1     0
+ 8  0.322 A2        1     0
+ 9 -0.443 A3        0     1
+10  1.19  A3        0     1
+11  0.868 A3        0     1
+12 -0.500 A3        0     1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="求和编码-2" class="level4" data-number="5.5.3">
+<h4 data-number="5.5.3" class="anchored" data-anchor-id="求和编码-2"><span class="header-section-number">5.5.3</span> 求和编码</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 求和编码</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dat_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A2v1 =</span> <span class="fu">case_when</span>(A <span class="sc">==</span> <span class="st">"A1"</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>L, <span class="co"># 基线</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                          A <span class="sc">==</span> <span class="st">"A2"</span> <span class="sc">~</span> <span class="dv">1</span>L,  <span class="co"># 目标</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                          <span class="cn">TRUE</span>      <span class="sc">~</span> <span class="dv">0</span>L), <span class="co"># 其他</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">A3v1 =</span> <span class="fu">case_when</span>(A <span class="sc">==</span> <span class="st">"A1"</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>L, <span class="co"># 基线</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                          A <span class="sc">==</span> <span class="st">"A3"</span> <span class="sc">~</span>  <span class="dv">1</span>L, <span class="co"># 目标</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                          <span class="cn">TRUE</span>      <span class="sc">~</span> <span class="dv">0</span>L)) <span class="co"># 其他</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="展开结果">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>展开结果
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+        Y A      A2v1  A3v1
+    &lt;dbl&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+ 1 -0.410 A1       -1    -1
+ 2 -1.44  A1       -1    -1
+ 3 -2.01  A1       -1    -1
+ 4  0.562 A1       -1    -1
+ 5 -0.671 A2        1     0
+ 6  1.000 A2        1     0
+ 7 -1.61  A2        1     0
+ 8  0.322 A2        1     0
+ 9 -0.443 A3        0     1
+10  1.19  A3        0     1
+11  0.868 A3        0     1
+12 -0.500 A3        0     1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="偏差编码-2" class="level4" data-number="5.5.4">
+<h4 data-number="5.5.4" class="anchored" data-anchor-id="偏差编码-2"><span class="header-section-number">5.5.4</span> 偏差编码</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 偏差编码</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 基线A1</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dat_dev <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A2v1 =</span> <span class="fu">if_else</span>(A <span class="sc">==</span> <span class="st">"A2"</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>), <span class="co"># 目标A2</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">A3v1 =</span> <span class="fu">if_else</span>(A <span class="sc">==</span> <span class="st">"A3"</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)) <span class="co"># 目标A3</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="展开答案">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>展开答案
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dat_dev</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+        Y A       A2v1   A3v1
+    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 -0.410 A1    -0.333 -0.333
+ 2 -1.44  A1    -0.333 -0.333
+ 3 -2.01  A1    -0.333 -0.333
+ 4  0.562 A1    -0.333 -0.333
+ 5 -0.671 A2     0.667 -0.333
+ 6  1.000 A2     0.667 -0.333
+ 7 -1.61  A2     0.667 -0.333
+ 8  0.322 A2     0.667 -0.333
+ 9 -0.443 A3    -0.333  0.667
+10  1.19  A3    -0.333  0.667
+11  0.868 A3    -0.333  0.667
+12 -0.500 A3    -0.333  0.667</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="小结" class="level3" data-number="5.6">
+<h3 data-number="5.6" class="anchored" data-anchor-id="小结"><span class="header-section-number">5.6</span> 小结</h3>
+<p><strong>除最高阶效应外，所有效应的解释都取决于编码方案</strong>。</p>
+<p>使用处理编码，你将查看<strong>简单</strong>效应和<strong>简单</strong>交互效应，而不是<strong>主</strong>效应和<strong>主</strong>交互效应。</p>
+<p><strong>求和编码的参数估计与偏差编码只在参数估计的大小上有所不同，但具有相同的解释</strong>。</p>
+<p>由于偏差编码不受求和编码中的缩放效应的影响，因此在ANOVA式设计中应默认(建议)使用偏差编码。</p>
+<p><strong>R中因子的默认编码方案是“处理”编码</strong>。</p>
+<p>因此，每当你将一个变量声明为<code>factor</code>类型，并将该变量用作回归模型中的预测变量时，R将自动创建处理编码操作后的变量。</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注意
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>要点：在R中使用回归来分析因子设计时，为了获得主效应和交互效应的经典ANOVA式解释，请使用偏差编码，而不是默认的处理编码</strong>。</p>
+</div>
+</div>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Lakens_Scheel_Isager_2018" class="csl-entry" role="listitem">
+Lakens, D., Scheel, A. M., &amp; Isager, P. M. (2018). Equivalence testing for psychological research: A tutorial. <em>Advances in Methods and Practices in Psychological Science</em>, <em>1</em>, 259–269. <a href="https://journals.sagepub.com/doi/abs/10.1177/2515245918770963">https://journals.sagepub.com/doi/abs/10.1177/2515245918770963</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

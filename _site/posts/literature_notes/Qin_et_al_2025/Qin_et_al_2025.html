@@ -1,0 +1,4256 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-05-25">
+
+<title>厌恶还是欣赏AI？能力-个性化框架和元分析综述 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">厌恶还是欣赏AI？能力-个性化框架和元分析综述</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">文献笔记</div>
+                <div class="quarto-category">AI</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 25, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#能力-个性化框架" id="toc-能力-个性化框架" class="nav-link active" data-scroll-target="#能力-个性化框架"><span class="header-section-number">1</span> 能力-个性化框架</a></li>
+  <li><a href="#方法" id="toc-方法" class="nav-link" data-scroll-target="#方法"><span class="header-section-number">2</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#透明和公开" id="toc-透明和公开" class="nav-link" data-scroll-target="#透明和公开"><span class="header-section-number">2.1</span> 透明和公开</a></li>
+  <li><a href="#文献检索" id="toc-文献检索" class="nav-link" data-scroll-target="#文献检索"><span class="header-section-number">2.2</span> 文献检索</a></li>
+  <li><a href="#纳入标准" id="toc-纳入标准" class="nav-link" data-scroll-target="#纳入标准"><span class="header-section-number">2.3</span> 纳入标准</a></li>
+  <li><a href="#决策情境编码" id="toc-决策情境编码" class="nav-link" data-scroll-target="#决策情境编码"><span class="header-section-number">2.4</span> 决策情境编码</a></li>
+  <li><a href="#调节因子" id="toc-调节因子" class="nav-link" data-scroll-target="#调节因子"><span class="header-section-number">2.5</span> 调节因子</a></li>
+  <li><a href="#统计过程" id="toc-统计过程" class="nav-link" data-scroll-target="#统计过程"><span class="header-section-number">2.6</span> 统计过程</a></li>
+  </ul></li>
+  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">3</span> 结果</a>
+  <ul class="collapse">
+  <li><a href="#研究特征" id="toc-研究特征" class="nav-link" data-scroll-target="#研究特征"><span class="header-section-number">3.1</span> 研究特征</a></li>
+  <li><a href="#测试ai厌恶-vs.-ai欣赏的能力-个性化框架" id="toc-测试ai厌恶-vs.-ai欣赏的能力-个性化框架" class="nav-link" data-scroll-target="#测试ai厌恶-vs.-ai欣赏的能力-个性化框架"><span class="header-section-number">3.2</span> 测试AI厌恶 vs.&nbsp;AI欣赏的能力-个性化框架</a></li>
+  <li><a href="#稳健性检验" id="toc-稳健性检验" class="nav-link" data-scroll-target="#稳健性检验"><span class="header-section-number">3.3</span> 稳健性检验</a></li>
+  <li><a href="#调节分析" id="toc-调节分析" class="nav-link" data-scroll-target="#调节分析"><span class="header-section-number">3.4</span> 调节分析</a>
+  <ul class="collapse">
+  <li><a href="#ai特征" id="toc-ai特征" class="nav-link" data-scroll-target="#ai特征"><span class="header-section-number">3.4.1</span> AI特征</a></li>
+  <li><a href="#研究特征-1" id="toc-研究特征-1" class="nav-link" data-scroll-target="#研究特征-1"><span class="header-section-number">3.4.2</span> 研究特征</a></li>
+  <li><a href="#样本特征" id="toc-样本特征" class="nav-link" data-scroll-target="#样本特征"><span class="header-section-number">3.4.3</span> 样本特征</a></li>
+  <li><a href="#发表特征" id="toc-发表特征" class="nav-link" data-scroll-target="#发表特征"><span class="header-section-number">3.4.4</span> 发表特征</a></li>
+  <li><a href="#国家或地区特征" id="toc-国家或地区特征" class="nav-link" data-scroll-target="#国家或地区特征"><span class="header-section-number">3.4.5</span> 国家或地区特征</a></li>
+  </ul></li>
+  <li><a href="#发表偏倚" id="toc-发表偏倚" class="nav-link" data-scroll-target="#发表偏倚"><span class="header-section-number">3.5</span> 发表偏倚</a>
+  <ul class="collapse">
+  <li><a href="#ai欣赏象限" id="toc-ai欣赏象限" class="nav-link" data-scroll-target="#ai欣赏象限"><span class="header-section-number">3.5.1</span> <em>AI欣赏象限</em></a></li>
+  <li><a href="#ai厌恶象限" id="toc-ai厌恶象限" class="nav-link" data-scroll-target="#ai厌恶象限"><span class="header-section-number">3.5.2</span> <em>AI厌恶象限</em></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">4</span> 讨论</a>
+  <ul class="collapse">
+  <li><a href="#理论和实证贡献" id="toc-理论和实证贡献" class="nav-link" data-scroll-target="#理论和实证贡献"><span class="header-section-number">4.1</span> 理论和实证贡献</a></li>
+  <li><a href="#实践贡献" id="toc-实践贡献" class="nav-link" data-scroll-target="#实践贡献"><span class="header-section-number">4.2</span> 实践贡献</a></li>
+  <li><a href="#局限与未来方向" id="toc-局限与未来方向" class="nav-link" data-scroll-target="#局限与未来方向"><span class="header-section-number">4.3</span> 局限与未来方向</a></li>
+  <li><a href="#结论" id="toc-结论" class="nav-link" data-scroll-target="#结论"><span class="header-section-number">4.4</span> 结论</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Qin, X., Zhou, X., Chen, C., Wu, D., Zhou, H., Dong, X., Cao, L., &amp; Lu, J. G. (2025). AI aversion or appreciation? A capability–personalization framework and a meta-analytic review. <em>Psychological Bulletin</em>, <em>151</em>(5), 580-599. <a href="https://doi.org/10.1037/bul0000477" class="uri">https://doi.org/10.1037/bul0000477</a></p>
+<p><span class="citation" data-cites="Qin_et_al_2025">Qin et al. (<a href="#ref-Qin_et_al_2025" role="doc-biblioref">2025</a>)</span></p>
+</div>
+</div>
+<ul>
+<li>AI厌恶（aversion）和AI欣赏（appreciation）存在差异
+<ul>
+<li>AI厌恶：人们倾向于对AI表现出更多的消极态度和行为
+<ul>
+<li>医疗保健</li>
+<li>人力资源管理</li>
+<li>法律和军事等道德相关领域</li>
+</ul></li>
+<li>AI欣赏：人们倾向于对AI表现出更多的积极态度和行为
+<ul>
+<li>数字估计和预测任务</li>
+<li>标准化分配任务</li>
+<li>纸牌游戏</li>
+</ul></li>
+</ul></li>
+<li>现有综述不足
+<ul>
+<li>没有<strong>直接调查</strong>对AI的态度</li>
+<li>没有提供适应<strong>不同领域</strong>的理论框架</li>
+<li>没有研究<strong>调节</strong>变量</li>
+</ul></li>
+</ul>
+<section id="能力-个性化框架" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 能力-个性化框架</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Capability_Personalization_Framework.png" class="img-fluid figure-img" width="5400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 能力-个性化框架
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><a href="#fig-1" class="quarto-xref">图&nbsp;1</a> 是能力-个性化框架（Capability–Personalization Framework）
+<ul>
+<li>感知AI能力和感知个性化必要性是两个可以区分的维度
+<ul>
+<li>部分任务，无论个体对AI的能力是什么态度，都认为个性化是必要的</li>
+<li>部分任务，即使情境相同，<strong>不同主体</strong>对个性化的要求也不一样</li>
+</ul></li>
+<li>只有同时满足<strong>AI能力足够</strong>和<strong>任务不需要个性化</strong>时，才会出现AI欣赏</li>
+</ul></li>
+</ul>
+</section>
+<section id="方法" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 方法</h1>
+<section id="透明和公开" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="透明和公开"><span class="header-section-number">2.1</span> 透明和公开</h2>
+<ul>
+<li>遵循PRISRM 2020</li>
+<li>数据和代码公开在<a href="https://osf.io/8skz6/" class="uri">https://osf.io/8skz6/</a></li>
+</ul>
+</section>
+<section id="文献检索" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="文献检索"><span class="header-section-number">2.2</span> 文献检索</h2>
+<ul>
+<li>2022年7月进行检索</li>
+<li>数据库：Web of Science Core Collection、APA PsycInfo、IEEE Xplore、ACM Digital、Engineering Village</li>
+<li>其他渠道：Google Scholar、文献内引用、公众呼吁未发表的研究</li>
+<li>数据库检索策略，结合以下关键词：
+<ul>
+<li>AI相关：“artificial intelligence” OR “AI” OR “A.I.” OR “algorithm” OR “robot” OR “autonomous vehicle” OR “machine learning”</li>
+<li>人类相关：“human” OR “human being” OR “people” OR “person” OR “individual”</li>
+<li>比较相关：“compare” OR “comparison”OR“contrast”OR“vs.”OR“versus”</li>
+<li>表现相关：“prefer” OR “trust” OR “fair”</li>
+</ul></li>
+<li>Google Scholar检索策略，5*3关键词组合：
+<ul>
+<li>AI与人类比较：“artificial intelligence vs.&nbsp;human”、“algorithm vs.&nbsp;human”、“robot vs.&nbsp;human”、“autonomous vehicle vs.&nbsp;human”、“machine learning vs.&nbsp;human”</li>
+<li>对人类或AI的偏好：“prefer”、“trust”、“fair”</li>
+<li>每组关键词浏览前100条结果</li>
+</ul></li>
+<li>审核参考文献</li>
+<li>通过LISTSERV和研究论坛（如Academy of Management、 Society for Personality and Social Psychology）发布未发表研究的征稿启事</li>
+</ul>
+</section>
+<section id="纳入标准" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="纳入标准"><span class="header-section-number">2.3</span> 纳入标准</h2>
+<ul>
+<li>英语</li>
+<li>对AI和人类的偏好进行了实证研究</li>
+<li>只关注AI和人类的直接比较，不包含关注AI某种特征</li>
+<li>如果是被试内实验，排除未告知被试对象是AI还是人类的研究</li>
+</ul>
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="PRISMA.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: PRISMA流程图
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="决策情境编码" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="决策情境编码"><span class="header-section-number">2.4</span> 决策情境编码</h2>
+<ul>
+<li>根据@fig-1 ，对文献决策情境的两个维度进行打分</li>
+<li>感知AI能力
+<ul>
+<li>当在这种情境下做出决定时，与人类相比，AI的能力如何？</li>
+<li>1 =“能力差得多”，6 =“能力强得多”</li>
+</ul></li>
+<li>感知个性化必要性
+<ul>
+<li>当在这种情境下做出决定时，主体是否有（要求）个性化的必要性？</li>
+<li>1 =“非常不必要”，6 =“非常必要”</li>
+</ul></li>
+<li>13名编码人员独立完成了对93个情境的编码
+<ul>
+<li>根据 <a href="#eq-rwg" class="quarto-xref">式&nbsp;1</a> ，感知AI能力 <span class="math inline">\(r_{\mathrm{wg}}\)</span> 均值和中位数均为0.89，感知个性化必要性也均为0.86，大于阈值0.5，说明不是随机作答</li>
+</ul></li>
+<li>两个维度取编码人员的均值，以<strong>3.5</strong>为界限划分为高和低，组合成4个象限</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="单独题目的编码信度">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>单独题目的编码信度
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span id="eq-rwg"><span class="math display">\[
+r_{\mathrm{wg}} = 1 - \frac{S_x^2}{\sigma_e^2}
+\tag{1}\]</span></span></p>
+<p>其中，</p>
+<p><span class="math inline">\(S_x^2\)</span>：实际评分方差</p>
+<p><span class="math inline">\(\sigma_e^2\)</span>：完全随机作答时的期望方差</p>
+<p>均匀分布的期望方差为 <span class="math inline">\(\sigma_e^2 = \frac{A^2 - 1}{12}\)</span>（<span class="math inline">\(A\)</span> 为量表等级数）</p>
+<p>1-6评分：<span class="math inline">\(\sigma_e^2 = \frac{6^2 - 1}{12} = \frac{35}{12} \approx 2.917\)</span></p>
+<p><span class="math inline">\(r_{\mathrm{wg}}\)</span> 越接近1说明信度越高，越接近0说明信度越低</p>
+<p><span class="citation" data-cites="James_et_al_1984">James et al. (<a href="#ref-James_et_al_1984" role="doc-biblioref">1984</a>)</span></p>
+</div>
+</div>
+</section>
+<section id="调节因子" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="调节因子"><span class="header-section-number">2.5</span> 调节因子</h2>
+<ul>
+<li>AI特征
+<ul>
+<li>有形机器人 vs.&nbsp;无形算法</li>
+</ul></li>
+<li>研究特征
+<ul>
+<li>偏好的测量：行为 vs.&nbsp;态度测量</li>
+<li>被试间 vs.&nbsp;被试内</li>
+<li>研究质量</li>
+<li>效应量转换</li>
+</ul></li>
+<li>样本特征
+<ul>
+<li>女性比例</li>
+<li>众包 vs.&nbsp;其他样本</li>
+</ul></li>
+<li>发表特征
+<ul>
+<li>发表状况</li>
+<li>发表年份</li>
+</ul></li>
+<li>国家或地区特征
+<ul>
+<li>失业率</li>
+<li>人均GDP</li>
+<li>大学学历比例</li>
+<li>互联网使用率</li>
+</ul></li>
+</ul>
+</section>
+<section id="统计过程" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="统计过程"><span class="header-section-number">2.6</span> 统计过程</h2>
+<ul>
+<li>效应量全转换为Cohen’s <span class="math inline">\(d\)</span>
+<ul>
+<li>442个效应量中，77个被转换</li>
+<li>正 <span class="math inline">\(d\)</span> 表示更喜欢AI，负 <span class="math inline">\(d\)</span> 表示更喜欢人类</li>
+</ul></li>
+<li>为综合被试间和被试内研究，用抽样方差倒数作为权重</li>
+<li>使用稳健方差估计（robust variance estimation）来解决一个研究报告多个效应量的情况</li>
+<li>使用随机效应元分析，使得研究结果可以更好地推广到纳入文献之外</li>
+<li>使用R包<em>metafor</em></li>
+<li>移动常数技术（moving constant technique）
+<ul>
+<li>在元回归基础上，用图形或表格展示估计的平均效应量随调节变量变化的变化以及置信区间</li>
+<li>本研究将其他调节变量恒定于均值水平，估计了不同研究特征和国家（地区）特征下的加权平均效应量及其置信区间</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="结果" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 结果</h1>
+<section id="研究特征" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="研究特征"><span class="header-section-number">3.1</span> 研究特征</h2>
+<ul>
+<li>如 <a href="#fig-2" class="quarto-xref">图&nbsp;2</a> 流程所示，共纳入83篇文献，163个研究，442个效应量</li>
+</ul>
+<div class="cell">
+<div id="tbl-1" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 描述统计
+</figcaption>
+<div aria-describedby="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="xzbywuovar" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xzbywuovar table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xzbywuovar thead, #xzbywuovar tbody, #xzbywuovar tfoot, #xzbywuovar tr, #xzbywuovar td, #xzbywuovar th {
+  border-style: none;
+}
+
+#xzbywuovar p {
+  margin: 0;
+  padding: 0;
+}
+
+#xzbywuovar .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xzbywuovar .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xzbywuovar .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xzbywuovar .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xzbywuovar .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xzbywuovar .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xzbywuovar .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xzbywuovar .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xzbywuovar .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xzbywuovar .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xzbywuovar .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xzbywuovar .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xzbywuovar .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xzbywuovar .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xzbywuovar .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzbywuovar .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xzbywuovar .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xzbywuovar .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xzbywuovar .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzbywuovar .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xzbywuovar .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzbywuovar .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xzbywuovar .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzbywuovar .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xzbywuovar .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzbywuovar .gt_left {
+  text-align: left;
+}
+
+#xzbywuovar .gt_center {
+  text-align: center;
+}
+
+#xzbywuovar .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xzbywuovar .gt_font_normal {
+  font-weight: normal;
+}
+
+#xzbywuovar .gt_font_bold {
+  font-weight: bold;
+}
+
+#xzbywuovar .gt_font_italic {
+  font-style: italic;
+}
+
+#xzbywuovar .gt_super {
+  font-size: 65%;
+}
+
+#xzbywuovar .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xzbywuovar .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xzbywuovar .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xzbywuovar .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xzbywuovar .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xzbywuovar .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xzbywuovar .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xzbywuovar .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xzbywuovar div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a变量" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="vertical-align: middle" scope="col">变量</th>
+<th id="a频数或均值标准差" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col">频数或均值(标准差)</th>
+<th id="a中位数" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle" scope="col">中位数</th>
+<th id="a众数统计值" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle" scope="col">众数(统计值)</th>
+<th id="a范围" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col">范围</th>
+<th id="a研究数n" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle" scope="col">研究数(<em>n</em>)</th>
+<th id="a效应量数k" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle" scope="col">效应量数(<em>k</em>)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量"><strong>AI特征</strong></td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="中位数"></td>
+<td class="gt_row gt_center" headers="众数统计值"></td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="研究数n"></td>
+<td class="gt_row gt_center" headers="效应量数k"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量">实体机器人vs无形算法</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">7.2%为实体机器人</td>
+<td class="gt_row gt_center" headers="中位数">-</td>
+<td class="gt_row gt_center" headers="众数统计值">无形算法</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0或1</td>
+<td class="gt_row gt_center" headers="研究数n">161</td>
+<td class="gt_row gt_center" headers="效应量数k">432</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量"><strong>研究特征</strong></td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="中位数"></td>
+<td class="gt_row gt_center" headers="众数统计值"></td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="研究数n"></td>
+<td class="gt_row gt_center" headers="效应量数k"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量">行为结果vs态度结果</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">7.5%为行为结果</td>
+<td class="gt_row gt_center" headers="中位数">-</td>
+<td class="gt_row gt_center" headers="众数统计值">态度</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0或1</td>
+<td class="gt_row gt_center" headers="研究数n">163</td>
+<td class="gt_row gt_center" headers="效应量数k">442</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量">被试间设计vs被试内设计</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">84.8%为被试间设计</td>
+<td class="gt_row gt_center" headers="中位数">-</td>
+<td class="gt_row gt_center" headers="众数统计值">被试间设计</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0或1</td>
+<td class="gt_row gt_center" headers="研究数n">163</td>
+<td class="gt_row gt_center" headers="效应量数k">442</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量">研究质量</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">-0.03(0.69)</td>
+<td class="gt_row gt_center" headers="中位数">-0.21</td>
+<td class="gt_row gt_center" headers="众数统计值">-0.71</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">-0.71~1.50</td>
+<td class="gt_row gt_center" headers="研究数n">163</td>
+<td class="gt_row gt_center" headers="效应量数k">442</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量">效应量转换</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">17.4%进行了转换</td>
+<td class="gt_row gt_center" headers="中位数">-</td>
+<td class="gt_row gt_center" headers="众数统计值">未转换</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0或1</td>
+<td class="gt_row gt_center" headers="研究数n">163</td>
+<td class="gt_row gt_center" headers="效应量数k">442</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量"><strong>样本特征</strong></td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="中位数"></td>
+<td class="gt_row gt_center" headers="众数统计值"></td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="研究数n"></td>
+<td class="gt_row gt_center" headers="效应量数k"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量">女性占比</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">0.56(0.13)</td>
+<td class="gt_row gt_center" headers="中位数">0.53</td>
+<td class="gt_row gt_center" headers="众数统计值">0.53</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0~1</td>
+<td class="gt_row gt_center" headers="研究数n">146</td>
+<td class="gt_row gt_center" headers="效应量数k">400</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量">众包样本vs其他样本</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">49.1%为众包样本</td>
+<td class="gt_row gt_center" headers="中位数">-</td>
+<td class="gt_row gt_center" headers="众数统计值">其他样本</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0或1</td>
+<td class="gt_row gt_center" headers="研究数n">163</td>
+<td class="gt_row gt_center" headers="效应量数k">442</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量"><strong>发表特征</strong></td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="中位数"></td>
+<td class="gt_row gt_center" headers="众数统计值"></td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="研究数n"></td>
+<td class="gt_row gt_center" headers="效应量数k"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量">已发表vs未发表</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">88.5%为已发表</td>
+<td class="gt_row gt_center" headers="中位数">-</td>
+<td class="gt_row gt_center" headers="众数统计值">已发表</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0或1</td>
+<td class="gt_row gt_center" headers="研究数n">163</td>
+<td class="gt_row gt_center" headers="效应量数k">442</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量">发表年份</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">2018.37(4.97)</td>
+<td class="gt_row gt_center" headers="中位数">2020</td>
+<td class="gt_row gt_center" headers="众数统计值">2021</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">2000~2022</td>
+<td class="gt_row gt_center" headers="研究数n">163</td>
+<td class="gt_row gt_center" headers="效应量数k">442</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量"><strong>国家特征</strong></td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="中位数"></td>
+<td class="gt_row gt_center" headers="众数统计值"></td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="研究数n"></td>
+<td class="gt_row gt_center" headers="效应量数k"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量">失业率</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">0.06(0.01)</td>
+<td class="gt_row gt_center" headers="中位数">0.06</td>
+<td class="gt_row gt_center" headers="众数统计值">0.06</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0.04~0.10</td>
+<td class="gt_row gt_center" headers="研究数n">146</td>
+<td class="gt_row gt_center" headers="效应量数k">402</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量">人均GDP(对数)</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">10.63(0.37)</td>
+<td class="gt_row gt_center" headers="中位数">10.72</td>
+<td class="gt_row gt_center" headers="众数统计值">10.72</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">8.33~11.08</td>
+<td class="gt_row gt_center" headers="研究数n">146</td>
+<td class="gt_row gt_center" headers="效应量数k">402</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量">大学学历占比</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">0.23(0.07)</td>
+<td class="gt_row gt_center" headers="中位数">0.28</td>
+<td class="gt_row gt_center" headers="众数统计值">0.28</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0.02~0.28</td>
+<td class="gt_row gt_center" headers="研究数n">146</td>
+<td class="gt_row gt_center" headers="效应量数k">402</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量">互联网使用率</td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">0.57(0.05)</td>
+<td class="gt_row gt_center" headers="中位数">0.57</td>
+<td class="gt_row gt_center" headers="众数统计值">50.57</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">0.25~0.64</td>
+<td class="gt_row gt_center" headers="研究数n">146</td>
+<td class="gt_row gt_center" headers="效应量数k">402</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量"><strong>样本量</strong></td>
+<td class="gt_row gt_center" headers="频数或均值标准差" style="white-space: nowrap">332.33(1979.99)</td>
+<td class="gt_row gt_center" headers="中位数">185</td>
+<td class="gt_row gt_center" headers="众数统计值">74</td>
+<td class="gt_row gt_center" headers="范围" style="white-space: nowrap">11~41592</td>
+<td class="gt_row gt_center" headers="研究数n">163</td>
+<td class="gt_row gt_center" headers="效应量数k">442</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="测试ai厌恶-vs.-ai欣赏的能力-个性化框架" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="测试ai厌恶-vs.-ai欣赏的能力-个性化框架"><span class="header-section-number">3.2</span> 测试AI厌恶 vs.&nbsp;AI欣赏的能力-个性化框架</h2>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Forest Plot.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 所有效应量（k = 442）的森林图，随机效应元分析
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-3" class="quarto-xref">图&nbsp;3</a> 中，正值表示AI欣赏；负值表示AI厌恶</li>
+<li>整体Cohen’s <span class="math inline">\(d\)</span> = -0.26，95% CI [-0.37，-0.15]，<span class="math inline">\(t(441)=-4.81\)</span>，<span class="math inline">\(p&lt;.001\)</span>，<strong>AI厌恶</strong>但<strong>效应量并不算大</strong></li>
+<li>异质性（heterogeneity）检验表明：<span class="math inline">\(Q(441)=15350.05，p&lt;.001\)</span>；<span class="math inline">\(I^2=97.96\%\)</span>，80%预测区间为-1.13到0.61</li>
+<li>根据 <a href="#fig-1" class="quarto-xref">图&nbsp;1</a> ，以象限Ⅰ作为参照组进行元回归，结果如 <a href="#tbl-2" class="quarto-xref">表&nbsp;2</a> 所示</li>
+</ul>
+<div class="cell">
+<div id="tbl-2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;2: 元回归结果
+</figcaption>
+<div aria-describedby="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="thlopeaqye" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#thlopeaqye table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#thlopeaqye thead, #thlopeaqye tbody, #thlopeaqye tfoot, #thlopeaqye tr, #thlopeaqye td, #thlopeaqye th {
+  border-style: none;
+}
+
+#thlopeaqye p {
+  margin: 0;
+  padding: 0;
+}
+
+#thlopeaqye .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#thlopeaqye .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#thlopeaqye .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#thlopeaqye .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#thlopeaqye .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#thlopeaqye .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#thlopeaqye .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#thlopeaqye .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#thlopeaqye .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#thlopeaqye .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#thlopeaqye .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#thlopeaqye .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#thlopeaqye .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#thlopeaqye .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#thlopeaqye .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#thlopeaqye .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#thlopeaqye .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#thlopeaqye .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#thlopeaqye .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#thlopeaqye .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#thlopeaqye .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#thlopeaqye .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#thlopeaqye .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#thlopeaqye .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#thlopeaqye .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#thlopeaqye .gt_left {
+  text-align: left;
+}
+
+#thlopeaqye .gt_center {
+  text-align: center;
+}
+
+#thlopeaqye .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#thlopeaqye .gt_font_normal {
+  font-weight: normal;
+}
+
+#thlopeaqye .gt_font_bold {
+  font-weight: bold;
+}
+
+#thlopeaqye .gt_font_italic {
+  font-style: italic;
+}
+
+#thlopeaqye .gt_super {
+  font-size: 65%;
+}
+
+#thlopeaqye .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#thlopeaqye .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#thlopeaqye .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#thlopeaqye .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#thlopeaqye .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#thlopeaqye .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#thlopeaqye .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#thlopeaqye .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#thlopeaqye div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a变量" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="white-space: nowrap" scope="col">变量</th>
+<th id="b" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="white-space: nowrap" scope="col"><em>b</em></th>
+<th id="SE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="white-space: nowrap" scope="col"><em>SE</em></th>
+<th id="t" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="white-space: nowrap" scope="col"><em>t</em></th>
+<th id="p" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="white-space: nowrap" scope="col"><em>p</em></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量" style="white-space: nowrap">截距 = 象限Ⅰ（高AI能力、低个性化）</td>
+<td class="gt_row gt_center" headers="b" style="white-space: nowrap">0.27</td>
+<td class="gt_row gt_center" headers="SE" style="white-space: nowrap">0.09</td>
+<td class="gt_row gt_center" headers="t" style="white-space: nowrap">3.01</td>
+<td class="gt_row gt_center" headers="p" style="white-space: nowrap">.003</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量" style="white-space: nowrap">象限Ⅱ（高AI能力、高个性化）</td>
+<td class="gt_row gt_center" headers="b" style="white-space: nowrap">-0.72</td>
+<td class="gt_row gt_center" headers="SE" style="white-space: nowrap">0.18</td>
+<td class="gt_row gt_center" headers="t" style="white-space: nowrap">-3.90</td>
+<td class="gt_row gt_center" headers="p" style="white-space: nowrap">&lt;.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="变量" style="white-space: nowrap">象限Ⅲ（低AI能力、高个性化）</td>
+<td class="gt_row gt_center" headers="b" style="white-space: nowrap">-0.65</td>
+<td class="gt_row gt_center" headers="SE" style="white-space: nowrap">0.12</td>
+<td class="gt_row gt_center" headers="t" style="white-space: nowrap">-5.37</td>
+<td class="gt_row gt_center" headers="p" style="white-space: nowrap">&lt;.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="变量" style="white-space: nowrap">象限Ⅳ（低AI能力、低个性化）</td>
+<td class="gt_row gt_center" headers="b" style="white-space: nowrap">-0.96</td>
+<td class="gt_row gt_center" headers="SE" style="white-space: nowrap">0.13</td>
+<td class="gt_row gt_center" headers="t" style="white-space: nowrap">-7.17</td>
+<td class="gt_row gt_center" headers="p" style="white-space: nowrap">&lt;.001</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<ul>
+<li>分象限进行元回归，结果如@tbl-3 所示</li>
+</ul>
+<div class="cell">
+<div id="tbl-3" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;3: 分象限元分析结果
+</figcaption>
+<div aria-describedby="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="rvtqmsgtfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rvtqmsgtfi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rvtqmsgtfi thead, #rvtqmsgtfi tbody, #rvtqmsgtfi tfoot, #rvtqmsgtfi tr, #rvtqmsgtfi td, #rvtqmsgtfi th {
+  border-style: none;
+}
+
+#rvtqmsgtfi p {
+  margin: 0;
+  padding: 0;
+}
+
+#rvtqmsgtfi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rvtqmsgtfi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rvtqmsgtfi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rvtqmsgtfi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rvtqmsgtfi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rvtqmsgtfi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rvtqmsgtfi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rvtqmsgtfi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rvtqmsgtfi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rvtqmsgtfi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rvtqmsgtfi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rvtqmsgtfi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rvtqmsgtfi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rvtqmsgtfi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rvtqmsgtfi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvtqmsgtfi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rvtqmsgtfi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rvtqmsgtfi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rvtqmsgtfi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvtqmsgtfi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rvtqmsgtfi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvtqmsgtfi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rvtqmsgtfi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvtqmsgtfi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rvtqmsgtfi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvtqmsgtfi .gt_left {
+  text-align: left;
+}
+
+#rvtqmsgtfi .gt_center {
+  text-align: center;
+}
+
+#rvtqmsgtfi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rvtqmsgtfi .gt_font_normal {
+  font-weight: normal;
+}
+
+#rvtqmsgtfi .gt_font_bold {
+  font-weight: bold;
+}
+
+#rvtqmsgtfi .gt_font_italic {
+  font-style: italic;
+}
+
+#rvtqmsgtfi .gt_super {
+  font-size: 65%;
+}
+
+#rvtqmsgtfi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rvtqmsgtfi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rvtqmsgtfi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rvtqmsgtfi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rvtqmsgtfi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rvtqmsgtfi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rvtqmsgtfi .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rvtqmsgtfi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rvtqmsgtfi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="a条件" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">条件</th>
+<th id="k_sample" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><em>k</em><sub>sample</sub></th>
+<th id="k_es" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><em>k</em><sub>es</sub></th>
+<th id="N" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><em>N</em></th>
+<th id="d" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><em>d</em></th>
+<th id="SD" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><em>SD</em></th>
+<th id="CI_95" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="white-space: nowrap" scope="col">95% CI</th>
+<th id="prediction_interval_80" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="white-space: nowrap" scope="col">80%预测区间</th>
+<th id="I2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><em>I</em><sup>2</sup></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="条件">象限Ⅰ（高AI能力、低个性化）</td>
+<td class="gt_row gt_center" headers="k_sample">46</td>
+<td class="gt_row gt_center" headers="k_es">106</td>
+<td class="gt_row gt_center" headers="N">8784</td>
+<td class="gt_row gt_center" headers="d">0.27</td>
+<td class="gt_row gt_center" headers="SD">0.31</td>
+<td class="gt_row gt_center" headers="CI_95" style="white-space: nowrap">[0.17, 0.37]</td>
+<td class="gt_row gt_center" headers="prediction_interval_80" style="white-space: nowrap">[-0.14, 0.67]</td>
+<td class="gt_row gt_center" headers="I2">90.82</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="条件">象限Ⅱ（高AI能力、高个性化）</td>
+<td class="gt_row gt_center" headers="k_sample">14</td>
+<td class="gt_row gt_center" headers="k_es">27</td>
+<td class="gt_row gt_center" headers="N">3400</td>
+<td class="gt_row gt_center" headers="d">-0.43</td>
+<td class="gt_row gt_center" headers="SD">0.18</td>
+<td class="gt_row gt_center" headers="CI_95" style="white-space: nowrap">[-0.54, -0.32]</td>
+<td class="gt_row gt_center" headers="prediction_interval_80" style="white-space: nowrap">[-0.67, -0.19]</td>
+<td class="gt_row gt_center" headers="I2">66.02</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="条件">象限Ⅲ（低AI能力、高个性化）</td>
+<td class="gt_row gt_center" headers="k_sample">53</td>
+<td class="gt_row gt_center" headers="k_es">184</td>
+<td class="gt_row gt_center" headers="N">15853</td>
+<td class="gt_row gt_center" headers="d">-0.38</td>
+<td class="gt_row gt_center" headers="SD">0.54</td>
+<td class="gt_row gt_center" headers="CI_95" style="white-space: nowrap">[-0.53, -0.23]</td>
+<td class="gt_row gt_center" headers="prediction_interval_80" style="white-space: nowrap">[-1.09, 0.32]</td>
+<td class="gt_row gt_center" headers="I2">96.10</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="条件">象限Ⅳ（低AI能力、低个性化）</td>
+<td class="gt_row gt_center" headers="k_sample">37</td>
+<td class="gt_row gt_center" headers="k_es">97</td>
+<td class="gt_row gt_center" headers="N">9805</td>
+<td class="gt_row gt_center" headers="d">-0.69</td>
+<td class="gt_row gt_center" headers="SD">0.90</td>
+<td class="gt_row gt_center" headers="CI_95" style="white-space: nowrap">[-0.98, -0.39]</td>
+<td class="gt_row gt_center" headers="prediction_interval_80" style="white-space: nowrap">[-1.86, 0.48]</td>
+<td class="gt_row gt_center" headers="I2">98.19</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<ul>
+<li>象限Ⅰ表现出AI欣赏；其他象限表现出AI厌恶</li>
+<li>合并象限Ⅱ、Ⅲ、Ⅳ，<span class="math inline">\(d=-0.50\)</span>，<span class="math inline">\(k_{\text{sample}}=104\)</span>，<span class="math inline">\(k_{\text{es}}=308\)</span>，95% CI <span class="math inline">\([-0.63, -0.37]\)</span>，<span class="math inline">\(t(307) = -7.36\)</span>，<span class="math inline">\(p&lt;.001\)</span>，整体表现出AI厌恶</li>
+<li><a href="#fig-4" class="quarto-xref">图&nbsp;4</a> 使用三维图展示了效应量的分布情况</li>
+</ul>
+<div id="fig-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="3d.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4: 三维图
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="稳健性检验" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="稳健性检验"><span class="header-section-number">3.3</span> 稳健性检验</h2>
+<ul>
+<li>选择中位数进行象限划分，结果稳健</li>
+<li>使用Cook’s距离和DFBETA值识别异常值，象限Ⅰ和Ⅱ无异常值，象限Ⅲ和Ⅳ分别有3个和5个异常值，去除后结果稳健</li>
+<li>仅对高质量文献元分析，结果稳健
+<ul>
+<li>是否进行功效分析</li>
+<li>是否进行预注册</li>
+<li>是否报告被试排除情况</li>
+<li>是否包含注意力测试</li>
+<li>排除低于中位数的文献</li>
+</ul></li>
+</ul>
+</section>
+<section id="调节分析" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="调节分析"><span class="header-section-number">3.4</span> 调节分析</h2>
+<div class="cell">
+<div id="tbl-4" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;4: 象限Ⅰ调节效应分析：元回归
+</figcaption>
+<div aria-describedby="tbl-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="uqtsqjugyj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uqtsqjugyj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#uqtsqjugyj thead, #uqtsqjugyj tbody, #uqtsqjugyj tfoot, #uqtsqjugyj tr, #uqtsqjugyj td, #uqtsqjugyj th {
+  border-style: none;
+}
+
+#uqtsqjugyj p {
+  margin: 0;
+  padding: 0;
+}
+
+#uqtsqjugyj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#uqtsqjugyj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#uqtsqjugyj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#uqtsqjugyj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 1.5px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#uqtsqjugyj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#uqtsqjugyj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#uqtsqjugyj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#uqtsqjugyj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 1.5px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#uqtsqjugyj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#uqtsqjugyj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#uqtsqjugyj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uqtsqjugyj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#uqtsqjugyj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#uqtsqjugyj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#uqtsqjugyj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uqtsqjugyj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#uqtsqjugyj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#uqtsqjugyj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#uqtsqjugyj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uqtsqjugyj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#uqtsqjugyj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uqtsqjugyj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#uqtsqjugyj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uqtsqjugyj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uqtsqjugyj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uqtsqjugyj .gt_left {
+  text-align: left;
+}
+
+#uqtsqjugyj .gt_center {
+  text-align: center;
+}
+
+#uqtsqjugyj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#uqtsqjugyj .gt_font_normal {
+  font-weight: normal;
+}
+
+#uqtsqjugyj .gt_font_bold {
+  font-weight: bold;
+}
+
+#uqtsqjugyj .gt_font_italic {
+  font-style: italic;
+}
+
+#uqtsqjugyj .gt_super {
+  font-size: 65%;
+}
+
+#uqtsqjugyj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#uqtsqjugyj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#uqtsqjugyj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#uqtsqjugyj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#uqtsqjugyj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#uqtsqjugyj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#uqtsqjugyj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#uqtsqjugyj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#uqtsqjugyj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings gt_spanner_row header">
+<th rowspan="2" id="a检验调节变量" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col">检验调节变量</th>
+<th colspan="4" id="模型1" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+模型1
+</div></th>
+<th colspan="4" id="模型2" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+模型2
+</div></th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a模型1_b" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>b</em></th>
+<th id="a模型1_SE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>SE</em></th>
+<th id="a模型1_p" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>p</em></th>
+<th id="a模型1_CI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col">95% CI</th>
+<th id="a模型2_b" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>b</em></th>
+<th id="a模型2_SE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>SE</em></th>
+<th id="a模型2_p" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>p</em></th>
+<th id="a模型2_CI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col">95% CI</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>AI特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">有形机器人 vs.&nbsp;无形算法</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.53</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.20</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.0095**</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[0.13, 0.93]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.43</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.20</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.03*</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[0.05, 0.82]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>研究特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">行为 vs.&nbsp;态度</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">-0.15</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.06</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.0098**</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.27, -0.04]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.11</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.06</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.06</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.23, 0.01]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">被试间 vs.&nbsp;被试内</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.35</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.13</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.009**</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[0.09, 0.61]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.26</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.13</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.04*</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[0.01, 0.52]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">研究质量</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">-0.01</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.09</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.89</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.19, 0.17]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.02</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.09</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.84</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.20, 0.17]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">效应量转换</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.09</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.14</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.51</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.18, 0.36]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.05</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.14</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.73</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.23, 0.33]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>样本特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">女性比例</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.23</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.55</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.67</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.84, 1.30]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.68</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.61</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.26</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.51, 1.87]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">众包 vs.&nbsp;其他样本</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.07</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.20</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.71</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.31, 0.46]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.31</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.23</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.19</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.15, 0.76]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>发表特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">发表 vs.&nbsp;未发表</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.12</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.19</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.52</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.25, 0.50]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.10</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.21</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.63</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.32, 0.52]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">发表年份</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">-0.01</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.02</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.42</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.05, 0.02]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.03</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.02</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.10</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.06, 0.01]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>国家或地区特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">失业率</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-16.38</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">6.24</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.009**</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-28.62, -4.14]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">人均GDP（log）</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.03</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.43</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.94</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.88, 0.82]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">大学学历比例</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.66</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">1.30</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.61</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-3.20, 1.88]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">互联网使用率</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-1.51</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">2.88</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.60</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-7.15, 4.12]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><em>N</em></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">8,383</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">8,286</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><em>k</em><sub>sample</sub></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">37</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">36</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><em>k</em><sub>es</sub></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">88</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">85</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-5" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;5: 象限Ⅱ、Ⅲ、Ⅳ调节效应分析：元回归
+</figcaption>
+<div aria-describedby="tbl-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="omgiajtmas" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#omgiajtmas table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#omgiajtmas thead, #omgiajtmas tbody, #omgiajtmas tfoot, #omgiajtmas tr, #omgiajtmas td, #omgiajtmas th {
+  border-style: none;
+}
+
+#omgiajtmas p {
+  margin: 0;
+  padding: 0;
+}
+
+#omgiajtmas .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#omgiajtmas .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#omgiajtmas .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#omgiajtmas .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 1.5px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#omgiajtmas .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#omgiajtmas .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#omgiajtmas .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#omgiajtmas .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 1.5px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#omgiajtmas .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#omgiajtmas .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#omgiajtmas .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#omgiajtmas .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#omgiajtmas .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#omgiajtmas .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#omgiajtmas .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#omgiajtmas .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#omgiajtmas .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#omgiajtmas .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#omgiajtmas .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#omgiajtmas .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#omgiajtmas .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#omgiajtmas .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#omgiajtmas .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#omgiajtmas .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#omgiajtmas .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#omgiajtmas .gt_left {
+  text-align: left;
+}
+
+#omgiajtmas .gt_center {
+  text-align: center;
+}
+
+#omgiajtmas .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#omgiajtmas .gt_font_normal {
+  font-weight: normal;
+}
+
+#omgiajtmas .gt_font_bold {
+  font-weight: bold;
+}
+
+#omgiajtmas .gt_font_italic {
+  font-style: italic;
+}
+
+#omgiajtmas .gt_super {
+  font-size: 65%;
+}
+
+#omgiajtmas .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#omgiajtmas .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#omgiajtmas .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#omgiajtmas .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#omgiajtmas .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#omgiajtmas .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#omgiajtmas .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#omgiajtmas .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#omgiajtmas div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings gt_spanner_row header">
+<th rowspan="2" id="a检验调节变量" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col">检验调节变量</th>
+<th colspan="4" id="模型1" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+模型1
+</div></th>
+<th colspan="4" id="模型2" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+模型2
+</div></th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a模型1_b" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>b</em></th>
+<th id="a模型1_SE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>SE</em></th>
+<th id="a模型1_p" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>p</em></th>
+<th id="a模型1_CI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col">95% CI</th>
+<th id="a模型2_b" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>b</em></th>
+<th id="a模型2_SE" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>SE</em></th>
+<th id="a模型2_p" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col"><em>p</em></th>
+<th id="a模型2_CI" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="vertical-align: middle; white-space: nowrap" scope="col">95% CI</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>AI特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">有形机器人 vs.&nbsp;无形算法</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.30</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.33</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.38</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.36, 0.95]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.27</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.30</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.37</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.32, 0.86]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>研究特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">行为 vs.&nbsp;态度</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.14</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.11</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.18</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.07, 0.36]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.18</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.12</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.11</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.04, 0.41]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">被试间 vs.&nbsp;被试内</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">-0.19</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.23</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.40</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.64, 0.25]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.05</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.19</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.80</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.32, 0.42]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">研究质量</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">-0.12</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.11</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.29</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.34, 0.10]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.06</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.10</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.57</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.26, 0.14]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">效应量转换</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">-0.35</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.06</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">&lt;.001***</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.46, -0.24]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.35</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.05</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">&lt;.001***</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.46, -0.24]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>样本特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">女性比例</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">-0.28</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.60</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.64</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-1.45, 0.90]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.75</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.54</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.16</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-1.81, 0.31]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">众包 vs.&nbsp;其他样本</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">-0.08</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.17</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.64</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.42, 0.26]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.22</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.16</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.16</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.09, 0.54]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>发表特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">发表 vs.&nbsp;未发表</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.30</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.25</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.24</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.20, 0.80]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">0.27</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.23</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.23</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.17, 0.72]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">发表年份</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">0.03</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap">0.02</td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap">.12</td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap">[-0.01, 0.08]</td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-0.004</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">0.02</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.82</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-0.04, 0.03]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><strong>国家或地区特征</strong></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">失业率</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">12.95</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">7.71</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">.09</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-2.16, 28.07]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">人均GDP（log）</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">3.89</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">1.12</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">&lt;.001***</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[1.70, 6.08]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">大学学历比例</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-6.21</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">1.86</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">&lt;.001***</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-9.85, -2.57]</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap">互联网使用率</td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">-27.14</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap">7.30</td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap">&lt;.001***</td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap">[-41.44, -12.84]</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><em>N</em></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">26,357</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">21,882</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><em>k</em><sub>sample</sub></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">95</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">80</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="检验调节变量" style="white-space: nowrap"><em>k</em><sub>es</sub></td>
+<td class="gt_row gt_center" headers="模型1_b" style="white-space: nowrap">277</td>
+<td class="gt_row gt_center" headers="模型1_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型1_CI" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_b" style="white-space: nowrap">243</td>
+<td class="gt_row gt_center" headers="模型2_SE" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_p" style="white-space: nowrap"></td>
+<td class="gt_row gt_center" headers="模型2_CI" style="white-space: nowrap"></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div id="fig-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="mod.jpeg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5: 移动常数技术绘制的调节效应图
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#tbl-4" class="quarto-xref">表&nbsp;4</a> 和 <a href="#tbl-5" class="quarto-xref">表&nbsp;5</a> 中，模型1只包含研究水平变量，模型2加入了国家或地区水平变量（二分类变量，vs.前和后分别是1和0）</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+注释
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>本节，<em>AI欣赏象限</em>特指象限Ⅰ，<em>AI厌恶象限</em>特指象限Ⅱ、Ⅲ、Ⅳ综合</p>
+</div>
+</div>
+<section id="ai特征" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="ai特征"><span class="header-section-number">3.4.1</span> AI特征</h3>
+<ul>
+<li>物理具身化（physical embodiment）会增加AI的感知社会临场感（perceived social presence）</li>
+<li><a href="#tbl-4" class="quarto-xref">表&nbsp;4</a> 和 <a href="#fig-5" class="quarto-xref">图&nbsp;5</a> a表明：<em>AI欣赏象限</em>中有形机器人的AI欣赏更明显</li>
+<li><a href="#tbl-5" class="quarto-xref">表&nbsp;5</a> 表明：<em>AI厌恶象限</em>中该变量不显著</li>
+</ul>
+</section>
+<section id="研究特征-1" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="研究特征-1"><span class="header-section-number">3.4.2</span> 研究特征</h3>
+<section id="行为和态度" class="level4" data-number="3.4.2.1">
+<h4 data-number="3.4.2.1" class="anchored" data-anchor-id="行为和态度"><span class="header-section-number">3.4.2.1</span> 行为和态度</h4>
+<ul>
+<li>态度强烈但行为保守</li>
+<li><em>AI欣赏象限</em>中，AI欣赏在态度条件下更明显</li>
+<li><em>AI厌恶象限</em>中该变量不显著</li>
+</ul>
+</section>
+<section id="被试间和被试内" class="level4" data-number="3.4.2.2">
+<h4 data-number="3.4.2.2" class="anchored" data-anchor-id="被试间和被试内"><span class="header-section-number">3.4.2.2</span> 被试间和被试内</h4>
+<ul>
+<li><em>AI欣赏象限</em>中，AI欣赏在被试间条件下更明显</li>
+<li><em>AI厌恶象限</em>中该变量不显著</li>
+</ul>
+</section>
+<section id="研究质量" class="level4" data-number="3.4.2.3">
+<h4 data-number="3.4.2.3" class="anchored" data-anchor-id="研究质量"><span class="header-section-number">3.4.2.3</span> 研究质量</h4>
+<ul>
+<li>在两种象限中均不显著</li>
+</ul>
+</section>
+<section id="效应量转换" class="level4" data-number="3.4.2.4">
+<h4 data-number="3.4.2.4" class="anchored" data-anchor-id="效应量转换"><span class="header-section-number">3.4.2.4</span> 效应量转换</h4>
+<ul>
+<li>1 = 已转换，0 = 未转换</li>
+<li><em>AI欣赏象限</em>中该变量不显著</li>
+<li><em>AI厌恶象限</em>中，AI厌恶在已转换效应量的研究更明显</li>
+</ul>
+</section>
+</section>
+<section id="样本特征" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="样本特征"><span class="header-section-number">3.4.3</span> 样本特征</h3>
+<ul>
+<li>女性比例和样本来源，在两种象限中均不显著</li>
+</ul>
+</section>
+<section id="发表特征" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="发表特征"><span class="header-section-number">3.4.4</span> 发表特征</h3>
+<ul>
+<li>是否发表和发表年份，在两种象限中均不显著</li>
+</ul>
+</section>
+<section id="国家或地区特征" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="国家或地区特征"><span class="header-section-number">3.4.5</span> 国家或地区特征</h3>
+<ul>
+<li>在<em>AI欣赏象限</em>中，失业率越高，AI欣赏水平越低；<em>AI厌恶象限</em>中该变量不显著
+<ul>
+<li>高失业率国家或地区，人们更担心被AI取代工作</li>
+</ul></li>
+<li>在<em>AI欣赏象限</em>中，人均GDP不显著；<em>AI厌恶象限</em>中，AI厌恶在人均GDP较高的国家或地区中显著降低</li>
+<li>在<em>AI欣赏象限</em>中，大学学历比例和互联网使用率均不显著；<em>AI厌恶象限</em>中，两变量高的国家或地区AI厌恶显著更高</li>
+</ul>
+</section>
+</section>
+<section id="发表偏倚" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="发表偏倚"><span class="header-section-number">3.5</span> 发表偏倚</h2>
+<div id="fig-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="funnel.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6: 漏洞图
+</figcaption>
+</figure>
+</div>
+<section id="ai欣赏象限" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="ai欣赏象限"><span class="header-section-number">3.5.1</span> <em>AI欣赏象限</em></h3>
+<ul>
+<li><a href="#fig-6" class="quarto-xref">图&nbsp;6</a> 左图是<em>AI欣赏象限</em>的结果
+<ul>
+<li>Egger检验结果不显著，表明对称（<span class="math inline">\(t=1.73，p=.08\)</span>）</li>
+</ul></li>
+<li>元回归中发表特征两个变量均不显著</li>
+<li>精准效应检验（precision-effect test，PET）也不显著（<span class="math inline">\(b = 0.48，SE = 0.55，p = .38\)</span>）</li>
+<li>均说明不存在发表偏移</li>
+</ul>
+</section>
+<section id="ai厌恶象限" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="ai厌恶象限"><span class="header-section-number">3.5.2</span> <em>AI厌恶象限</em></h3>
+<ul>
+<li><a href="#fig-6" class="quarto-xref">图&nbsp;6</a> 右图是<em>AI厌恶象限</em>的结果
+<ul>
+<li>Egger检验结果显著，表明不对称（<span class="math inline">\(t=3.53，p&lt;.001\)</span>）</li>
+<li><a href="#fig-6" class="quarto-xref">图&nbsp;6</a> 右图显示：效应量大的区域存在缺失，说明对不显著结果的选择性不报告<strong>并非</strong>主要问题</li>
+</ul></li>
+<li>发表状态为协变量，效应量为因变量进行元回归
+<ul>
+<li>发表状态和效应量之间无显著关联（<span class="math inline">\(b = 0.11，SE = 0.22，p = .61\)</span>）</li>
+</ul></li>
+<li>PET结果不显著（<span class="math inline">\(b = 1.74，SE = 0.95，p = .07\)</span>）</li>
+<li>均说明不太可能存在发表偏倚</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="PET-PEESE">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>PET-PEESE
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>精确效应检验（precision-effect test，PET）和带标准误的精确效应估计（precision-effect estimate with standard error，PEESE）构成两步法。</p>
+<p>因为PET会低估非零效应，PEESE会高估零效应，所以当PET显著时，优先采用PEESE结果；PET不显著时，优先采用PET结果。</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="讨论" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 讨论</h1>
+<section id="理论和实证贡献" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="理论和实证贡献"><span class="header-section-number">4.1</span> 理论和实证贡献</h2>
+<ul>
+<li>能力-个性化框架很好的解释了AI厌恶和AI欣赏</li>
+<li>人们对AI态度上的欣赏未必能转化为行为上的AI接受</li>
+<li>需要开展跨学科研究，探究AI具身化如何塑造AI偏好</li>
+<li>AI可能加剧不同失业率国家之间的经济不平等</li>
+</ul>
+</section>
+<section id="实践贡献" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="实践贡献"><span class="header-section-number">4.2</span> 实践贡献</h2>
+<ul>
+<li>开发者应考虑具体情境</li>
+<li>用户应培养对AI的平衡看法，不要让偏见影响认知</li>
+</ul>
+</section>
+<section id="局限与未来方向" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="局限与未来方向"><span class="header-section-number">4.3</span> 局限与未来方向</h2>
+<ul>
+<li>能力-个性化框架不能解释所有影响因素</li>
+<li>单一题目测量每个维度是方法上的局限
+<ul>
+<li>进行了分析性和情绪性的编码，但解释效果不如能力和个性化</li>
+</ul></li>
+<li>2022年11月，ChatGPT的发行可能对结果有较大影响</li>
+<li>调节变量取值不均匀，尤其是未发表数据远少于已发表</li>
+<li>样本可能不具有全国代表性，且缺少非WEIRD和非英语国家</li>
+<li>其他调节变量未考虑到</li>
+<li>元分析表示相关而不是因果</li>
+<li>未进行预注册，很多分析是在审稿人建议下进行，为了需要进行重复验证</li>
+</ul>
+</section>
+<section id="结论" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="结论"><span class="header-section-number">4.4</span> 结论</h2>
+<ul>
+<li>人们认为AI比人类能力更强且个性化被认为不必要时，AI欣赏才会出现</li>
+<li>其他情况会出现AI厌恶</li>
+</ul>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-James_et_al_1984" class="csl-entry" role="listitem">
+James, L. R., Demaree, R. G., &amp; Wolf, G. (1984). Estimating within-group interrater reliability with and without response bias. <em>Journal of Applied Psychology</em>, <em>69</em>(1), 85–98. <a href="https://doi.org/10.1037/0021-9010.69.1.85">https://doi.org/10.1037/0021-9010.69.1.85</a>
+</div>
+<div id="ref-Qin_et_al_2025" class="csl-entry" role="listitem">
+Qin, X., Zhou, X., Chen, C., Wu, D., Zhou, H., Dong, X., Cao, L., &amp; Lu, J. G. (2025). AI aversion or appreciation? A capability–personalization framework and a meta-analytic review. <em>Psychological Bulletin</em>, <em>151</em>(5), 580–599. <a href="https://doi.org/10.1037/bul0000477">https://doi.org/10.1037/bul0000477</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
