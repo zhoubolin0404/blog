@@ -9,7 +9,7 @@
 <meta name="author" content="周博霖">
 <meta name="dcterms.date" content="2026-09-27">
 
-<title>拥有选择会改变熟悉面孔和陌生面孔的吸引力：性别差异和相似性 – Zhou Bolin’s blog</title>
+<title>拥有选择会改变熟悉面孔和新异面孔的吸引力：性别差异和相似性 – Zhou Bolin’s blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,7 +28,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -76,35 +96,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../styles.css">
 </head>
@@ -146,7 +137,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">拥有选择会改变熟悉面孔和陌生面孔的吸引力：性别差异和相似性</h1>
+      <h1 class="title">拥有选择会改变熟悉面孔和新异面孔的吸引力：性别差异和相似性</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">文献笔记</div>
                 <div class="quarto-category">伴侣评价</div>
@@ -186,41 +177,59 @@ window.Quarto = {
   <ul>
   <li><a href="#引言" id="toc-引言" class="nav-link active" data-scroll-target="#引言"><span class="header-section-number">1</span> 引言</a>
   <ul class="collapse">
-  <li><a href="#人们希望自己在线上约会中的形象是什么样的" id="toc-人们希望自己在线上约会中的形象是什么样的" class="nav-link" data-scroll-target="#人们希望自己在线上约会中的形象是什么样的"><span class="header-section-number">1.1</span> 人们希望自己在线上约会中的形象是什么样的？</a></li>
-  <li><a href="#人们是否被准确看到或者和他们的自我呈现目标一致" id="toc-人们是否被准确看到或者和他们的自我呈现目标一致" class="nav-link" data-scroll-target="#人们是否被准确看到或者和他们的自我呈现目标一致"><span class="header-section-number">1.2</span> 人们是否被准确看到，或者和他们的自我呈现目标一致？</a></li>
-  <li><a href="#准确性或自我展示成功是值得的吗" id="toc-准确性或自我展示成功是值得的吗" class="nav-link" data-scroll-target="#准确性或自我展示成功是值得的吗"><span class="header-section-number">1.3</span> 准确性或自我展示成功是值得的吗？</a></li>
-  <li><a href="#准确性和自我展示的调节效应" id="toc-准确性和自我展示的调节效应" class="nav-link" data-scroll-target="#准确性和自我展示的调节效应"><span class="header-section-number">1.4</span> 准确性和自我展示的调节效应</a></li>
-  <li><a href="#本研究" id="toc-本研究" class="nav-link" data-scroll-target="#本研究"><span class="header-section-number">1.5</span> 本研究</a></li>
+  <li><a href="#对面孔的社会判断及其后果" id="toc-对面孔的社会判断及其后果" class="nav-link" data-scroll-target="#对面孔的社会判断及其后果"><span class="header-section-number">1.1</span> 对面孔的社会判断及其后果</a></li>
+  <li><a href="#线上交友平台引发的评估心态" id="toc-线上交友平台引发的评估心态" class="nav-link" data-scroll-target="#线上交友平台引发的评估心态"><span class="header-section-number">1.2</span> 线上交友平台引发的评估心态</a></li>
+  <li><a href="#评估心态和选择在交友中的作用" id="toc-评估心态和选择在交友中的作用" class="nav-link" data-scroll-target="#评估心态和选择在交友中的作用"><span class="header-section-number">1.3</span> 评估心态和选择在交友中的作用</a></li>
+  <li><a href="#本实验" id="toc-本实验" class="nav-link" data-scroll-target="#本实验"><span class="header-section-number">1.4</span> 本实验</a></li>
   </ul></li>
-  <li><a href="#方法" id="toc-方法" class="nav-link" data-scroll-target="#方法"><span class="header-section-number">2</span> 方法</a>
+  <li><a href="#实验1" id="toc-实验1" class="nav-link" data-scroll-target="#实验1"><span class="header-section-number">2</span> 实验1</a>
   <ul class="collapse">
-  <li><a href="#被试" id="toc-被试" class="nav-link" data-scroll-target="#被试"><span class="header-section-number">2.1</span> 被试</a></li>
-  <li><a href="#测量" id="toc-测量" class="nav-link" data-scroll-target="#测量"><span class="header-section-number">2.2</span> 测量</a></li>
-  <li><a href="#分析" id="toc-分析" class="nav-link" data-scroll-target="#分析"><span class="header-section-number">2.3</span> 分析</a>
+  <li><a href="#方法" id="toc-方法" class="nav-link" data-scroll-target="#方法"><span class="header-section-number">2.1</span> 方法</a>
   <ul class="collapse">
-  <li><a href="#人们希望在线上约会中如何被看到" id="toc-人们希望在线上约会中如何被看到" class="nav-link" data-scroll-target="#人们希望在线上约会中如何被看到"><span class="header-section-number">2.3.1</span> 人们希望在线上约会中如何被看到？</a></li>
-  <li><a href="#人们是否被准确看到或者和他们的自我呈现目标一致-1" id="toc-人们是否被准确看到或者和他们的自我呈现目标一致-1" class="nav-link" data-scroll-target="#人们是否被准确看到或者和他们的自我呈现目标一致-1"><span class="header-section-number">2.3.2</span> 人们是否被准确看到，或者和他们的自我呈现目标一致？</a></li>
+  <li><a href="#被试" id="toc-被试" class="nav-link" data-scroll-target="#被试"><span class="header-section-number">2.1.1</span> 被试</a></li>
+  <li><a href="#面孔刺激" id="toc-面孔刺激" class="nav-link" data-scroll-target="#面孔刺激"><span class="header-section-number">2.1.2</span> 面孔刺激</a></li>
+  <li><a href="#预实验" id="toc-预实验" class="nav-link" data-scroll-target="#预实验"><span class="header-section-number">2.1.3</span> 预实验</a></li>
+  <li><a href="#实验流程" id="toc-实验流程" class="nav-link" data-scroll-target="#实验流程"><span class="header-section-number">2.1.4</span> 实验流程</a></li>
+  <li><a href="#数据分析策略" id="toc-数据分析策略" class="nav-link" data-scroll-target="#数据分析策略"><span class="header-section-number">2.1.5</span> 数据分析策略</a></li>
   </ul></li>
+  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">2.2</span> 结果</a></li>
   </ul></li>
-  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">3</span> 结果</a>
+  <li><a href="#实验2" id="toc-实验2" class="nav-link" data-scroll-target="#实验2"><span class="header-section-number">3</span> 实验2</a>
   <ul class="collapse">
-  <li><a href="#人们希望在线上约会中如何被看到-1" id="toc-人们希望在线上约会中如何被看到-1" class="nav-link" data-scroll-target="#人们希望在线上约会中如何被看到-1"><span class="header-section-number">3.1</span> 人们希望在线上约会中如何被看到？</a></li>
-  <li><a href="#人们是否被准确看到或者和他们的自我呈现目标一致-2" id="toc-人们是否被准确看到或者和他们的自我呈现目标一致-2" class="nav-link" data-scroll-target="#人们是否被准确看到或者和他们的自我呈现目标一致-2"><span class="header-section-number">3.2</span> 人们是否被准确看到，或者和他们的自我呈现目标一致？</a></li>
-  <li><a href="#准确性或自我展示成功是值得的吗-1" id="toc-准确性或自我展示成功是值得的吗-1" class="nav-link" data-scroll-target="#准确性或自我展示成功是值得的吗-1"><span class="header-section-number">3.3</span> 准确性或自我展示成功是值得的吗？</a></li>
-  <li><a href="#准确性和自我展示的调节因素" id="toc-准确性和自我展示的调节因素" class="nav-link" data-scroll-target="#准确性和自我展示的调节因素"><span class="header-section-number">3.4</span> 准确性和自我展示的调节因素</a></li>
-  </ul></li>
-  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">4</span> 讨论</a>
+  <li><a href="#方法-1" id="toc-方法-1" class="nav-link" data-scroll-target="#方法-1"><span class="header-section-number">3.1</span> 方法</a>
   <ul class="collapse">
-  <li><a href="#准确性和意外透明" id="toc-准确性和意外透明" class="nav-link" data-scroll-target="#准确性和意外透明"><span class="header-section-number">4.1</span> 准确性和意外透明</a></li>
-  <li><a href="#准确性是值得的吗" id="toc-准确性是值得的吗" class="nav-link" data-scroll-target="#准确性是值得的吗"><span class="header-section-number">4.2</span> 准确性是值得的吗？</a></li>
-  <li><a href="#准确性目标和被准确看到的调节因素" id="toc-准确性目标和被准确看到的调节因素" class="nav-link" data-scroll-target="#准确性目标和被准确看到的调节因素"><span class="header-section-number">4.3</span> 准确性目标和被准确看到的调节因素</a></li>
-  <li><a href="#自我展示成功和技巧性错误展示" id="toc-自我展示成功和技巧性错误展示" class="nav-link" data-scroll-target="#自我展示成功和技巧性错误展示"><span class="header-section-number">4.4</span> 自我展示成功和技巧性错误展示</a></li>
-  <li><a href="#自我展示成功是值得的吗" id="toc-自我展示成功是值得的吗" class="nav-link" data-scroll-target="#自我展示成功是值得的吗"><span class="header-section-number">4.5</span> 自我展示成功是值得的吗？</a></li>
-  <li><a href="#自我展示的调节因素" id="toc-自我展示的调节因素" class="nav-link" data-scroll-target="#自我展示的调节因素"><span class="header-section-number">4.6</span> 自我展示的调节因素</a></li>
-  <li><a href="#未来研究方向" id="toc-未来研究方向" class="nav-link" data-scroll-target="#未来研究方向"><span class="header-section-number">4.7</span> 未来研究方向</a></li>
-  <li><a href="#局限" id="toc-局限" class="nav-link" data-scroll-target="#局限"><span class="header-section-number">4.8</span> 局限</a></li>
+  <li><a href="#被试-1" id="toc-被试-1" class="nav-link" data-scroll-target="#被试-1"><span class="header-section-number">3.1.1</span> 被试</a></li>
+  <li><a href="#实验流程-1" id="toc-实验流程-1" class="nav-link" data-scroll-target="#实验流程-1"><span class="header-section-number">3.1.2</span> 实验流程</a></li>
+  <li><a href="#数据分析策略-1" id="toc-数据分析策略-1" class="nav-link" data-scroll-target="#数据分析策略-1"><span class="header-section-number">3.1.3</span> 数据分析策略</a></li>
   </ul></li>
-  <li><a href="#结论" id="toc-结论" class="nav-link" data-scroll-target="#结论"><span class="header-section-number">5</span> 结论</a></li>
+  <li><a href="#结果-1" id="toc-结果-1" class="nav-link" data-scroll-target="#结果-1"><span class="header-section-number">3.2</span> 结果</a></li>
+  </ul></li>
+  <li><a href="#实验3" id="toc-实验3" class="nav-link" data-scroll-target="#实验3"><span class="header-section-number">4</span> 实验3</a>
+  <ul class="collapse">
+  <li><a href="#方法-2" id="toc-方法-2" class="nav-link" data-scroll-target="#方法-2"><span class="header-section-number">4.1</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#被试-2" id="toc-被试-2" class="nav-link" data-scroll-target="#被试-2"><span class="header-section-number">4.1.1</span> 被试</a></li>
+  <li><a href="#实验流程和分析策略" id="toc-实验流程和分析策略" class="nav-link" data-scroll-target="#实验流程和分析策略"><span class="header-section-number">4.1.2</span> 实验流程和分析策略</a></li>
+  </ul></li>
+  <li><a href="#结果-2" id="toc-结果-2" class="nav-link" data-scroll-target="#结果-2"><span class="header-section-number">4.2</span> 结果</a></li>
+  </ul></li>
+  <li><a href="#实验4" id="toc-实验4" class="nav-link" data-scroll-target="#实验4"><span class="header-section-number">5</span> 实验4</a>
+  <ul class="collapse">
+  <li><a href="#方法-3" id="toc-方法-3" class="nav-link" data-scroll-target="#方法-3"><span class="header-section-number">5.1</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#被试-3" id="toc-被试-3" class="nav-link" data-scroll-target="#被试-3"><span class="header-section-number">5.1.1</span> 被试</a></li>
+  <li><a href="#实验流程-2" id="toc-实验流程-2" class="nav-link" data-scroll-target="#实验流程-2"><span class="header-section-number">5.1.2</span> 实验流程</a></li>
+  <li><a href="#数据分析策略-2" id="toc-数据分析策略-2" class="nav-link" data-scroll-target="#数据分析策略-2"><span class="header-section-number">5.1.3</span> 数据分析策略</a></li>
+  </ul></li>
+  <li><a href="#结果-3" id="toc-结果-3" class="nav-link" data-scroll-target="#结果-3"><span class="header-section-number">5.2</span> 结果</a></li>
+  </ul></li>
+  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">6</span> 讨论</a>
+  <ul class="collapse">
+  <li><a href="#结果总结" id="toc-结果总结" class="nav-link" data-scroll-target="#结果总结"><span class="header-section-number">6.1</span> 结果总结</a></li>
+  <li><a href="#理论解释" id="toc-理论解释" class="nav-link" data-scroll-target="#理论解释"><span class="header-section-number">6.2</span> 理论解释</a></li>
+  <li><a href="#局限性和实际应用" id="toc-局限性和实际应用" class="nav-link" data-scroll-target="#局限性和实际应用"><span class="header-section-number">6.3</span> 局限性和实际应用</a></li>
+  </ul></li>
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结"><span class="header-section-number">7</span> 总结</a></li>
   </ul>
 </nav>
     </div>
@@ -241,612 +250,460 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Jiwa, S., Elsaadawy, N., &amp; Carlson, E. N. (in press). Who Did I Swipe On? Accuracy and Self-Presentation in Online Dating. <em>Personality and Social Psychology Bulletin</em>. https://doi.org/10.1177/01461672251386488</p>
-<p><span class="citation" data-cites="jiwa_et_al_in_press">(<a href="#ref-jiwa_et_al_in_press" role="doc-biblioref"><strong>jiwa_et_al_in_press?</strong></a>)</span></p>
+<p>Sculley, J. R., Ritchie, K. L., &amp; Watkins, C. D. (2021). Having options alters the attractiveness of familiar versus novel faces: Sex differences and similarities. <em>Computers in Human Behavior</em>, <em>124</em>, 106937. <a href="https://doi.org/https://doi.org/10.1016/j.chb.2021.106937" class="uri">https://doi.org/https://doi.org/10.1016/j.chb.2021.106937</a></p>
+<p><span class="citation" data-cites="Sculley_et_al_2021">Sculley et al. (<a href="#ref-Sculley_et_al_2021" role="doc-biblioref">2021</a>)</span></p>
 </div>
 </div>
 <section id="引言" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> 引言</h1>
+<section id="对面孔的社会判断及其后果" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="对面孔的社会判断及其后果"><span class="header-section-number">1.1</span> 对面孔的社会判断及其后果</h2>
 <ul>
-<li>人们多大程度上想在约会资料里准确或不同地展示自己</li>
-<li>人们多大程度上希望被准确地看到和/或以符合他们希望的方式被看到</li>
-<li>这些策略和过程与约会成功的关系</li>
-</ul>
-<section id="人们希望自己在线上约会中的形象是什么样的" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="人们希望自己在线上约会中的形象是什么样的"><span class="header-section-number">1.1</span> 人们希望自己在线上约会中的形象是什么样的？</h2>
+<li><em>效价</em>（valence）和<em>吸引力</em>（attractiveness）是评价面孔的两个维度</li>
+<li>面孔的吸引力判断是<strong>快速</strong>的，即使这种判断和手头的任务无关</li>
+<li>熟悉产生喜欢（familiarity breeds liking）
 <ul>
-<li>形象管理在约会中很重要，尤其是在线上约会中</li>
-<li>准确展示自己的动机
-<ul>
-<li>遇到合适的人</li>
-<li>与某人见面的期待，避免货不对板让对方失望</li>
+<li>熟悉性和典型性（大众均值的代表性）是吸引力的部分基础</li>
+<li>交友网站上，兴趣、价值观、年龄和教育程度等方面的相似性会促进重复接触</li>
 </ul></li>
-<li>不准确展示自己的动机
-<ul>
-<li>吸引最佳潜在约会对象</li>
-<li>满足价值和自尊需求</li>
-</ul></li>
-<li><strong>事实上</strong>人们会选择性描述来提高吸引力</li>
-<li>尽管被试会说自己准确地展示了自己，但我们不知道是不是真的</li>
+<li>本研究关注：在<em>线上交友</em>背景下，<em>熟悉性</em>（familiarity）和<em>新异性</em>（novelty）对<em>吸引力判断</em>的影响</li>
 </ul>
 </section>
-<section id="人们是否被准确看到或者和他们的自我呈现目标一致" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="人们是否被准确看到或者和他们的自我呈现目标一致"><span class="header-section-number">1.2</span> 人们是否被准确看到，或者和他们的自我呈现目标一致？</h2>
+<section id="线上交友平台引发的评估心态" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="线上交友平台引发的评估心态"><span class="header-section-number">1.2</span> 线上交友平台引发的评估心态</h2>
 <ul>
-<li>人们通过细微背景被看到</li>
-<li><em>自我展示成功</em>（self-presentational success）：通过展示自我，以自己希望的方式被看到</li>
-<li><em>技巧性错误展示</em>（skilled misrepresentation）：把自己描绘得更成功</li>
-<li><em>意外透明</em>（accidental transparency）：想隐瞒但部分真是情况被察觉</li>
-<li>本研究揭示：
+<li>现在人们花费大量时间在线上，接触大量不熟悉的社会同伴</li>
+<li>浏览个人资料是线上交友的重要环节
 <ul>
-<li>人们的人格在线上约会中如何表现</li>
-<li>人们是否能在线上约会中实现自我表现的目标——不管这些目标是否被准确地看到</li>
-<li>线上约会中观察到的部分准确性是有意的还是偶然的。</li>
+<li>短时间内大量浏览、缺乏真实社会情景情况下低成本联系</li>
+<li>塑造与面对面不同的趋近-回避行为（approach-avoidance behaviour）</li>
+</ul></li>
+<li>搜索和视觉得到的特征比面对面交流才能得到的特征（幽默感、沟通风格等）更突出</li>
+<li>肤浅的评估心态（assessment mindset）
+<ul>
+<li>潜在交友对象和大量替代对象进行比较</li>
+<li>在第一次“互配”后仍寻找“更合适”的对象</li>
 </ul></li>
 </ul>
 </section>
-<section id="准确性或自我展示成功是值得的吗" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="准确性或自我展示成功是值得的吗"><span class="header-section-number">1.3</span> 准确性或自我展示成功是值得的吗？</h2>
+<section id="评估心态和选择在交友中的作用" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="评估心态和选择在交友中的作用"><span class="header-section-number">1.3</span> 评估心态和选择在交友中的作用</h2>
 <ul>
-<li>约会者喜欢准确，但事实上<strong>主观的</strong>对他人理解才是促进关系发展的原因</li>
-<li>早期浪漫关系中，被积极看待比被了解更好</li>
-<li>快速约会中，被准确看到和低浪漫兴趣（romantic interest）相关</li>
-<li>约会者似乎更喜欢自我展示成功者或技巧性错误展示者</li>
-<li>本研究揭示：
+<li>评估心态在线上交友的各个环节发挥作用
 <ul>
-<li>准确性和自我展示成功是否能预测浪漫兴趣</li>
-<li>准确性是有意的还是偶然的（解释准确性的矛盾结果）
+<li>是否回应、早期约会评估伴侣、承诺还是继续、是否停止使用</li>
+<li><strong>选择过载假说</strong>（The Choice Overload Hypothesis）
 <ul>
-<li>偶然的准确性通常和不良结果相关（隐瞒被发现）</li>
+<li>基于肤浅或少量线索的大数据集会触发节俭的选择策略，做出更保守的决策</li>
+<li>在购物、线下快速交友中均得到验证</li>
+<li>交友决策中表示拒绝、购物决策中不购买</li>
 </ul></li>
 </ul></li>
 </ul>
 </section>
-<section id="准确性和自我展示的调节效应" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="准确性和自我展示的调节效应"><span class="header-section-number">1.4</span> 准确性和自我展示的调节效应</h2>
+<section id="本实验" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="本实验"><span class="header-section-number">1.4</span> 本实验</h2>
 <ul>
-<li>有些人被准确看到是有意的，有些人是想隐瞒但被发现</li>
-<li>探究一下变量的调节作用：
+<li><em>激活</em>评估心态，并判断这种心态如何影响对熟悉和新异面孔吸引力的判断
 <ul>
-<li>表现力（expressiveness）</li>
-<li>自尊（self-esteem）</li>
-<li>关系目标（relationship goals）</li>
-<li>吸引力（attractiveness）</li>
-<li>依恋（attachment）</li>
+<li>吸引力是面孔知觉的重要的维度，也是我们进行互动的原因</li>
+<li>情景变化，吸引力也会变化</li>
+<li>证明约会过程不同阶段所涉及的<em>较低层次知觉机制</em>，即<strong>吸引力判断机制</strong>
+<ul>
+<li>大量新异的替代伴侣，他人吸引力增强还是减弱</li>
 </ul></li>
-<li>高自尊、多信息展示、寻找长期关系和吸引力高的人会准确展示并希望被准确看到</li>
-<li>焦虑型依恋会技巧性错误展示，但会失败（隐藏焦虑动机）</li>
-<li>回避型依恋会技巧性错误展示，但会成功（回避亲密动机）</li>
-</ul>
-</section>
-<section id="本研究" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="本研究"><span class="header-section-number">1.5</span> 本研究</h2>
-<ul>
-<li>探究自我展示目标、多大程度上被准确看到、多大程度上达到自我展示目标</li>
-<li>探究这些情况是否会被选中</li>
-<li>探究调节效应</li>
-</ul>
-</section>
-</section>
-<section id="方法" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 方法</h1>
-<section id="被试" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="被试"><span class="header-section-number">2.1</span> 被试</h2>
-<ul>
-<li>目标：在线约会资料
-<ul>
-<li>180人，18+</li>
-<li>上传真实约会资料</li>
 </ul></li>
-<li>在线约会资料评委
+<li>柯立芝效应（Coolidge Effect）
 <ul>
-<li>196人，18-30</li>
-<li>单身且在寻求一段关系</li>
+<li>在动物的雄性（以及少数情况指雌性）对于新出现的异性有较高的交配意愿，即使它已与周遭旧有的异性有交配经验</li>
+<li>相较于男性，女性认为熟悉面孔相对于新异面孔更有吸引力</li>
+<li>熟悉性是研究线上交友和选择行为时的一个重要维度</li>
 </ul></li>
-</ul>
-</section>
-<section id="测量" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="测量"><span class="header-section-number">2.2</span> 测量</h2>
+<li>本研究探究：多个项目间进行选择的条件是否降低了对熟悉面孔和熟悉但相对于不熟悉/新异面孔的吸引力评级
 <ul>
-<li>目标
-<ul>
-<li>自我认知和期望印象：大五人格，Ten Item Personality Inventory，包括对自己的评价和自己期望的状态</li>
-<li>表现力：约会资料图片数量和文字数量，z分数后求和</li>
-<li>自尊：Single Item Self Esteem Scale</li>
-<li>关系目标：What kind of relationship are you seeking?，长期和短期</li>
-<li>依恋：12-item Experience in Close Relationships Scale</li>
-<li>线上约会资料：真实平台资料，去除个人信息后，至少包含一张图片</li>
-</ul></li>
-<li>评委
-<ul>
-<li>目标人格：Ten Item Personality Inventory，分3次，一次评10个，共评价30个目标</li>
-<li>吸引力：I think this person is attractive/good-looking</li>
-<li>结果：通过滑动来决定是否接受目标，右滑是感兴趣</li>
-</ul></li>
-</ul>
-</section>
-<section id="分析" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="分析"><span class="header-section-number">2.3</span> 分析</h2>
-<ul>
-<li>使用Social Accuracy Model（SAM）</li>
-</ul>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="SAM">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>SAM
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>通俗说明，仅说明框架，表达不一定准确，详细信息参考：<a href="https://socialaccuracy.com/social-accuracy-model" class="uri">https://socialaccuracy.com/social-accuracy-model</a></p>
-<p><span class="math display">\[
-Y_{pti}=\gamma_{0pt}+\gamma_{1pt}V_{cti}+\gamma_{2pt}V_{\text{mean},i}+e_{pti} \tag{1}
-\]</span></p>
-<p><span class="math display">\[
-\begin{aligned}
-\gamma_{0pt}&amp;=\gamma_{00}+u_{0p}+u_{0t}+u_{0(pt)}\\
-\gamma_{1pt}&amp;=\gamma_{10}+u_{1p}+u_{1t}+u_{1(pt)}\\
-\gamma_{2pt}&amp;=\gamma_{20}+u_{2p}+u_{2t}+u_{2(pt)}
-\end{aligned} \tag{2}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(p\)</span> 是观察者，<span class="math inline">\(t\)</span> 是目标，<span class="math inline">\(i\)</span> 是项目</li>
-<li><span class="math inline">\(Y_{pti}\)</span> 是观察者对目标在项目<span class="math inline">\(i\)</span>上的评分</li>
-<li><span class="math inline">\(V_{cti}\)</span> 是目标在项目<span class="math inline">\(i\)</span>上的自我评分（或第三者评分）减去所有目标在项目 <span class="math inline">\(i\)</span> 上的均值，<span class="math inline">\(V_{cti}=V_{ti}-V_{\text{mean},i}\)</span></li>
-<li><span class="math inline">\(V_{\text{mean},i}\)</span> 是所有目标在项目 <span class="math inline">\(i\)</span> 上的均值</li>
-</ul>
-<p>模型在观察者、目标者以及观察者—目标者二元关系（观察者*目标者组合）三个层面，允许随机截距和全部随机斜率</p>
-<ul>
-<li><span class="math inline">\(\gamma_{0pt}\)</span> 表示所有项目均值基线（在 <span class="math inline">\(V_{\text{mean},i}\)</span> 基于所有数据宏平均均值中心化后）</li>
-<li><span class="math inline">\(\gamma_{1pt}\)</span> 表示观察者—目标者配对的独特性准确性，即观察者能否识别目标者相对于一般人的独特特征</li>
-<li><span class="math inline">\(\gamma_{2pt}\)</span> 表示观察者—目标者配对的规范性准确性，即观察者的评分与平均目标者之间的对应程度</li>
-</ul>
-<p>在本研究中，还可以把 <span class="math inline">\(V_{\text{mean},i}\)</span> 拆分为第三方对TIPI评价的均值和 <span class="math inline">\(V_{\text{mean},i}\)</span> 减去该均值后得到的值，观察和社会均值比该item的差异，但发现差异不大，所以没有这么做</p>
-</div>
-</div>
-<section id="人们希望在线上约会中如何被看到" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="人们希望在线上约会中如何被看到"><span class="header-section-number">2.3.1</span> 人们希望在线上约会中如何被看到？</h3>
-<ul>
-<li><em>自评</em>大五人格作为自变量，<em>理想</em>大五人格作为因变量，套入SAM进行检验</li>
-</ul>
-</section>
-<section id="人们是否被准确看到或者和他们的自我呈现目标一致-1" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="人们是否被准确看到或者和他们的自我呈现目标一致-1"><span class="header-section-number">2.3.2</span> 人们是否被准确看到，或者和他们的自我呈现目标一致？</h3>
-<ul>
-<li>准确性：<em>自评</em>大五人格作为自变量（以<em>自评</em>大五人格均值为中心），<em>评委</em>评分大五人格作为因变量，套入SAM进行检验</li>
-<li>自我展示成功：<em>理想</em>大五人格作为自变量（以<em>理想</em>大五人格均值为中心），<em>评委</em>评分大五人格作为因变量，套入SAM进行检验</li>
-<li>技巧性错误展示和意外透明：<em>自评</em>大五人格和<em>理想</em>大五人格一起作为自变量（都以<em>自评</em>大五人格均值为中心），<em>评委</em>评分大五人格作为因变量，套入SAM进行检验
-<ul>
-<li><em>自评</em>大五人格的系数是意外透明</li>
-<li><em>理想</em>大五人格的系数是技巧性错误展示</li>
-</ul></li>
-<li>结果和调节：所有变量都是处理后作为调节变量加入模型
-<ul>
-<li>滑动：确认比例（目标水平）和哑变量（评委水平）两种</li>
-<li>表现力：z分数</li>
-<li>关系目标：哑变量</li>
-<li>自尊、依恋焦虑、依恋回避：宏平均</li>
-<li>吸引力：原始吸引力评分；通过在评委、目标两个层面的随机截距，获得评委和目标部分得分的偏差值，减去偏差值和整体均值得到的评分（二元吸引力）</li>
+<li>线上交友情景下，被试是否会降低对熟悉性别偏好面孔的评价</li>
+<li>检验可选择性是否破坏承诺，同时检验性别差异</li>
 </ul></li>
 </ul>
 </section>
 </section>
+<section id="实验1" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 实验1</h1>
+<section id="方法" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="方法"><span class="header-section-number">2.1</span> 方法</h2>
+<section id="被试" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="被试"><span class="header-section-number">2.1.1</span> 被试</h3>
+<ul>
+<li>188名异性恋个体；93男；年龄：24.69 ± 8.52</li>
+<li>预注册90%效应下计算得到需要每个条件下54个被试，但因为一些规则删除了部分被试，最后除男性控制组人数外，其他组均达到80%效应要求</li>
+</ul>
 </section>
-<section id="结果" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> 结果</h1>
-<section id="人们希望在线上约会中如何被看到-1" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="人们希望在线上约会中如何被看到-1"><span class="header-section-number">3.1</span> 人们希望在线上约会中如何被看到？</h2>
-<div id="tbl-model1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-model1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-表&nbsp;1: 目标、准确性和自我展示成功的固定效应和随机效应
-</figcaption>
-<div aria-describedby="tbl-model1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="model1.png" class="img-fluid figure-img">
-</div>
-</figure>
-</div>
+<section id="面孔刺激" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="面孔刺激"><span class="header-section-number">2.1.2</span> 面孔刺激</h3>
+<ul>
+<li>面孔材料来自<a href="https://doi.org/10.6084/m9.figshare.5047666.v3">Face Research Lab London Set</a>,全彩标准条件下拍摄的白人面孔
+<ul>
+<li>样本的吸引力由950名异性恋女性和515名异性恋男性对性别偏好面孔打分得到，1-7</li>
+<li>选取吸引力在中点（mid-point，3.5）附近的分数的照片</li>
+</ul></li>
+<li>性别（男、女）× 条件（熟悉、新异）
+<ul>
+<li>两次评分，第一次5男5女面孔，第二次额外加入5男5女面孔作为新异面孔
+<ul>
+<li>四组面孔之间吸引力没有显著差异</li>
+</ul></li>
+<li><strong>同时对两性评分</strong>，为了区分效应是浪漫吸引产生的</li>
+</ul></li>
+</ul>
+</section>
+<section id="预实验" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="预实验"><span class="header-section-number">2.1.3</span> 预实验</h3>
+<ul>
+<li>预实验目的是选择建构用于激活心理状态的场景的材料</li>
+<li>招募两批被试，第一批评价潜在约会伴侣，第二批评价潜在选择的甜点</li>
+<li>潜在约会伴侣照片找其他志愿者自行上传可用于线上交友简介的照片；甜点照片在公开图库中选择（要求被试想象选一个带回家，与<strong>照片的不同主要是交友这种社会信息</strong>）</li>
+<li>被试在观看照片后评价
+<ul>
+<li>效价：愉快（1分）-不愉快（9分）；</li>
+<li>唤醒度：兴奋（1分）-平静（9分）；</li>
+<li>支配感：感到受控制（1分）-感到能够控制（9分）</li>
+<li>吸引力：1-7</li>
+</ul></li>
+<li>最后男性、女性、甜点各选出15张<em>吸引力在统计上相似</em>（其他三个维度也无显著差异）的照片作为实验背景建构材料</li>
+<li>确保实验控制材料的吸引力，只保留约会选择的影响</li>
+</ul>
+</section>
+<section id="实验流程" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="实验流程"><span class="header-section-number">2.1.4</span> 实验流程</h3>
+<ul>
+<li>先评价5男5女照片的吸引力</li>
+<li>分配至实验组或控制组
+<ul>
+<li>实验组：先想象正在浏览交友网站，并选择是否愿意约会，播放幻灯片照片，每张照片后都想象一会场景</li>
+<li>控制组：先想象正在浏览甜品网站，并选择是否愿意带回家，播放幻灯片照片，每张照片后都想象一会场景</li>
+</ul></li>
+<li>再次评分，为了防止猜到目的，额外加入10张面孔</li>
+</ul>
+</section>
+<section id="数据分析策略" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="数据分析策略"><span class="header-section-number">2.1.5</span> 数据分析策略</h3>
+<ul>
+<li>分别计算前后测男女性别面孔得分均值，共四个分</li>
+<li>出现两次的面孔，后测减去前测得到变化，大于0熟悉性偏好，小于0新异性偏好</li>
+<li>三个模型
+<ul>
+<li>模型一：实验条件（约会、甜品）× 被试性别（男、女）× 面孔性别（被试内：男、女），因变量：吸引力评分变化</li>
+<li>模型二：实验条件（约会、甜品）× 被试性别（男、女）× 面孔性别（被试内：男、女）× 实验阶段（被试内：前测、后测），因变量：吸引力评分</li>
+<li>模型三：实验条件（约会、甜品）× 被试性别（男、女）× 面孔性别（被试内：男、女）× 面孔组别（被试内：熟悉、新异），因变量：后测吸引力评分</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="结果" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="结果"><span class="header-section-number">2.2</span> 结果</h2>
+<ul>
+<li>模型一：无显著差异</li>
+<li>模型二：
+<ul>
+<li><em>面孔性别 × 被试性别</em>交互效应显著
+<ul>
+<li>男性对异性面孔吸引力评分大于同性</li>
+<li>女性无差异</li>
+</ul></li>
+<li><em>实验阶段</em>主效应显著，配对样本t检验证明熟悉面孔吸引力评分更低</li>
+</ul></li>
+<li>模型三：
+<ul>
+<li>结果和模型二类似，<em>面孔组别</em>主效应显著</li>
+<li>新异面孔吸引力得分大于熟悉面孔</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="实验2" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 实验2</h1>
+<ul>
+<li>越熟悉越没吸引力，是不是在<strong>单身</strong>群体中效应更明显</li>
+<li>相同时间内<strong>更少的选择</strong>是不是不会触发这种效果</li>
+</ul>
+<section id="方法-1" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="方法-1"><span class="header-section-number">3.1</span> 方法</h2>
+<section id="被试-1" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="被试-1"><span class="header-section-number">3.1.1</span> 被试</h3>
+<ul>
+<li>439单身，231男，208女</li>
+</ul>
+</section>
+<section id="实验流程-1" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="实验流程-1"><span class="header-section-number">3.1.2</span> 实验流程</h3>
+<ul>
+<li>和实验1大体类似</li>
+<li>幻灯片分四种情况（实验条件 × 选择条件）
+<ul>
+<li>交友图片-高选择：和实验1相同，15张人脸图片</li>
+<li>交友图片-低选择：相同时间内5张人脸图片</li>
+<li>甜点图片-高选择：15张甜点图片</li>
+<li>甜点图片-低选择：相同时间内5张甜点图片</li>
+</ul></li>
+<li>不同组吸引力进行了匹配</li>
+</ul>
+</section>
+<section id="数据分析策略-1" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="数据分析策略-1"><span class="header-section-number">3.1.3</span> 数据分析策略</h3>
+<ul>
+<li>在研究1模型一和模型三的基础上添加了<em>选择条件</em></li>
+<li>实验阶段（前测、后测）差异不是本研究重点</li>
+</ul>
+</section>
+</section>
+<section id="结果-1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="结果-1"><span class="header-section-number">3.2</span> 结果</h2>
 <div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="fig_1.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-图&nbsp;1: 随机斜率分布
+图&nbsp;1: 研究2对比图
 </figcaption>
 </figure>
 </div>
 <ul>
-<li>随机效应方差显著（0.20），说明差异较大， <a href="#fig-1" class="quarto-xref">图&nbsp;1</a> 表明人们都希望被积极看待</li>
-<li><a href="#tbl-model1" class="quarto-xref">表&nbsp;1</a> 表明：人们希望展示真实自我（0.37）</li>
+<li>实验条件（约会、甜品）× 被试性别（男、女）× 面孔性别（被试内：男、女）× 选择条件（被试内：高、低），因变量：吸引力评分变化
+<ul>
+<li><em>被试性别</em>、<em>面孔性别</em>主效应显著</li>
+<li>女性对熟悉面孔打分<strong>降低幅度</strong>显著大于男性（见 <a href="#fig-1" class="quarto-xref">图&nbsp;1</a> a）</li>
+</ul></li>
+<li>实验条件（约会、甜品）× 被试性别（男、女）× 面孔性别（被试内：男、女）× 面孔组别（被试内：熟悉、新异）× 选择条件（被试内：高、低），因变量：后测吸引力评分
+<ul>
+<li><em>面孔性别</em>主效应显著</li>
+<li><em>面孔组别 × 被试性别</em>交互效应显著
+<ul>
+<li>对男性而言，新异面孔得分大于熟悉面孔的幅度显著大于女性（见 <a href="#fig-1" class="quarto-xref">图&nbsp;1</a> b），两种性别性下新异面孔均显著大于熟悉面孔</li>
+</ul></li>
+<li><em>实验条件 × 被试性别</em>交互效应显著
+<ul>
+<li>以后测吸引力评分为因变量，<strong>分性别</strong>进行单因素方差分析</li>
+<li>男性：<em>约会</em>条件后的评分<em>显著大于甜品</em>条件后的得分</li>
+<li>女性：<em>甜品</em>条件后的评分<em>大于约会</em>条件后的得分，但<strong>不显著</strong></li>
+</ul></li>
+</ul></li>
 </ul>
 </section>
-<section id="人们是否被准确看到或者和他们的自我呈现目标一致-2" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="人们是否被准确看到或者和他们的自我呈现目标一致-2"><span class="header-section-number">3.2</span> 人们是否被准确看到，或者和他们的自我呈现目标一致？</h2>
+</section>
+<section id="实验3" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 实验3</h1>
+<ul>
+<li>对新异面孔的高评价在男女中均出现，在面孔和甜点条件下也都出现</li>
+<li>可能非浪漫关系的选择也会引发相似的<strong>评估心态</strong></li>
+</ul>
+<section id="方法-2" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="方法-2"><span class="header-section-number">4.1</span> 方法</h2>
+<section id="被试-2" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="被试-2"><span class="header-section-number">4.1.1</span> 被试</h3>
+<ul>
+<li>130异性恋，64男性</li>
+<li>无额外筛选标准</li>
+</ul>
+</section>
+<section id="实验流程和分析策略" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="实验流程和分析策略"><span class="header-section-number">4.1.2</span> 实验流程和分析策略</h3>
+<ul>
+<li>和实验1一致，只是把幻灯片播放变成了休息</li>
+<li>分析方法和实验2一致，只是去除了实验条件（约会、甜品）这个变量</li>
+</ul>
+</section>
+</section>
+<section id="结果-2" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="结果-2"><span class="header-section-number">4.2</span> 结果</h2>
+<ul>
+<li>被试性别（男、女）× 面孔性别（被试内：男、女），因变量：吸引力评分变化
+<ul>
+<li><em>面孔性别</em>主效应显著，女性面孔得到更积极的评价</li>
+</ul></li>
+<li>被试性别（男、女）× 面孔性别（被试内：男、女）× 面孔组别（被试内：熟悉、新异），因变量：后测吸引力评分
+<ul>
+<li><em>被试性别 × 面孔组别</em>交互效应显著，男性给新异面孔评价显著高于熟悉面孔，但在女性中无显著差异</li>
+</ul></li>
+<li>只分析非恋爱中被试
+<ul>
+<li><em>面孔性别 × 面孔组别</em>交互效应显著，男性面孔中，新异面孔评价显著高于熟悉面孔，但在女性面孔中无差异</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="实验4" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 实验4</h1>
+<ul>
+<li>第3个实验证明对新异面孔的喜好在单身群体中没有性别差异</li>
+<li>交换实验2中新异面孔和熟悉面孔（在实验4中，实验2中的新异面孔出现2次，熟悉面孔出现1次）</li>
+<li>统一使用约会图片，同时想象这些对象都对自己感兴趣或都不感兴趣</li>
+</ul>
+<section id="方法-3" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="方法-3"><span class="header-section-number">5.1</span> 方法</h2>
+<section id="被试-3" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="被试-3"><span class="header-section-number">5.1.1</span> 被试</h3>
+<ul>
+<li>352单身异性恋，181男，171女</li>
+<li>根据实验2的标准（回答时间过长），部分情况下排除了76人</li>
+</ul>
+</section>
+<section id="实验流程-2" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="实验流程-2"><span class="header-section-number">5.1.2</span> 实验流程</h3>
+<ul>
+<li>材料和实验2一致，只是转换了新异和熟悉面孔</li>
+<li>使用指导语操纵，被试全部得到回应和全部没得到回应</li>
+<li>完成积极和消极情绪量表，观察是否进入状态
+<ul>
+<li>观察积极和消极的差值，结果显著</li>
+</ul></li>
+<li>其他流程不变</li>
+</ul>
+</section>
+<section id="数据分析策略-2" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="数据分析策略-2"><span class="header-section-number">5.1.3</span> 数据分析策略</h3>
+<ul>
+<li>和实验2一致，除了实验条件变为是否得到回应</li>
+</ul>
+</section>
+</section>
+<section id="结果-3" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="结果-3"><span class="header-section-number">5.2</span> 结果</h2>
 <div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="fig_2.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-图&nbsp;2: 准确性随机斜率分布
+图&nbsp;2: 实验4结果
 </figcaption>
 </figure>
 </div>
 <ul>
-<li><a href="#tbl-model1" class="quarto-xref">表&nbsp;1</a> 表明：准确性低但显著（0.04），一定程度上还是可以准确识别的
+<li>实验条件（回应、不回应）× 被试性别（男、女）× 面孔性别（被试内：男、女），因变量：吸引力评分变化
 <ul>
-<li>结合 <a href="#fig-2" class="quarto-xref">图&nbsp;2</a> 表明：随机斜率方差正态分布且不大（0.09），说明找到合适的调节变量可能性不大</li>
+<li>全样本时，无显著（单尾<em>被试性别 × 实验条件</em>显著）</li>
+<li>排除时间过长的被试后，<em>被试性别 × 实验条件</em>显著
+<ul>
+<li>回应时，男性和女性均对熟悉面孔评价没有差异</li>
+<li>不回应时，男性对熟悉面孔吸引力评价显著提高；女性无显著差异；两性差异显著（见 <a href="#fig-2" class="quarto-xref">图&nbsp;2</a> a）</li>
 </ul></li>
-<li>检验自我展示目标模型和准确性模型在准确性上<strong>系数的相关性</strong>（ <a href="#tbl-model1" class="quarto-xref">表&nbsp;1</a> 中0.34和0.04），发现两者显著正相关，说明愿意展示真实自我的人更容易被准确识别</li>
-<li>目标的理想状态也能被识别，模式和真实状态被识别类似（0.05和0.11），也有和自我展示准确性上的显著正相关</li>
-<li>真实自我被识别主要来自技巧性错误展示（0.01和0.07）</li>
-</ul>
-</section>
-<section id="准确性或自我展示成功是值得的吗-1" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="准确性或自我展示成功是值得的吗-1"><span class="header-section-number">3.3</span> 准确性或自我展示成功是值得的吗？</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="model_2.png" class="img-fluid figure-img"></p>
-<figcaption>目标、准确性和自我展示成功与滑动结果的交互</figcaption>
-</figure>
-</div>
-<ul>
-<li>比例
-<ul>
-<li>更希望别人按照真实人格认识自己的目标者，右滑比例无变化</li>
-<li>总体上更容易被评委准确判断的目标，右滑比例无变化</li>
-<li>更能成功传达期望印象的目标，右滑比例无变化</li>
-<li>两种显露下，右滑比例无变化</li>
 </ul></li>
-<li>哑变量
+<li>实验条件（回应、不回应）× 被试性别（男、女）× 面孔性别（被试内：男、女）× 面孔组别（被试内：熟悉、新异）× 选择条件（被试内：高、低），因变量：后测吸引力评分
 <ul>
-<li>评委对自己感兴趣的人（右滑），反而判断得稍微不那么准确</li>
-<li>评委越按照目标希望的方式认识该目标，该评委越不容易右滑</li>
-<li>评委识别出了目标并不打算展示的真实人格，更不容易右滑</li>
+<li><em>面孔性别 × 被试性别 × 面孔组别</em>显著</li>
+<li><em>面孔组别 × 实验条件</em>显著，排除超时被试后仅这个显著
+<ul>
+<li>回应时，新异面孔比熟悉面孔更有吸引力</li>
+<li>不回应时，两者不存在显著差异（见 <a href="#fig-2" class="quarto-xref">图&nbsp;2</a> b）</li>
 </ul></li>
-</ul>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="为什么交互项系数展示滑动对准确性影响">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>为什么交互项系数展示滑动对准确性影响
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>SAM中用斜率表示准确性</p>
-<p><span class="math display">\[
-Y_{jti}
-=
-b_0+b_1X_{ti}+b_2S_{jt}+b_3X_{ti}S_{jt}+e_{jti}
-\]</span></p>
-<p>其中：</p>
-<ul>
-<li><span class="math inline">\(Y_{jti}\)</span>：观察者 <span class="math inline">\(j\)</span> 对目标者 <span class="math inline">\(t\)</span> 在项目 <span class="math inline">\(i\)</span> 上的评分；</li>
-<li><span class="math inline">\(X_{ti}\)</span>：目标者在项目 <span class="math inline">\(i\)</span> 上的独特自我认知；</li>
-<li><span class="math inline">\(S_{jt}\)</span>：观察者 <span class="math inline">\(j\)</span> 是否右滑目标者 <span class="math inline">\(t\)</span>，右滑为 1，左滑为 0；</li>
-<li><span class="math inline">\(b_3\)</span>：交互系数。</li>
-</ul>
-<p>没有右滑</p>
-<p>当 <span class="math inline">\(S_{jt}=0\)</span> 时：</p>
-<p><span class="math display">\[
-\begin{aligned}
-Y
-&amp;=b_0+b_1X+b_2(0)+b_3X(0)\\
-&amp;=b_0+b_1X
-\end{aligned}
-\]</span></p>
-<p>因此，未右滑组的准确性斜率为：</p>
-<p><span class="math display">\[
-\operatorname{Slope}_{\text{未右滑}}=b_1
-\]</span></p>
-<p>右滑时</p>
-<p>当 <span class="math inline">\(S_{jt}=1\)</span> 时：</p>
-<p><span class="math display">\[
-\begin{aligned}
-Y
-&amp;=b_0+b_1X+b_2(1)+b_3X(1)\\
-&amp;=(b_0+b_2)+(b_1+b_3)X
-\end{aligned}
-\]</span></p>
-<p>因此，右滑组的准确性斜率为：</p>
-<p><span class="math display">\[
-\operatorname{Slope}_{\text{右滑}}=b_1+b_3
-\]</span></p>
-<p>右滑组与未右滑组的准确性斜率之差为：</p>
-<p><span class="math display">\[
-\begin{aligned}
-\operatorname{Slope}_{\text{右滑}}
--
-\operatorname{Slope}_{\text{未右滑}}
-&amp;=(b_1+b_3)-b_1\\
-&amp;=b_3
-\end{aligned}
-\]</span></p>
-<p>因此，交互系数 <span class="math inline">\(b_3\)</span> 直接表示右滑组与未右滑组的准确性斜率差异：</p>
-<ul>
-<li>如果 <span class="math inline">\(b_3&gt;0\)</span>，右滑组的准确性高于未右滑组；</li>
-<li>如果 <span class="math inline">\(b_3&lt;0\)</span>，右滑组的准确性低于未右滑组；</li>
-<li>如果 <span class="math inline">\(b_3=0\)</span>，两组的准确性斜率没有差异</li>
-</ul>
-<p>概率等连续变量也同理，均是和设置好的基线0相比</p>
-</div>
-</div>
-</section>
-<section id="准确性和自我展示的调节因素" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="准确性和自我展示的调节因素"><span class="header-section-number">3.4</span> 准确性和自我展示的调节因素</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="model_3.png" class="img-fluid figure-img"></p>
-<figcaption>其他变量的交互</figcaption>
-</figure>
-</div>
-<ul>
-<li>表现力
-<ul>
-<li>表现力强的个体更会技巧性错误展示</li>
-</ul></li>
-<li>自尊
-<ul>
-<li>自尊高的个体更愿意展示真实的自己</li>
-</ul></li>
-<li>关系目标
-<ul>
-<li>均无准确性差异</li>
-</ul></li>
-<li>吸引力
-<ul>
-<li>均无准确性差异</li>
-</ul></li>
-<li>二元吸引力
-<ul>
-<li>二元吸引力高的个体不易被准确识别</li>
-<li>二元吸引力高的个体不易被发现意外透明</li>
-<li>二元吸引力高的个体更容易技巧性错误展示</li>
-</ul></li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="model_4.png" class="img-fluid figure-img"></p>
-<figcaption>依恋的交互</figcaption>
-</figure>
-</div>
-<ul>
-<li>焦虑型依恋和回避型依恋
-<ul>
-<li>均不愿意展示真实自我</li>
 </ul></li>
 </ul>
 </section>
 </section>
-<section id="讨论" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> 讨论</h1>
+<section id="讨论" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 讨论</h1>
+<section id="结果总结" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="结果总结"><span class="header-section-number">6.1</span> 结果总结</h2>
 <ul>
-<li>在线约会者既希望别人准确地认识自己，也希望呈现不同于一般自我认知的形象</li>
-<li>在线约会者在准确展示和不同展示上都取得了一定成功</li>
-<li>当人们能够选择和组织线索时，他们既会真实展示自己，也会投射经过塑造的不同形象</li>
-<li>准确性主要是有意形成的，而不是目标者无法控制的真实人格泄露</li>
-<li>被准确看到没有带来更多浪漫兴趣</li>
-</ul>
-<section id="准确性和意外透明" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="准确性和意外透明"><span class="header-section-number">4.1</span> 准确性和意外透明</h2>
+<li>实验1
 <ul>
-<li>在线约会资料能够在一定程度上反映目标者的真实人格</li>
-<li>目标者在希望被准确看到的程度上存在差异</li>
-<li>希望被准确看到的人通常也更容易被准确看到</li>
-<li>准确性主要来自目标者主动提供有效线索，而不是评委特别善于判断</li>
-<li>目标者能够通过选择照片、文字等资料控制自己的人格透明度</li>
-<li>意外透明整体较弱，说明准确性通常不是因为目标者想隐藏却没有隐藏成功</li>
-<li>在目标者难以控制线索的环境中，例如快速约会，可能出现更多意外透明</li>
-</ul>
-</section>
-<section id="准确性是值得的吗" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="准确性是值得的吗"><span class="header-section-number">4.2</span> 准确性是值得的吗？</h2>
-<ul>
-<li>目标层面
-<ul>
-<li>总体上更容易被准确判断的目标者，并没有收到更多或更少右滑</li>
-<li>没有证据表明容易被准确判断的人总体上更受欢迎</li>
+<li>选择情境没有使异性熟悉面孔的评分相对于基线下降</li>
+<li>熟悉面孔在幻灯片后的评分低于幻灯片前</li>
+<li>幻灯片后，被试更偏向新面孔而不是熟悉面孔</li>
 </ul></li>
-<li>评委—目标二元关系层面
+<li>实验2
 <ul>
-<li>某位评委对某个目标判断得越准确，该评委越不容易右滑该目标</li>
-<li>浪漫兴趣与准确性的负向关系主要发生在二元关系层面，而不是目标者总体层面</li>
+<li>与单身男性相比，单身女性在幻灯片后对熟悉面孔的吸引力评价更低</li>
+<li>选项数量和幻灯片内容均未影响面孔偏好</li>
+<li>男性和女性都更喜欢新面孔，但男性的新异偏好更强</li>
+<li>男性浏览约会照片后，对后续面孔的总体评价高于浏览甜点后；女性没有出现相同模式</li>
 </ul></li>
-<li>可能解释
+<li>实验3
 <ul>
-<li>评委受到某个目标者吸引时，可能减少对人格线索的注意</li>
-<li>光环偏差可能让评委对自己认为有吸引力的人判断得不够准确</li>
-<li>但事后分析发现，吸引力不能解释浪漫兴趣与准确性之间的关系</li>
-<li>约会者声称喜欢真实的人，但其实际选择可能不符合这种偏好</li>
+<li>取消用于激活评估心态的幻灯片后，单身男性与单身女性的面孔偏好没有表现出性别差异</li>
+<li>实验2中的性别差异可能由选择或评估情境诱发</li>
 </ul></li>
-<li>解释边界
+<li>实验4
 <ul>
-<li>这些结果只能说明右滑与准确性相关</li>
-<li>不能证明准确性导致右滑减少</li>
-<li>也可能是浪漫兴趣改变了评委处理人格线索的方式</li>
+<li>排除离群值后，男性在第二次看到熟悉面孔时，比女性表现出更高的吸引力评价，与实验2的方向一致
+<ul>
+<li>这一性别差异只出现在未得到回应的条件中</li>
+</ul></li>
+<li>得到回应时，男性与女性之间没有差异</li>
+<li>回应条件下，男性和女性都更喜欢新面孔而不是熟悉面孔</li>
 </ul></li>
 </ul>
 </section>
-<section id="准确性目标和被准确看到的调节因素" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="准确性目标和被准确看到的调节因素"><span class="header-section-number">4.3</span> 准确性目标和被准确看到的调节因素</h2>
+<section id="理论解释" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="理论解释"><span class="header-section-number">6.2</span> 理论解释</h2>
 <ul>
-<li>自尊
+<li>前人研究认为：线上交友平台上规模较大的潜在约会对象群体可能诱发一种“评估心态”，并在约会过程的不同阶段削弱个体的承诺意愿
 <ul>
-<li>自尊高的人更希望被准确看到</li>
-<li>但自尊高的人实际上没有被判断得更准确</li>
+<li>表现：
+<ul>
+<li>在不同情境下，人们第二次看到同一张面孔时，对其吸引力的评价可能发生变化</li>
+<li>在实验性地激活选择情境后，人们对熟悉面孔与新异面孔的相对吸引力评价可能发生变化</li>
 </ul></li>
-<li>依恋
+<li>理论：
 <ul>
-<li>焦虑型依恋者更不希望被准确看到</li>
-<li>回避型依恋者更不希望被准确看到</li>
-<li>但依恋焦虑和依恋回避均未预测实际准确性</li>
+<li>吸引力是面孔知觉和社会互动中的一个关键维度</li>
+<li>人们对吸引力的判断具有一定的自动性和强制性</li>
+<li>吸引力判断对于塑造我们接近或回避特定个体的动机具有重要作用</li>
 </ul></li>
-<li>其他变量
-<ul>
-<li>关系目标、表现力和总体吸引力等没有稳定预测实际准确性</li>
 </ul></li>
-<li>总体结论
+<li>本研究发现：
 <ul>
-<li>准确性动机没有稳定转化为实际准确性</li>
-<li>个体差异能够解释想不想被准确看到，但不能解释是否真的被准确看到</li>
+<li>这种现象的性别差异不受<em>选择集数量本身</em>的调节，受<em>回应数量</em>调节</li>
+<li>单身女性对新异面孔相对于熟悉面孔表现出更强的偏好</li>
 </ul></li>
-<li>可能原因
+<li>未来可考察：
 <ul>
-<li>目标者之间的准确性差异较小</li>
-<li>意外透明的目标者间差异也较小</li>
-<li>可供调节变量解释的变异有限</li>
-<li>在线约会资料提供的人格线索有限</li>
-<li>评委不预期与目标者见面，因此准确判断的动机可能不足</li>
+<li>自评吸引力</li>
+<li>目标吸引力</li>
+<li>社会规范</li>
+<li>人生阶段</li>
 </ul></li>
-</ul>
-</section>
-<section id="自我展示成功和技巧性错误展示" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="自我展示成功和技巧性错误展示"><span class="header-section-number">4.4</span> 自我展示成功和技巧性错误展示</h2>
+<li>本研究还控制了吸引力的基线、网络环境
 <ul>
-<li>在线约会者能够成功传达自己希望形成的印象</li>
-<li>即使期望印象不同于真实自我认知，他们也能够取得一定程度的自我展示成功</li>
-<li>这说明人们能够通过选择照片、文字和其他资料线索塑造期望形象</li>
-<li>评委可能认为自己正在从约会资料中筛选有效信息，但实际上可能遗漏重要人格线索</li>
-</ul>
-</section>
-<section id="自我展示成功是值得的吗" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="自我展示成功是值得的吗"><span class="header-section-number">4.5</span> 自我展示成功是值得的吗？</h2>
-<ul>
-<li>目标者层面
-<ul>
-<li>总体上更能成功传达期望印象的目标者，没有收到更多或更少右滑</li>
-<li>技巧性错误展示没有带来更多或更少的总体右滑</li>
+<li>新异面孔比熟悉面孔更有吸引力，男性中强于女性</li>
+<li>匹配成功效应都会增强</li>
+<li>可能是因为积极的网络经历对承诺有负面影响</li>
 </ul></li>
-<li>评委—目标二元关系层面
+<li>本研究不能断言线上交友选择会降低男性对同一个熟悉对象的吸引力评价</li>
+<li>本研究的设计可以区分
 <ul>
-<li>某位评委越按照目标者希望的方式认识目标者，该评委越不容易右滑</li>
-<li>自我展示成功与右滑之间存在较小的负向关系</li>
-</ul></li>
-<li>可能解释
-<ul>
-<li>自我展示成功的一部分是被准确看到</li>
-<li>其负向结果可能主要来自准确性与浪漫兴趣之间的负向关系</li>
-</ul></li>
-<li>技巧性错误展示
-<ul>
-<li>技巧性错误展示与右滑没有稳定关系</li>
-</ul></li>
-<li>总体结论
-<ul>
-<li>评委没有表现出对自我展示技巧较高者的特别欣赏</li>
-<li>目标者希望被准确看到的愿望反而可能产生负面结果</li>
+<li>熟悉面孔是不是吸引力下降（时间变化）</li>
+<li>新异面孔是不是有优势（熟悉面孔相对于其他人的吸引力是否发生变化）</li>
 </ul></li>
 </ul>
 </section>
-<section id="自我展示的调节因素" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="自我展示的调节因素"><span class="header-section-number">4.6</span> 自我展示的调节因素</h2>
+<section id="局限性和实际应用" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="局限性和实际应用"><span class="header-section-number">6.3</span> 局限性和实际应用</h2>
 <ul>
-<li>依恋
-<ul>
-<li>焦虑型和回避型依恋者更希望展示不同于真实自我的形象</li>
-<li>依恋没有预测技巧性错误展示是否成功</li>
-<li>有错误展示动机不等于有能力成功进行错误展示</li>
-</ul></li>
-<li>表现力
-<ul>
-<li>在资料中提供更多照片和文字的人更擅长技巧性错误展示</li>
-<li>提供更多信息没有使目标者被判断得更加准确</li>
-<li>更多信息可能为目标者提供更多组织和操纵线索的机会</li>
-</ul></li>
-<li>二元吸引力
-<ul>
-<li>某位评委越觉得某个目标者特别有吸引力，该目标者越能向这位评委传达期望印象</li>
-<li>二元吸引力越高，意外透明越少</li>
-<li>二元吸引力越高，技巧性错误展示越成功</li>
-<li>吸引力可能增加评委的注意，但这些注意可能受到目标者所组织线索的引导</li>
-</ul></li>
-</ul>
-</section>
-<section id="未来研究方向" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="未来研究方向"><span class="header-section-number">4.7</span> 未来研究方向</h2>
-<ul>
-<li>考察哪些照片、文字和资料线索能够改变具体人格印象</li>
-<li>考察黑暗三联征等自我展示动机</li>
-<li>考察在线约会经验等自我展示能力</li>
-<li>考察不同人格特质的错误展示难度</li>
-</ul>
-</section>
-<section id="局限" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="局限"><span class="header-section-number">4.8</span> 局限</h2>
-<ul>
-<li>评委不预期与目标者见面
-<ul>
-<li>可能降低评委准确判断目标者人格的动机</li>
-<li>现实约会中的准确性水平和目标者间差异可能更高</li>
-</ul></li>
-<li>线上与线下可能不同
-<ul>
-<li>线上善于组织线索的人，线下不一定能够形成相同印象</li>
-<li>表现力强的人可能在线上成功自我展示，但在线下更容易出现意外透明</li>
-<li>自我展示能力可能具有情境特异性</li>
-</ul></li>
-<li>研究主要关注目标者
-<ul>
-<li>评委的社会经历和关系经历可能影响其处理人格线索的方式</li>
-<li>善于判断人格的评委可能要到聊天或线下互动阶段才会显现</li>
-<li>还可能存在特别善于识别错误展示的评委</li>
-</ul></li>
-<li>没有充分考察具体人格特质
-<ul>
-<li>不同人格特质可能具有不同的可识别程度</li>
-<li>幽默、自信等大五人格以外的特质可能在约会情境中更加重要</li>
-<li>未来可以采用逐项特质分析</li>
-</ul></li>
-<li>准确性标准存在限制
-<ul>
-<li>研究以目标者的一般自我认知作为准确性标准</li>
-<li>目标者在约会情境中的自我认知可能不同于一般自我认知</li>
-<li>未来应测量约会情境特异性的自我认知</li>
-</ul></li>
-<li>可推广性的限制</li>
-<li>被试年龄均为18—30岁</li>
-<li>被试来自加拿大或美国</li>
-<li>很多被试是大学生</li>
-<li>结果主要适用于参与在线约会的北美年轻成年人</li>
-<li>年龄较大的成年人可能具有不同的约会自我展示目标</li>
-<li>未来研究应扩展到年龄更大以及其他文化背景的人群</li>
+<li>原假设未被支持，效应可能是一种普遍的选择机制</li>
+<li>实验4部分恢复了约会情境的解释力，部分解决特异性问题（在两性面孔上都出现效果，不能确定是浪漫关系）</li>
+<li>测量的是初始知觉，而不是实际约会行为</li>
+<li>真实平台中的效应可能更强，但这只是有待检验的推测</li>
 </ul>
 </section>
 </section>
-<section id="结论" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> 结论</h1>
+<section id="总结" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 总结</h1>
 <ul>
-<li>在线约会者同时具有两种自我展示目标
-<ul>
-<li>准确展示真实自我</li>
-<li>展示不同于真实自我的形象</li>
-</ul></li>
-<li>在线约会者在两种目标上都取得了一定成功</li>
-<li>准确性主要是目标者有意透明的结果</li>
-<li>透明和准确没有带来更多浪漫兴趣</li>
-<li>在特定评委—目标关系中，透明和准确甚至与更少右滑相关</li>
-<li>技巧性错误展示没有表现出稳定的浪漫收益或代价</li>
-<li>本研究主要识别出了一些阻碍准确展示或错误展示成功的因素，但尚未明确发现促进这些策略的因素</li>
-<li>研究人格判断准确性时，需要考虑目标者是否希望被准确看到</li>
-<li>后续研究需要进一步区分
-<ul>
-<li>有意的准确展示</li>
-<li>意外透明</li>
-<li>技巧性错误展示</li>
-<li>目标者总体效应</li>
-<li>评委—目标二元效应</li>
-</ul></li>
+<li>人们对新异面孔评分更高</li>
+<li>在控制情境的情况下，女性对熟悉面孔评分更低，男性无差异</li>
 </ul>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Sculley_et_al_2021" class="csl-entry" role="listitem">
+Sculley, J. R., Ritchie, K. L., &amp; Watkins, C. D. (2021). Having options alters the attractiveness of familiar versus novel faces: Sex differences and similarities. <em>Computers in Human Behavior</em>, <em>124</em>, 106937. https://doi.org/<a href="https://doi.org/10.1016/j.chb.2021.106937">https://doi.org/10.1016/j.chb.2021.106937</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
