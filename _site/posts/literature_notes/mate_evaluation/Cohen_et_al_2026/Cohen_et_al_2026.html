@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-10-28">
+
+<title>心理价值理论：从基于价值选择的通用计算认知模型预测最初的浪漫伴侣选择 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script src="../../../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="../../../../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+
+<script src="../../../../site_libs/datatables-binding-0.34.0/datatables.js"></script>
+
+<script src="../../../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="../../../../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<link href="../../../../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+
+<script src="../../../../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link href="../../../../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="../../../../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">心理价值理论：从基于价值选择的通用计算认知模型预测最初的浪漫伴侣选择</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">文献笔记</div>
+                <div class="quarto-category">伴侣评价</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 28, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#引言" id="toc-引言" class="nav-link active" data-scroll-target="#引言"><span class="header-section-number">1</span> 引言</a>
+  <ul class="collapse">
+  <li><a href="#伴侣价值" id="toc-伴侣价值" class="nav-link" data-scroll-target="#伴侣价值"><span class="header-section-number">1.1</span> 伴侣价值</a></li>
+  <li><a href="#最初的浪漫伴侣选择" id="toc-最初的浪漫伴侣选择" class="nav-link" data-scroll-target="#最初的浪漫伴侣选择"><span class="header-section-number">1.2</span> 最初的浪漫伴侣选择</a></li>
+  <li><a href="#心理价值理论" id="toc-心理价值理论" class="nav-link" data-scroll-target="#心理价值理论"><span class="header-section-number">1.3</span> 心理价值理论</a></li>
+  <li><a href="#决策" id="toc-决策" class="nav-link" data-scroll-target="#决策"><span class="header-section-number">1.4</span> 决策</a></li>
+  <li><a href="#本研究" id="toc-本研究" class="nav-link" data-scroll-target="#本研究"><span class="header-section-number">1.5</span> 本研究</a></li>
+  </ul></li>
+  <li><a href="#实验1" id="toc-实验1" class="nav-link" data-scroll-target="#实验1"><span class="header-section-number">2</span> 实验1</a>
+  <ul class="collapse">
+  <li><a href="#方法" id="toc-方法" class="nav-link" data-scroll-target="#方法"><span class="header-section-number">2.1</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#被试" id="toc-被试" class="nav-link" data-scroll-target="#被试"><span class="header-section-number">2.1.1</span> 被试</a></li>
+  <li><a href="#设备和刺激" id="toc-设备和刺激" class="nav-link" data-scroll-target="#设备和刺激"><span class="header-section-number">2.1.2</span> 设备和刺激</a></li>
+  </ul></li>
+  <li><a href="#程序" id="toc-程序" class="nav-link" data-scroll-target="#程序"><span class="header-section-number">2.2</span> 程序</a></li>
+  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">2.3</span> 结果</a>
+  <ul class="collapse">
+  <li><a href="#心理价值" id="toc-心理价值" class="nav-link" data-scroll-target="#心理价值"><span class="header-section-number">2.3.1</span> 心理价值</a></li>
+  <li><a href="#选择数据" id="toc-选择数据" class="nav-link" data-scroll-target="#选择数据"><span class="header-section-number">2.3.2</span> 选择数据</a></li>
+  </ul></li>
+  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">2.4</span> 讨论</a></li>
+  </ul></li>
+  <li><a href="#实验2" id="toc-实验2" class="nav-link" data-scroll-target="#实验2"><span class="header-section-number">3</span> 实验2</a>
+  <ul class="collapse">
+  <li><a href="#方法-1" id="toc-方法-1" class="nav-link" data-scroll-target="#方法-1"><span class="header-section-number">3.1</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#被试-1" id="toc-被试-1" class="nav-link" data-scroll-target="#被试-1"><span class="header-section-number">3.1.1</span> 被试</a></li>
+  <li><a href="#设备和刺激-1" id="toc-设备和刺激-1" class="nav-link" data-scroll-target="#设备和刺激-1"><span class="header-section-number">3.1.2</span> 设备和刺激</a></li>
+  <li><a href="#程序-1" id="toc-程序-1" class="nav-link" data-scroll-target="#程序-1"><span class="header-section-number">3.1.3</span> 程序</a></li>
+  </ul></li>
+  <li><a href="#结果-1" id="toc-结果-1" class="nav-link" data-scroll-target="#结果-1"><span class="header-section-number">3.2</span> 结果</a>
+  <ul class="collapse">
+  <li><a href="#计算刺激组的心理价值" id="toc-计算刺激组的心理价值" class="nav-link" data-scroll-target="#计算刺激组的心理价值"><span class="header-section-number">3.2.1</span> 计算刺激组的心理价值</a></li>
+  <li><a href="#rrw分析-1" id="toc-rrw分析-1" class="nav-link" data-scroll-target="#rrw分析-1"><span class="header-section-number">3.2.2</span> RRW分析</a></li>
+  <li><a href="#个体被试分析-1" id="toc-个体被试分析-1" class="nav-link" data-scroll-target="#个体被试分析-1"><span class="header-section-number">3.2.3</span> 个体被试分析</a></li>
+  </ul></li>
+  <li><a href="#讨论-1" id="toc-讨论-1" class="nav-link" data-scroll-target="#讨论-1"><span class="header-section-number">3.3</span> 讨论</a></li>
+  </ul></li>
+  <li><a href="#综合讨论" id="toc-综合讨论" class="nav-link" data-scroll-target="#综合讨论"><span class="header-section-number">4</span> 综合讨论</a>
+  <ul class="collapse">
+  <li><a href="#未来研究与局限" id="toc-未来研究与局限" class="nav-link" data-scroll-target="#未来研究与局限"><span class="header-section-number">4.1</span> 未来研究与局限</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cohen, D. J., White, T. D., &amp; Luo, S. (2026). Psychological Value Theory: Predicting Initial Romantic Partner Choice From a General-Purpose, Computational Cognitive Model of Value-Based Choice. <em>Cognitive Science</em>, <em>50</em>(2), e70181. <a href="https://doi.org/10.1111/cogs.70181" class="uri">https://doi.org/10.1111/cogs.70181</a></p>
+<p><span class="citation" data-cites="Cohen_et_al_2026">Cohen et al. (<a href="#ref-Cohen_et_al_2026" role="doc-biblioref">2026</a>)</span></p>
+</div>
+</div>
+<section id="引言" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 引言</h1>
+<ul>
+<li>对于浪漫<strong>决策的时间动态过程</strong>（temporal decision dynamics）理解不足</li>
+<li>心理价值理论（Psychological Value Theory，PVT）：关于价值和选择的通用计算认知模型</li>
+<li>如果适用，说明浪漫伴侣选择和其他社会决策一样，具有同样<em>普遍的、基于价值的</em>机制</li>
+</ul>
+<section id="伴侣价值" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="伴侣价值"><span class="header-section-number">1.1</span> 伴侣价值</h2>
+<ul>
+<li>效用理论（Utility Theory）：面对多个选择时，选择价值最大的
+<ul>
+<li>对选择进行定量，这种定量就是<em>价值</em>（value）</li>
+<li>选择与价值独立，用价值来预测选择</li>
+</ul></li>
+<li>伴侣价值没有统一概念
+<ul>
+<li>进化视角：包括适应度（inclusive fitness），基因和繁衍优势</li>
+<li>社会交换视角：社会利益和成本</li>
+</ul></li>
+<li>从正反两面总结<em>潜在伴侣的特征</em></li>
+<li>对潜在伴侣的偏好（<span class="math inline">\(Pref\)</span>）和预期（<span class="math inline">\(Prev\)</span>）共同决定伴侣价值
+<ul>
+<li><span class="math inline">\(\text{Mate value}=\text{Pref}*\text {Prev}\)</span></li>
+<li><span class="math inline">\(\text{Mate value}=\text{Pref}-\text {Prev}\)</span>，理想标准模型（Ideal Standards Model）</li>
+<li><span class="math inline">\(\text{Mate value}=\sum_{1}^{n}(Pref_{n}*Prev_{n})\)</span>，线性加权求和</li>
+<li><span class="math inline">\(\text{Mate value}=-1*\sqrt{\sum_{1}^{n}(Pref_{n}-Prev_{n})^{2}}\)</span>，欧式距离</li>
+</ul></li>
+<li>线性加权求和和欧式距离哪个更好均有支持</li>
+</ul>
+</section>
+<section id="最初的浪漫伴侣选择" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="最初的浪漫伴侣选择"><span class="header-section-number">1.2</span> 最初的浪漫伴侣选择</h2>
+<ul>
+<li>最初的选择基于较少的信息，但影响长期关系</li>
+<li>关于浪漫决策的时间动态过程的研究较少</li>
+<li>PVT可以捕抓这种动态过程，且在很多社会决策中得到验证
+<ul>
+<li>利用独立于当前决策情境测得的价值，事先预测人们的选择和反应时</li>
+</ul></li>
+</ul>
+</section>
+<section id="心理价值理论" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="心理价值理论"><span class="header-section-number">1.3</span> 心理价值理论</h2>
+<ul>
+<li>心理价值：对观察者而言的<em>重要性</em>、<em>价值</em>、<em>有用性</em>（importance、worth、usefulness）的感知
+<ul>
+<li>受Axiom of Perceptual Variability支配，因此视心理价值是一个<strong>过程</strong>而不是一个点</li>
+</ul></li>
+<li>使用数量估计任务（magnitude estimation task）测量
+<ul>
+<li>首先告知被试个人价值和货币价值无关（有些物品对个人而言有价值，但在市场上并没有）</li>
+<li>给黑猩猩的价值（参照物）赋值1000，让被试评估自己、手机等人事物的价值（指针）</li>
+<li>进化出的价值判断体系使不同个体对同一事物的价值判断趋同，因此每次判断可视为<em>价值区间内随机抽样</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="决策" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="决策"><span class="header-section-number">1.4</span> 决策</h2>
+<ul>
+<li>二元选择的决策，考虑到价值是个过程，点的估计是有瑕疵的</li>
+<li>开发了一种基于价值的序贯抽样程序（sequential sampling procedure，SSP），将PVT变成一个模型，称为Robust Random Walk（RRW）
+<ul>
+<li>从两个选项的决策边界中间起步</li>
+<li>每一时刻，从两个价值分布中抽取一个样本，样本之差决定随机游走方向</li>
+<li>信息不断积累直到越过某个边间，期间的抽样次数可以预测反应时</li>
+</ul></li>
+</ul>
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: RRW示例：
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-2" class="quarto-xref">图&nbsp;2</a> 展示了两个选项价值分布不同重叠情况下RRW的情况
+<ul>
+<li>重叠程度越高，越过边界就越难，越可能出错，需要的证据就越多</li>
+<li>重叠程度较高，导致反应较慢且更容易出错</li>
+<li>重叠程度较低，导致反应较快且更准确</li>
+</ul></li>
+</ul>
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: RRW预测可视化
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>RRW和传统SSP差异
+<ul>
+<li>RRW用区间来预测选择和反应时</li>
+<li>RRW从多个重叠中进行预测</li>
+<li>RRW只需要更少的参数</li>
+</ul></li>
+</ul>
+</section>
+<section id="本研究" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="本研究"><span class="header-section-number">1.5</span> 本研究</h2>
+<ul>
+<li>实验1：身份认同的影响</li>
+<li>实验2：综合多个特征</li>
+</ul>
+</section>
+</section>
+<section id="实验1" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 实验1</h1>
+<ul>
+<li>二选一迫选任务</li>
+<li>两个潜在约会对象中选择一个进行约会，每个对象用一个<em>特征</em>进行描述</li>
+<li>记录选择和反应性，用 <span class="citation" data-cites="Cohen_et_al_2022">Cohen et al. (<a href="#ref-Cohen_et_al_2022" role="doc-biblioref">2022</a>)</span> 得到的数据进行预测</li>
+<li>如果预测成功，说明伴侣选择就是心理价值分布所组成的函数可以预测的</li>
+</ul>
+<section id="方法" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="方法"><span class="header-section-number">2.1</span> 方法</h2>
+<section id="被试" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="被试"><span class="header-section-number">2.1.1</span> 被试</h3>
+<ul>
+<li>108名被试；19.32±1.48岁；71%性别认同女、28%男、1%其他</li>
+<li>之前研究表明效应量很大，所以<strong>较大样本量主要是可推广性而不是显著性</strong>，设定为100人</li>
+</ul>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_3.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 实验1示例
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="设备和刺激" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="设备和刺激"><span class="header-section-number">2.1.2</span> 设备和刺激</h3>
+<ul>
+<li>网络链接，自选设备进入</li>
+<li>73个特征，有放回随机抽样,从 <a href="#tbl-1" class="quarto-xref">表&nbsp;1</a> 中剔除普遍性的和少见的</li>
+</ul>
+<div id="tbl-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 抽象概念及其对应的伴侣特征
+</figcaption>
+<div aria-describedby="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-b2fa6f29d72293a4305c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b2fa6f29d72293a4305c">{"x":{"filter":"none","vertical":false,"data":[["adaptability","aggression","ambition","anxiety","arrogance","art","boredom","carelessness","caution","compassion","competence","composure","confidence","cooperation","courage","cowardice","creativity","criticism","curiosity","deceit","dependability","disloyalty","education","efficiency","embarrassment","empathy","encouragement","travel","entertainment","exercise","fairness","fertility","financial stability","forgiveness","frugality","generosity","goals","greed","common sense","honesty","humility","humor","hygiene","ignorance","illiteracy","independence","intellectual stimulation","intelligence"],["adaptable","aggressive","ambitious","anxious","arrogant","artistic","boring","careless","cautious","compassionate","competent","composed","confident","cooperative","courageous","cowardly","creative","critical","curious","deceitful","dependable","disloyal","educated","efficient","embarrassing","empathetic","encouraging","enjoys traveling","entertaining","exercises","fair","fertile","financially stable","forgiving","frugal","generous","goal-oriented","greedy","has common sense","honest","humble","humorous","hygienic","ignorant","illiterate","independent","intellectually stimulating","intelligent"],["physical health","physical mobility","conservative ideology","liberal ideology","practicality","productivity","punctuality","religion","resilience","respect","responsibility","romance","sarcasm","science","self-discipline","selfishness","physical health","physical mobility","conservative ideology","liberal ideology","practicality","productivity","punctuality","religion","resilience","respect","responsibility","romance","sarcasm","science","self-discipline","selfishness","sexual attraction","sincerity","spirituality","spontaneity","strength","tact","talent","tolerance","trust","vulnerability","parenthood","weakness","wealth","literature","wisdom","youthfulness"],["physically healthy","physically mobile","politically conservative","politically liberal","practical","productive","punctual","religious","resilient","respectful","responsible","romantic","sarcastic","scientific","self-disciplined","selfish","physically healthy","physically mobile","politically conservative","politically liberal","practical","productive","punctual","religious","resilient","respectful","responsible","romantic","sarcastic","scientific","self-disciplined","selfish","sexually attractive","sincere","spiritual","spontaneous","strong","tactful","talented","tolerant","trustworthy","vulnerable","want kids","weak","wealthy","well read","wise","youthful"]],"container":"<table class=\"stripe hover compact nowrap\">\n  <thead>\n    <tr>\n      <th>Abstract Concept<\/th>\n      <th>Translated Feature<\/th>\n      <th>Abstract Concept<\/th>\n      <th>Translated Feature<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollY":"320px","scrollX":true,"scrollCollapse":true,"paging":false,"searching":true,"ordering":false,"info":false,"dom":"ft","columnDefs":[{"targets":"_all","className":"dt-left"},{"name":"concept_left","targets":0},{"name":"feature_left","targets":1},{"name":"concept_right","targets":2},{"name":"feature_right","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<ul>
+<li>红色注视点 → 500ms → 如 <a href="#fig-3" class="quarto-xref">图&nbsp;3</a> 文本，但特征词被星号隐蔽 → 2400ms → 显示特征词 → <code>d</code>和<code>k</code>键决定上下（每个被试随机）</li>
+<li>性别认同和年龄</li>
+</ul>
+</section>
+</section>
+<section id="程序" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="程序"><span class="header-section-number">2.2</span> 程序</h2>
+<ul>
+<li>知情同意、人口学、学分、伦理审核等固定流程</li>
+<li>10试次练习，练习时会重复出现任务要求和提示</li>
+<li>250个试次，一半时让被试选择自由休息时间</li>
+</ul>
+</section>
+<section id="结果" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="结果"><span class="header-section-number">2.3</span> 结果</h2>
+<section id="心理价值" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="心理价值"><span class="header-section-number">2.3.1</span> 心理价值</h3>
+<ul>
+<li>根据 <span class="citation" data-cites="Cohen_et_al_2022">Cohen et al. (<a href="#ref-Cohen_et_al_2022" role="doc-biblioref">2022</a>)</span> 的结果对心理价值进行赋值</li>
+<li>对两个特征进行bootstrap 1000次，记录特征A大于特征B的概率为<span class="math inline">\(meanP\)</span>，之后 <span class="math inline">\(Overlap = 1-\frac{abs(meanP-0.5)}{0.5}\)</span> 得到重叠度</li>
+<li>以0.1为精度四舍五入，并以0.1为区间进行分组（0到0.1,0.1到0.2……），用理论中值代表该组（0.5；0.15……），标记为 <span class="math inline">\(O_{0.1}\)</span></li>
+</ul>
+</section>
+<section id="选择数据" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="选择数据"><span class="header-section-number">2.3.2</span> 选择数据</h3>
+<ul>
+<li>通过反应时的变异系数（<span class="math inline">\(\mathrm{CV_{RT}=SD_{RT}/M_{RT}}\)</span>）进行筛选，剔除了最高5%的被试6人</li>
+<li>选择表现低于或处于随机水平的被试3人，说明注意力不足</li>
+<li>得到99人，70%女</li>
+<li>每个 <span class="math inline">\(O_{0.1}\)</span> 分箱剔除反应时最高和最低2.5%</li>
+<li>通过 <span class="math inline">\(log(\mathrm{RT})=a*\exp{(b*\left(\mathrm{trial-1}\right))}\)</span> 来消除练习造成的<em>熟练度对反应时</em>的影响，残差 <span class="math inline">\(RT_{res}\)</span> 作为反应时</li>
+</ul>
+<section id="rrw分析" class="level4" data-number="2.3.2.1">
+<h4 data-number="2.3.2.1" class="anchored" data-anchor-id="rrw分析"><span class="header-section-number">2.3.2.1</span> RRW分析</h4>
+<ul>
+<li>RRW测量
+<ul>
+<li>选择较高价值选项的概率，<span class="math inline">\(p(HVO)\)</span></li>
+<li>选择较高价值选项的反应时，<span class="math inline">\(RT_{HVO}\)</span></li>
+<li>选择较低价值选项的反应时，<span class="math inline">\(RT_{LVO}\)</span></li>
+</ul></li>
+<li>RRW包含的参数
+<ul>
+<li>非决策时间 <span class="math inline">\(T_{er}\)</span>，本质上是一个截距项，用于解释与Overlap无关的各种过程所花费的累计时间</li>
+<li>起点 <span class="math inline">\(s\)</span></li>
+<li>边界间距 <span class="math inline">\(b\)</span></li>
+<li>向抽样过程加入噪声的误差参数 <span class="math inline">\(N_{SD}\)</span></li>
+<li>信息积累偏差（Information Accrual Bias，IAB）中的两个参数 <span class="math inline">\(d_A\)</span> 和 <span class="math inline">\(d_B\)</span>
+<ul>
+<li>衡量近因偏差或首因偏差</li>
+<li>将 <span class="math inline">\(d_A\)</span> 固定为0.2</li>
+<li><span class="math inline">\(d_B\)</span> 根据数据进行拟合</li>
+<li>当 <span class="math inline">\(d_A\)</span> 固定且 <span class="math inline">\(d_B\)</span> 为正时，表示知觉上较新的信息，比知觉上较早的信息具有更大的决策权重</li>
+</ul></li>
+</ul></li>
+<li>评估了<em>简单模型</em>和<em>位置偏差模型</em>
+<ul>
+<li>简单模型
+<ul>
+<li>假设不存在反应偏差，且价值估计是准确的</li>
+<li>四个自由参数：边界位置 <span class="math inline">\(b\)</span>、非决策时间 <span class="math inline">\(T_{er}\)</span>、误差参数 <span class="math inline">\(N_{SD}\)</span>，以及由 <span class="math inline">\(d_B\)</span> 参数表示的信息近因影响</li>
+</ul></li>
+<li>位置偏差模型
+<ul>
+<li>用于评估被试是否<em>总体上偏好位于上方或下方的选项</em></li>
+<li>增加了一个自由参数，用于描述起点朝偏好位置选项所对应边界的偏移
+<ul>
+<li>较低价值选项位于上方的情境，记为 <span class="math inline">\(Top_{LVO}\)</span>，下方记为 <span class="math inline">\(Top_{HVO}\)</span>，分别编码为1和-1</li>
+<li>将编码后的结果和起点 <span class="math inline">\(s\)</span> 相乘，使两类试次的起点围绕零起点产生对称的正向或负向偏移</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>对整体数据进行<em>重叠度×跨越边界×偏差效应编码</em>，得到稳定反应时和 <span class="math inline">\(p(HVO)\)</span> 估计</li>
+<li>部分重叠度低，但选择了价值更低的选项的试次被认为是错误试次，去除了少于40次的这类试次（3组低重叠）</li>
+<li>使用自行开发的Smart Grid Search algorithm调参</li>
+<li>最佳拟合模型运行40次，取每个重叠度下的预测反应时和 <span class="math inline">\(p(HVO)\)</span> 的均值，用这一均值来预测拟合结果的 <span class="math inline">\(r^2\)</span> 和BIC
+<ul>
+<li>BIC更低更优，如BIC差值在2以内，参数更少更优</li>
+</ul></li>
+<li>必须满足以下所有条件PVT才能预测选择
+<ul>
+<li>选择是基于价值的偏好决策</li>
+<li>数量估计任务可以准确测量抽象概念的心理价值</li>
+<li>抽象概念的心理价值和特征的心理价值等价</li>
+<li>RRW可以准确模拟心理价值产生的决策</li>
+</ul></li>
+<li>整体来看<code>位置偏差模型</code>拟合效果更好（<span class="math inline">\(r^2=0.9\)</span>，BIC = 55）</li>
+</ul>
+<div id="tbl-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;2: 实验1最佳拟合PVT模型的参数
+</figcaption>
+<div aria-describedby="tbl-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<style>
+.pvt-parameters {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+  font-family: "Times New Roman", serif;
+  font-size: 17px;
+  white-space: nowrap;
+}
+.pvt-parameters th,
+.pvt-parameters td {
+  padding: 8px 12px;
+  text-align: center;
+  font-weight: normal;
+}
+.pvt-parameters thead {
+  border-bottom: 1px solid #333;
+}
+.pvt-parameters .group-heading {
+  border-bottom: 1px solid #555;
+}
+.pvt-parameters tbody td:first-child {
+  text-align: left;
+}
+</style>
+
+<div style="max-width: 100%; overflow-x: auto;">
+
+<table class="pvt-parameters caption-top table">
+<thead>
+<tr class="header">
+<th rowspan="2" data-quarto-table-cell-role="th"></th>
+<th colspan="7" class="group-heading" data-quarto-table-cell-role="th">Free parameters</th>
+<th colspan="2" class="group-heading" data-quarto-table-cell-role="th">Model fit</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">T<sub>er</sub></th>
+<th data-quarto-table-cell-role="th">b</th>
+<th data-quarto-table-cell-role="th">d<sub>B</sub></th>
+<th data-quarto-table-cell-role="th">nSD</th>
+<th data-quarto-table-cell-role="th">s<sub>P</sub></th>
+<th data-quarto-table-cell-role="th">b<sub>TQ</sub></th>
+<th data-quarto-table-cell-role="th">vc<sub>TQ</sub></th>
+<th data-quarto-table-cell-role="th"><em>r</em><sup>2</sup></th>
+<th data-quarto-table-cell-role="th">BIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single feature</td>
+<td>−0.79</td>
+<td>55</td>
+<td>0.03</td>
+<td>4.75</td>
+<td>−0.04</td>
+<td>−</td>
+<td>−</td>
+<td>.90</td>
+<td>55</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="折效度检验" class="level4" data-number="2.3.2.2">
+<h4 data-number="2.3.2.2" class="anchored" data-anchor-id="折效度检验"><span class="header-section-number">2.3.2.2</span> 3折效度检验</h4>
+<ul>
+<li>三等分，三个分别做一次测试集，另外两个做训练集</li>
+<li>平均 <span class="math inline">\(r^2=0.88\)</span>，标准差为0.01，考虑到测试集样本量小，结果的可靠合理的</li>
+</ul>
+</section>
+<section id="性别" class="level4" data-number="2.3.2.3">
+<h4 data-number="2.3.2.3" class="anchored" data-anchor-id="性别"><span class="header-section-number">2.3.2.3</span> 性别</h4>
+<ul>
+<li><a href="#tbl-2" class="quarto-xref">表&nbsp;2</a> 的参数不变，<span class="math inline">\(T_{er}\)</span> 可变</li>
+<li>男女拟合效果无显著差异，说明性别不影响判断</li>
+</ul>
+</section>
+<section id="个体被试分析" class="level4" data-number="2.3.2.4">
+<h4 data-number="2.3.2.4" class="anchored" data-anchor-id="个体被试分析"><span class="header-section-number">2.3.2.4</span> 个体被试分析</h4>
+<ul>
+<li>整体拟合良好，但个体也需要考虑</li>
+<li>使用 <span class="math inline">\(p(HVO)=(1-a)*\left(1-Overlap^{b}\right)+a\)</span> 和 <span class="math inline">\(RT=a+b*Overlap\)</span> 来拟合每个被试</li>
+<li>基于PVT，斜率一定为正，所以斜率为负的 <span class="math inline">\(r^2\)</span> 乘-1，转换后的 <span class="math inline">\(r^2\)</span> 记为 <span class="math inline">\(r^2_{signed}\)</span></li>
+</ul>
+<div id="fig-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_4.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4: 个体拟合情况
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-4" class="quarto-xref">图&nbsp;4</a> 展示了个体拟合情况</li>
+<li>反应时
+<ul>
+<li><span class="math inline">\(r^2_{signed}\)</span> 均值为0.35，标准差为0.33，<span class="math inline">\(t(98)=10.63\)</span>，<span class="math inline">\(p&lt;.001\)</span>，<span class="math inline">\(d=1.06\)</span></li>
+<li>拟合程度分布较广，但考虑到 <span class="math inline">\(d=1.06\)</span>，可认为稳健</li>
+</ul></li>
+<li>选择
+<ul>
+<li><span class="math inline">\(r^2\)</span> 均值为0.74，标准差为0.24，<span class="math inline">\(t(98)=29.98\)</span>，<span class="math inline">\(p&lt;.001\)</span>，<span class="math inline">\(d=3.08\)</span></li>
+<li>预测准确，稳健</li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="讨论" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="讨论"><span class="header-section-number">2.4</span> 讨论</h2>
+<ul>
+<li>PVT能够准确预测初始择偶选择
+<ul>
+<li>初始择偶选择是一种基于价值的偏好决策</li>
+<li>数量估计任务能够准确测量特征价值</li>
+<li>抽象概念的心理价值与相应特征的心理价值相似</li>
+<li>RRW模型能够准确描述初始择偶选择背后的决策过程</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="实验2" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 实验2</h1>
+<div id="fig-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_5.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5: 实验2示例
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>实验2比较一个或两个特征，如 <a href="#fig-5" class="quarto-xref">图&nbsp;5</a> 所示</li>
+<li>使用求和、平均、无偏欧氏距离、乐观欧氏距离和偏向平均算法多个算法检验
+<ul>
+<li>Summation algorithm：伴侣价值等于各价值之和</li>
+<li>Averaging algorithm：伴侣价值等于各价值均值</li>
+<li>Unbiased Euclidean Distance：特征越多值越低，只有 <span class="math inline">\(Pref-Prev\)</span> 为0才不降低</li>
+<li>Optimistic Euclidean Distance：未提及的特征默认 <span class="math inline">\(Pref-Prev\)</span> 为0</li>
+<li>Biased Averaging：心理价值同时受最大值（特征分布整体更大的）和均值影响，<span class="math inline">\(\left[\operatorname{Max}(\text{Psychological Value})+\operatorname{Average}(\text{Psychological Value})\right]/2\)</span></li>
+</ul></li>
+</ul>
+<section id="方法-1" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="方法-1"><span class="header-section-number">3.1</span> 方法</h2>
+<section id="被试-1" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="被试-1"><span class="header-section-number">3.1.1</span> 被试</h3>
+<ul>
+<li>200名被试；19.16±3.07岁；84%性别认同女、15%男、1%其他</li>
+</ul>
+</section>
+<section id="设备和刺激-1" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="设备和刺激-1"><span class="header-section-number">3.1.2</span> 设备和刺激</h3>
+<ul>
+<li>指导语修改，提示多特征</li>
+<li>上下选择换成左右</li>
+<li>200试次，四种情况（都2特征，都1特征，左1右2，左2右1）各50次</li>
+<li>规避矛盾特征</li>
+</ul>
+</section>
+<section id="程序-1" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="程序-1"><span class="header-section-number">3.1.3</span> 程序</h3>
+<ul>
+<li>和实验1相同，但减少了试次</li>
+</ul>
+</section>
+</section>
+<section id="结果-1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="结果-1"><span class="header-section-number">3.2</span> 结果</h2>
+<section id="计算刺激组的心理价值" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="计算刺激组的心理价值"><span class="header-section-number">3.2.1</span> 计算刺激组的心理价值</h3>
+<ul>
+<li>和实验1类似，如果是组合则根据不同算法进行计算</li>
+<li>Summation algorithm：直接相加比较</li>
+<li>Averaging algorithm：两个分布合并为向量，比较向量的抽样</li>
+<li>Biased Averaging：呈现的特征中，先按照Averaging algorithm计算，再根据40%和60%的权重将Averaging algorithm的值和最大值的抽样相加</li>
+<li>Euclidean Distance
+<ul>
+<li>假设最高价值特征的理论均值为 <span class="math inline">\(Pref\)</span>，记为 <span class="math inline">\(\text{maxVal}\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\mathrm{mateValue}=\frac{-1\times\sqrt{\displaystyle\sum_{1}^{n}(\mathrm{maxVal}-\mathrm{Prev}_n)^2}+\sqrt{\mathrm{numFeatures}\times\mathrm{maxVal}^{2}}}{\sqrt{\mathrm{numFeatures}\times\mathrm{maxVal}^{2}}}
+\]</span></p>
+<ul>
+<li>无偏欧式距离根据特征数进行缩放，乐观欧氏距离固定是两个特征</li>
+<li>欧氏距离是点估计，所以视相对平均距离为重叠度，越近说明重叠度越高</li>
+<li><span class="math inline">\(\operatorname{abs}(\text{Partner A}-\text{Partner B})\)</span>，之后缩放到0-1，为了和Overlap对应，<em>0最大差值，1最小差值</em></li>
+<li>如果RRW无法拟合，说明上述假设不成立</li>
+</ul>
+</section>
+<section id="rrw分析-1" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="rrw分析-1"><span class="header-section-number">3.2.2</span> RRW分析</h3>
+<ul>
+<li>和实验1类似，但使用5种算法进行了评估</li>
+<li>如果两个选项特征数相同，5种算法得到的重叠度是类似的</li>
+<li>如果两个选项特征数不一致，部分算法会出现系统偏离，有时会高估特征整合，有时会低估
+<ul>
+<li><em>四种组合×Overlap分箱</em>来判断 <span class="math inline">\(p(HVO)\)</span></li>
+<li><em>四种组合×Overlap分箱×选择结果</em>来判断反应时</li>
+</ul></li>
+<li>提出以下5种模型
+<ul>
+<li>位置偏差模型：实验1一致</li>
+<li>位置偏差+边界模型：增加一个用于评估随特征数量增加，决策边界是否变化的参数，反应了数量增加对阅读和整合信息消耗时间的影响</li>
+<li>位置偏差+价值变化：增加一个用于评估随特征数量增加，分布重叠程度是否变化的参数，反应了对价值整合的高估和低估</li>
+<li>位置偏差+边界+价值变化：同时评估边界变化和价值变化</li>
+<li>简单+边界+价值变化：位置偏差+边界+价值变化效果更好时再拟合该模型，查看位置偏差是否增加了预测能力</li>
+</ul></li>
+</ul>
+<section id="最佳拟合" class="level4" data-number="3.2.2.1">
+<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="最佳拟合"><span class="header-section-number">3.2.2.1</span> 最佳拟合</h4>
+<ul>
+<li>Summation algorithm高估了整合；Biased Averaging准确评价了价值；其他的低估了整合</li>
+</ul>
+<div id="tbl-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;3: 实验2 PVT模型拟合情况
+</figcaption>
+<div aria-describedby="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Summation</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Average</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Unbiased Euclidian Distance</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Optimistic Euclidian Distance</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Biased Average</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-b6d7c9039983d5334c82" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b6d7c9039983d5334c82">{"x":{"filter":"none","vertical":false,"data":[["Position Bias","Position Bias + Boundary","Position Bias + Value Change","Position Bias + Value Change + Boundary","Simple + Value Change + Boundary"],[5,6,6,7,6],[".08",".39",".43",".94",".94"],[500,414,368,25,28],["","","","","✓"]],"container":"<table class=\"stripe hover compact nowrap\">\n  <thead>\n    <tr>\n      <th>Model<\/th>\n      <th>Free parameters<\/th>\n      <th>r²<\/th>\n      <th>BIC<\/th>\n      <th>Best fit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollY":"230px","scrollX":true,"scrollCollapse":true,"paging":false,"searching":false,"info":false,"ordering":false,"lengthChange":false,"dom":"t","columnDefs":[{"targets":0,"className":"dt-left"},{"targets":[1,2,3,4],"className":"dt-center"},{"name":"model","targets":0},{"name":"n_parameters","targets":1},{"name":"r2","targets":2},{"name":"BIC","targets":3},{"name":"best","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(row).css({'font-weight':value == \"✓\" ? \"600\" : null,'background-color':value == \"✓\" ? \"#eaf4ee\" : null});\n}"},"callback":"function(table) {\ndocument.addEventListener('shown.bs.tab', function () {\n  table.columns.adjust();\n});\n}"},"evals":["options.rowCallback","callback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-397edfb20e4b7ac7efce" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-397edfb20e4b7ac7efce">{"x":{"filter":"none","vertical":false,"data":[["Position Bias","Position Bias + Boundary","Position Bias + Value Change","Position Bias + Value Change + Boundary","Simple + Value Change + Boundary"],[5,6,6,7,6],[".46",".83",".55",".90",".90"],[458,234,409,142,130],["","","","","✓"]],"container":"<table class=\"stripe hover compact nowrap\">\n  <thead>\n    <tr>\n      <th>Model<\/th>\n      <th>Free parameters<\/th>\n      <th>r²<\/th>\n      <th>BIC<\/th>\n      <th>Best fit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollY":"230px","scrollX":true,"scrollCollapse":true,"paging":false,"searching":false,"info":false,"ordering":false,"lengthChange":false,"dom":"t","columnDefs":[{"targets":0,"className":"dt-left"},{"targets":[1,2,3,4],"className":"dt-center"},{"name":"model","targets":0},{"name":"n_parameters","targets":1},{"name":"r2","targets":2},{"name":"BIC","targets":3},{"name":"best","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(row).css({'font-weight':value == \"✓\" ? \"600\" : null,'background-color':value == \"✓\" ? \"#eaf4ee\" : null});\n}"},"callback":"function(table) {\ndocument.addEventListener('shown.bs.tab', function () {\n  table.columns.adjust();\n});\n}"},"evals":["options.rowCallback","callback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-18cf7240d8e2040f04c3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-18cf7240d8e2040f04c3">{"x":{"filter":"none","vertical":false,"data":[["Position Bias","Position Bias + Boundary","Position Bias + Value Change","Position Bias + Value Change + Boundary","Simple + Value Change + Boundary"],[5,6,6,7,6],[".41",".87",".49",".92",".92"],[459,271,410,124,122],["","","","","✓"]],"container":"<table class=\"stripe hover compact nowrap\">\n  <thead>\n    <tr>\n      <th>Model<\/th>\n      <th>Free parameters<\/th>\n      <th>r²<\/th>\n      <th>BIC<\/th>\n      <th>Best fit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollY":"230px","scrollX":true,"scrollCollapse":true,"paging":false,"searching":false,"info":false,"ordering":false,"lengthChange":false,"dom":"t","columnDefs":[{"targets":0,"className":"dt-left"},{"targets":[1,2,3,4],"className":"dt-center"},{"name":"model","targets":0},{"name":"n_parameters","targets":1},{"name":"r2","targets":2},{"name":"BIC","targets":3},{"name":"best","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(row).css({'font-weight':value == \"✓\" ? \"600\" : null,'background-color':value == \"✓\" ? \"#eaf4ee\" : null});\n}"},"callback":"function(table) {\ndocument.addEventListener('shown.bs.tab', function () {\n  table.columns.adjust();\n});\n}"},"evals":["options.rowCallback","callback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-23fa55f6176ea6677c7c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-23fa55f6176ea6677c7c">{"x":{"filter":"none","vertical":false,"data":[["Position Bias","Position Bias + Boundary","Position Bias + Value Change","Position Bias + Value Change + Boundary","Simple + Value Change + Boundary"],[5,6,6,7,6],[".27",".74",".44",".92",".92"],[464,346,384,89,85],["","","","","✓"]],"container":"<table class=\"stripe hover compact nowrap\">\n  <thead>\n    <tr>\n      <th>Model<\/th>\n      <th>Free parameters<\/th>\n      <th>r²<\/th>\n      <th>BIC<\/th>\n      <th>Best fit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollY":"230px","scrollX":true,"scrollCollapse":true,"paging":false,"searching":false,"info":false,"ordering":false,"lengthChange":false,"dom":"t","columnDefs":[{"targets":0,"className":"dt-left"},{"targets":[1,2,3,4],"className":"dt-center"},{"name":"model","targets":0},{"name":"n_parameters","targets":1},{"name":"r2","targets":2},{"name":"BIC","targets":3},{"name":"best","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(row).css({'font-weight':value == \"✓\" ? \"600\" : null,'background-color':value == \"✓\" ? \"#eaf4ee\" : null});\n}"},"callback":"function(table) {\ndocument.addEventListener('shown.bs.tab', function () {\n  table.columns.adjust();\n});\n}"},"evals":["options.rowCallback","callback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-65229293f19e07fc6b3f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-65229293f19e07fc6b3f">{"x":{"filter":"none","vertical":false,"data":[["Position Bias","Position Bias + Boundary","Position Bias + Value Change","Position Bias + Value Change + Boundary","Simple + Value Change + Boundary","Simple + Boundary"],[5,6,6,7,6,5],[".46",".85",".43",".85",".85",".84"],[449,195,460,199,195,196],["","","","","","✓"]],"container":"<table class=\"stripe hover compact nowrap\">\n  <thead>\n    <tr>\n      <th>Model<\/th>\n      <th>Free parameters<\/th>\n      <th>r²<\/th>\n      <th>BIC<\/th>\n      <th>Best fit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollY":"230px","scrollX":true,"scrollCollapse":true,"paging":false,"searching":false,"info":false,"ordering":false,"lengthChange":false,"dom":"t","columnDefs":[{"targets":0,"className":"dt-left"},{"targets":[1,2,3,4],"className":"dt-center"},{"name":"model","targets":0},{"name":"n_parameters","targets":1},{"name":"r2","targets":2},{"name":"BIC","targets":3},{"name":"best","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(row).css({'font-weight':value == \"✓\" ? \"600\" : null,'background-color':value == \"✓\" ? \"#eaf4ee\" : null});\n}"},"callback":"function(table) {\ndocument.addEventListener('shown.bs.tab', function () {\n  table.columns.adjust();\n});\n}"},"evals":["options.rowCallback","callback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<div id="tbl-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;4: 实验2 PVT模型参数估计
+</figcaption>
+<div aria-describedby="tbl-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href=""><span class="math inline">\(VC_{TQ}\)</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">no <span class="math inline">\(VC_{TQ}\)</span></a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-46e86ffdb88dfc448378" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-46e86ffdb88dfc448378">{"x":{"filter":"none","vertical":false,"class":"stripe hover compact nowrap","data":[["Sum","Average","Unbiased Euclidian Distance","Optimistic Euclidian Distance","Biased Average"],["−1.04","−0.67","−1.64","−2.50","−0.92"],["173","128","118","180","114"],["0.03","0.01","0.04","0.06","0.04"],["4.5","6.5","3.5","2.75","3.75"],["−","−","−","−","−"],["61","32","39","64","41"],["2.1","−0.3","−0.28","−0.51","−0.05"],[".94",".90",".92",".92",".85"],["28","130","122","85","195"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th rowspan=\"2\" style=\"vertical-align: middle;\">Integration Algorithm<\/th>\n      <th colspan=\"7\" style=\"text-align: center;\">Free parameters<\/th>\n      <th colspan=\"2\" style=\"text-align: center;\">Model fit<\/th>\n    <\/tr>\n    <tr>\n      <th>T<sub>er<\/sub><\/th>\n      <th>b<\/th>\n      <th>d<sub>B<\/sub><\/th>\n      <th>nSD<\/th>\n      <th>s<sub>P<\/sub><\/th>\n      <th>b<sub>TQ<\/sub><\/th>\n      <th>vc<sub>TQ<\/sub><\/th>\n      <th><i>r<\/i><sup>2<\/sup><\/th>\n      <th>BIC<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollY":"230px","scrollX":true,"scrollCollapse":true,"paging":false,"searching":false,"info":false,"ordering":false,"lengthChange":false,"dom":"t","columnDefs":[{"targets":0,"className":"dt-left"},{"targets":[1,2,3,4,5,6,7,8,9],"className":"dt-center"},{"name":"algorithm","targets":0},{"name":"Ter","targets":1},{"name":"b","targets":2},{"name":"dB","targets":3},{"name":"nSD","targets":4},{"name":"sP","targets":5},{"name":"bTQ","targets":6},{"name":"vcTQ","targets":7},{"name":"r2","targets":8},{"name":"BIC","targets":9}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[6]; $(this.api().cell(row, 6).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[7]; $(this.api().cell(row, 7).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[8]; $(this.api().cell(row, 8).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[9]; $(this.api().cell(row, 9).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\n}"},"callback":"function(table) {\ndocument.addEventListener('shown.bs.tab', function () {\n  table.columns.adjust();\n});\n}"},"evals":["options.rowCallback","callback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-204951d5cfe0cfe31b37" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-204951d5cfe0cfe31b37">{"x":{"filter":"none","vertical":false,"class":"stripe hover compact nowrap","data":[["Sum","Average","Unbiased Euclidian Distance","Optimistic Euclidian Distance","Biased Average"],["−1.09","−0.68","−1.62","−1.91","−1.13"],["46","77","165","155","155"],["0.45","0.02","0.03","61","0.06"],["2.75","4.75","4.25","3.00","3.25"],["0.03","−0.03","0.01","−0.01","−"],["20","22","52","61","56"],["−","−","−","−","−"],[".39",".83",".87",".74",".84"],["414","234","271","346","196"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th rowspan=\"2\" style=\"vertical-align: middle;\">Integration Algorithm<\/th>\n      <th colspan=\"7\" style=\"text-align: center;\">Free parameters<\/th>\n      <th colspan=\"2\" style=\"text-align: center;\">Model fit<\/th>\n    <\/tr>\n    <tr>\n      <th>T<sub>er<\/sub><\/th>\n      <th>b<\/th>\n      <th>d<sub>B<\/sub><\/th>\n      <th>nSD<\/th>\n      <th>s<sub>P<\/sub><\/th>\n      <th>b<sub>TQ<\/sub><\/th>\n      <th>vc<sub>TQ<\/sub><\/th>\n      <th><i>r<\/i><sup>2<\/sup><\/th>\n      <th>BIC<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollY":"230px","scrollX":true,"scrollCollapse":true,"paging":false,"searching":false,"info":false,"ordering":false,"lengthChange":false,"dom":"t","columnDefs":[{"targets":0,"className":"dt-left"},{"targets":[1,2,3,4,5,6,7,8,9],"className":"dt-center"},{"name":"algorithm","targets":0},{"name":"Ter","targets":1},{"name":"b","targets":2},{"name":"dB","targets":3},{"name":"nSD","targets":4},{"name":"sP","targets":5},{"name":"bTQ","targets":6},{"name":"vcTQ","targets":7},{"name":"r2","targets":8},{"name":"BIC","targets":9}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[6]; $(this.api().cell(row, 6).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[7]; $(this.api().cell(row, 7).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[8]; $(this.api().cell(row, 8).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\nvar value=data[9]; $(this.api().cell(row, 9).node()).css({'font-size':'13px','padding':'6px 10px','line-height':'1.5'});\n}"},"callback":"function(table) {\ndocument.addEventListener('shown.bs.tab', function () {\n  table.columns.adjust();\n});\n}"},"evals":["options.rowCallback","callback"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<ul>
+<li>所有最佳算法中均包含边界参数 <span class="math inline">\(b_{TQ}\)</span>
+<ul>
+<li>额外处理一个特征（4个特征）时，边界提高25%-35%</li>
+<li>需要更多抽样，预测的反应时和准确度都会提高</li>
+</ul></li>
+<li>价值变化参数 <span class="math inline">\(vc_{TQ}\)</span> 为正说明对多特征高估了，为负则低估了，以标准差为单位
+<ul>
+<li>Summation algorithm高估了约2.1个标准差</li>
+<li>Biased Averaging低估了约0.05个标准差（不添加对拟合没有太大影响）</li>
+<li>其他算法低估了0.28-0.5个标准差</li>
+<li>不添加 <span class="math inline">\(vc_{TQ}\)</span>，除Biased Averaging外，预测效果均明显降低</li>
+</ul></li>
+<li>选择Biased Average Grouping作为最佳模型</li>
+</ul>
+</section>
+<section id="折效度检验-1" class="level4" data-number="3.2.2.2">
+<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="折效度检验-1"><span class="header-section-number">3.2.2.2</span> 3折效度检验</h4>
+<ul>
+<li>平均 <span class="math inline">\(r^2=0.80\)</span>，标准差为0.03</li>
+</ul>
+</section>
+</section>
+<section id="个体被试分析-1" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="个体被试分析-1"><span class="header-section-number">3.2.3</span> 个体被试分析</h3>
+<div id="fig-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_6.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6: 个体拟合情况
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>反应时
+<ul>
+<li><span class="math inline">\(r^2_{signed}\)</span> 均值为0.47，标准差为0.38，<span class="math inline">\(t(181)=16.76\)</span>，<span class="math inline">\(p&lt;.001\)</span>，<span class="math inline">\(d=1.24\)</span></li>
+</ul></li>
+<li>选择
+<ul>
+<li><span class="math inline">\(r^2\)</span> 均值为0.73，标准差为0.26，<span class="math inline">\(t(181)=37.78\)</span>，<span class="math inline">\(p&lt;.001\)</span>，<span class="math inline">\(d=2.81\)</span></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="讨论-1" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="讨论-1"><span class="header-section-number">3.3</span> 讨论</h2>
+<ul>
+<li>Biased Averaging无需校正可以很好拟合</li>
+</ul>
+</section>
+</section>
+<section id="综合讨论" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 综合讨论</h1>
+<ul>
+<li>初始恋爱伴侣选择涉及一种<em>通用的</em>、<em>基于价值</em>的认知机制</li>
+<li>PVT可以很好的评估价值的分布的作用，考虑到了随机性在<em>伴侣选择</em>这一认知过程中的作用</li>
+<li>Biased Averaging的优势可能来自于：高价值刺激对注意的捕获</li>
+<li>特征价值评估的个体差异相对较小</li>
+</ul>
+<section id="未来研究与局限" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="未来研究与局限"><span class="header-section-number">4.1</span> 未来研究与局限</h2>
+<ul>
+<li>局限
+<ul>
+<li>单一大学被试，样本代表性不足；但在其他领域PVT可以很好的预测跨文化被试的选择</li>
+<li>情境性不足</li>
+<li>欧氏距离算法和重叠度的关系还是基于假设，并没有实质证据</li>
+<li>本研究认为 <span class="math inline">\(vc_{TQ}\)</span> 是负担，不需要的模型更优，但这可能就是认知的实际情况</li>
+</ul></li>
+<li>未来研究
+<ul>
+<li>利用PVT辨析情境因素影响的原因
+<ul>
+<li>喜欢距离更近的是不是因为距离影响了价值判断</li>
+<li>反应偏向，决策过程从一开始就偏向距离较近的选项</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Cohen_et_al_2022" class="csl-entry" role="listitem">
+Cohen, D. J., Cromley, A. R., Freda, K. E., &amp; White, M. (2022). Psychological value theory: The psychological value of human lives and economic goods. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, <em>48</em>(12), 2015–2050. <a href="https://doi.org/10.1037/xlm0001047">https://doi.org/10.1037/xlm0001047</a>
+</div>
+<div id="ref-Cohen_et_al_2026" class="csl-entry" role="listitem">
+Cohen, D. J., White, T. D., &amp; Luo, S. (2026). Psychological value theory: Predicting initial romantic partner choice from a general-purpose, computational cognitive model of value-based choice. <em>Cognitive Science</em>, <em>50</em>(2), e70181. <a href="https://doi.org/10.1111/cogs.70181">https://doi.org/10.1111/cogs.70181</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
