@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="周博霖">
+<meta name="dcterms.date" content="2026-11-01">
+
+<title>什么是择偶偏好？使用伴侣配对模拟探索择偶偏好的计算形式 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">什么是择偶偏好？使用伴侣配对模拟探索择偶偏好的计算形式</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">文献笔记</div>
+                <div class="quarto-category">伴侣评价</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">作者</div>
+      <div class="quarto-title-meta-contents">
+               <p>周博霖 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">发布于</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 1, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#偏好的多个起源" id="toc-偏好的多个起源" class="nav-link active" data-scroll-target="#偏好的多个起源"><span class="header-section-number">1</span> 偏好的多个起源</a>
+  <ul class="collapse">
+  <li><a href="#为择偶偏好勾勒一个更精确的建模框架" id="toc-为择偶偏好勾勒一个更精确的建模框架" class="nav-link" data-scroll-target="#为择偶偏好勾勒一个更精确的建模框架"><span class="header-section-number">1.1</span> 为择偶偏好勾勒一个更精确的建模框架</a></li>
+  <li><a href="#择偶偏好与伴侣评价的本质" id="toc-择偶偏好与伴侣评价的本质" class="nav-link" data-scroll-target="#择偶偏好与伴侣评价的本质"><span class="header-section-number">1.2</span> 择偶偏好与伴侣评价的本质</a></li>
+  </ul></li>
+  <li><a href="#概念验证模型" id="toc-概念验证模型" class="nav-link" data-scroll-target="#概念验证模型"><span class="header-section-number">2</span> 概念验证模型</a>
+  <ul class="collapse">
+  <li><a href="#模型设置" id="toc-模型设置" class="nav-link" data-scroll-target="#模型设置"><span class="header-section-number">2.1</span> 模型设置</a>
+  <ul class="collapse">
+  <li><a href="#生成智能体总体" id="toc-生成智能体总体" class="nav-link" data-scroll-target="#生成智能体总体"><span class="header-section-number">2.1.1</span> 生成智能体总体</a></li>
+  <li><a href="#生成智能体伴侣配对" id="toc-生成智能体伴侣配对" class="nav-link" data-scroll-target="#生成智能体伴侣配对"><span class="header-section-number">2.1.2</span> 生成智能体伴侣配对</a></li>
+  <li><a href="#应用伴侣配对模拟" id="toc-应用伴侣配对模拟" class="nav-link" data-scroll-target="#应用伴侣配对模拟"><span class="header-section-number">2.1.3</span> 应用伴侣配对模拟</a></li>
+  </ul></li>
+  <li><a href="#模型结果" id="toc-模型结果" class="nav-link" data-scroll-target="#模型结果"><span class="header-section-number">2.2</span> 模型结果</a></li>
+  <li><a href="#讨论" id="toc-讨论" class="nav-link" data-scroll-target="#讨论"><span class="header-section-number">2.3</span> 讨论</a></li>
+  </ul></li>
+  <li><a href="#研究1" id="toc-研究1" class="nav-link" data-scroll-target="#研究1"><span class="header-section-number">3</span> 研究1</a>
+  <ul class="collapse">
+  <li><a href="#方法" id="toc-方法" class="nav-link" data-scroll-target="#方法"><span class="header-section-number">3.1</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#被试" id="toc-被试" class="nav-link" data-scroll-target="#被试"><span class="header-section-number">3.1.1</span> 被试</a></li>
+  <li><a href="#材料" id="toc-材料" class="nav-link" data-scroll-target="#材料"><span class="header-section-number">3.1.2</span> 材料</a></li>
+  <li><a href="#程序" id="toc-程序" class="nav-link" data-scroll-target="#程序"><span class="header-section-number">3.1.3</span> 程序</a></li>
+  <li><a href="#数据处理" id="toc-数据处理" class="nav-link" data-scroll-target="#数据处理"><span class="header-section-number">3.1.4</span> 数据处理</a></li>
+  </ul></li>
+  <li><a href="#结果" id="toc-结果" class="nav-link" data-scroll-target="#结果"><span class="header-section-number">3.2</span> 结果</a>
+  <ul class="collapse">
+  <li><a href="#关于重要性的探索性分析" id="toc-关于重要性的探索性分析" class="nav-link" data-scroll-target="#关于重要性的探索性分析"><span class="header-section-number">3.2.1</span> 关于重要性的探索性分析</a></li>
+  </ul></li>
+  <li><a href="#讨论-1" id="toc-讨论-1" class="nav-link" data-scroll-target="#讨论-1"><span class="header-section-number">3.3</span> 讨论</a></li>
+  </ul></li>
+  <li><a href="#研究2" id="toc-研究2" class="nav-link" data-scroll-target="#研究2"><span class="header-section-number">4</span> 研究2</a>
+  <ul class="collapse">
+  <li><a href="#方法-1" id="toc-方法-1" class="nav-link" data-scroll-target="#方法-1"><span class="header-section-number">4.1</span> 方法</a>
+  <ul class="collapse">
+  <li><a href="#被试-1" id="toc-被试-1" class="nav-link" data-scroll-target="#被试-1"><span class="header-section-number">4.1.1</span> 被试</a></li>
+  <li><a href="#材料-1" id="toc-材料-1" class="nav-link" data-scroll-target="#材料-1"><span class="header-section-number">4.1.2</span> 材料</a></li>
+  <li><a href="#程序和数据分析" id="toc-程序和数据分析" class="nav-link" data-scroll-target="#程序和数据分析"><span class="header-section-number">4.1.3</span> 程序和数据分析</a></li>
+  </ul></li>
+  <li><a href="#结果-1" id="toc-结果-1" class="nav-link" data-scroll-target="#结果-1"><span class="header-section-number">4.2</span> 结果</a></li>
+  <li><a href="#讨论-2" id="toc-讨论-2" class="nav-link" data-scroll-target="#讨论-2"><span class="header-section-number">4.3</span> 讨论</a></li>
+  </ul></li>
+  <li><a href="#总讨论" id="toc-总讨论" class="nav-link" data-scroll-target="#总讨论"><span class="header-section-number">5</span> 总讨论</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="参考文献">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注释</span>参考文献
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Conroy-Beam, D., Walter, K. V., &amp; Duarte, K. (2022). What is a mate preference? Probing the computational format of mate preferences using couple simulation. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 510-526. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.09.002" class="uri">https://doi.org/10.1016/j.evolhumbehav.2022.09.002</a></p>
+<p><span class="citation" data-cites="Conroy_Beam_et_al_2022">Conroy-Beam et al. (<a href="#ref-Conroy_Beam_et_al_2022" role="doc-biblioref">2022</a>)</span></p>
+</div>
+</div>
+<p>择偶偏好究竟是什么，现在还没有定论</p>
+<section id="偏好的多个起源" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 偏好的多个起源</h1>
+<ul>
+<li>择偶偏好现代研究的起源至少可以追溯到20世纪70-80年代的进化心理学和人类学
+<ul>
+<li>择偶偏好适应（mate preference adaptations）：从非人类动物研究中获得启发，利于繁衍的基因会遗传下来
+<ul>
+<li>认为人类也一样，关注<em>偏好的内容</em>、<em>性别的作用</em>、<em>情境</em>、<em>生态</em>和<em>选择行为</em></li>
+<li>关注偏好本身，而不是前因后果</li>
+<li>关注偏好的具体特征而不是计算过程</li>
+<li>涉及<strong>心理过程</strong>，而且是持久的（进化而来的）</li>
+</ul></li>
+</ul></li>
+<li>经济学家的<code>偏好</code>是指选项的排序
+<ul>
+<li>不是对A的抽象偏好，而是A比B好的排序</li>
+<li>经济学家的偏好是选A还是B的<strong>行为</strong>，不是心理</li>
+<li>尽管受到挑战，但偏好视为排序的观念依然有影响力</li>
+</ul></li>
+<li>心理和行为的定义各有优缺点
+<ul>
+<li>行为定义清晰，可以用数学表示，但很难对进化理论进行建构
+<ul>
+<li>自然选择不可能对所有选项进行排序：选项无限、情境可能有唯一性（独特）</li>
+</ul></li>
+<li>心理定义更适合建构自然选择观点
+<ul>
+<li>理解决策情境中与反复出现的稳定规律相对应的特征</li>
+<li>输入成功繁衍的策略优化选择</li>
+<li>进化理论视角也可以指导行为的算法</li>
+<li>没有对择偶偏好的确切定义</li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="为择偶偏好勾勒一个更精确的建模框架" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="为择偶偏好勾勒一个更精确的建模框架"><span class="header-section-number">1.1</span> 为择偶偏好勾勒一个更精确的建模框架</h2>
+<ul>
+<li>择偶所涉及的决策任务
+<ul>
+<li>有性生殖生物，择偶才能繁衍</li>
+<li>时间精力限制，不可能追求每个机会</li>
+<li>如何分配有限的资源是一切的起点</li>
+</ul></li>
+<li>配偶价值（mate value）
+<ul>
+<li>理论上择偶是任意的，但不同对象会有不同的繁衍后果，这一差异造成了配偶价值
+<ul>
+<li>与高配偶价值的对象结合，繁衍成功的概率更大</li>
+<li>进化会促使形成选择高配偶价值的心理机制</li>
+</ul></li>
+<li>配偶价值不可见，只能根据线索推断
+<ul>
+<li>特质、暂时状态、情境、双方关系等</li>
+<li>存在知觉层次差异（如：外貌和社会地位）</li>
+<li>必须被准确高效感知，且和配偶价值紧密相关</li>
+</ul></li>
+<li>配偶价值是多维的，组合是多样的</li>
+</ul></li>
+<li>评价形式多种
+<ul>
+<li>二元、排序、得分</li>
+<li>伴侣评价心理机制的输出</li>
+<li>知觉通过运算转换为输出</li>
+</ul></li>
+<li><a href="#fig-1" class="quarto-xref">图&nbsp;1</a> 展示了一种合理的运算形式
+<ul>
+<li>择偶偏好被定义为：<strong>择偶所依赖的评价函数中的参数</strong></li>
+<li>对感知和偏好进行加工，这些都是心理变量，符合进化的解释</li>
+</ul></li>
+</ul>
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 择偶偏好模型
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="择偶偏好与伴侣评价的本质" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="择偶偏好与伴侣评价的本质"><span class="header-section-number">1.2</span> 择偶偏好与伴侣评价的本质</h2>
+<ul>
+<li>人类伴侣评价函数的性质是什么；函数中的偏好参数具有什么样的性质？</li>
+<li>理想特征<em>线性求和</em>，偏好是<em>权重</em>
+<ul>
+<li>通过排序测量</li>
+<li>通过调节效应测量</li>
+</ul></li>
+<li>阈值，二元判断</li>
+<li>对比特征和理想的偏移，偏移越小吸引力越大
+<ul>
+<li>Ideal Standards Model</li>
+</ul></li>
+<li>不同模型可以进行组合</li>
+<li><a href="#tbl-1" class="quarto-xref">表&nbsp;1</a> 展示了常见的模型和评价函数</li>
+</ul>
+<div id="tbl-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 部分偏好模型及其评价函数（简化版）
+</figcaption>
+<div aria-describedby="tbl-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>偏好模型</th>
+<th>评价函数</th>
+<th>示例文献</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>权重</td>
+<td><span class="math inline">\(p\times t\)</span></td>
+<td><span class="citation" data-cites="Buss_1989">Buss (<a href="#ref-Buss_1989" role="doc-biblioref">1989</a>)</span> ；<span class="citation" data-cites="Eastwick_Smith_2018">Eastwick &amp; Smith (<a href="#ref-Eastwick_Smith_2018" role="doc-biblioref">2018</a>)</span></td>
+</tr>
+<tr class="even">
+<td>可接受范围</td>
+<td><span class="math inline">\(p_{\max}&gt;t&gt;p_{\min}\)</span></td>
+<td><span class="citation" data-cites="Kenrick_et_al_1990">Kenrick et al. (<a href="#ref-Kenrick_et_al_1990" role="doc-biblioref">1990</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>最低阈值</td>
+<td><span class="math inline">\(t&gt;p\)</span></td>
+<td><span class="citation" data-cites="Miller_Todd_1998">Miller &amp; Todd (<a href="#ref-Miller_Todd_1998" role="doc-biblioref">1998</a>)</span></td>
+</tr>
+<tr class="even">
+<td>理想值</td>
+<td><span class="math inline">\(p-t\)</span></td>
+<td><span class="citation" data-cites="Fletcher_Simpson_2000">Fletcher &amp; Simpson (<a href="#ref-Fletcher_Simpson_2000" role="doc-biblioref">2000</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>组合模型</td>
+<td><span class="math inline">\(p_1\times(p_2-t)\)</span>；或：若 <span class="math inline">\(t&gt;p_1\)</span>，则为 <span class="math inline">\(p_2\times t\)</span>，否则为 <span class="math inline">\(0\)</span></td>
+<td><span class="citation" data-cites="Conroy_Beam_et_al_2019"><span class="nocase">Conroy-Beam et al.</span> (<a href="#ref-Conroy_Beam_et_al_2019" role="doc-biblioref">2019</a>)</span> ；<span class="citation" data-cites="Li_et_al_2002">Li et al. (<a href="#ref-Li_et_al_2002" role="doc-biblioref">2002</a>)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>注：</strong> <span class="math inline">\(p\)</span> 表示偏好值，其具体作用随模型而异，可以充当权重、阈值或理想值；<span class="math inline">\(t\)</span> 表示对潜在伴侣某项特质的知觉值；<span class="math inline">\(p_{\min}\)</span> 和 <span class="math inline">\(p_{\max}\)</span> 分别表示最低和最高可接受值；<span class="math inline">\(p_1\)</span>、<span class="math inline">\(p_2\)</span> 表示组合模型中承担不同作用的偏好参数</p>
+<ul>
+<li>不同模型隐含的对偏好的理解不同</li>
+<li>已有研究发现权重模型更合理
+<ul>
+<li>只是针对模型的拟合效果，并非针对偏好究竟是什么（斜率、阈值）</li>
+</ul></li>
+<li>现有研究使用伴侣模型，<strong>同时比较择偶偏好和伴侣评价</strong>
+<ul>
+<li>招募真实恋爱被试，让被试创建包含自身特征（偏好和特质）的化身智能体</li>
+<li>化身智能体进入择偶市场，操纵择偶策略</li>
+<li>对比智能体和真实被试选择的结果</li>
+<li>决策越接近人类，结果越接近</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="概念验证模型" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 概念验证模型</h1>
+<ul>
+<li>参考 <span class="citation" data-cites="Conroy_Beam_2021">Conroy-Beam (<a href="#ref-Conroy_Beam_2021" role="doc-biblioref">2021</a>)</span> 的研究进行设计</li>
+</ul>
+<section id="模型设置" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="模型设置"><span class="header-section-number">2.1</span> 模型设置</h2>
+<section id="生成智能体总体" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="生成智能体总体"><span class="header-section-number">2.1.1</span> 生成智能体总体</h3>
+<ul>
+<li>根据522对现实稳定伴侣，生成50000个智能体</li>
+<li>被试报告16个维度上的择偶偏好，分以下几种形式：
+<ul>
+<li>理想值（11点）</li>
+<li>最低和最高可接受阈值（11点）</li>
+<li>相对重要性（排序、固定总分评分）</li>
+<li>自己和伴侣的值（11点）</li>
+</ul></li>
+<li>用这些数据模拟出一个50000样本的智能体总体</li>
+</ul>
+</section>
+<section id="生成智能体伴侣配对" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="生成智能体伴侣配对"><span class="header-section-number">2.1.2</span> 生成智能体伴侣配对</h3>
+<ul>
+<li>划分为100个子总体，每个子总体包含500个智能体，<strong>复制三份，每份用不同规则得到模拟的匹配对</strong></li>
+<li>子总体中智能体根据规则计算每个潜在对象的配偶价值
+<ul>
+<li>加权求和：相对重要性加权求和</li>
+<li>期望阈值：按偏好重要性顺序，依据最低和最高可接受阈值逐步筛选；用完全部维度，或下一项筛选将排除所有剩余对象时停止。剩余对象赋值为10，被排除者赋值为0</li>
+<li>欧氏距离：特质和理想值之间的欧氏距离，缩放到0-10,0是差距最大，10是完全匹配</li>
+</ul></li>
+<li>每个智能体还拥有10个单位数值作为精力金钱等有限条件
+<ul>
+<li>根据配偶价值大小分配</li>
+<li>将给予对方和从对方获得的投入相乘，得到双方相互投入的指标，再据此按比例重新分配资源</li>
+<li>根据这个权重重新分配，重复100次</li>
+<li>最后数值会集中在一两个智能体上，如果两人互为投入最多的对象，则形成配对</li>
+</ul></li>
+</ul>
+</section>
+<section id="应用伴侣配对模拟" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="应用伴侣配对模拟"><span class="header-section-number">2.1.3</span> 应用伴侣配对模拟</h3>
+<ul>
+<li>从三个模拟总体中，分别在50、75、100、200、300、400、500对伴侣这七种样本量下，各随机抽取100个伴侣样本</li>
+<li>对每个样本，分别使用三种评价规则重新进行伴侣配对模拟</li>
+<li>比较各模型准确重建原始配对的比例，检验原始生成模型能否优于替代模型</li>
+<li>如果相同规则匹配出的伴侣对数是最多的，说明这种方法可以很好地识别匹配规则</li>
+</ul>
+</section>
+</section>
+<section id="模型结果" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="模型结果"><span class="header-section-number">2.2</span> 模型结果</h2>
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_2.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: 概念验证模型的结果：ASP、EUC和WS分别表示期望阈值、欧氏距离和加权求和
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-2" class="quarto-xref">图&nbsp;2</a> 展示了模拟结果，相同规则得到的结果最好，且随着样本量增加，模拟效果越来越不好，和前人研究一致</li>
+<li>基于欧氏距离、曼哈顿距离、幂次为1.5的闵可夫斯基距离重新评估配偶价值</li>
+<li>使用余弦相似度计算配偶价值</li>
+<li>使用加权欧氏距离，根据偏好重要性评分，对各维度的偏差进行加权</li>
+</ul>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_3.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 第二组验证模型的结果：A：余弦相似度总体；B：欧氏距离总体；C：加权欧氏距离总体；D：曼哈顿距离总体；E：闵可夫斯基距离总体
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-3" class="quarto-xref">图&nbsp;3</a> 展示了模拟结果，拟合效果接近，但样本量变大后，一致的配对方法拟合效果还是占优</li>
+</ul>
+<div id="fig-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_4.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4: 第二组验证模型的混淆矩阵：A—G面板分别对应50、75、100、200、300、400和500对伴侣的样本量
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>伴侣配对模拟能够清楚地区分彼此差异较大的伴侣评价模型，但对于相对接近的距离度量，其区分能力略低</li>
+</ul>
+</section>
+<section id="讨论" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="讨论"><span class="header-section-number">2.3</span> 讨论</h2>
+<ul>
+<li>可以识别原有的匹配模式</li>
+<li>相似的距离匹配策略，在少量被试时识别效果较低</li>
+<li>后续比较中不再纳入闵可夫斯基距离，并对曼哈顿距离与欧氏距离之间的差异作谨慎解释</li>
+</ul>
+</section>
+</section>
+<section id="研究1" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 研究1</h1>
+<ul>
+<li>概念验证表明，在所设定的模拟条件下，伴侣配对模拟能够区分不同的择偶偏好和伴侣评价模型</li>
+<li>将伴侣配对模拟应用于一个真实伴侣样本</li>
+</ul>
+<section id="方法" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="方法"><span class="header-section-number">3.1</span> 方法</h2>
+<section id="被试" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="被试"><span class="header-section-number">3.1.1</span> 被试</h3>
+<ul>
+<li>526对情侣，美国异性恋，正处于恋爱关系中，与伴侣同居</li>
+<li>平均年龄56.89 ± 13.95，关系持续时间的中位数27.83年，范围为1—64年</li>
+<li>已婚（93.58%）、认真交往（3.26%）、随意交往（1.34%）</li>
+</ul>
+</section>
+<section id="材料" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="材料"><span class="header-section-number">3.1.2</span> 材料</h3>
+<ul>
+<li>偏好问卷使用自己开发的15个维度和年龄：理想、最大最小、自我和伴侣
+<ul>
+<li>Affectionateness、Ambition、Artisticness、Disposition、Health、Humor、Intelligent、Kindness、Parenting Skills、Physical Attractiveness、Religiousness、Resources、Sexiness、Status、Family Support</li>
+<li>除年龄外，每个维度两道题</li>
+</ul></li>
+<li>偏好排序：16个维度排序（对的年龄也是一个维度）</li>
+<li>重要性评分：每个维度使用10点评分，16个维度的总分固定为80分，总分不变情况下调整重要性分数</li>
+<li>关系质量问卷：Quality Marriage Index（QMI）、Perceived Relationships Quality Components Inventory（PRQC）、Multidimensional Jealousy Scale（MJS）的认知分量表</li>
+</ul>
+</section>
+<section id="程序" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="程序"><span class="header-section-number">3.1.3</span> 程序</h3>
+<ul>
+<li>随机顺序完成理想偏好评分、自我评分和伴侣评分，各题组内部的条目顺序也随机排列</li>
+<li>完成QMI</li>
+<li>随机顺序完成最低偏好、最高偏好和偏好重要性评分，各题组内部的条目同样随机排列</li>
+<li>题组分别与PRQC的部分分量表搭配呈现；偏好排序任务和重要性评分任务之间，则穿插多维嫉妒量表的认知分量表</li>
+</ul>
+</section>
+<section id="数据处理" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="数据处理"><span class="header-section-number">3.1.4</span> 数据处理</h3>
+<ul>
+<li>为每名被试创建一个智能体，继承其所有形式的偏好；特质值采用本人和伴侣对该被试特质评分的均值</li>
+<li>根据不同算法，生成19个模型进行模拟</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_5.png" class="img-fluid figure-img"></p>
+<figcaption>择偶偏好和评价模型</figcaption>
+</figure>
+</div>
+<ul>
+<li>使用基于伴侣的随机截距，用准确性来预测标准化后的关系变量</li>
+</ul>
+</section>
+</section>
+<section id="结果" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="结果"><span class="header-section-number">3.2</span> 结果</h2>
+<div id="fig-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_6.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5: 研究1结果
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>仅使用理想值的模型结果最好，加权求和模型和期望阈值模型表现均很差</li>
+<li>被识别的被试关系质量更好</li>
+<li>预测准确性来预测关系质量，均显著（<span class="math inline">\(ps&lt;0.014\)</span>）</li>
+</ul>
+<section id="关于重要性的探索性分析" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="关于重要性的探索性分析"><span class="header-section-number">3.2.1</span> 关于重要性的探索性分析</h3>
+<ul>
+<li>择偶偏好理解为不同维度的相对重要性，一直是一种占主导地位的偏好模型，但<strong>偏好权重模型表现较差</strong></li>
+<li>为什么偏好权重和选择无关，但可以预测偏好的性别差异</li>
+<li>可能是：<strong>人们会根据自己在择偶市场中的不同经历调整偏好</strong>
+<ul>
+<li>被拒绝时，择偶偏好往往会变得更加灵活</li>
+<li>高配偶价值的人较少遭到拒绝，有较高的偏好标准</li>
+<li>被拒绝后，可能同时降低各个标准，也可能降低部分不重要的标准</li>
+<li>某个偏好维度的相对重要性，可能反映的是理想偏好对经验的<strong>敏感程度</strong>，而<strong>不是直接参与</strong>对潜在伴侣的<strong>评价</strong></li>
+</ul></li>
+<li>使用欧氏距离，计算配偶价值，建构其与偏好重要性评分的交互，来预测理想值偏好
+<ul>
+<li><a href="#fig-6" class="quarto-xref">图&nbsp;6</a> 展示了交互结果，结果显著</li>
+<li>理想偏好与配偶价值相关，且在不重要的偏好上更强</li>
+<li>说明不重要的偏好会更灵活</li>
+</ul></li>
+</ul>
+<div id="fig-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_7.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6: 重要性的探索性分析结果
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="讨论-1" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="讨论-1"><span class="header-section-number">3.3</span> 讨论</h2>
+<ul>
+<li>理想值是最合理的择偶偏好模型，而距离度量是最合理的伴侣评价模型</li>
+<li>研究1中被试的伴侣关系已经持续很长时间，结果可能无法推广到关系时间较短的被试身上</li>
+<li>曼哈顿距离的优势出乎意料
+<ul>
+<li>曼哈顿距离不会区分“少数维度上的较大偏差”与“多个维度上的较小偏差”</li>
+<li>恶毒可能被外貌弥补</li>
+</ul></li>
+<li>会有一定的不准确性，接下来在短期关系的样本上进行研究</li>
+</ul>
+</section>
+</section>
+<section id="研究2" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 研究2</h1>
+<section id="方法-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="方法-1"><span class="header-section-number">4.1</span> 方法</h2>
+<section id="被试-1" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="被试-1"><span class="header-section-number">4.1.1</span> 被试</h3>
+<ul>
+<li>295对，590人，异性稳定伴侣，25.87 ± 5.00岁</li>
+<li>关系不足5年，中位数3年，0-5年，四分位数2-4年</li>
+</ul>
+</section>
+<section id="材料-1" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="材料-1"><span class="header-section-number">4.1.2</span> 材料</h3>
+<ul>
+<li>理想偏好、固定总分的重要性评分、自我和伴侣特质评分，以及QMI、PRQC和完整MJS</li>
+</ul>
+</section>
+<section id="程序和数据分析" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="程序和数据分析"><span class="header-section-number">4.1.3</span> 程序和数据分析</h3>
+<ul>
+<li>和研究1一致</li>
+<li>仅考察理想值或权重形式偏好的评价模型
+<ul>
+<li>欧氏距离、加权欧氏距离、曼哈顿距离、加权曼哈顿距离、余弦相似度、求和、加权求和</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="结果-1" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="结果-1"><span class="header-section-number">4.2</span> 结果</h2>
+<div id="fig-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_8.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;7: 研究2结果
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>偏好作为理想值的模型优于作为权重的模型</li>
+<li>欧氏距离和曼哈顿距离预测效果没有显著差异</li>
+<li>欧氏距离准确性依然可以预测所有关系质量</li>
+<li>整体准确率下降出乎意料
+<ul>
+<li>之前研究样本越少准确率越高</li>
+<li>关系时间较短，模型更适合时间更长的</li>
+<li>样本同质性更高</li>
+<li>研究1和2的样本混合进行第三轮模拟
+<ul>
+<li>将研究2中的每一对样本分别放入研究1中抽样出的294对样本中（保证样本量一致，整体同质性和研究1类似）</li>
+<li>研究2的伴侣55.256%被识别，研究1样本的平均准确性为42.765%</li>
+<li>长时关系也能识别短时关系，说明主要是<strong>样本同质性更强</strong>的原因</li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="fig-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig_9.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8: 研究2结果
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="#fig-8" class="quarto-xref">图&nbsp;8</a> 所示，不重要的偏好维度更灵活</li>
+</ul>
+</section>
+<section id="讨论-2" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="讨论-2"><span class="header-section-number">4.3</span> 讨论</h2>
+<ul>
+<li>研究2总体上复制了研究1的结果</li>
+<li>可以推广到短时伴侣，但距离度量识别更困难</li>
+<li>纵向研究单身被试的择偶选择或更大规模样本，可能可以有更多的解释</li>
+</ul>
+</section>
+</section>
+<section id="总讨论" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 总讨论</h1>
+<ul>
+<li>择偶偏好是评价函数中的参数，这些参数参与决定对潜在伴侣的知觉如何转化为配偶价值估计
+<ul>
+<li>权重、阈值、范围和理想值</li>
+</ul></li>
+<li>表现最好的择偶偏好模型是将偏好理解为<strong>理想值</strong>的模型
+<ul>
+<li>在关系长和短的被试中均适用</li>
+<li>被准确识别的被试有着更高的关系质量</li>
+</ul></li>
+<li>启示：
+<ul>
+<li>将相对重要性（优先性）和偏好本身区分开来</li>
+<li>探索性结果提示，优先性可能主要参与理想偏好的形成与调整，再通过理想偏好间接关联择偶选择</li>
+<li>关注个体内部发展，偏好会随时间经历变化</li>
+</ul></li>
+<li>局限
+<ul>
+<li>偏好是在关系建立后测量的，难以排除人们根据现有伴侣调整偏好的可能</li>
+<li>被试并非来自同一个真实、相对封闭的择偶市场，彼此通常不认识</li>
+<li>同一模型假定所有人及不同维度的偏好具有相同形式，未考虑偏好形式的差异</li>
+<li>模拟准确性与关系质量之间的联系尚难解释</li>
+<li>资源分配模型只是择偶过程的一种近似，换用其他选择模型可能影响结果</li>
+<li>距离函数表现较好，不代表心智实际计算了这些距离；简单启发式规则也可能产生类似结果</li>
+<li>可能只需要较少的偏好维度，就能达到相近的模拟准确率</li>
+<li>当前比较方法没有对模型复杂度设置惩罚</li>
+<li>择偶包含不同决策尺度：总体上选择伴侣，与当下决定和谁相处，面对的选项范围不同</li>
+<li>不同形式的偏好可能调节不同尺度的决策，这一解释仍有待检验</li>
+</ul></li>
+</ul>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Buss_1989" class="csl-entry" role="listitem">
+Buss, D. M. (1989). Sex differences in human mate preferences: Evolutionary hypotheses tested in 37 cultures. <em>Behavioral and Brain Sciences</em>, <em>12</em>(1), 1–14. <a href="https://doi.org/10.1017/S0140525X00023992">https://doi.org/10.1017/S0140525X00023992</a>
+</div>
+<div id="ref-Conroy_Beam_2021" class="csl-entry" role="listitem">
+Conroy-Beam, D. (2021). Couple simulation: A novel approach for evaluating models of human mate choice. <em>Personality and Social Psychology Review</em>, <em>25</em>(3), 191–228. <a href="https://doi.org/10.1177/1088868320971258">https://doi.org/10.1177/1088868320971258</a>
+</div>
+<div id="ref-Conroy_Beam_et_al_2019" class="csl-entry" role="listitem">
+<span class="nocase">Conroy-Beam, D., Buss, D. M., Asao, K., Sorokowska, A., Sorokowski, P., Aavik, T., Akello, G., Alhabahba, M. M., Alm, C., Amjad, N., Anjum, A., Atama, C. S., Duyar, D. A., Ayebare, R., Batres, C., Bendixen, M., Bensafia, A., Bizumic, B., Boussena, M., et al.others</span>. (2019). Contrasting computational models of mate preference integration across 45 countries [Journal Article]. <em>Scientific Reports</em>, <em>9</em>(1), 16885. <a href="https://doi.org/10.1038/s41598-019-52748-8">https://doi.org/10.1038/s41598-019-52748-8</a>
+</div>
+<div id="ref-Conroy_Beam_et_al_2022" class="csl-entry" role="listitem">
+Conroy-Beam, D., Walter, K. V., &amp; Duarte, K. (2022). What is a mate preference? Probing the computational format of mate preferences using couple simulation. <em>Evolution and Human Behavior</em>, <em>43</em>(6), 510–526. <a href="https://doi.org/10.1016/j.evolhumbehav.2022.09.002">https://doi.org/10.1016/j.evolhumbehav.2022.09.002</a>
+</div>
+<div id="ref-Eastwick_Smith_2018" class="csl-entry" role="listitem">
+Eastwick, P. W., &amp; Smith, L. K. (2018). Sex-differentiated effects of physical attractiveness on romantic desire: A highly powered, preregistered study in a photograph evaluation context. <em>Comprehensive Results in Social Psychology</em>, <em>3</em>(1), 1–27. <a href="https://doi.org/10.1080/23743603.2018.1425089">https://doi.org/10.1080/23743603.2018.1425089</a>
+</div>
+<div id="ref-Fletcher_Simpson_2000" class="csl-entry" role="listitem">
+Fletcher, G. J. O., &amp; Simpson, J. A. (2000). Ideal standards in close relationships:their structure and functions. <em>Current Directions in Psychological Science</em>, <em>9</em>(3), 102–105. <a href="https://doi.org/10.1111/1467-8721.00070">https://doi.org/10.1111/1467-8721.00070</a>
+</div>
+<div id="ref-Kenrick_et_al_1990" class="csl-entry" role="listitem">
+Kenrick, D. T., Sadalla, E. K., Groth, G., &amp; Trost, M. R. (1990). Evolution, traits, and the stages of human courtship: Qualifying the parental investment model. <em>Journal of Personality</em>, <em>58</em>(1), 97–116. <a href="https://doi.org/10.1111/j.1467-6494.1990.tb00909.x">https://doi.org/10.1111/j.1467-6494.1990.tb00909.x</a>
+</div>
+<div id="ref-Li_et_al_2002" class="csl-entry" role="listitem">
+Li, N. P., Bailey, J. M., Kenrick, D. T., &amp; Linsenmeier, J. A. W. (2002). The necessities and luxuries of mate preferences: Testing the tradeoffs. <em>Journal of Personality and Social Psychology</em>, <em>82</em>(6), 947–955. <a href="https://doi.org/10.1037/0022-3514.82.6.947">https://doi.org/10.1037/0022-3514.82.6.947</a>
+</div>
+<div id="ref-Miller_Todd_1998" class="csl-entry" role="listitem">
+Miller, G. F., &amp; Todd, P. M. (1998). Mate choice turns cognitive. <em>Trends in Cognitive Sciences</em>, <em>2</em>(5), 190–198. <a href="https://doi.org/10.1016/S1364-6613(98)01169-3">https://doi.org/10.1016/S1364-6613(98)01169-3</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
