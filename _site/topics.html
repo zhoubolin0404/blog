@@ -123,6 +123,28 @@ ul.task-list li input[type="checkbox"] {
   
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-ai-human-list .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-ai-human-list'] = new List('listing-ai-human-list', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-literature-list .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
@@ -243,6 +265,129 @@ window.Quarto = {
 </header>
 
 
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">统计方法</h2>
+<section id="linear-algebra-solutions" class="level3">
+<h3 class="anchored" data-anchor-id="linear-algebra-solutions">Linear Algebra Solutions</h3>
+<p><a href="./linear-algebra/index.html">Exercise Solutions for <em>Linear Algebra Done Right</em> (4th Edition)</a></p>
+</section>
+<section id="混合效应模型系列" class="level3">
+<h3 class="anchored" data-anchor-id="混合效应模型系列">混合效应模型系列</h3>
+<div id="listing-glmm-list" class="quarto-listing quarto-listing-container-table">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+    <select id="listing-glmm-list-sort" class="form-select" aria-label="排序方式" onchange="window['quarto-listings']['listing-glmm-list'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+      <option value="" disabled="" selected="" hidden="">排序方式</option>
+      <option value="index" data-direction="asc">默认</option>
+      <option value="listing-title-sort" data-direction="asc">
+        标题
+      </option>
+    </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="筛选">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">标题</a>
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="72" data-listing-title-sort="00-概述" data-listing-filename-sort="概述.qmd">
+<td>
+<a href="./posts/glmm/概述/概述.html" class="title listing-title">00-概述</a>
+</td>
+
+</tr>
+
+<tr data-index="1" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="498" data-listing-title-sort="01-前言" data-listing-filename-sort="前言.qmd">
+<td>
+<a href="./posts/glmm/引言/前言.html" class="title listing-title">01-前言</a>
+</td>
+
+</tr>
+
+<tr data-index="2" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1034" data-listing-title-sort="02-相关和回归" data-listing-filename-sort="相关和回归.qmd">
+<td>
+<a href="./posts/glmm/相关和回归/相关和回归.html" class="title listing-title">02-相关和回归</a>
+</td>
+
+</tr>
+
+<tr data-index="3" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="849" data-listing-title-sort="03-多元回归" data-listing-filename-sort="多元回归.qmd">
+<td>
+<a href="./posts/glmm/多元回归/多元回归.html" class="title listing-title">03-多元回归</a>
+</td>
+
+</tr>
+
+<tr data-index="4" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3581" data-listing-title-sort="04-交互效应" data-listing-filename-sort="交互效应.qmd">
+<td>
+<a href="./posts/glmm/交互效应/交互效应.html" class="title listing-title">04-交互效应</a>
+</td>
+
+</tr>
+
+<tr data-index="5" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2763" data-listing-title-sort="05-介绍线性混合效应模型" data-listing-filename-sort="介绍线性混合效应模型.qmd">
+<td>
+<a href="./posts/glmm/介绍线性混合效应模型/介绍线性混合效应模型.html" class="title listing-title">05-介绍线性混合效应模型</a>
+</td>
+
+</tr>
+
+<tr data-index="6" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1252" data-listing-title-sort="06-单随机因子线性混合效应模型" data-listing-filename-sort="单随机因子线性混合效应模型.qmd">
+<td>
+<a href="./posts/glmm/单随机因子线性混合效应模型/单随机因子线性混合效应模型.html" class="title listing-title">06-单随机因子线性混合效应模型</a>
+</td>
+
+</tr>
+
+<tr data-index="7" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1998" data-listing-title-sort="07-交叉随机因子线性混合效应模型" data-listing-filename-sort="交叉随机因子线性混合效应模型.qmd">
+<td>
+<a href="./posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html" class="title listing-title">07-交叉随机因子线性混合效应模型</a>
+</td>
+
+</tr>
+
+<tr data-index="8" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="373" data-listing-title-sort="08-广义线性混合效应模型" data-listing-filename-sort="广义线性混合效应模型.qmd">
+<td>
+<a href="./posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html" class="title listing-title">08-广义线性混合效应模型</a>
+</td>
+
+</tr>
+
+<tr data-index="9" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1214" data-listing-title-sort="09-符号定义" data-listing-filename-sort="符号定义.qmd">
+<td>
+<a href="./posts/glmm/符号定义/符号定义.html" class="title listing-title">09-符号定义</a>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="listing-no-matching d-none">无匹配项</div>
+</div>
+<p><a href="./posts/SDM-PSI/SDM-PSI.html">SDM-PSI 参考手册（中文翻译）</a></p>
+</section>
+<section id="心理科学中多元数据的网络分析" class="level3">
+<h3 class="anchored" data-anchor-id="心理科学中多元数据的网络分析"><a href="./posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html">心理科学中多元数据的网络分析</a></h3>
+</section>
+<section id="潜在类别分析" class="level3">
+<h3 class="anchored" data-anchor-id="潜在类别分析"><a href="./posts/literature_notes/LCA/LCA.html">潜在类别分析</a></h3>
+</section>
+<section id="理解生态瞬时评估数据一项关于探索生态瞬时评估数据中项目表现的教程" class="level3">
+<h3 class="anchored" data-anchor-id="理解生态瞬时评估数据一项关于探索生态瞬时评估数据中项目表现的教程"><a href="./posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html">理解生态瞬时评估数据：一项关于探索生态瞬时评估数据中项目表现的教程</a></h3>
+</section>
+</section>
 <section id="relationships" class="level2">
 <h2 class="anchored" data-anchor-id="relationships">亲密关系研究</h2>
 <div id="listing-relationship-list" class="quarto-listing quarto-listing-container-table">
@@ -419,17 +564,21 @@ window.Quarto = {
 <div class="listing-no-matching d-none">无匹配项</div>
 </div>
 </section>
-<section id="methods" class="level2">
-<h2 class="anchored" data-anchor-id="methods">统计方法</h2>
-<section id="混合效应模型系列" class="level3">
-<h3 class="anchored" data-anchor-id="混合效应模型系列">混合效应模型系列</h3>
-<div id="listing-glmm-list" class="quarto-listing quarto-listing-container-table">
+<section id="ai-and-humans" class="level2">
+<h2 class="anchored" data-anchor-id="ai-and-humans">AI</h2>
+<div id="listing-ai-human-list" class="quarto-listing quarto-listing-container-table">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-glmm-list-sort" class="form-select" aria-label="排序方式" onchange="window['quarto-listings']['listing-glmm-list'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+    <select id="listing-ai-human-list-sort" class="form-select" aria-label="排序方式" onchange="window['quarto-listings']['listing-ai-human-list'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
       <option value="" disabled="" selected="" hidden="">排序方式</option>
       <option value="index" data-direction="asc">默认</option>
+      <option value="listing-date-sort" data-direction="asc">
+        日期 - 日期升序
+      </option>
+      <option value="listing-date-sort" data-direction="desc">
+        日期 - 日期降序
+      </option>
       <option value="listing-title-sort" data-direction="asc">
         标题
       </option>
@@ -448,76 +597,70 @@ window.Quarto = {
 <a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">标题</a>
 </th>
 
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">日期</a>
+</th>
+
 </tr>
 </thead>
 <tbody class="list">
 
-<tr data-index="0" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="72" data-listing-title-sort="00-概述" data-listing-filename-sort="概述.qmd">
+<tr data-index="0" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1779638400000" data-listing-file-modified-sort="1795753214149" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4949" data-listing-title-sort="厌恶还是欣赏AI？能力-个性化框架和元分析综述" data-listing-filename-sort="Qin_et_al_2025.qmd">
 <td>
-<a href="./posts/glmm/概述/概述.html" class="title listing-title">00-概述</a>
+<a href="./posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html" class="title listing-title">厌恶还是欣赏AI？能力-个性化框架和元分析综述</a>
+</td>
+<td>
+<span class="listing-date">May 25, 2026</span>
 </td>
 
 </tr>
 
-<tr data-index="1" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="498" data-listing-title-sort="01-前言" data-listing-filename-sort="前言.qmd">
+<tr data-index="1" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1775577600000" data-listing-file-modified-sort="1795753537546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="532" data-listing-title-sort="评估大型语言模型道德能力的路线图" data-listing-filename-sort="Haas_et_al_2026.qmd">
 <td>
-<a href="./posts/glmm/引言/前言.html" class="title listing-title">01-前言</a>
+<a href="./posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html" class="title listing-title">评估大型语言模型道德能力的路线图</a>
+</td>
+<td>
+<span class="listing-date">Apr 8, 2026</span>
 </td>
 
 </tr>
 
-<tr data-index="2" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1034" data-listing-title-sort="02-相关和回归" data-listing-filename-sort="相关和回归.qmd">
+<tr data-index="2" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1755014400000" data-listing-file-modified-sort="1795753537547" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1112" data-listing-title-sort="人们对人类和机器人在经典道德困境中的判断" data-listing-filename-sort="Malle_et_al_2025.qmd">
 <td>
-<a href="./posts/glmm/相关和回归/相关和回归.html" class="title listing-title">02-相关和回归</a>
+<a href="./posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html" class="title listing-title">人们对人类和机器人在经典道德困境中的判断</a>
+</td>
+<td>
+<span class="listing-date">Aug 13, 2025</span>
 </td>
 
 </tr>
 
-<tr data-index="3" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="849" data-listing-title-sort="03-多元回归" data-listing-filename-sort="多元回归.qmd">
+<tr data-index="3" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1750176000000" data-listing-file-modified-sort="1795753537546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="978" data-listing-title-sort="人工智能的道德心理学" data-listing-filename-sort="Bonnefon_et_al_2024.qmd">
 <td>
-<a href="./posts/glmm/多元回归/多元回归.html" class="title listing-title">03-多元回归</a>
+<a href="./posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html" class="title listing-title">人工智能的道德心理学</a>
+</td>
+<td>
+<span class="listing-date">Jun 18, 2025</span>
 </td>
 
 </tr>
 
-<tr data-index="4" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3581" data-listing-title-sort="04-交互效应" data-listing-filename-sort="交互效应.qmd">
+<tr data-index="4" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUk=" data-listing-date-sort="1749398400000" data-listing-file-modified-sort="1795753537546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="569" data-listing-title-sort="在AI时代抵制非人化" data-listing-filename-sort="Bender_2024.qmd">
 <td>
-<a href="./posts/glmm/交互效应/交互效应.html" class="title listing-title">04-交互效应</a>
+<a href="./posts/literature_notes/Bender_2024/Bender_2024.html" class="title listing-title">在AI时代抵制非人化</a>
+</td>
+<td>
+<span class="listing-date">Jun 9, 2025</span>
 </td>
 
 </tr>
 
-<tr data-index="5" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2763" data-listing-title-sort="05-介绍线性混合效应模型" data-listing-filename-sort="介绍线性混合效应模型.qmd">
+<tr data-index="5" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQ0FTQSUyQ0FJ" data-listing-date-sort="1749225600000" data-listing-file-modified-sort="1795753758145" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1823" data-listing-title-sort="聊天机器人的采用：多视角的系统回顾和未来的研究议程" data-listing-filename-sort="Alsharhan_et_al_2024.qmd">
 <td>
-<a href="./posts/glmm/介绍线性混合效应模型/介绍线性混合效应模型.html" class="title listing-title">05-介绍线性混合效应模型</a>
+<a href="./posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html" class="title listing-title">聊天机器人的采用：多视角的系统回顾和未来的研究议程</a>
 </td>
-
-</tr>
-
-<tr data-index="6" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1252" data-listing-title-sort="06-单随机因子线性混合效应模型" data-listing-filename-sort="单随机因子线性混合效应模型.qmd">
 <td>
-<a href="./posts/glmm/单随机因子线性混合效应模型/单随机因子线性混合效应模型.html" class="title listing-title">06-单随机因子线性混合效应模型</a>
-</td>
-
-</tr>
-
-<tr data-index="7" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1998" data-listing-title-sort="07-交叉随机因子线性混合效应模型" data-listing-filename-sort="交叉随机因子线性混合效应模型.qmd">
-<td>
-<a href="./posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html" class="title listing-title">07-交叉随机因子线性混合效应模型</a>
-</td>
-
-</tr>
-
-<tr data-index="8" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="373" data-listing-title-sort="08-广义线性混合效应模型" data-listing-filename-sort="广义线性混合效应模型.qmd">
-<td>
-<a href="./posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html" class="title listing-title">08-广义线性混合效应模型</a>
-</td>
-
-</tr>
-
-<tr data-index="9" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1214" data-listing-title-sort="09-符号定义" data-listing-filename-sort="符号定义.qmd">
-<td>
-<a href="./posts/glmm/符号定义/符号定义.html" class="title listing-title">09-符号定义</a>
+<span class="listing-date">Jun 7, 2025</span>
 </td>
 
 </tr>
@@ -526,8 +669,6 @@ window.Quarto = {
 </table>
 <div class="listing-no-matching d-none">无匹配项</div>
 </div>
-<p><a href="./posts/SDM-PSI/SDM-PSI.html">SDM-PSI 参考手册（中文翻译）</a></p>
-</section>
 </section>
 <section id="literature" class="level2">
 <h2 class="anchored" data-anchor-id="literature">全部文献笔记</h2>
@@ -710,7 +851,7 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="14" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1779638400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4949" data-listing-title-sort="厌恶还是欣赏AI？能力-个性化框架和元分析综述" data-listing-filename-sort="Qin_et_al_2025.qmd">
+<tr data-index="14" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1779638400000" data-listing-file-modified-sort="1795753214149" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4949" data-listing-title-sort="厌恶还是欣赏AI？能力-个性化框架和元分析综述" data-listing-filename-sort="Qin_et_al_2025.qmd">
 <td>
 <a href="./posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html" class="title listing-title">厌恶还是欣赏AI？能力-个性化框架和元分析综述</a>
 </td>
@@ -760,7 +901,7 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="19" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1775577600000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="532" data-listing-title-sort="评估大型语言模型道德能力的路线图" data-listing-filename-sort="Haas_et_al_2026.qmd">
+<tr data-index="19" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1775577600000" data-listing-file-modified-sort="1795753537546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="532" data-listing-title-sort="评估大型语言模型道德能力的路线图" data-listing-filename-sort="Haas_et_al_2026.qmd">
 <td>
 <a href="./posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html" class="title listing-title">评估大型语言模型道德能力的路线图</a>
 </td>
@@ -770,7 +911,7 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="20" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1755014400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1112" data-listing-title-sort="人们对人类和机器人在经典道德困境中的判断" data-listing-filename-sort="Malle_et_al_2025.qmd">
+<tr data-index="20" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1755014400000" data-listing-file-modified-sort="1795753537547" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1112" data-listing-title-sort="人们对人类和机器人在经典道德困境中的判断" data-listing-filename-sort="Malle_et_al_2025.qmd">
 <td>
 <a href="./posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html" class="title listing-title">人们对人类和机器人在经典道德困境中的判断</a>
 </td>
@@ -780,7 +921,7 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="21" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1750176000000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="978" data-listing-title-sort="人工智能的道德心理学" data-listing-filename-sort="Bonnefon_et_al_2024.qmd">
+<tr data-index="21" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1750176000000" data-listing-file-modified-sort="1795753537546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="978" data-listing-title-sort="人工智能的道德心理学" data-listing-filename-sort="Bonnefon_et_al_2024.qmd">
 <td>
 <a href="./posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html" class="title listing-title">人工智能的道德心理学</a>
 </td>
@@ -790,7 +931,7 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="22" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUk=" data-listing-date-sort="1749398400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="569" data-listing-title-sort="在AI时代抵制非人化" data-listing-filename-sort="Bender_2024.qmd">
+<tr data-index="22" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUk=" data-listing-date-sort="1749398400000" data-listing-file-modified-sort="1795753537546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="569" data-listing-title-sort="在AI时代抵制非人化" data-listing-filename-sort="Bender_2024.qmd">
 <td>
 <a href="./posts/literature_notes/Bender_2024/Bender_2024.html" class="title listing-title">在AI时代抵制非人化</a>
 </td>
@@ -810,7 +951,7 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="24" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQ0FTQQ==" data-listing-date-sort="1749225600000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1823" data-listing-title-sort="聊天机器人的采用：多视角的系统回顾和未来的研究议程" data-listing-filename-sort="Alsharhan_et_al_2024.qmd">
+<tr data-index="24" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQ0FTQSUyQ0FJ" data-listing-date-sort="1749225600000" data-listing-file-modified-sort="1795753758145" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1823" data-listing-title-sort="聊天机器人的采用：多视角的系统回顾和未来的研究议程" data-listing-filename-sort="Alsharhan_et_al_2024.qmd">
 <td>
 <a href="./posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html" class="title listing-title">聊天机器人的采用：多视角的系统回顾和未来的研究议程</a>
 </td>

@@ -65,3 +65,16 @@
     gap: .55rem;
   }
 }
+
+#listing-linear-algebra-solutions {
+  display: none;
+}
+
+/* Quarto stores the encoded Linear Algebra Solutions label in data-category. */
+body:has(.quarto-listing-category .category.active[data-category="TGluZWFyJTIwQWxnZWJyYSUyMFNvbHV0aW9ucw=="]) #listing-blog-posts {
+  display: none;
+}
+
+body:has(.quarto-listing-category .category.active[data-category="TGluZWFyJTIwQWxnZWJyYSUyMFNvbHV0aW9ucw=="]) #listing-linear-algebra-solutions {
+  display: block;
+}

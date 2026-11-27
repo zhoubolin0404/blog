@@ -25,18 +25,18 @@
       "/posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html",
       "/posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html",
       "/posts/glmm/符号定义/符号定义.html",
-      "/posts/literature_notes/Fujii_2026/Fujii_2026.html",
       "/posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html",
-      "/posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html",
-      "/posts/literature_notes/LCA/LCA.html",
-      "/posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html",
-      "/posts/literature_notes/Imrani_et_al_2026/Imrani_et_al_2026.html",
       "/posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html",
       "/posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html",
       "/posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html",
       "/posts/literature_notes/Bender_2024/Bender_2024.html",
-      "/posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html",
-      "/posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html"
+      "/posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html",
+      "/posts/literature_notes/Fujii_2026/Fujii_2026.html",
+      "/posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html",
+      "/posts/literature_notes/LCA/LCA.html",
+      "/posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html",
+      "/posts/literature_notes/Imrani_et_al_2026/Imrani_et_al_2026.html",
+      "/posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html"
     ]
   },
   {
@@ -77,7 +77,8 @@
       "/posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html",
       "/posts/literature_notes/Bender_2024/Bender_2024.html",
       "/posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html",
-      "/posts/SDM-PSI/SDM-PSI.html"
+      "/posts/SDM-PSI/SDM-PSI.html",
+      "/linear-algebra/index.html"
     ]
   }
 ]
