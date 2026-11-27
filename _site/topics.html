@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>专题 – Zhou Bolin’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-48eea8e06ff06eb442a2daacfce5ac08.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-relationship-list .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-relationship-list'] = new List('listing-relationship-list', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-glmm-list .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-glmm-list'] = new List('listing-glmm-list', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-literature-list .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-literature-list'] = new List('listing-literature-list', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Zhou Bolin’s blog</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./topics.html" aria-current="page"> 
+<span class="menu-text">专题</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">个人简介</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/zhoubolin0404"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="搜索"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">专题</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="relationships" class="level2">
+<h2 class="anchored" data-anchor-id="relationships">亲密关系研究</h2>
+<div id="listing-relationship-list" class="quarto-listing quarto-listing-container-table">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+    <select id="listing-relationship-list-sort" class="form-select" aria-label="排序方式" onchange="window['quarto-listings']['listing-relationship-list'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+      <option value="" disabled="" selected="" hidden="">排序方式</option>
+      <option value="index" data-direction="asc">默认</option>
+      <option value="listing-date-sort" data-direction="asc">
+        日期 - 日期升序
+      </option>
+      <option value="listing-date-sort" data-direction="desc">
+        日期 - 日期降序
+      </option>
+      <option value="listing-title-sort" data-direction="asc">
+        标题
+      </option>
+    </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="筛选">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">标题</a>
+</th>
+
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">日期</a>
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1795536000000" data-listing-file-modified-sort="1795596621998" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="32" data-listing-word-count-sort="6213" data-listing-title-sort="疏远而不快乐？考察不忠事件前后个人福祉和关系福祉的动态变化" data-listing-filename-sort="Stavrova_et_al_2023.qmd">
+<td>
+<a href="./posts/literature_notes/infidelity/Stavrova_et_al_2023/Stavrova_et_al_2023.html" class="title listing-title">疏远而不快乐？考察不忠事件前后个人福祉和关系福祉的动态变化</a>
+</td>
+<td>
+<span class="listing-date">Nov 25, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="1" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1794240000000" data-listing-file-modified-sort="1794295275392" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="439" data-listing-title-sort="配偶价值差异和伴侣保持行为：三次响应面分析" data-listing-filename-sort="Young_et_al_2024.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Young_et_al_2024/Young_et_al_2024.html" class="title listing-title">配偶价值差异和伴侣保持行为：三次响应面分析</a>
+</td>
+<td>
+<span class="listing-date">Nov 10, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="2" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1793462400000" data-listing-file-modified-sort="1793605286416" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="509" data-listing-title-sort="什么是择偶偏好？使用伴侣配对模拟探索择偶偏好的计算形式" data-listing-filename-sort="Conroy_Beam_et_al_2022.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Conroy_Beam_et_al_2022/Conroy_Beam_et_al_2022.html" class="title listing-title">什么是择偶偏好？使用伴侣配对模拟探索择偶偏好的计算形式</a>
+</td>
+<td>
+<span class="listing-date">Nov 1, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="3" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1793116800000" data-listing-file-modified-sort="1793173348878" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2714" data-listing-title-sort="心理价值理论：从基于价值选择的通用计算认知模型预测最初的浪漫伴侣选择" data-listing-filename-sort="Cohen_et_al_2026.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Cohen_et_al_2026/Cohen_et_al_2026.html" class="title listing-title">心理价值理论：从基于价值选择的通用计算认知模型预测最初的浪漫伴侣选择</a>
+</td>
+<td>
+<span class="listing-date">Oct 28, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="4" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3JTJDJUU5JTlEJUEyJUU1JUFEJTk0JTJDbWV0YQ==" data-listing-date-sort="1791129600000" data-listing-file-modified-sort="1791188313072" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="375" data-listing-title-sort="吸引力的性别差异" data-listing-filename-sort="Wassiliwizky_et_al_2026.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Wassiliwizky_et_al_2026/Wassiliwizky_et_al_2026.html" class="title listing-title">吸引力的性别差异</a>
+</td>
+<td>
+<span class="listing-date">Oct 5, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="5" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3JTJDJUU5JTlEJUEyJUU1JUFEJTk0" data-listing-date-sort="1790438400000" data-listing-file-modified-sort="1790587992966" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="547" data-listing-title-sort="拥有选择会改变熟悉面孔和新异面孔的吸引力：性别差异和相似性" data-listing-filename-sort="Sculley_et_al_2021.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Sculley_et_al_2021/Sculley_et_al_2021.html" class="title listing-title">拥有选择会改变熟悉面孔和新异面孔的吸引力：性别差异和相似性</a>
+</td>
+<td>
+<span class="listing-date">Sep 27, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="6" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3JTJDJUU3JUJBJUJGJUU0JUI4JThBJUU3JUJBJUE2JUU0JUJDJTlB" data-listing-date-sort="1789574400000" data-listing-file-modified-sort="1789653529643" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="616" data-listing-title-sort="我刷到谁了？线上约会的准确性和自我展示" data-listing-filename-sort="Jiwa_et_al_in_press.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Jiwa_et_al_in_press/Jiwa_et_al_in_press.html" class="title listing-title">我刷到谁了？线上约会的准确性和自我展示</a>
+</td>
+<td>
+<span class="listing-date">Sep 17, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="7" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1789488000000" data-listing-file-modified-sort="1789547911653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="330" data-listing-title-sort="异性恋伴侣中的外貌满意度、身体批评与关系质量：一项二元研究" data-listing-filename-sort="Fruchier_et_al_2025.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Fruchier_et_al_2025/Fruchier_et_al_2025.html" class="title listing-title">异性恋伴侣中的外貌满意度、身体批评与关系质量：一项二元研究</a>
+</td>
+<td>
+<span class="listing-date">Sep 16, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="8" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1788796800000" data-listing-file-modified-sort="1788832364679" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="481" data-listing-title-sort="虚拟恋爱关系中线上不忠的解释" data-listing-filename-sort="Oliullah_Murtuza_2026.qmd">
+<td>
+<a href="./posts/literature_notes/infidelity/Oliullah_Murtuza_2026/Oliullah_Murtuza_2026.html" class="title listing-title">虚拟恋爱关系中线上不忠的解释</a>
+</td>
+<td>
+<span class="listing-date">Sep 8, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="9" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1788278400000" data-listing-file-modified-sort="1788785760682" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="149" data-listing-title-sort="社交媒体与亲密关系：连接和断开之迷" data-listing-filename-sort="Taylor_et_al_2022.qmd">
+<td>
+<a href="./posts/literature_notes/infidelity/Taylor_et_al_2022/Taylor_et_al_2022.html" class="title listing-title">社交媒体与亲密关系：连接和断开之迷</a>
+</td>
+<td>
+<span class="listing-date">Sep 2, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="10" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1782748800000" data-listing-file-modified-sort="1790425510691" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="363" data-listing-title-sort="理想伴侣偏好在关系中作用的实验检验" data-listing-filename-sort="Frost_Eastwick_2025.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Frost_Eastwick_2025/Frost_Eastwick_2025.html" class="title listing-title">理想伴侣偏好在关系中作用的实验检验</a>
+</td>
+<td>
+<span class="listing-date">Jun 30, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="11" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1782057600000" data-listing-file-modified-sort="1790425352110" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1220" data-listing-title-sort="准确自我评价在最优择偶中的作用" data-listing-filename-sort="Harper_et_al_2024.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Harper_et_al_2024/Harper_et_al_2024.html" class="title listing-title">准确自我评价在最优择偶中的作用</a>
+</td>
+<td>
+<span class="listing-date">Jun 22, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="12" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1781625600000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="29" data-listing-word-count-sort="5724" data-listing-title-sort="不忠是可以预测的吗？使用可解释的机器学习来识别不忠的最重要预测因素" data-listing-filename-sort="Vowels_et_al_2022.qmd">
+<td>
+<a href="./posts/literature_notes/Vowels_et_al_2022/Vowels_et_al_2022.html" class="title listing-title">不忠是可以预测的吗？使用可解释的机器学习来识别不忠的最重要预测因素</a>
+</td>
+<td>
+<span class="listing-date">Jun 17, 2026</span>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="listing-no-matching d-none">无匹配项</div>
+</div>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">统计方法</h2>
+<section id="混合效应模型系列" class="level3">
+<h3 class="anchored" data-anchor-id="混合效应模型系列">混合效应模型系列</h3>
+<div id="listing-glmm-list" class="quarto-listing quarto-listing-container-table">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+    <select id="listing-glmm-list-sort" class="form-select" aria-label="排序方式" onchange="window['quarto-listings']['listing-glmm-list'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+      <option value="" disabled="" selected="" hidden="">排序方式</option>
+      <option value="index" data-direction="asc">默认</option>
+      <option value="listing-title-sort" data-direction="asc">
+        标题
+      </option>
+    </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="筛选">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">标题</a>
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="72" data-listing-title-sort="00-概述" data-listing-filename-sort="概述.qmd">
+<td>
+<a href="./posts/glmm/概述/概述.html" class="title listing-title">00-概述</a>
+</td>
+
+</tr>
+
+<tr data-index="1" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="498" data-listing-title-sort="01-前言" data-listing-filename-sort="前言.qmd">
+<td>
+<a href="./posts/glmm/引言/前言.html" class="title listing-title">01-前言</a>
+</td>
+
+</tr>
+
+<tr data-index="2" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1034" data-listing-title-sort="02-相关和回归" data-listing-filename-sort="相关和回归.qmd">
+<td>
+<a href="./posts/glmm/相关和回归/相关和回归.html" class="title listing-title">02-相关和回归</a>
+</td>
+
+</tr>
+
+<tr data-index="3" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="849" data-listing-title-sort="03-多元回归" data-listing-filename-sort="多元回归.qmd">
+<td>
+<a href="./posts/glmm/多元回归/多元回归.html" class="title listing-title">03-多元回归</a>
+</td>
+
+</tr>
+
+<tr data-index="4" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3581" data-listing-title-sort="04-交互效应" data-listing-filename-sort="交互效应.qmd">
+<td>
+<a href="./posts/glmm/交互效应/交互效应.html" class="title listing-title">04-交互效应</a>
+</td>
+
+</tr>
+
+<tr data-index="5" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2763" data-listing-title-sort="05-介绍线性混合效应模型" data-listing-filename-sort="介绍线性混合效应模型.qmd">
+<td>
+<a href="./posts/glmm/介绍线性混合效应模型/介绍线性混合效应模型.html" class="title listing-title">05-介绍线性混合效应模型</a>
+</td>
+
+</tr>
+
+<tr data-index="6" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1252" data-listing-title-sort="06-单随机因子线性混合效应模型" data-listing-filename-sort="单随机因子线性混合效应模型.qmd">
+<td>
+<a href="./posts/glmm/单随机因子线性混合效应模型/单随机因子线性混合效应模型.html" class="title listing-title">06-单随机因子线性混合效应模型</a>
+</td>
+
+</tr>
+
+<tr data-index="7" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1998" data-listing-title-sort="07-交叉随机因子线性混合效应模型" data-listing-filename-sort="交叉随机因子线性混合效应模型.qmd">
+<td>
+<a href="./posts/glmm/交叉随机因子线性混合效应模型/交叉随机因子线性混合效应模型.html" class="title listing-title">07-交叉随机因子线性混合效应模型</a>
+</td>
+
+</tr>
+
+<tr data-index="8" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="373" data-listing-title-sort="08-广义线性混合效应模型" data-listing-filename-sort="广义线性混合效应模型.qmd">
+<td>
+<a href="./posts/glmm/广义线性混合效应模型/广义线性混合效应模型.html" class="title listing-title">08-广义线性混合效应模型</a>
+</td>
+
+</tr>
+
+<tr data-index="9" data-categories="R0xNTSUyQyVFNyVCQSVCRiVFNiU4MCVBNyVFNiVCNyVCNyVFNSU5MCU4OCVFNiU5NSU4OCVFNSVCQSU5NCVFNiVBOCVBMSVFNSU5RSU4Qg==" data-listing-date-sort="1772380800000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1214" data-listing-title-sort="09-符号定义" data-listing-filename-sort="符号定义.qmd">
+<td>
+<a href="./posts/glmm/符号定义/符号定义.html" class="title listing-title">09-符号定义</a>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="listing-no-matching d-none">无匹配项</div>
+</div>
+<p><a href="./posts/SDM-PSI/SDM-PSI.html">SDM-PSI 参考手册（中文翻译）</a></p>
+</section>
+</section>
+<section id="literature" class="level2">
+<h2 class="anchored" data-anchor-id="literature">全部文献笔记</h2>
+<div id="listing-literature-list" class="quarto-listing quarto-listing-container-table">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+    <select id="listing-literature-list-sort" class="form-select" aria-label="排序方式" onchange="window['quarto-listings']['listing-literature-list'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+      <option value="" disabled="" selected="" hidden="">排序方式</option>
+      <option value="index" data-direction="asc">默认</option>
+      <option value="listing-date-sort" data-direction="asc">
+        日期 - 日期升序
+      </option>
+      <option value="listing-date-sort" data-direction="desc">
+        日期 - 日期降序
+      </option>
+      <option value="listing-title-sort" data-direction="asc">
+        标题
+      </option>
+    </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="筛选">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">标题</a>
+</th>
+
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">日期</a>
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1795536000000" data-listing-file-modified-sort="1795596621998" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="32" data-listing-word-count-sort="6213" data-listing-title-sort="疏远而不快乐？考察不忠事件前后个人福祉和关系福祉的动态变化" data-listing-filename-sort="Stavrova_et_al_2023.qmd">
+<td>
+<a href="./posts/literature_notes/infidelity/Stavrova_et_al_2023/Stavrova_et_al_2023.html" class="title listing-title">疏远而不快乐？考察不忠事件前后个人福祉和关系福祉的动态变化</a>
+</td>
+<td>
+<span class="listing-date">Nov 25, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="1" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1794240000000" data-listing-file-modified-sort="1794295275392" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="439" data-listing-title-sort="配偶价值差异和伴侣保持行为：三次响应面分析" data-listing-filename-sort="Young_et_al_2024.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Young_et_al_2024/Young_et_al_2024.html" class="title listing-title">配偶价值差异和伴侣保持行为：三次响应面分析</a>
+</td>
+<td>
+<span class="listing-date">Nov 10, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="2" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1793462400000" data-listing-file-modified-sort="1793605286416" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="509" data-listing-title-sort="什么是择偶偏好？使用伴侣配对模拟探索择偶偏好的计算形式" data-listing-filename-sort="Conroy_Beam_et_al_2022.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Conroy_Beam_et_al_2022/Conroy_Beam_et_al_2022.html" class="title listing-title">什么是择偶偏好？使用伴侣配对模拟探索择偶偏好的计算形式</a>
+</td>
+<td>
+<span class="listing-date">Nov 1, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="3" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1793116800000" data-listing-file-modified-sort="1793173348878" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2714" data-listing-title-sort="心理价值理论：从基于价值选择的通用计算认知模型预测最初的浪漫伴侣选择" data-listing-filename-sort="Cohen_et_al_2026.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Cohen_et_al_2026/Cohen_et_al_2026.html" class="title listing-title">心理价值理论：从基于价值选择的通用计算认知模型预测最初的浪漫伴侣选择</a>
+</td>
+<td>
+<span class="listing-date">Oct 28, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="4" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3JTJDJUU5JTlEJUEyJUU1JUFEJTk0JTJDbWV0YQ==" data-listing-date-sort="1791129600000" data-listing-file-modified-sort="1791188313072" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="375" data-listing-title-sort="吸引力的性别差异" data-listing-filename-sort="Wassiliwizky_et_al_2026.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Wassiliwizky_et_al_2026/Wassiliwizky_et_al_2026.html" class="title listing-title">吸引力的性别差异</a>
+</td>
+<td>
+<span class="listing-date">Oct 5, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="5" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3JTJDJUU5JTlEJUEyJUU1JUFEJTk0" data-listing-date-sort="1790438400000" data-listing-file-modified-sort="1790587992966" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="547" data-listing-title-sort="拥有选择会改变熟悉面孔和新异面孔的吸引力：性别差异和相似性" data-listing-filename-sort="Sculley_et_al_2021.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Sculley_et_al_2021/Sculley_et_al_2021.html" class="title listing-title">拥有选择会改变熟悉面孔和新异面孔的吸引力：性别差异和相似性</a>
+</td>
+<td>
+<span class="listing-date">Sep 27, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="6" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3JTJDJUU3JUJBJUJGJUU0JUI4JThBJUU3JUJBJUE2JUU0JUJDJTlB" data-listing-date-sort="1789574400000" data-listing-file-modified-sort="1789653529643" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="616" data-listing-title-sort="我刷到谁了？线上约会的准确性和自我展示" data-listing-filename-sort="Jiwa_et_al_in_press.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Jiwa_et_al_in_press/Jiwa_et_al_in_press.html" class="title listing-title">我刷到谁了？线上约会的准确性和自我展示</a>
+</td>
+<td>
+<span class="listing-date">Sep 17, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="7" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1789488000000" data-listing-file-modified-sort="1789547911653" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="330" data-listing-title-sort="异性恋伴侣中的外貌满意度、身体批评与关系质量：一项二元研究" data-listing-filename-sort="Fruchier_et_al_2025.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Fruchier_et_al_2025/Fruchier_et_al_2025.html" class="title listing-title">异性恋伴侣中的外貌满意度、身体批评与关系质量：一项二元研究</a>
+</td>
+<td>
+<span class="listing-date">Sep 16, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="8" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1788796800000" data-listing-file-modified-sort="1788832364679" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="481" data-listing-title-sort="虚拟恋爱关系中线上不忠的解释" data-listing-filename-sort="Oliullah_Murtuza_2026.qmd">
+<td>
+<a href="./posts/literature_notes/infidelity/Oliullah_Murtuza_2026/Oliullah_Murtuza_2026.html" class="title listing-title">虚拟恋爱关系中线上不忠的解释</a>
+</td>
+<td>
+<span class="listing-date">Sep 8, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="9" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1788278400000" data-listing-file-modified-sort="1788785760682" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="149" data-listing-title-sort="社交媒体与亲密关系：连接和断开之迷" data-listing-filename-sort="Taylor_et_al_2022.qmd">
+<td>
+<a href="./posts/literature_notes/infidelity/Taylor_et_al_2022/Taylor_et_al_2022.html" class="title listing-title">社交媒体与亲密关系：连接和断开之迷</a>
+</td>
+<td>
+<span class="listing-date">Sep 2, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="10" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1782748800000" data-listing-file-modified-sort="1790425510691" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="363" data-listing-title-sort="理想伴侣偏好在关系中作用的实验检验" data-listing-filename-sort="Frost_Eastwick_2025.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Frost_Eastwick_2025/Frost_Eastwick_2025.html" class="title listing-title">理想伴侣偏好在关系中作用的实验检验</a>
+</td>
+<td>
+<span class="listing-date">Jun 30, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="11" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJDJUI0JUU0JUJFJUEzJUU4JUFGJTg0JUU0JUJCJUI3" data-listing-date-sort="1782057600000" data-listing-file-modified-sort="1790425352110" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1220" data-listing-title-sort="准确自我评价在最优择偶中的作用" data-listing-filename-sort="Harper_et_al_2024.qmd">
+<td>
+<a href="./posts/literature_notes/mate_evaluation/Harper_et_al_2024/Harper_et_al_2024.html" class="title listing-title">准确自我评价在最优择偶中的作用</a>
+</td>
+<td>
+<span class="listing-date">Jun 22, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="12" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUI4JThEJUU1JUJGJUEw" data-listing-date-sort="1781625600000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="29" data-listing-word-count-sort="5724" data-listing-title-sort="不忠是可以预测的吗？使用可解释的机器学习来识别不忠的最重要预测因素" data-listing-filename-sort="Vowels_et_al_2022.qmd">
+<td>
+<a href="./posts/literature_notes/Vowels_et_al_2022/Vowels_et_al_2022.html" class="title listing-title">不忠是可以预测的吗？使用可解释的机器学习来识别不忠的最重要预测因素</a>
+</td>
+<td>
+<span class="listing-date">Jun 17, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="13" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIw" data-listing-date-sort="1780675200000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="135" data-listing-title-sort="如何设计有效的科学图片" data-listing-filename-sort="Fujii_2026.qmd">
+<td>
+<a href="./posts/literature_notes/Fujii_2026/Fujii_2026.html" class="title listing-title">如何设计有效的科学图片</a>
+</td>
+<td>
+<span class="listing-date">Jun 6, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="14" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1779638400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4949" data-listing-title-sort="厌恶还是欣赏AI？能力-个性化框架和元分析综述" data-listing-filename-sort="Qin_et_al_2025.qmd">
+<td>
+<a href="./posts/literature_notes/Qin_et_al_2025/Qin_et_al_2025.html" class="title listing-title">厌恶还是欣赏AI？能力-个性化框架和元分析综述</a>
+</td>
+<td>
+<span class="listing-date">May 25, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="15" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDRU1BJTJDRVNNJTJDJUU2JTk3JUI2JUU5JTk3JUI0JUU1JUJBJThGJUU1JTg4JTk3" data-listing-date-sort="1779206400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="883" data-listing-title-sort="理解生态瞬时评估数据：一项关于探索生态瞬时评估数据中项目表现的教程" data-listing-filename-sort="Siepe_et_al_2025.qmd">
+<td>
+<a href="./posts/literature_notes/Siepe_et_al_2025/Siepe_et_al_2025.html" class="title listing-title">理解生态瞬时评估数据：一项关于探索生态瞬时评估数据中项目表现的教程</a>
+</td>
+<td>
+<span class="listing-date">May 20, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="16" data-categories="TENB" data-listing-date-sort="1778601600000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="45" data-listing-word-count-sort="8877" data-listing-title-sort="潜在类别分析" data-listing-filename-sort="LCA.qmd">
+<td>
+<a href="./posts/literature_notes/LCA/LCA.html" class="title listing-title">潜在类别分析</a>
+</td>
+<td>
+<span class="listing-date">May 13, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="17" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDbmV0d29yaw==" data-listing-date-sort="1777305600000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="601" data-listing-title-sort="心理科学中多元数据的网络分析" data-listing-filename-sort="Borsboom_et_al_2021.qmd">
+<td>
+<a href="./posts/literature_notes/network/Borsboom_et_al_2021/Borsboom_et_al_2021.html" class="title listing-title">心理科学中多元数据的网络分析</a>
+</td>
+<td>
+<span class="listing-date">Apr 28, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="18" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDTENB" data-listing-date-sort="1776182400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="126" data-listing-title-sort="失眠与刷屏：睡眠障碍如何预测青少年强迫性互联网使用" data-listing-filename-sort="Imrani_et_al_2026.qmd">
+<td>
+<a href="./posts/literature_notes/Imrani_et_al_2026/Imrani_et_al_2026.html" class="title listing-title">失眠与刷屏：睡眠障碍如何预测青少年强迫性互联网使用</a>
+</td>
+<td>
+<span class="listing-date">Apr 15, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="19" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUk=" data-listing-date-sort="1775577600000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="532" data-listing-title-sort="评估大型语言模型道德能力的路线图" data-listing-filename-sort="Haas_et_al_2026.qmd">
+<td>
+<a href="./posts/literature_notes/Haas_et_al_2026/Haas_et_al_2026.html" class="title listing-title">评估大型语言模型道德能力的路线图</a>
+</td>
+<td>
+<span class="listing-date">Apr 8, 2026</span>
+</td>
+
+</tr>
+
+<tr data-index="20" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1755014400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1112" data-listing-title-sort="人们对人类和机器人在经典道德困境中的判断" data-listing-filename-sort="Malle_et_al_2025.qmd">
+<td>
+<a href="./posts/literature_notes/Malle_et_al_2025/Malle_et_al_2025.html" class="title listing-title">人们对人类和机器人在经典道德困境中的判断</a>
+</td>
+<td>
+<span class="listing-date">Aug 13, 2025</span>
+</td>
+
+</tr>
+
+<tr data-index="21" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUklMkMlRTklODElOTMlRTUlQkUlQjclRTUlQkYlODMlRTclOTAlODYlRTUlQUQlQTY=" data-listing-date-sort="1750176000000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="978" data-listing-title-sort="人工智能的道德心理学" data-listing-filename-sort="Bonnefon_et_al_2024.qmd">
+<td>
+<a href="./posts/literature_notes/Bonnefon_et_al_2024/Bonnefon_et_al_2024.html" class="title listing-title">人工智能的道德心理学</a>
+</td>
+<td>
+<span class="listing-date">Jun 18, 2025</span>
+</td>
+
+</tr>
+
+<tr data-index="22" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQUk=" data-listing-date-sort="1749398400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="569" data-listing-title-sort="在AI时代抵制非人化" data-listing-filename-sort="Bender_2024.qmd">
+<td>
+<a href="./posts/literature_notes/Bender_2024/Bender_2024.html" class="title listing-title">在AI时代抵制非人化</a>
+</td>
+<td>
+<span class="listing-date">Jun 9, 2025</span>
+</td>
+
+</tr>
+
+<tr data-index="23" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQ0FTQQ==" data-listing-date-sort="1749398400000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="240" data-listing-title-sort="CASA理论不再适用于台式电脑" data-listing-filename-sort="Heyselaar_2023.qmd">
+<td>
+<a href="./posts/literature_notes/Heyselaar_2023/Heyselaar_2023.html" class="title listing-title">CASA理论不再适用于台式电脑</a>
+</td>
+<td>
+<span class="listing-date">Jun 9, 2025</span>
+</td>
+
+</tr>
+
+<tr data-index="24" data-categories="JUU2JTk2JTg3JUU3JThDJUFFJUU3JUFDJTk0JUU4JUFFJUIwJTJDJUU0JUJBJUJBJUU2JTlDJUJBJUU0JUJBJUE0JUU0JUJBJTkyJTJDQ0FTQQ==" data-listing-date-sort="1749225600000" data-listing-file-modified-sort="1787304209000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1823" data-listing-title-sort="聊天机器人的采用：多视角的系统回顾和未来的研究议程" data-listing-filename-sort="Alsharhan_et_al_2024.qmd">
+<td>
+<a href="./posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html" class="title listing-title">聊天机器人的采用：多视角的系统回顾和未来的研究议程</a>
+</td>
+<td>
+<span class="listing-date">Jun 7, 2025</span>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="listing-no-matching d-none">无匹配项</div>
+</div>
+
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
