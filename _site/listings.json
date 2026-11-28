@@ -2,6 +2,7 @@
   {
     "listing": "/topics.html",
     "items": [
+      "/posts/literature_notes/infidelity/Fong_et_al_2024/Fong_et_al_2024.html",
       "/posts/literature_notes/infidelity/Stavrova_et_al_2023/Stavrova_et_al_2023.html",
       "/posts/literature_notes/mate_evaluation/Young_et_al_2024/Young_et_al_2024.html",
       "/posts/literature_notes/mate_evaluation/Conroy_Beam_et_al_2022/Conroy_Beam_et_al_2022.html",
@@ -42,6 +43,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/literature_notes/infidelity/Fong_et_al_2024/Fong_et_al_2024.html",
       "/posts/literature_notes/infidelity/Stavrova_et_al_2023/Stavrova_et_al_2023.html",
       "/posts/literature_notes/mate_evaluation/Young_et_al_2024/Young_et_al_2024.html",
       "/posts/literature_notes/mate_evaluation/Conroy_Beam_et_al_2022/Conroy_Beam_et_al_2022.html",
@@ -78,6 +80,7 @@
       "/posts/literature_notes/Bender_2024/Bender_2024.html",
       "/posts/literature_notes/Alsharhan_et_al_2024/Alsharhan_et_al_2024.html",
       "/posts/SDM-PSI/SDM-PSI.html",
+      "/linear-algebra/chapter-01/section-1a.html",
       "/linear-algebra/index.html"
     ]
   }
