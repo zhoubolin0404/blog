@@ -1670,7 +1670,7 @@
     "href": "posts/literature_notes/infidelity/Fong_et_al_2024/Fong_et_al_2024.html#研究设计和程序",
     "title": "线上性体验的潜在异质性及其与性风险行为和行为健康结果的关联：中国青年成人横断面研究",
     "section": "2.1 研究设计和程序",
-    "text": "2.1 研究设计和程序\n\n2021 Youth Sexuality Study (YSS) of the Hong Kong Family Planning Association\n\n电话访谈\n充分经验的机构负责\n下午6:30到10:30打电话\n22000个电话，1909个无效，17253个无目标对象，2838个有资格参加\n最终1205完成访谈，42.5%\n600个进行了第三方质检，563个通过"
+    "text": "2.1 研究设计和程序\n\n2021 Youth Sexuality Study (YSS) of the Hong Kong Family Planning Association\n\n电话访谈\n充分经验的机构负责\n下午6:30到10:30打电话\n22000个电话，1909个无效，17253个无目标对象，2838个有资格参加\n最终1205完成访谈，42.5%\n独立核查人员对600份访谈进行了质量核查，563个通过"
   },
   {
     "objectID": "posts/literature_notes/infidelity/Fong_et_al_2024/Fong_et_al_2024.html#测量",
@@ -1684,7 +1684,7 @@
     "href": "posts/literature_notes/infidelity/Fong_et_al_2024/Fong_et_al_2024.html#数据分析",
     "title": "线上性体验的潜在异质性及其与性风险行为和行为健康结果的关联：中国青年成人横断面研究",
     "section": "2.3 数据分析",
-    "text": "2.3 数据分析\n\n根据人口普查信息，对性别、年龄组、出生地进行权重校正\n缺失信息用FIML补全\nOSE使用LCA分类\n\nBIC、Lo-Mendell-Rubin (LMR) likelihood ratio test、entropy、average latent class probabilities用于评估\n分性别\nBHC比较分类差异，Sidak correction\n多项式逻辑回归\n\nSEM\n伦理审核通过"
+    "text": "2.3 数据分析\n\n根据人口普查信息，对性别、年龄组、出生地进行权重校正\n缺失信息用FIML补全\nOSE使用LCA分类\n\nBIC、Lo-Mendell-Rubin (LMR) likelihood ratio test、entropy、average latent class probabilities用于评估\n分性别\nBCH比较分类差异，Sidak correction\n多项逻辑回归\n\nSEM\n伦理审核通过"
   },
   {
     "objectID": "posts/literature_notes/infidelity/Fong_et_al_2024/Fong_et_al_2024.html#样本特征",
@@ -1705,7 +1705,7 @@
     "href": "posts/literature_notes/infidelity/Fong_et_al_2024/Fong_et_al_2024.html#sem",
     "title": "线上性体验的潜在异质性及其与性风险行为和行为健康结果的关联：中国青年成人横断面研究",
     "section": "3.3 SEM",
-    "text": "3.3 SEM\n\n\n\nSEMk结果\n\n\n\n活跃型和非活跃型（节制型和常见型合并）比较\n经由性风险行为，活跃型与更高的性传播感染报告率和精神活性药物使用报告率间接相关\n经由心理困扰，活跃型与更高的自杀意念报告率间接相关"
+    "text": "3.3 SEM\n\n\n\nSEM结果\n\n\n\n活跃型和非活跃型（节制型和常见型合并）比较\n经由性风险行为，活跃型与更高的性传播感染报告率和吸毒报告率间接相关\n经由心理困扰，活跃型与更高的自杀意念报告率间接相关"
   },
   {
     "objectID": "posts/literature_notes/infidelity/Stavrova_et_al_2023/Stavrova_et_al_2023.html",
